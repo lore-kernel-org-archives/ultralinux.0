@@ -1,20 +1,35 @@
-From: V Ganesh <ganesh@vxindia.veritas.com>
-Date: Fri, 30 Apr 1999 12:59:52 +0000
-Subject: Re: Redhat 6.0, sound cards for an Ultra 5/10...
-Message-Id: <marc-linux-ultrasparc-92547667521301@msgid-missing>
+From: Xtian <xtian@devo.com>
+Date: Wed, 28 Apr 1999 17:29:22 +0000
+Subject: CD Q.
+Message-Id: <marc-linux-ultrasparc-92532298519515@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92533759205159@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92533759205159@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-so someone added support for CS4321 on the ultra 5 ? with the EBus2 DMA
-engine ?
-damn damn damn. I just spent the last couple of nights wading through
-ebus and crystal docs and got playback working a few minutes ago.
-mp3s work nicely now.
-ah well, that's free software for you ...
 
-ganesh
+Howdy.
+
+I didn't see this listed anywhere, forgive me if this is in an FAQ:
+
+Are UltraPenguin bootable CDROMs available from somewhere? I do have a CD
+burner but its an internal unit in a Wintel box and I am not sure I can
+figure out how to make a bootable UltraLinux CD with the burning tools I have
+available to me under Win9X. 
+
+Actually, if an entire all setup-ready-to-go ISO9660 disk image of an
+UltraLinux CDROM is available for download THAT I could burn and make
+bootable I would think. (My CD burning software is CDRWIN, and it does make
+bootable CDROMs...)
+
+Thank you,
+
+-Christian
+
+--
+c h r i s t i a n  r o h r m e i e r
+D E V O  Communications
+Creators of unique information on the Web
+http://www.devo.com
+xtian@devo.com
