@@ -1,27 +1,20 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Sat, 16 May 1998 19:45:27 +0000
-Subject: Re: UltraSPARC lock performance
-Message-Id: <marc-linux-ultrasparc-90222356531043@msgid-missing>
+From: Alberto Brealey <beto@alpha.ulatina.ac.cr>
+Date: Tue, 26 May 1998 22:33:21 +0000
+Subject: where is the install proggie?
+Message-Id: <marc-linux-ultrasparc-90222356531078@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356531041@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356531041@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-We use CAS where applicable in the Ultra SMP support code.
+i jus d/l the ultrapenguin-1.0.9 distribution from ultra.linux.cz, but i
+can't find the install program, to boot from floppy...
 
-Also your claims about ldstub are incorrect, they do not lock the bus,
-just like CAS, if the L2 cache line being accessed is valid and owned
-exclusively, as per the UPA interface documentation in the UltraSparc
-programmers manuals.
+is there another way of installing other than the net/cd boot? anyone with
+floppys?
 
-What you are seeing is the difference between wait free algorithms and
-spinlock based resource protection in general, which you failed to
-mention at all.
+thanks
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+alberto
