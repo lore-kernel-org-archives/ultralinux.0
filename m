@@ -1,41 +1,25 @@
-From: DURANTEZ Marc <durantez@is.s.u-tokyo.ac.jp>
-Date: Mon, 07 Sep 1998 04:01:40 +0000
-Subject: Cannot compile with /usr/local/bin/sparc64-linux-gcc
-Message-Id: <marc-linux-ultrasparc-90515862113550@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Mon, 07 Sep 1998 09:04:09 +0000
+Subject: Re: Cannot compile with /usr/local/bin/sparc64-linux-gcc
+Message-Id: <marc-linux-ultrasparc-90516261014723@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90515862113550@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90515862113550@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I have just installed the distribution 1.0.9 of
-ultrapenguin on my ultra2 and I wanted
-to compile a kind of helloworld 64 bits. But I get
-an error with sparc64-linux-gcc:
 
-/usr/local/bin/sparc64-linux-gcc -o test64
-test64.c
-/usr/local/sparc64-linux/bin/ld: cannot open
-crt1.o: No such file or directory.
+64-bit userland is not supported or even exists yet, that special
+64-bit compiler is only for the kernel, we are working on 64-bit
+userland as I type this.
 
-I could compile it with the standard gcc (the one
-in the path) but then the output
-of test64 is that long and pointers are 4bytes
-long.
+So please don't bombard us with "when will it be ready, can I help
+etc." questions, so that we can use our valuable time finishing this
+task.  We will be quick to notify people when it is ready even for the
+most dangerous testing, it is not even at that stage yet.
 
-How should I do to compile programs using the
-64bits capabilities of the Ultra2?
-Might be I missed an important HOWTO or info page.
-
-I would also like to subscribe to the ultralinux
-mailing list and receive information
-about any source of information on ultrapenguin as
-FAQs, HOWTOs, etc...
-
-Please reply directly as I am not in the mailing
-list!
-
-Thanks
-
-Marc Durantez
-durantez@is.s.u-tokyo.ac.jp
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
