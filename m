@@ -1,18 +1,25 @@
-From: Alberto Brealey <beto@alpha.ulatina.ac.cr>
-Date: Fri, 21 Aug 1998 19:37:47 +0000
-Subject: Ultra Enterprise 450 support?
-Message-Id: <marc-linux-ultrasparc-90373550005513@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Sat, 01 Aug 1998 07:53:46 +0000
+Subject: Re: boot problems with cvs kernel...
+Message-Id: <marc-linux-ultrasparc-90223508402783@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+   Date: 	Fri, 31 Jul 1998 16:22:48 -0600 (CST)
+   From: Alberto Brealey <beto@alpha.ulatina.ac.cr>
 
-which tftp image should i use to boot the Ultra 450 Enterprise server?
-because the tftpboot.img in the sparc64/images/ directory hangs shortly
-after booting...
+   it's just here or the latest cvs kernel locks up the screen on boot?
+   (Ultra 5 running UP 1.0.9)
 
-thanks
+If you check the machine is running just fine and boots up all the
+way, the screen is just blank.  You can telnet in and use it once it
+fully boots.
 
-alberto
+This bug is being worked on.
+
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
