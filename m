@@ -1,33 +1,37 @@
-From: Jakub Jelinek <jakub@redhat.com>
-Date: Wed, 17 May 2000 11:46:12 +0000
+From: Chris Osicki <osk@gd2.swissptt.ch>
+Date: Thu, 18 May 2000 09:28:15 +0000
 Subject: Re: Solaris emulation
-Message-Id: <marc-linux-ultrasparc-95856399101263@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95864281407485@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-95856399101263@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-95856399101263@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, May 17, 2000 at 12:25:53PM +0200, Chris Osicki wrote:
-> 
-> Hi,
-> 
-> Please excuse my ignorance as I am new to Linux on Sparc.
-> 
+
+Following up my own posting hoping that it could be useful for somebody.
+
+Some time ago I wrote:
+
 > I built a new kernel in order to be able to use Solaris emulation.
 > insmod solaris results in a long list on unresolved symbols, ie:
 > solaris_syscall
 > I checked the source and found it ifdef-ed by
 >  #ifdef CONFIG_SOLARIS_EMUL_MODULE
 > but there is no such option in my .config file, only CONFIG_SOLARIS_EMUL
-> 
-> Am I missing something? The search engine on redhat.com where a I was 
-> hoping to get some infos from couldn't find glimpse index.
+[...]
+> It is kernel source 2.2.14, installed from kernel-source-2.2.14-5.0.rpm
 
-If you say `m' to
-Solaris binary emulation (EXPERIMENTAL)
-in make config (or menuconfig), then CONFIG_SOLARIS_EMUL_MODULE is defined.
-The above seems like you configured Solaris emul as compiled into the
-kernel, but then I don't understand how you compiled solaris.o module.
+Then I realized, I was not able to insert _any_ module.
+The solution was simple, but it took me very long to find it:
 
-	Jakub
+    make distclean
+
+before normal compilation.
+
+Thanks to all who tried to help.
+
+Regards,
+Chris
