@@ -1,36 +1,33 @@
-From: Karel van Houten <K.H.C.vanHouten@research.kpn.com>
-Date: Tue, 03 Nov 1998 17:53:21 +0000
-Subject: UtraLinux 1.0.9 on IPC -> Data Access Exception
-Message-Id: <marc-linux-ultrasparc-91011668020844@msgid-missing>
+From: "Chris L. Mason" <cmason@wyrex.com>
+Date: Thu, 05 Nov 1998 15:05:16 +0000
+Subject: Databases on Ultralinux?
+Message-Id: <marc-linux-ultrasparc-91028044628130@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-After successfully installing UltraLinux on a SparcClassic,
-I tried to install my IPC also. But after the system loads
-the tftp file, it just gives: Data Access Exception:
 
-----------------------------------------------------------
-SPARCstation IPC, No Keyboard
-ROM Rev. 2.9, 36 MB memory installed, Serial #4267322.
-Ethernet address 8:0:20:f:4e:1f, Host ID: 52411d3a.
+Hi,
+
+I just managed to get Ultralinux 1.0.9 installed on an Ultra Enterprise
+2 and it seems to be working great so far.  I had one installation problem
+though.  The silo bootloader install didn't work (kept saying "can't mount"
+or some similar error).  I managed to get around this by hitting ctrl-z,
+setting LD_LIBRARY_PATH to /mnt/lib, running chroot /mnt and running
+silo manually.  Anyway, great job guys!
+
+I have a question, though.  Is Ultralinux 1.0.9 stable enough to use as
+a database/web server?  If so, does anyone know of any large database
+vendors that provide sparc-linux binaries?  (Oracle, Informix, Sybase,
+etc.)  Or alternatively, any free databases that are more fully-featured
+than PostgreSQL and mySQL? (referential integrity would be nice)
+
+(Also, when I log into the serial console, I have no job control in the
+shell??  Can I fix this?)
+
+Thanks,
 
 
-Testing   1 megs of memory. Still to go    0
-                                                                      
-Type  help  for more information
-ok boot net
-Boot device: /sbus/le@0,c00000   File and args: 
-291600 
-
-Data Access Exception
-ok 
-----------------------------------------------------------
-
-The tftp image files was dated:
-2676522 Oct 29 16:04 tftpboot.img
-
--- 
-Karel van Houten
+Chris
