@@ -1,7 +1,7 @@
-From: Rich Sahlender <rsahlen@voicenet.com>
-Date: Sat, 14 Nov 1998 15:45:30 +0000
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Sat, 14 Nov 1998 19:53:04 +0000
 Subject: Re: 2.1.126 still no sparc64 autofsu
-Message-Id: <marc-linux-ultrasparc-91107867319330@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91108815922574@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91107863319189@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91107863319189@msgid-missing>
@@ -10,26 +10,25 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-H. Peter Anvin wrote:
-> 
 > Why is the "long" a different size in kernel and user space?  That
 > seems buggy.  It's an easy thing to fix, but it seems like the Wrong
 > Thing[TM].
 
-I tend to agree it's buggy. I would expect the long to generate a 32
-bit int even in the 64 bit kernel space unless you specifically ask
-for a 64 bit long .ie. suns 'long long'. This would keep things
-downward/backward compatible.
-
+Simple reason: the userland application in question is a 32bit application,
+not the native 64bit application, while the kernel is 64bit. 64bit apps
+don't need any translations, 32bit apps run in 32bit emulation. So, we are
+of course not going to change it to int, just add ioctls playing with that
+structure into our 32bit compatibility layer.
 > 
 > Changing that to "int" would be just fine, *except* it would break the
 > protocol for all other platforms.
-> 
 
-I was going to provide a patch to do something like this, but unless I
-misunderstood Alan I think he said there are ioctl's which can be used
-to convert the 64 bit structs while passing to 32 bit user space. I'm
-getting lost finding them though...
-
-Anyway, I guess this is only a problem while were're still limited to
-32 bit user space with 64 bit kernels.
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.127 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
