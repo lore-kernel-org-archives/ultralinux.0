@@ -1,31 +1,27 @@
-From: Bob Drzyzgula <bob@drzyzgula.org>
-Date: Sat, 11 Jul 1998 18:36:06 +0000
-Subject: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531013@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Sun, 12 Jul 1998 01:56:58 +0000
+Subject: Re: Ultra AXmp
+Message-Id: <marc-linux-ultrasparc-90222358531014@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+   Date: 	Sat, 11 Jul 1998 14:36:06 -0400
+   From: Bob Drzyzgula <bob@drzyzgula.org>
 
-Sun's newly announced Ultra AXmp board is a pretty interesting
-platform. Based on early pricing estimates I've seen, it should
-be possible to build a quad-processor @ 300+MHz, 2GB rackmount
-system for under around $US 20K. I have a lot of Solaris applications
-for this board, but I also wonder what capabilities one would
-expect ULtraLinux to have on this machine...
+   Based on early pricing estimates I've seen, it should be possible
+   to build a quad-processor @ 300+MHz, 2GB rackmount system for under
+   around $US 20K.
 
-http://www.sun.com/microelectronics/SPARCengineUltraAXmp/ 
-http://www.sun.com/microelectronics/SPARCengineUltraAXmp/805-5865.pdf
-http://www.sun.com/microelectronics/SPARCengineUltraAXmp/s7-mod.pdf
-http://www.sun.com/microelectronics/SPARCengineUltraAXmp/cover980706.html
-http://www.sun.com/smi/Press/sunflash/9807/sunflash.980706.1.html
+I wonder what the equivalent quad-PPRO system would cost (even with
+400MHZ chips...)...  I love the Ultra as everyone knows, but I have to
+say, price talks bullshit walks... and Sun has a lot of trouble
+learning this especially on the high end.
 
---Bob
-
--- 
-==============================
-Bob Drzyzgula                             It's not a problem
-bob@drzyzgula.org                until something bad happens
-==============================
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
