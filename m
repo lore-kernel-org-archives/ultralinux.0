@@ -1,26 +1,33 @@
-From: Steve Dunham <dunham@cse.msu.edu>
-Date: Sat, 09 Jan 1999 16:30:56 +0000
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Sun, 10 Jan 1999 19:32:44 +0000
 Subject: Re: wmaker at 16 bpp, X crashes
-Message-Id: <marc-linux-ultrasparc-91598904211686@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91606619412310@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91588845410084@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91588845410084@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="macroman"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-wMzBpMCxIDxqZW9uZ3l1bkBuZXRpYW4uY29tPiB3cml0ZXM6Cgo+IHVsdHJhcGVuZ3VpbiAxLjEu
-OSwgeGY4NiAzLjMuMi4zLTI2LCBrZXJuZWwgMi4yLjBwcmU0Cgo+IGlzIHRoaXMgYSBrbm93biBi
-dWc/IHRtdyBhbmQgZnZ3bTIgd29ya3MganVzdCBmaW5lIGF0IDE2IGJwcAoKSSBzZW50IEpha3Vi
-IHRoaXMgcGF0Y2ggYSBmZXcgd2Vla3MgYWdvLiBJIGRpc2NvdmVyZWQgdGhlIHByb2JsZW0Kd2hp
-bGUgcG9ydGluZyBEZWJpYW4gdG8gdGhlIFVsdHJhU3BhcmMuICBJdCBmaXhlcyB0aGUgcHJvYmxl
-bS4gIChJdCdzCnZlcnkgZWFzeSB0byB0cmFjayB0aGVzZSB0aGluZ3MgZG93biB3aXRoIGdkYiBp
-ZiB5b3UgaGF2ZSBhIERlYnVnCmJ1aWxkIG9mIFggbHlpbmcgYXJvdW5kLikKCi0tLSB4Yy9wcm9n
-cmFtcy9Yc2VydmVyL2NmYi9jZmI4bGluZS5jLm9yaWcJU3VuIERlYyAyMCAxNjozMDo1OSAxOTk4
-CisrKyB4Yy9wcm9ncmFtcy9Yc2VydmVyL2NmYi9jZmI4bGluZS5jCVN1biBEZWMgMjAgMTY6MzQ6
-NTggMTk5OApAQCAtODk4LDcgKzg5OCwxMSBAQAogCQlpZiAoeDFfb3JfbGVuKQogCQkgIHsKIAkJ
-ICAgIG1hc2twYXJ0aWFsYml0cyh5MV9vcl9lMSwgeDFfb3JfbGVuLCBlKQorI2lmZGVmIF9fc3Bh
-cmNfXworCQkgICAgICBSUk9QX1NPTElEX01BU0tfbHUoKHVuc2lnbmVkIGxvbmcgKikgYWRkcnAs
-IGUpOworI2Vsc2UKIAkJICAgICAgUlJPUF9TT0xJRF9NQVNLKCh1bnNpZ25lZCBsb25nICopIGFk
-ZHJwLCBlKTsKKyNlbmRpZgogCQkgIH0KIAkgICAgICB9CiAJICAgIGVsc2UK
+> > ultrapenguin 1.1.9, xf86 3.3.2.3-26, kernel 2.2.0pre4
+> 
+> > is this a known bug? tmw and fvwm2 works just fine at 16 bpp
+> 
+> I sent Jakub this patch a few weeks ago. I discovered the problem
+> while porting Debian to the UltraSparc.  It fixes the problem.  (It's
+> very easy to track these things down with gdb if you have a Debug
+> build of X lying around.)
+
+Yep, I have this in my XFree86 patch queue, but have not managed to make new
+rpms yet (I'd like to do some hacks in it still). Sorry.
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
+Linux version 2.2.0-pre6 on a sparc64 machine (3958.37 BogoMips)
+___________________________________________________________________
