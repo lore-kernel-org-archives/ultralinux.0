@@ -1,42 +1,40 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Tue, 06 Apr 1999 17:01:41 +0000
-Subject: UltraPenguin 1.1.9 update
-Message-Id: <marc-linux-ultrasparc-92341848122037@msgid-missing>
+From: Malcolm Beattie <mbeattie@sable.ox.ac.uk>
+Date: Wed, 07 Apr 1999 12:13:44 +0000
+Subject: Re: UltraPenguin 1.1.9 update
+Message-Id: <marc-linux-ultrasparc-92348842207818@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92341848122037@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92341848122037@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+Jakub Jelinek writes:
+> I've updated kernel in UltraPenguin distribution to 2.2.5 current, so that
+> 1) SCSI/HME PCI cards are fully supported
 
-I've updated kernel in UltraPenguin distribution to 2.2.5 current, so that
-1) SCSI/HME PCI cards are fully supported
-2) HME PCI card interrupt problem is fixed
-3) LEO console screen glitches are fixed
-4) several sparc32 crashes and hangs fixed (e.g. glibc 2.1 should run well
-   on sparc32 finally)
+Indeed, "insmod qlogicisp" now seems to work fine on my Ultra5 with
+SunSwift SCSI/HME PCI card. Many thanks to DaveM who you said, I
+believe, did the PCI port recently. I don't have any disks to try on
+it immediately but I've a 6 x 10K RPM 9GB multipack arriving RSN
+(ordered a few weeks ago) which I can hook up and run some benchmarks
+on. I'm putting the disks on a new web server in a couple of weeks or
+so but I'll have a little window to run any tests/benchmarks if
+people want any done. Does this 2.2.5 kernel have Mingo's new RAID
+code or is it still the old stuff? From the presence of the
+raidtools-0.90 RPM and the "raid5: using high-speed VIS checksum
+routine" boot time message I'd guess it's the new (which I'm already
+using in production on a number of machines). If so, I'll do some
+testing to see how Ultra5+SunSwift benchmarks against PII+BT958 with
+the same disk array for various RAID combinations (and maybe even
+against Solaris+Solstice Disk suite on the same (SPARC) hardware.
 
-In this release, 64bit ELF application support is disabled (I guess none of
-you is using 64bit binaries and it is a security hole at the moment), but
-/usr/gnemul/sunos/ support is reenabled. Please let us know if you find any
-problems.
-The kernel has been updated both in rpms and in the install images.
+Thanks for the 2.2.5 update, by the way, it works fine.
 
-I'd like to release UltraPenguin 1.2 shortly after this, so please test it
-as much as possible if you can.
-Packages still to be updated are gdb and XFree86 (to fix some FFB bugs and
-add Leo/ZX support (I'm finishing last optimizations on leo I'd like to have
-in UP1.2).
-The CD has not bee updated yet, check the date before downloading it that is
-has been updated already.
+--Malcolm
 
-Enjoy yourselves and the distribution as well,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
-Linux version 2.2.5 on a sparc64 machine (3958.37 BogoMips)
-___________________________________________________________________
+-- 
+Malcolm Beattie <mbeattie@sable.ox.ac.uk>
+Unix Systems Programmer
+Oxford University Computing Services
