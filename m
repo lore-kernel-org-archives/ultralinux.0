@@ -1,29 +1,26 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Sat, 29 Jan 2000 07:39:13 +0000
-Subject: Re: RH 6.1 stable with X?
-Message-Id: <marc-linux-ultrasparc-94913187624643@msgid-missing>
+From: "Durantez, Marc" <durantez@is.s.u-tokyo.ac.jp>
+Date: Fri, 14 Jan 2000 07:11:11 +0000
+Subject: About the coherence of the D-cache
+Message-Id: <marc-linux-ultrasparc-94789462417593@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-94886096424743@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-94886096424743@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   From: Scott Michel <scottm@aero.org>
-   Date: 	Fri, 28 Jan 2000 16:19:53 -0800
+I am accessing user-space memory from the network bottom-half using
+ASI_PHYS_USE_EC. I copied quite a bit from arch/sparc64/kernel/ptrace.c and
+everything looks fine. 
 
-   I too see some "instability" in X, mostly attributable to either a bad
-   param being sent by WindowMaker 0.61 to the Xlib library, or to the X
-   server itself saying "sunMouse<mumble>: unrecognized id".
+Nevertheless I want to be sure that when I write data no stalled data is left on
+the D-cache.
 
-   I'm on a UltraSparc 10, RH 6.0.
+In the normal use of ptrace functions, I think there isn't data from in traced
+process on the primary cache so there is no problem. But in my case, it is very
+possible that the data I am reading/writing is there. I whould even want to
+read/write it directly...
 
-All known X server stability issues (especially with
-Creator/Creator3D/Elite3D cards) were fixed in 6.1
+So which is the opinion of the master hackers?
 
-I'd highly recommend using 6.1
 
-Later,
-David S. Miller
-davem@redhat.com
+Marc
