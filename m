@@ -1,48 +1,51 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Fri, 17 Jul 1998 13:42:26 +0000
-Subject: Re: VIS
-Message-Id: <marc-linux-ultrasparc-90222358531059@msgid-missing>
+From: Jan Rychter <jwr@icm.edu.pl>
+Date: Fri, 03 Jul 1998 12:13:46 +0000
+Subject: weird messages from 2.1.99, ultrapenguin-1.0.9
+Message-Id: <marc-linux-ultrasparc-90222358530992@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222358531047@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222358531047@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: Fri, 17 Jul 1998 15:29:49 +0200
-   From: Andi Kleen <ak@muc.de>
+[14:07] sonata:/stuff#/usr/sbin/named
+get interface configuration: Cannot allocate memory
+Abort
 
-   On Fri, Jul 17, 1998 at 02:46:54PM +0200, David S. Miller wrote:
-   > GCC doesn't get perfect scheduling in any event.  And it won't for
-   > some time until real superscalar facilities are added.
+(trying another time I succeeded)
 
-   This is true for gcc, but Sun's compiler does near perfect scheduling for 
-   the UltraSparc chips afaik, so they have a bit different requirements. 
+[14:07] sonata:/stuff/#ifconfig
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:7168  Metric:1
+          RX packets:186 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:186 errors:0 dropped:0 overruns:0 carrier:0
+             collisions:0
 
-Yes they do get perfect scheduling, and I have to say it is really
-nicely done.
+eth0      Link encap:Ethernet  HWaddr 08:00:20:86:98:50
+          inet addr:194.181.232.10  Bcast:194.181.232.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:115501 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:58801 errors:0 dropped:0 overruns:0 carrier:0
+             collisions:0
+          Interrupt:4 Base address:0x6400
 
-   Do you see a better design for 100% schedulable inline assembler?
+whiteh: unknown interface.
+[14:07] sonata:/stuff#
 
-Of course.  And it retails the beauty of GCCs interface and obtains
-the benefit of sunpro's.
+Any ideas ? 
 
-Simply keep things as they currently are, then add hooks to the back
-end to add minimal parsing of the inline asm.  I say minimal, because
-that is all that is necessary, you really only need to determine
-the class of each insn (enough to compute the "type" attribute which
-gcc uses for scheduling).  The rest is implicit in the constraints and
-the register args used by each instruction.
+As far as memory is concerned:
 
-In this way you don't lose any of the generics of the GCC interface.
+[14:07] sonata:/stuff#free
+             total       used       free     shared    buffers     cached
+Mem:         61864      43368      18496      21456      10944       8736
+-/+ buffers/cache:      23688      38176
+Swap:       122344       8104     114240
+[14:09] sonata:/stuff#
 
-And in such a scheme "asm volatile" can be extended to mean "don't
-schedule me dammit, I coded it this way, don't move shit around".
+[14:09] sonata:/stuff#uname -a
+Linux sonata.chopin.edu.pl 2.1.99 #3 Tue Jun 30 16:49:49 CEST 1998 sparc64 unknown
 
-I may even implement this, I'm in the middle of rewriting the entire
-sparc backend for egcs anyways.
-
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+thanks,
+--J.
