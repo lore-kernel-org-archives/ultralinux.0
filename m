@@ -1,8 +1,10 @@
 From: mickey <mickey@donovan.com.sg>
-Date: Mon, 06 Mar 2000 03:42:11 +0000
-Subject: Internet game on Linux on UltraSparc platform
-Message-Id: <marc-linux-ultrasparc-95231422319673@msgid-missing>
+Date: Mon, 06 Mar 2000 03:43:17 +0000
+Subject: Internet game on Linux On UltraSparc platform
+Message-Id: <marc-linux-ultrasparc-95231429919704@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-95231422319673@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-95231422319673@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
