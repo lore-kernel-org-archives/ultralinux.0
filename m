@@ -1,12 +1,31 @@
-From: Stephane Bortzmeyer <stephane@laperouse.internatif.org>
-Date: Tue, 09 Dec 2003 05:50:50 +0000
-Subject: Installing Linux on a E250 with serial console: cannot get the boot prompt
-Message-Id: <marc-linux-ultrasparc-107094852316886@msgid-missing>
+From: "William \(BT\) Griffin" <bt@cw.net>
+Date: Wed, 10 Dec 2003 16:30:38 +0000
+Subject: RE: Installing Linux on a E250 with serial console: cannot get the boot prompt
+Message-Id: <marc-linux-ultrasparc-107107426316174@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-107094852316886@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-107094852316886@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
+
+do you have the telnet card in the machine? and if its configured you wont
+get anything from the serial connection in normal power-on mode. I had this
+problem and just removed the card and then I had serial output.
+
+William
+
+
+-----Original Message-----
+From: ultralinux-owner@vger.kernel.org
+[mailto:ultralinux-owner@vger.kernel.org]On Behalf Of Stephane
+Bortzmeyer
+Sent: Tuesday, December 09, 2003 12:39 AM
+To: ultralinux@vger.kernel.org
+Subject: Installing Linux on a E250 with serial console: cannot get the
+boot prompt
+
 
 Hello, everybody,
 
@@ -39,4 +58,9 @@ Probing /pci@1f,2000 at Device 2  Nothing there
 Probing /pci@1f,2000 at Device 3  Nothing there
 Probing /pci@1f,2000 at Device 4  Nothing there
 Probing /pci@1f,2000 at Device 5  Nothing there
+
+-
+To unsubscribe from this list: send the line "unsubscribe ultralinux" in
+the body of a message to majordomo@vger.kernel.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
 
