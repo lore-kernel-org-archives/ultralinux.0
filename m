@@ -1,7 +1,7 @@
-From: "Derek R. Pizzagoni" <drp@interlink.com>
-Date: Fri, 15 May 1998 05:20:52 +0000
-Subject: RE: Ultra 5
-Message-Id: <marc-linux-ultrasparc-90222356531039@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Fri, 15 May 1998 09:03:19 +0000
+Subject: Re: Ultra 5
+Message-Id: <marc-linux-ultrasparc-90222356531040@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222356531023@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222356531023@msgid-missing>
@@ -10,40 +10,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Yes, the Ultra5 came with an internal IDE.  There is a workaround?
+   From: "Derek R. Pizzagoni" <drp@interlink.com>
+   Date: Thu, 14 May 1998 22:20:52 -0700
 
---
-Derek R. Pizzagoni
-Unix Network Administrator/DBA
-Interlink Computer Sciences, Inc.
-URL: http://www.interlink.com
+   Yes, the Ultra5 came with an internal IDE.  There is a workaround?
 
+For the impatient you can either:
 
-> -----Original Message-----
-> From: David S. Miller [mailto:davem@dm.cobaltmicro.com]
-> Sent: Wednesday, May 13, 1998 10:50 PM
-> To: drp@interlink.com
-> Cc: ultralinux@vger.rutgers.edu
-> Subject: Re: Ultra 5
->
->
->    Date: 	Wed, 13 May 1998 13:13:44 -0700
->    From: "Derek R. Pizzagoni" <drp@interlink.com>
->
->    I'm trying to boot an Ultra 5, and I get to a line similar to the
->    following:
->
->    CMD646: MDMA enable [SELECT SETXFER CMND wait STAT(50) SETFEATURE wait
->    STAT(d0) STAT(d0) STAT(d0) STAT(d0) STAT(d0) STAT(d0) STAT(d0) STAT(d0)
->    STAT(d0) DMA_CAP DONE]
->
->    It hangs at that point forever.  I have the tftpboot.img from May 2.
->    Any ideas?
->
-> Do you have a IDE cdrom drive on this machine?  They seem to be
-> problematic, if this is the case I know how to fix it though.
->
-> Later,
-> David S. Miller
-> davem@dm.cobaltmicro.com
->
+1) Disconnect the cdrom driver
+2) Try multiple boots over and over, I've this technique work around
+   the problem for a couple crappy IDE disks I have.
+
+Otherwise wait for the next set of kernel updates in the UP-109
+distribution area.
+
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
