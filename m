@@ -1,8 +1,10 @@
 From: "Raymond Hall H." <kovalski@ife.org.mx>
-Date: Fri, 06 Aug 1999 19:47:33 +0000
+Date: Tue, 10 Aug 1999 17:27:35 +0000
 Subject: serial port overrruns
-Message-Id: <marc-linux-ultrasparc-93396885301754@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93436743328656@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-93396885301754@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-93396885301754@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
