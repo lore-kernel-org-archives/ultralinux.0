@@ -1,7 +1,7 @@
 From: rehn@informatik.tu-muenchen.de
-Date: Wed, 17 Mar 1999 09:28:45 +0000
-Subject: gdbstub for ultrasparc
-Message-Id: <marc-linux-ultrasparc-92166443020415@msgid-missing>
+Date: Fri, 12 Mar 1999 09:53:59 +0000
+Subject: ddd-3.1.3 RPMs for ultrasparc
+Message-Id: <marc-linux-ultrasparc-92123313001664@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
@@ -10,10 +10,13 @@ To: ultralinux@vger.kernel.org
 
 Hi,
 
-I have connected 2 PCs with a nullmodem cable and use gdbstub to debug the
-kernel of the 2nd PC running a debugger on the 1st PC.
-Does anyone know if there exists also a gdbstub for 2 connected ultrasparcs or
-even better (cheaper) a cross-gdbstub to debug the kernel running on ultrasparc
-from a PC.
+I couldn't find ddd-3.1.3 RPMs for Sun Ultrasparc on the net,
+so I have packed my own SRPMs/RPMs.
+If anyone likes to download them he can find the ddd-3.1.3 
+together with lesstif-0.87.9 packages on my homepage:
 
-Chris
+http://wwwspies.informatik.tu-muenchen.de/personen/rehn/
+
+
+Ciao,
+    Chris
