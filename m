@@ -1,55 +1,43 @@
-From: Stephan van Hienen <ultra@a2000.nu>
-Date: Sun, 05 May 2002 16:35:08 +0000
-Subject: Iptables counters not working on Ultrasparc10 ?
-Message-Id: <marc-linux-ultrasparc-102072329522531@msgid-missing>
+From: Stuffed Crust <pizza@shaftnet.org>
+Date: Sun, 09 Jun 2002 04:21:58 +0000
+Subject: STP4020 sbus-pcmcia driver?
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="oyUTqETQ0mS9luUI"
+Message-Id: <marc-linux-ultrasparc-102359659714932@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
 
-after upgrading to iptables (kernel 2.4.19-pre1)
-i noticed that the counters of iptables are not working correctly
-also upgrading to 2.4.19-pre4/7 and pre8 don't fix this problem
+--oyUTqETQ0mS9luUI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-:
+I have a dual-cpu Ultra2 Creator on its way to doing somethig other than
+being an extremely effective paperweight. =20
 
----
-[root@ddx root]# iptables -L -vx
-Chain INPUT (policy ACCEPT 16765358 packets, 18446744073708030807 bytes)
-    pkts      bytes target     prot opt in     out     source
-destination
-10370665672134623548 11136161423212670306 ACCEPT     tcp  --  eth0   any
-anywhere             anywhere           tcp dpt:ftp-data
-18446744073709550910 18446744073709506011 ACCEPT     tcp  --  eth0   any
-anywhere             anywhere           tcp dpt:ftp
-18446744073709550907 16690754 ACCEPT     tcp  --  eth0   any     anywhere
-anywhere           tcp dpt:ssh
----and more of these high counters---
+Has there been any initiative to port the netbsd driver for the STP4020
+sbus->pcmcia bridge?  I haven't seen anything in a quick perusal of the
+archives, and goodle seems to only turn up the netbsd driver.
 
-so then iptables -Z (which should clear the counters)
-gives the same counters (almost, since there is network traffic)
+ - Pizza
+--=20
+Solomon Peachy
+I ain't broke, but I'm badly bent.                           ICQ# 1318344
+Patience comes to those who wait.
+    ...It's not "Beanbag Love", it's a "Transanimate Relationship"...
 
-sometimes it gives me this :
+--oyUTqETQ0mS9luUI
+Content-Type: application/pgp-signature
+Content-Disposition: inline
 
----
-Chain INPUT (policy ACCEPT 18446744073692785501 packets, 1463844 bytes)
-    pkts      bytes target     prot opt in     out     source
-destination
-8076078401574928068 7310582650496881310 ACCEPT     tcp  --  eth0   any
-anywhere             anywhere           tcp dpt:ftp-data
-     706    45605 ACCEPT     tcp  --  eth0   any     anywhere
-anywhere           tcp dpt:ftp
-     709 18446744073692860862 ACCEPT     tcp  --  eth0   any     anywhere
-anywhere           tcp dpt:ssh
----
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.0.6 (GNU/Linux)
+Comment: For info see http://www.gnupg.org
 
-doing some times -Z gives me almos identical values
-(sometimes like first dump, sometimes like second)
+iD8DBQE9AtfmPuLgii2759ARAgfWAKDlD5ov8Vr6QC+zQc6k+NbaG6hdQQCfS+/1
+RyXz5BRNFqdsLsba31o+XCc=
+=9i+y
+-----END PGP SIGNATURE-----
 
-Any ideas ?
-
-
-
+--oyUTqETQ0mS9luUI--
