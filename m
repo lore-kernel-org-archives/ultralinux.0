@@ -1,29 +1,30 @@
-From: Jack Thomas <jthomas@csf.edu>
-Date: Thu, 25 Mar 1999 11:46:56 +0000
-Subject: Enterprise 450 fan control
-Message-Id: <marc-linux-ultrasparc-92236237530337@msgid-missing>
+From: Steffen Persvold <sp@scali.no>
+Date: Thu, 18 Mar 1999 16:39:30 +0000
+Subject: SMP problems on Ultra 2
+Message-Id: <marc-linux-ultrasparc-92177566600996@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hello,
-	I hope this question isn't inappropriate to this list...
+I have an Sun Ultra 2 SBUS box with two UltraSparc II 300MHz, 512Mb of
+RAM, Segate barracuda 4.1 GB and Openboot v3.11.
 
-After installing UltraLinux 1.1 on my Ultra Enterprise 450, I notice that the
-fans all run at full speed all the time, which is both noisy and energy
-innefficient. The Owner's Guide says the OS is expected to control environmental
-monitoring, and the PROM will automatically put the fans on full speed if the OS
-doesn't do this.
+If I try to boot with the SMP kernel that comes with ultrapenguin-1.1.9
+I get the following output:
 
-	So my question is: Has anyone written anything in linux to talk to a sun's
-environmental controls, or found a work-around to the problem, or have any other
-advice on this issue?
+Booting Linux...
+Fast Instruction Access MMU Miss
 
-Much obliged,
+Any idea what this could be ? It works fine with the "none SMP" version.
 
-Jack Thomas
-Systems Administrator
-College of Santa Fe
-jthomas@csf.edu
+Thanks in advance.
+-- 
+  Steffen Persvold               Systems Engineer
+  Email : mailto:sp@scali.no     Scali AS (http://www.scali.com)
+  Tlf   : (+47) 63 84 67 02      Hvamstubben 17
+  Fax   : (+47) 63 84 40 05      N-2013 Skjetten
+
+    TRY OUT THE WORLDS GREATEST MPI,-ScaMPI-,
+    latency <8us, >75MBytes/sec, -affordable!
