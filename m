@@ -1,45 +1,43 @@
-From: Frank Stolze <fstolze@yahoo.com>
-Date: Sat, 13 Jun 1998 01:01:00 +0000
-Subject: Ultra 5
-Message-Id: <marc-linux-ultrasparc-90222357631012@msgid-missing>
+From: Tethys <tethys@ml.com>
+Date: Wed, 10 Jun 1998 14:16:43 +0000
+Subject: E4000 boot problems
+Message-Id: <marc-linux-ultrasparc-90222357630998@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356531023@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356531023@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Some feedback regarding booting UltraLinux on an
-Ultra 5:
 
-I have not been able to do a successful net boot for
-UltraLinux 1.0 and 1.0.9 on an Ultra 5.
+Trying to boot UltraPenguin 1.0.9 on an E4000.
 
-1.0:  After loading the tftp boot image, there is a
-      simple error message:
+Installed onto an external disk pack on a sun4m machine. No
+problems. The machine boots and we can log in OK. We then
+moved the disk pack over to the E4000 and tried to boot from
+it. Immediately after trying to boot from the PROM, it gives
+an error message:
 
-      Strange OBP version 'OBP 3.11.9 1998/03.06 10:31'
-      Program terminated
+	fast data access MMU miss
 
-      and you're back at the ok prompt.
+and then stops. Any ideas?
 
-1.0.9: The tftp boot image is loaded, the display
-       switches to the white-on-black Linux display
-       and the usual Linux kernel boot messages show
-       up. After the line:
+Our next move is to try and get the E4000 onto an appropriate
+network quad so we can tftp boot it. We're currently waiting
+for a spare network card and for the network boys to sort us
+out a port on the right quad (that's why we had to mess about
+with moving the disks around).
 
-       hdc: packet command error: status=0x0d { Busy }
+The other solution would be to create a CD. We've got a local
+mirror of UltraPenguin here. If we burn a CD from that, what
+do we need to do to make it bootable? I understand that El
+Torito is an Intel only bootable CD format. Do we need to
+do anything else other than make a Rock Ridge ISO9660 image
+from the ultrapenguin-devel directory?
 
-       the system hangs indefinitely. Looking through
-       the messages the only thing that looks weird
-       is the irq number "-1073739808" given for both
-       ide0 and ide1.
+Tet
 
-
-Regards,
-Frank Stolze
-
-_________________________________________________________
-DO YOU YAHOO!?
-Get your free @yahoo.com address at http://mail.yahoo.com
+-- 
+``Live free or die; death is not the worst of evils'' - General George Stark
+--------------------+--------------+----------------------------------------
+tethys@ml.com       |  Micro$oft:  | Linux,  the choice of a GNU generation.
+tet@astradyne.co.uk | Just say no! | See http://www.uk.linux.org for details
