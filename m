@@ -1,73 +1,63 @@
-From: Peter Firmstone <q8902929@topaz.cqu.edu.au>
-Date: Thu, 16 Nov 2000 12:25:52 +0000
-Subject: Ais may port Xess to sparc linux
-Message-Id: <marc-linux-ultrasparc-97437712606749@msgid-missing>
+From: Sean Upton <seanupton@yahoo.com>
+Date: Thu, 30 Nov 2000 22:56:49 +0000
+Subject: glibc 2.1.3 Build - locale/C-ctype.c
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="0-1605894428-975625009=:25055"
+Message-Id: <marc-linux-ultrasparc-97562491722740@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
+--0-1605894428-975625009=:25055
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I recently emailed Ais regarding their spreadsheet Xess and whether they
-would consider porting it to sparc linux.
+2 quick questions... 
 
-This is what they said:
+I have sort of naively stumbled on to a problem and
+solution in building glibc 2.1.3 on sparc.  Buillding
+a custom distro, and I was trying to build glibc 2.1.3
+on an Ultra 10 in sparc32 mode, and had a problems
+building it with gcc 2.95.3 and 2.95.2, because
+compile failed due to parse error in locale/C-ctype.c
+that seemsed sort of weird.  I believe this issue was
+a syntax problem that prevented compilation on
+big-endian arcitectures (look at the code, you'll see
+what I mean).  I added a comma to line 377 and tried
+rebuilding, with 100% success.  diff output is
+attached.  Has anyone else seen this, and would
+patching this file in this manner cause problems for
+little-endian boxes?  
 
+2.1.3 deals with endian issues with preprocessor
+directives, from looking at the code in glibc 2.2, it
+deals with the endian issues differently, so this
+should be a non-issue with 2.2.  Has anyone had decent
+luck using glibc running on sparc/linux?
 
-info@ais.com wrote:
+C-ctype.c:379: parse error before `{'
+C-ctype.c:382: parse error before `}'
+make[2]: ***
+[/lfs/usr/src/glibc-build/locale/C-ctype.o] Error 1
 
-> Dear Mr. Firmstone,
->
-> Thank you for contacting us.
->
-> We cannot justify doing this for a single license...but if are willing
-to
-> do it if it is part of a several license purchase.
->
-> To do this we would need to add a disk to a SPARC here, install Linux,
+Thanks in advance,
+Sean
 
-> build, and test.  We generally build on RedHat Linux.  Do you know of
-any
-> compatibility issues between RedHat and Debian on SPARC?
->
-> Thank you for your interest in XESS.  We look forward to working with
-you.
->
-> Sincerely,
->
-> Shannon Tostanoski
-> AIS Sales Admin
-> shannon@ais.com
->
->
--------------------------------------------------------------------------
+__________________________________________________
+Do You Yahoo!?
+Yahoo! Shopping - Thousands of Stores. Millions of Products.
+http://shopping.yahoo.com/
+--0-1605894428-975625009=:25055
+Content-Type: application/x-unknown; name="sparc.diff"
+Content-Transfer-Encoding: base64
+Content-Description: sparc.diff
+Content-Disposition: attachment; filename="sparc.diff"
 
-> Applied Information Systems, Inc.           toll free:  800-334-5510
-> 121 South Estes Drive Suite 205                 phone:  919-942-7801
-> Chapel Hill NC 27514 USA                          fax:  919-942-0793
->                         website:  http://www.ais.com
->
--------------------------------------------------------------------------
+Mzc3YzM3Nwo8ICAgICB7IHN0cmluZzogKGNvbnN0IGNoYXIgKikgKF9ubF9D
+X0xDX0NUWVBFX3RvbG93ZXIgKyAxMjgpIH0KLS0tCj4gICAgIHsgc3RyaW5n
+OiAoY29uc3QgY2hhciAqKSAoX25sX0NfTENfQ1RZUEVfdG9sb3dlciArIDEy
+OCkgfSwK
 
->
-
-Now I know most people prefer open-source software and this is not
-open-source, however it is the best spreadsheet available with more
-features than any other program, it's bloat free too. It's also
-compatible with excell and lotus.
-
-Anyone interested in helping me to get this ported to sparc linux by
-purchasing a license please contact me at q8902929@topaz.cqu.edu.cqu or
-contact Shannon at shannon@ais.com
-
-If you have an intel box you can try the demo version available at their
-web site.
-
-Best Regards,
-
-Peter Firmstone.
+--0-1605894428-975625009=:25055--
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
