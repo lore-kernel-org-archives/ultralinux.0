@@ -1,53 +1,39 @@
-From: rehn@informatik.tu-muenchen.de
-Date: Wed, 14 Apr 1999 09:14:09 +0000
-Subject: Address that caused sigsegv
-Message-Id: <marc-linux-ultrasparc-92408170123936@msgid-missing>
+From: Michiel Boland <boland@diva.nl>
+Date: Wed, 14 Apr 1999 10:13:53 +0000
+Subject: Re: Address that caused sigsegv
+Message-Id: <marc-linux-ultrasparc-92408589426900@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92408170123936@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92408170123936@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I am wrtiting a signal handler to catch SIGSEGVs.
-In the handler I want to know which address caused the segmentation fault.
-Could anyone tell me, where this information is on the stack frame?
+> * Is it impossible to get the address that caused the SIGSEGV or does
+>   new_setup_frame32() write this information to the stack frame?
 
-In arch/sparc64/kernel/signal32.c I found the functions new_setup_frame32(),
-setup_frame32() and setup_rt_frame32().
-When I cause a SIGSEGV, handle_signal32() is called:
+Judging by the source, it doesn't.
 
-static inline void handle_signal32(...)
-{
-...
-		if (ka->sa.sa_flags & SA_SIGINFO)
-			setup_rt_frame32(ka, regs, signr, oldset, info);
-		else if (current->tss.new_signal)
-			new_setup_frame32(ka, regs, signr, oldset);
-		else
-			setup_frame32(&ka->sa, regs->tpc, regs->tnpc, regs, signr, oldset);
-...
-}
+> * Why does tss.new_signal exist, is setup_frame32() obsolete?
 
-setup_rt_frame32() is called if SA_SIGINFO is set in sa_flags but the manpage 
-for sigaction says nothing about SA_SIGINFO under Linux (but under Solaris).
-current->tss.new_signal is always not equal to zero so I think
-new_setup_frame32() is always called.
+No idea why it exists. This is from sys32_sigaction():
 
+	if(sig < 0) {
+		current->tss.new_signal = 1;         
+		sig = -sig;
+	}
 
-* Is it impossible to get the address that caused the SIGSEGV or does
-  new_setup_frame32() write this information to the stack frame?
-* What about SA_SIGINFO, is it obsolete or not implemented yet?
-* Why does tss.new_signal exist, is setup_frame32() obsolete?
+Since you say that new_signal is always nonzero (how do you check that?),
+my guess is that there is some hacking going on in libc.
 
+The setup_frame32 function *does* put the faulting address on the stack,
+but I guess you will have to hack around libc in order to get it to
+work.
 
-Christian
+This is of course going to be extreeeeeeeemely unportable so I would
+advise to just let your app dump core and not install a handler for 
+SIGSEGV.
 
--- 
-*******************************************************************************
-Dipl. Inform. Christian Rehn                                                  
-phone/fax: +49 +89 - 289 - {25408 / 22037}                                    
-email:     rehn@in.tum.de                                                     
-www:       http://wwwspies.informatik.tu-muenchen.de/personen/rehn            
-smail:     Technische Universitaet Muenchen, Informatik - H7, D-80290 Muenchen
-visit:     Luisenstrasse, Eingang XI, Zimmer 3558, D-80333 Muenchen           
-*******************************************************************************
+Cheers
+Michiel
