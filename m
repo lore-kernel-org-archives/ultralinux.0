@@ -1,170 +1,69 @@
-From: Matthew Jacob <mjacob@feral.com>
-Date: Tue, 29 Dec 1998 20:52:00 +0000
-Subject: wierd NFS problem with UP1.1.9
-Message-Id: <marc-linux-ultrasparc-91498590423703@msgid-missing>
+From: Gregory Burd <gburd@Eng.Sun.COM>
+Date: Tue, 15 Dec 1998 21:03:05 +0000
+Subject: up-1.1.9 /linuxrc line 51 error
+Message-Id: <marc-linux-ultrasparc-91376975720097@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Greetings, I had a little problem with 1.1.9, read below and email me
+for more information if you need it.
 
-I've been trying to build a kernel with a freshly installed
-UP1.1.9 release but the kernel tree is across NFS (Solaris 2.6
-serving)- but it's more complicated than that...
+Thanks for the good work!
 
-mkdep is core dumping early on- but here's the wierd thing. If
-I run mkdep from another NFS mounted partition from the same server,
-it works. If I run it anywhere in this partition, it core dumps
-early (before even getting to main). All the exports are the same.
+-greg
 
-So- the obvious things like 32 vs. 64 bit and permissions don't play out
-here.
 
-Anyone got a clue? Below is a typescript showing working/non-working.
 
--matt
-Script started on Tue Dec 29 20:43:08 1998
-slinx.feral.com > pwd
-/vger/linux/scripts
-slinx.feral.com > cc -O -o mkdep mkdep.c
-slinx.feral.com > cc -v
-Reading specs from /usr/lib/gcc-lib/sparc-redhat-linux/egcs-2.90.29/specs
-gcc version egcs-2.90.29 980515 (egcs-1.0.3 release)
-slinx.feral.com > cp mkdep ~
-slinx.feral.com > ./mkdep *.c
-Segmentation fault (core dumped)
-slinx.feral.com > strace ./mkdep *.c
-execve("./mkdep", ["./mkdep", "mkdep.c", "split-include.c", "tkcond.c", "tk=
-gen.c", "tkparse.c"], [/* 48 vars */]) =3D 0
-brk(0)                                  =3D 0x22ef8
---- SIGSEGV (Segmentation fault) ---
-+++ killed by SIGSEGV +++
-slinx.feral.com > strace ~/mkdep *.c
-execve("/home/mjacob/mkdep", ["/home/mjacob/mkdep", "mkdep.c", "split-inclu=
-de.c", "tkcond.c", "tkgen.c", "tkparse.c"], [/* 48 vars */]) =3D 0
-brk(0)                                  =3D 0x22ef8
-open("/etc/ld.so.preload", O_RDONLY)    =3D -1 ENOENT (No such file or dire=
-ctory)
-open("/etc/ld.so.cache", O_RDONLY)      =3D 3
-fstat(3, {st_mode=3DS_IFREG|0644, st_size=14472, ...}) =3D 0
-mmap(0, 14472, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x7000e000
-close(3)                                =3D 0
-open("/lib/libc.so.6", O_RDONLY)        =3D 3
-mmap(0, 8192, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x70012000
-munmap(0x70012000, 8192)                =3D 0
-mmap(0, 780584, PROT_READ|PROT_EXEC, MAP_PRIVATE, 3, 0) =3D 0x7001e000
-mprotect(0x700ba000, 141608, PROT_NONE) =3D 0
-mmap(0x700be000, 81920, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIX=
-ED, 3, 0x90000) =3D 0x700be000
-mmap(0x700d2000, 43304, PROT_READ|PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_FIX=
-ED|MAP_ANONYMOUS, -1, 0) =3D 0x700d2000
-close(3)                                =3D 0
-munmap(0x7000e000, 14472)               =3D 0
-personality(PER_LINUX)                  =3D 0
-getpid()                                =3D 2018
-open("mkdep.c", O_RDONLY)               =3D 3
-fstat(3, {st_mode=3DS_IFREG|0666, st_size=9885, ...}) =3D 0
-mmap(0, 16384, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x7000e000
-brk(0)                                  =3D 0x22ef8
-brk(0x23f10)                            =3D 0x23f10
-brk(0x24000)                            =3D 0x24000
-access("/usr/src/linux/include/ctype.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/stdio.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/stdlib.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/string.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/unistd.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/sys/fcntl.h", F_OK) =3D -1 ENOENT (No such f=
-ile or directory)
-access("/usr/src/linux/include/sys/mman.h", F_OK) =3D -1 ENOENT (No such fi=
-le or directory)
-access("/usr/src/linux/include/sys/stat.h", F_OK) =3D -1 ENOENT (No such fi=
-le or directory)
-access("/usr/src/linux/include/sys/types.h", F_OK) =3D -1 ENOENT (No such f=
-ile or directory)
-munmap(0x7000e000, 16384)               =3D 0
-close(3)                                =3D 0
-open("split-include.c", O_RDONLY)       =3D 3
-fstat(3, {st_mode=3DS_IFREG|0666, st_sizeU65, ...}) =3D 0
-mmap(0, 8192, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x7000e000
-access("/usr/src/linux/include/sys/stat.h", F_OK) =3D -1 ENOENT (No such fi=
-le or directory)
-access("/usr/src/linux/include/sys/types.h", F_OK) =3D -1 ENOENT (No such f=
-ile or directory)
-access("/usr/src/linux/include/ctype.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/errno.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/fcntl.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/stdio.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/stdlib.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/string.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/unistd.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-munmap(0x7000e000, 8192)                =3D 0
-close(3)                                =3D 0
-open("tkcond.c", O_RDONLY)              =3D 3
-fstat(3, {st_mode=3DS_IFREG|0666, st_size=13640, ...}) =3D 0
-mmap(0, 16384, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x7000e000
-access("/usr/src/linux/include/stdlib.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/stdio.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/string.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("tkparse.h", F_OK)               =3D 0
-fstat(1, {st_mode=3DS_IFCHR|0666, st_rdev=3Dmakedev(3, 1), ...}) =3D 0
-mmap(0, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) =3D 0=
-x70012000
-ioctl(1, TCGETS, {B38400 opost isig icanon echo ...}) =3D 0
-write(1, "tkcond.o: \\\n", 12tkcond.o: \
-)          =3D 12
-write(1, "   tkparse.h\n", 13   tkparse.h
-)          =3D 13
-munmap(0x7000e000, 16384)               =3D 0
-close(3)                                =3D 0
-open("tkgen.c", O_RDONLY)               =3D 3
-fstat(3, {st_mode=3DS_IFREG|0666, st_size4151, ...}) =3D 0
-mmap(0, 40960, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x700de000
-access("/usr/src/linux/include/stdio.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/unistd.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("tkparse.h", F_OK)               =3D 0
-write(1, "tkgen.o: \\\n", 11tkgen.o: \
-)           =3D 11
-write(1, "   tkparse.h\n", 13   tkparse.h
-)          =3D 13
-munmap(0x700de000, 40960)               =3D 0
-close(3)                                =3D 0
-open("tkparse.c", O_RDONLY)             =3D 3
-fstat(3, {st_mode=3DS_IFREG|0666, st_size=16370, ...}) =3D 0
-mmap(0, 16384, PROT_READ, MAP_PRIVATE, 3, 0) =3D 0x7000e000
-access("/usr/src/linux/include/stdlib.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("/usr/src/linux/include/stdio.h", F_OK) =3D -1 ENOENT (No such file =
-or directory)
-access("/usr/src/linux/include/string.h", F_OK) =3D -1 ENOENT (No such file=
- or directory)
-access("tkparse.h", F_OK)               =3D 0
-write(1, "tkparse.o: \\\n", 13tkparse.o: \
-)         =3D 13
-write(1, "   tkparse.h\n", 13   tkparse.h
-)          =3D 13
-munmap(0x7000e000, 16384)               =3D 0
-close(3)                                =3D 0
-munmap(0x70012000, 8192)                =3D 0
-exit(0)                                 =3D ?
-slinx.feral.com > exit
-exit
+From: David Andrew - Sun MDE <David.Andrew@East>
+To: gburd@Eng
+Cc: David.Andrew@East
+Subject: Re: up-1.1.9 /linuxrc line 51
+Date: Tue, 15 Dec 1998 14:05:14 -0500 (EST)
 
-Script done on Tue Dec 29 20:43:43 1998
+Greg,
+
+Please send this bug report to ultralinux@vger.rutgers.edu.   This is the 
+kind of feedback they need - the experiences of users.
+
+That alias is monitored by the guys who are doing the port, among many 
+others.  They will look at it and should be able to reply fairly quickly, 
+in my experience, and are in a position to do something about it or supply 
+a possible workaround.  
+
+Also, you might give Eric Brower a call (62313) - he is working on this 
+version too and has a number of platforms, so he might already have news 
+on it.
+
+Regards,
+
+Dave
+-----
+> Date: Tue, 15 Dec 1998 09:56:40 -0800 (PST)
+> From: Gregory Burd <gburd@Eng>
+> To: david.andrew@East
+> Subject: up-1.1.9 /linuxrc line 51
+> 
+> David,
+> 
+> 	I was able to make a CD from that 1.1.9 image.  It failed
+> during boot at line 51 of /linuxrc with a syntax error on the word
+> 'done' expecting 'fi'.  Scripting error.  That caused the entire boot
+> to fail.  I was on an Ultra1/C3D 167MHz with 512MB and lots of
+> external SCSI drives off a second SCSI interface.  I unplugged the
+> drives but left the extra SCSI card in, didn't seem to change things
+> at all.  I don't think it has to do with the extra SCSI interface,
+> just thought I would mention it.
+> 
+> cheers,
+> 
+> -greg
+> 
+> 
+
+David Andrew                Tel:  978-442-2316   Internal:   22316
+Market Development Engineer - I/O Technologies   FAX:  978-442-1520	
+Sun Microsystems, 2 Omni Way - M/S UCHL02-102,   Chelmsford, MA 01824	 
+e-mail:  david.andrew@sun.com
