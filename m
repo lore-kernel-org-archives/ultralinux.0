@@ -1,26 +1,23 @@
-From: Bob Van Cleef <vancleef@microunity.com>
-Date: Wed, 28 Apr 1999 21:38:39 +0000
-Subject: Re: RedHat 6.0 runs on UltraSPARC?
-Message-Id: <marc-linux-ultrasparc-92533640803602@msgid-missing>
+From: Peter Jones <pjones@redhat.com>
+Date: Wed, 28 Apr 1999 17:42:46 +0000
+Subject: Re: Redhat 6.0, sound cards for an Ultra 5/10...
+Message-Id: <marc-linux-ultrasparc-92533759205159@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92530848032119@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92530848032119@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+There are a couple of interesting behaviors with the mixer stuff, but for
+the most part, the sound works, yes.
 
-On Wed, 28 Apr 1999, Randy Carpenter wrote:
+ -- Peter
 
-> They don't have the $40 version for alpha or sparc yet...
+"The surest way to corrupt a youth is to instruct him to hold in higher
+esteem those who think alike than those who think differently."
+		-- Nietzsche
+
+On Wed, 28 Apr 1999, Shawn Hooton wrote:
+
+> Does Redhat 6.0 support the crystal sound cards on an Ultra 5/10?
 > 
-
-Watch Cheap Bytes - www.cheapbytes.com - They have it available
-pretty soon, and their prices are "competative." :)
-
-Bob
-><>  ><>  ><>  ><>  ><>  ><>  ><>  ><>  ><>  ><>  ><>  ><>  ><>
-Bob Van Cleef, Member of Technical Staff         (408) 734-8100
-MicroUnity Systems Engineering, Inc.         FAX (408) 734-8136
-475 Potrero Ave., Sunnyvale, CA 94086   vancleef@microunity.com
