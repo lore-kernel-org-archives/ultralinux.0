@@ -1,37 +1,31 @@
-From: John Adamson <John.Adamson@East.Sun.COM>
-Date: Tue, 17 Nov 1998 13:25:32 +0000
-Subject: AHA-2940 o/f Ultra support
-Message-Id: <marc-linux-ultrasparc-91133041215343@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Tue, 17 Nov 1998 21:37:48 +0000
+Subject: Re: AHA-2940 o/f Ultra support
+Message-Id: <marc-linux-ultrasparc-91139332418468@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-91133041215343@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-91133041215343@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I have an Ultra 5 with a AHA-2940 o/f scsi card and
-when Linux/Ultra is tring to probe devices it gets
-stuck looking at the 2940.
+> 
+> I have an Ultra 5 with a AHA-2940 o/f scsi card and
+> when Linux/Ultra is tring to probe devices it gets
+> stuck looking at the 2940.
+> 
+> Any ideas?  I am running 128mb ram with the latest OBP.
 
-Any ideas?  I am running 128mb ram with the latest OBP.
+Can you please be more specific on how it gets stuck, what messages does it
+print, what kernel are you running, etc.? It should work just fine.
 
-Thanks for your time.
-
-                                                         (o o)
-===========================oOO=(_)=OOo======
-     /\                                  |
-     \ \                                 |        John D. Adamson Sr.
-    \ \ /          /\  | | |\ |          |	    A.R.S.  W1HZH
-   \ \ / /         \   | | |\ |          |      
-  / \/ \/ /\        \  | | | \|          |      Technical Support Engineer
- / /     / /       \/  \_/ | \|          |    North American Solution Center
- \/ /\ /\ /      CUSTOMER SERVICES       |     
-   / / \ \                               |         Voice: (978)442-1256 
-    / \ \   "When you build great        |         FAX #: (978)244-2140
-     \ \      technologies, the support  |     
-      \/       comes naturally."         |   Email: john.adamson@East.Sun.COM 
-               
-If a man does not keep pace with his companions, perhaps it is because he
-hears a different drummer. Let him step to the music which he hears,
-however measured or far away. 
-			               --Henry David Thoreau
-=======================================
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.128 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
