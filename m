@@ -1,28 +1,33 @@
-From: gert@greenie.muc.de (Gert Doering)
-Date: Sat, 13 Jun 1998 09:05:40 +0000
-Subject: Re: netboot
-Message-Id: <marc-linux-ultrasparc-90222357631013@msgid-missing>
+From: Gerald McLarnon <mclarnon@atm.ox.ac.uk>
+Date: Mon, 08 Jun 1998 09:17:11 +0000
+Subject: Problems with UP1.0.9 on SS5/70
+Message-Id: <marc-linux-ultrasparc-90222357630994@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357631011@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357631011@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
+Hi
 
-Alberto Brealey wrote:
-> however, whenever i issue a 'boot net' on the prompt, i crash the switches
-> of the campus network... (really shitty by the way, the switches)
+I'm having some installation problems with UP1.0.9 on a SS5/70, 16Mb.
+I have tried two different (and previously working under 4.1.3_U1) disks.
 
-Sounds like a real bad bug in the switches' firmware.  Nothing a host can
-do should ever crash a switch.
+I tried both an NFS and a FTP install with minimal configuration (nothing
+except networking [1]). On my most recent attempt as the RPMS are loading
+the GUI install bombs out a few packages into the install. No errors on
+any of the other virtual consoles. A redhat 4.2 install doesn't even
+get as far as loading the base system.
 
-gert
+Has anyone had any more luck than me with this [2] or is there more
+information I could supply to help diagnose this problem? 
 
--- 
-USENET is *not* the non-clickable part of WWW!
-                                                           //www.muc.de/~gert/
-Gert Doering - Munich, Germany                             gert@greenie.muc.de
-fax: +49-89-35655025                        gert.doering@physik.tu-muenchen.de
+Thanks a lot,
+
+- Gerald
+
+[1]  The install complains that kbd requires perl, BTW - I think there
+     must be an error in the hdlist.
+
+[2]  Please CC me any replies as I tend to read this list via list
+     WWW archives rather than through subscription.
