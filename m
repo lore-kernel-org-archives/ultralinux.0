@@ -1,7 +1,7 @@
-From: Isaiah Weiner <iweiner@redhat.com>
-Date: Wed, 09 Feb 2000 15:28:47 +0000
+From: Aaron T Porter <atporter@primate.net>
+Date: Wed, 09 Feb 2000 16:27:27 +0000
 Subject: Re: CD ripper/MP3 encoder
-Message-Id: <marc-linux-ultrasparc-95011076426332@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95011405330198@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-95005914224137@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-95005914224137@msgid-missing>
@@ -10,12 +10,18 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> I think the U10 is the only 'tower' machine that has to be opened
-> upside-down...
+On Wed, 9 Feb 2000, Shawn Hooton wrote:
 
-	And the little metal flaps below (or above, if you've got the case
-off)  the floppy have to be bent to add another drive.  It's very
-frustrating, and I cut my hands on those more than any other case I've
-ever messed with.
+> This is easy!  I have a PII 400 with 1 2GB SCSI2 HD and a 4x SCSI
+> toshiba CDROM and I encode, rip, and play mp3s all the time.  In fact I
+> have even compiled code during this process!  Note:  Esd had to be
+> reniced to -10
 
-	- Isaiah
+	Do you have a SCSI drive that will read audio tracks at above 1x?
+	If so, which brand/model?
+
++--------------------------------------------------------------------------+
+| Aaron T Porter                      | If you can't code it -- support it |
+| atporter@primate.net                | Help make Linux work for everyone  |
+| owner-linux-kernel@vger.rutgers.edu | Subscribe to linux-admin today.    |
++--------------------------------------------------------------------------+
