@@ -1,7 +1,7 @@
-From: Ward Deng <wdeng@KachinaTech.COM>
-Date: Sun, 26 Jul 1998 04:29:46 +0000
+From: Bob Drzyzgula <bob@drzyzgula.org>
+Date: Sun, 26 Jul 1998 12:29:06 +0000
 Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531085@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531087@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
@@ -10,51 +10,80 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> I am also more interested in memory bandwidth than L2
-> cache, although at 4MB the cache probably begins to be
-> helpful. Some of our tasks will grab 100MB or more of
-> main memory and spin through it repeatedly for weeks
-> or months at a time, thus rendering the cache largely
-> irrelevant. The memory bandwidth in the UPA is a step
-> in the right direction for us, although it is still the
-> case that several processors all squeezing memory access
-> through a single memory port can be a drag (the AXmp has a
-> single 144-bit -- 128 bits of data and 16 bits of ECC --
-> UPA port for memory; the EDO memory is accessed 576 bits at
-> a time, but then it is multiplexed through XB9 crossbars
-> into the single UPA port). Multiple memory ports as on
-> the gigaplane help, but in the end it seems kind of silly
-> spending tens of thousands of dollars to get a machine and
-> then to tune your workload to make it work like a cluster;
-> I'd still rather have a pile of single or dual processor
-> machines; I can afford a lot more processors that way,
-> for one thing.  The biggest problem I have here is
-> physical space, although I saw a nice 2U chassis at
-> Linux Expo (DCG Computers), and the manufacturer is working
-> on modifying it for the AXi motherboard. Too bad the
-> AXi's memory channel is choked off to Pentium II levels.
+On Sat, Jul 25, 1998 at 10:29:46PM -0600, Ward Deng wrote:
+>
+> On my datasheets, AXi (Panther) has 144-bit memory path while Pentium II
+> is only 64-bit. AX (Photon) has 288-bit full-scale UPA. AXmp (Chrico)
+> has two UPAs with 576-bit memory path. In our tests, even AXi has much
+> better scalability than PII.
 
-[snip]
+We have four of the AXi boards and have similarly
+been very happy with them. Nonetheless, the
+UltraSPARC IIi chip only has a 72-bit (64/8) window
+on the memory subsystem. If you'll take a look at
+http://www.sun.com/microelectronics/UltraSPARC-IIi/specs.html,
+you'll see that the data lines feeding back to the
+processor from the XCVR chip is only 72 bits wide.
+On the AXi the path from the memory to the XCVR is 144
+bits so that they can assure a full bandwidth feed to the
+processor using commodity 60ns buffered EDO or FPM DIMMs.
+I think that this is one reason why the AXi does so much
+better than the PII on memory access; while both chips
+have an 8-byte path to memory, the AXi is designed to keep
+it filled. Note that, for example, you can usually run a
+PII board with a single DIMM, while the AXi needs them in
+multiples of two.
 
-On my datasheets, AXi (Panther) has 144-bit memory path while Pentium II
-is only 64-bit. AX (Photon) has 288-bit full-scale UPA. AXmp (Chrico)
-has two UPAs with 576-bit memory path. In our tests, even AXi has much
-better scalability than PII.
+[The specs on the AXi claim only 400MBps for memory
+throughput with a 300MHz processor. Since the path is
+8 bytes wide, I concluded that the memory interface on
+the 300MHz module runs at 50MHz, meaning that the 300MHz
+processor is clock-sextupled. Does anyone know if this is
+wrong? The block diagram shows the memory interface as
+being runnable at 83MHz, I'd guess that the 333MHz chip
+is clock-quadrupled?]
 
-We experienced the same problem as Bob did. A large-scale computational
-chemisty program ran dog-slow once the problem scaled up to practical
-level on an Alpha-PC system while it ran blazing fast during development
-phase. The reason: system throughput was too bad. HAL system was a big
-improvement then until UltraSPARC came out. Most real computing jobs won't
-fit in your SRAM cache no matter how big you make it.
+In the AXmp, the 576-bit channel is multiplexed down
+to 144 bits into the processor; you can see this on
+page 3-3 of the OEM manual:
+http://www.sun.com/microelectronics/SPARCengineUltraAXmp/805-5865.pdf
+(the block diagram on the Web is almost illegible). 
+Still, the AXmp has two such 144-bit channels,
+each channel shared between up to two processors.
+When these 16-byte busses are set to run at 100MHz,
+they result in a 1.6GBps memory channel. Running
+flat out with four processors, this thing should
+be able to pump upward of 3GBps out of memory, which
+is to me just an amazing number for something selling
+at this price. [Does anyone know if the 360MHz
+processor will be running at 120MHz tripled on
+the AXmp as it does on the Ultra 60? If so, this
+would crank the memory channels up to 1.9GBps]
+We have four four-processor AXmps on order. I'm
+looking forward to them...
 
-This is why we are so interested in UltraSPARC architecture and try to
-make it available to Linux users. We first started Pentium Pro and got
-very disappointed. Then we found OEM Alpha PC (DEC intended for NT users)
-was not a good candidate either. We hope UltraSPARC nodes make into
-"Beowulf" clusters soon. Pricewise, I think UltraSPARC is very reasonable
-comparing with Intel Xeon. Maybe SME should provide a version similar to
-Intel Celeron (joke) just for marketing purpose.
+You can see from this that the AXi and the AXmp are
+designed with the same kind of proportions. The
+AXi processor has a 8-byte-wide channel, so that the
+the memory is accessed in 16-byte chunks to assure
+a steady feed from commodity memory. In the AXmp,
+there are two 16-byte-wide channels, requiring
+a full-speed 32-byte-wide feed. Thus the commodity
+memory is accessed in 64-byte chunks and multiplexed
+down.
 
---ward
+> Maybe SME should provide a version similar to
+> Intel Celeron (joke) just for marketing purpose.
+
+I suppose that, comparing the the UltraSPARC II
+to the UltraSPARC IIi, it could be argued that
+the IIi is SME's Celeron-equivalent. It just
+happens to be a whole lot less embarrasing. :-)
+
+--Bob
+
+-- 
+==============================
+Bob Drzyzgula                             It's not a problem
+bob@drzyzgula.org                until something bad happens
+==============================
