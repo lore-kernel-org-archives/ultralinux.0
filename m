@@ -1,33 +1,18 @@
-From: Chan Yee <chunnamhon@yahoo.com>
-Date: Tue, 16 May 2000 06:22:38 +0000
-Subject: Hardware compatible...
-Message-Id: <marc-linux-ultrasparc-95845841006446@msgid-missing>
+From: "David S. Miller" <davem@redhat.com>
+Date: Tue, 16 May 2000 06:22:56 +0000
+Subject: Re: Hardware compatible...
+Message-Id: <marc-linux-ultrasparc-95845895306852@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-95845841006446@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-95845841006446@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi all,
 
-May I know where can I find more information on the
-hardware for example a video camera, mpeg card, tv
-tuner card, video capture card that is compatible with
-a sparc machine running linux. Can you also provide
-some information on them if available. i would also
-like to know more about the pricing and the
-compability of the mentioned hardware with the sparc
-machine. 
+We support the BTTV WinTV cards on PCI UltraSparc systems.
 
-P.S. can you please reply to my email address instead
-of putting it into the mailing list. my email is
-chunnamhon@yahoo.com
-
-regards,
-
-Chun Nam Hon
-
-__________________________________________________
-Do You Yahoo!?
-Send instant messages & get email alerts with Yahoo! Messenger.
-http://im.yahoo.com/
+Later,
+David S. Miller
+davem@redhat.com
