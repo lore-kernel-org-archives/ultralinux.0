@@ -1,18 +1,26 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Thu, 05 Jun 2003 08:05:55 +0000
-Subject: Re: drivers/scsi/Kconfig
-Message-Id: <marc-linux-ultrasparc-105480050404089@msgid-missing>
+From: "gero.waldhausen" <gero.waldhausen@ch4u.de>
+Date: Sat, 05 Jul 2003 20:17:46 +0000
+Subject: 
+Message-Id: <marc-linux-ultrasparc-105743637321578@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-105431270727833@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-105431270727833@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 To: ultralinux@vger.kernel.org
 
-   From: Matthew Wilcox <willy@debian.org>
-   Date: Wed, 4 Jun 2003 18:50:20 +0100
+Hallo ultralinux,
 
-   Comments from m68k or sparc64 people invited ...
+where can i get the latest linux-version for a sun ultra 5???
 
-Looks ok.
+--=20
+Mit freundlichen Gr=FCssen
+
+
+Gero Waldhausen
+K=F6nig-Heinrich-Weg 41
+22459 Hamburg
+Germany
+
+mailto: gero.waldhausen@ch4u.de
+__________________________________________
+
