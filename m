@@ -1,30 +1,31 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Tue, 08 Dec 1998 08:25:29 +0000
-Subject: Re: egcs 1.1.1 and ultrasparc .. possible ?
-Message-Id: <marc-linux-ultrasparc-91314935310552@msgid-missing>
+From: TSP SD AKIMOTO DAISUKE <akimoto.qj004@ex.tel.co.jp>
+Date: Fri, 18 Dec 1998 06:42:41 +0000
+Subject: RE: AHA-2940 o/f Ultra support
+Message-Id: <marc-linux-ultrasparc-91396358912028@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91308610811901@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91308610811901@msgid-missing>
+References: <marc-linux-ultrasparc-91133041215343@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-91133041215343@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: Tue, 8 Dec 1998 09:17:12 +0100 (EET)
-   From: =3D?ISO-8859-2?Q?Tomasz_K=B3oczko?=3D <kloczek@rudy.mif.pg.gda.pl>
+>>Loading aic7xxx module
+>>(scsi0) <Adaptec AHA-294X SCSI host adapter> found at PCI 1/0
+>>(scsi0) Narrow Channe, SCSI ID=7, 16/255 SCBs 
+>>(scsi0) Downloading sequencer code...412 instructions download
+>>(scsi0) BRKADRINIT error (0x8):
+>>Squencer Ram Parity Error
+>>
+>>Can you give me a hint?
 
-   On Tue, 8 Dec 1998, David S. Miller wrote:
+>I believe this to be fixed with current kernels.  The bug was
+>introduced in 2.1.12[56] and fixed in 2.1.128
 
-   > no, 64-bit userland is still completely non-functional, the tools and
-   > glibc still need a lot of work...
+All problems were solved! 
+Our linux box is running properly.
 
-   Hmm .. also for crosscompiling kernel ?
+Thanks for the good support.
 
-Some versions of egcs work, some don't.  And it's a pain in the neck
-to build the cross sparc64 egcs compiler, so for now I'd suggest
-staying away from it for now and keep using the distributed sparc64
-gcc for kernel builds.
-
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+Tokyo Electron Sapporo Limited
+Daisuke Akimoto
