@@ -1,7 +1,7 @@
-From: Peter Jones <pjones@redhat.com>
-Date: Wed, 06 Oct 1999 14:53:46 +0000
+From: Steve Dunham <dunham@cse.msu.edu>
+Date: Sun, 10 Oct 1999 05:43:48 +0000
 Subject: Re: tulip under linux sparc?
-Message-Id: <marc-linux-ultrasparc-93922345621784@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93953400009796@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-93909789806109@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-93909789806109@msgid-missing>
@@ -10,33 +10,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Tue, 5 Oct 1999, Bob Drzyzgula wrote:
+David Cooley <n5xmt@bellsouth.net> writes:
 
-> I think that the issue is that, to be functional at boot time, there
-> has to be OBP driver code for the card *either* in the card *or* in
-> the system OBP. Sun's stock OBP has driver code for some basic PCI
-> cards, but it could not be described as "wide support for most cards".
-> Manufacturers that wish to sell in the SPARC/PCI market have the
-> option of writing their own OBP driver and putting it in ROM on the
-> card in a standard manner; in that case the system OBP will find it
-> and can branch to that code at boot time. Adaptec does this with some
-> of their SCSI cards, for example. But once a system is up and running,
-> the ability of an OS to use the card is a function of the OS. It may
-> be the case that Solaris won't use cards that aren't reported by the
-> OBP, but Linux can go ahead and probe for cards that the OBP didn't
-> recognize. (Did I get this right, Dave?)
+> At 02:35 PM 10/5/1999 +1000, nick wrote:
+> >Anyone,
+> >
+> >Is it possible or not to get a Netgear 10/100 card, based on the tulip
+> >driver, working on a UE10 running Sparc Linux? (redhat 6.0)
 
-Pretty much, yeah.  Most PCI cards should work, With a few minor
-exceptions, such as _old_ Buslogic scsi boards tend to make my u10 not get
-_to_ openboot, some cards do some rather obnoxious things with their DMA,
-like ess Maestro's and a couple of other sound cards i've got.  
+> It's not possible because the netgear card has a bios/microcode setup for a 
+> PC architecture.  The Sun has to have a card that is designed for the OBP 
+> architecture.
 
-But yeah, there isn't any good reason a vendor can't make a PCI card that
-works fine on a sparc and an x86 (and an alpha, and a powerpc).  OBP
-support just affects doing things from the firmware, like booting the
-device.
+This not true.  I've used both a standard PC 3Com 3c905 network card
+and a standard PC Adaptec 2940 card in an Ultra 5.  It works fine with
+Linux.  
 
- -- Peter
+(Note that You can't load the kernel from a SCSI disk without the
+right BIOS, but Linux can use the devices without problem after the
+kernel is loaded. - In fact the Ultra 5 that I am typing this on is
+swapping off of a SCSI disk through the standard PC Adaptec controller.)
 
-"Who's scruffy-looking?"
-		-- Solo
+
+Steve
+dunham@cse.msu.edu
