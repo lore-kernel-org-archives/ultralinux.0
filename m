@@ -1,23 +1,31 @@
 From: "David S. Miller" <davem@redhat.com>
-Date: Wed, 21 Jul 2004 21:47:40 +0000
-Subject: Re: [PATCH] Fix sparc64 build with CONFIG_COMPAT=n
-Message-Id: <20040721144740.11bb8440.davem@redhat.com>
+Date: Thu, 01 Jul 2004 05:25:47 +0000
+Subject: Re: A question about PROT_NONE on Sparc and Sparc64
+Message-Id: <20040630222547.65d793da.davem@redhat.com>
 List-Id: <ultralinux.vger.kernel.org>
-References: <52fz808qwy.fsf@topspin.com>
-	<20040720200352.5c17b3f7.davem@redhat.com>
-	<52llhd2ira.fsf@topspin.com>
-In-Reply-To: <52llhd2ira.fsf@topspin.com>
+References: <20040630030503.GA25149@mail.shareable.org>
+	<20040630082804.GS21264@devserv.devel.redhat.com>
+	<20040630135419.25b843b8.davem@redhat.com>
+	<20040630225220.GA32560@mail.shareable.org>
+In-Reply-To: <20040630225220.GA32560@mail.shareable.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Roland Dreier <roland@topspin.com>
-Cc: ultralinux@vger.kernel.org, linux-kernel@vger.kernel.org
+To: Jamie Lokier <jamie@shareable.org>
+Cc: jakub@redhat.com, wesolows@foobazco.org, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, linux-kernel@vger.kernel.org
 
-On Wed, 21 Jul 2004 13:43:53 -0700
-Roland Dreier <roland@topspin.com> wrote:
+On Wed, 30 Jun 2004 23:52:20 +0100
+Jamie Lokier <jamie@shareable.org> wrote:
 
-> Just out of curiousity, is there any practical use for sparc64 without
-> CONFIG_COMPAT?  My impression was that everyone used 32-bit userspace
-> (except for possibly a few executables).
+> The PaX security patch already implements R!X pages on Sparc64, so you
+> could just cut out that part of the patch.  Just pick out the changes
+> to arch/sparc64/* and include/asm-sparc64/*:
+> 
+> 	http://pax.grsecurity.net/pax-linux-2.6.7-200406252135.patch
+> 
+> It appears to use exactly the technique Jakub describes, and has been tested.
 
-Someone could build a 64-bit pure system.
+Great, I'm integrating something along these lines right now.
+
+Do you have any idea who authored the sparc64 bits so I can give
+them credit?
