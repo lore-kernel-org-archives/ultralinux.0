@@ -1,19 +1,24 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Fri, 16 Oct 1998 00:48:42 +0000
-Subject: Re: Using gprof with ultrapenguin
-Message-Id: <marc-linux-ultrasparc-90854008221352@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Sat, 17 Oct 1998 18:37:05 +0000
+Subject: libstdc++.so.2.8
+Message-Id: <marc-linux-ultrasparc-90868562018612@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90849828006596@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90849828006596@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+tried the libstdc++.so.2.9.0
 
-Make sure you have the devel/debug/profile versions of the glibc rpms
-installed.
+still te error
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+so making a link  :
+
+ln -s libstdc++.so.2.9.0 libstdc++.so.2.8
+
+now :
+
+netscape: error in loading shared libraries    
+: undefined symbol: __eh_pc
+
+so i hope som1 has the libstdc++.so.2.8 rpm for me  
