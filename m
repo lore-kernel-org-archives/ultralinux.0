@@ -1,15 +1,19 @@
-From: "toling" <esetv@2299.com>
-Date: Wed, 30 Apr 2003 06:15:23 +0000
-Subject: good news
-Message-Id: <marc-linux-ultrasparc-105168572501335@msgid-missing>
+From: bulletwood18349@aol.com
+Date: Fri, 18 Apr 2003 04:24:22 +0000
+Subject: Re: hi
+Message-Id: <marc-linux-ultrasparc-105063965518082@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-105114225004748@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-105114225004748@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-please click the address  .then please choice yes.  there are good news.
-https://218.110.147.65:446
-https://219.4.104.137
+http://www.loanhunters.org/
+Hello,
+Well you asked for it. This is the website that got me that 5.125% mortgage.
+You simple fill out the form and lenders compete for your business.
+http://www.loanhunters.org/
+thanks,
+Richard Murphy
+Remove:
+http://www.loanhunters.bz/mort/rem/
