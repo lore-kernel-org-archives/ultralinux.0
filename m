@@ -1,46 +1,40 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Tue, 23 Mar 1999 09:20:38 +0000
-Subject: Re: Header files conflicts
-Message-Id: <marc-linux-ultrasparc-92218116701467@msgid-missing>
+From: Peter Jones <pjones@redhat.com>
+Date: Tue, 16 Mar 1999 09:05:40 +0000
+Subject: SCSI stuff...
+Message-Id: <marc-linux-ultrasparc-92157751902398@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92212191626693@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92212191626693@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> > 
-> > Hello,
-> > 
-> > The header files in /usr/include/linux seriously conflict with some
-> > from glibc-devel-2.0.7-29 in my ultrasparc-I box running UP-1.1.9 and
-> > kernel 2.2.4.
-> > 
-> > Here is a sample example (using <sys/types.h>):
-> [...]
-> > What may have missed?
-> > 
-> > Thierry Lafage.
-> 
-> Here is another example (trying to include <linux/types.h>):
+To get SCSI to compile on sparc64 as a module appears to need this patch:
 
-That's what you get on i386 with glibc as well, simply linux/types.h is
-incompatible with glibc headers, it has been like that for quite some time.
-Generally, you should use glibc headers and if you ever need something from
-linux/ headers which include linux/types.h or similar headers, just handle
-it somehow. If you look into most low level packages which do this, you'll
-see they either use their own copy of kernel headers, thus are independent
-on the actual kernel version installed during build (which is a good thing),
-or #define some define which will prevent those headers to be included.
+--- include/asm-sparc64/softirq.old	Tue Mar 16 03:52:55 1999
++++ include/asm-sparc64/softirq.h	Tue Mar 16 03:51:09 1999
+@@ -44,7 +44,7 @@
+ extern inline void remove_bh(int nr)
+ {
+ 	bh_mask &= ~(1 << nr);
+-	membar("StoreStore");
++	membar("#StoreStore");
+ 	bh_base[nr] = NULL;
+ }
+ 
+--- drivers/scsi/scsi.old	Tue Mar 16 03:33:51 1999
++++ drivers/scsi/scsi.c	Tue Mar 16 03:45:32 1999
+@@ -3297,7 +3296,7 @@
+ 
+     /* One bit per sector to indicate free/busy */
+     size = (dma_sectors / SECTORS_PER_PAGE)*sizeof(FreeSectorBitmap);
+-    dma_malloc_freelist = (unsigned char *) scsi_init_malloc(size, GFP_ATOMIC);
++    dma_malloc_freelist = (FreeSectorBitmap *) scsi_init_malloc(size, GFP_ATOMIC);
+     memset(dma_malloc_freelist, 0, size);
+ 
+     /* One pointer per page for the page list */
+ 
+ -- Peter, staying up far too late as usual.
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
-Linux version 2.2.3 on a sparc64 machine (3958.37 BogoMips)
-___________________________________________________________________
+Computers have already beaten communists at chess.  The next thing you
+know, they'll be beating humans.
+		-- Dale
