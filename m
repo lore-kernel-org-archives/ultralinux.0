@@ -1,50 +1,45 @@
-From: David Andrew - Sun MDE <David.Andrew@East.Sun.COM>
-Date: Mon, 29 Jun 1998 15:15:38 +0000
-Subject: Re: Question: Where to get the CD?
-Message-Id: <marc-linux-ultrasparc-90222357631044@msgid-missing>
+From: Frank Stolze <fstolze@yahoo.com>
+Date: Sat, 13 Jun 1998 01:01:00 +0000
+Subject: Ultra 5
+Message-Id: <marc-linux-ultrasparc-90222357631012@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357631037@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357631037@msgid-missing>
+References: <marc-linux-ultrasparc-90222356531023@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90222356531023@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Tony,
+Some feedback regarding booting UltraLinux on an
+Ultra 5:
 
-Sorry, no CD yet, but soon. Linux 5.1 on UltraSParc CD should be available from 
-Red Hat in July or August.  UltraPenguin is only available on the net at this 
-time.
+I have not been able to do a successful net boot for
+UltraLinux 1.0 and 1.0.9 on an Ultra 5.
 
-Maybe someone on the mailing list has generated one...
+1.0:  After loading the tftp boot image, there is a
+      simple error message:
 
-David Andrew
---------------
+      Strange OBP version 'OBP 3.11.9 1998/03.06 10:31'
+      Program terminated
 
-> Date: Fri, 26 Jun 1998 16:50:47 -0500
-> From: Tony Harris <tony@ntech.com>
-> MIME-Version: 1.0
-> To: ultralinux@vger.rutgers.edu
-> Subject: Question: Where to get the CD?
-> Content-Transfer-Encoding: 7bit
-> X-Orcpt: rfc822;ultralinux@vger.rutgers.edu
-> X-Loop: majordomo@vger.rutgers.edu
-> 
-> Hi,
-> I am not on the mailing list, so please CC me as well....
-> 
-> I've been reading the info on this web site, and would like to know
-> where I can get UltraLinux on a bootable CD??
-> 
-> I have redhat 4.2 for sparc, but they don't list an Ultra version.
-> 
-> I am looking to get Linux on my Ultra 5.  I'd prefer from CD.  Any and
-> all help would be most appreciated.
-> 
-> -Tony
-> 
+      and you're back at the ok prompt.
 
-David Andrew                Tel:  978-442-2316   Internal:   22316
-Market Development Engineer - I/O Technologies   FAX:  978-442-1520	
-Sun Microsystems, 2 Omni Way - M/S UCHL02-102,   Chelmsford, MA 01824	 
-e-mail:  david.andrew@sun.com
+1.0.9: The tftp boot image is loaded, the display
+       switches to the white-on-black Linux display
+       and the usual Linux kernel boot messages show
+       up. After the line:
+
+       hdc: packet command error: status=0x0d { Busy }
+
+       the system hangs indefinitely. Looking through
+       the messages the only thing that looks weird
+       is the irq number "-1073739808" given for both
+       ide0 and ide1.
+
+
+Regards,
+Frank Stolze
+
+_________________________________________________________
+DO YOU YAHOO!?
+Get your free @yahoo.com address at http://mail.yahoo.com
