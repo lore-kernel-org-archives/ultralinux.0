@@ -1,33 +1,55 @@
-From: Flavio Pescuma <edtfopa@malmen.ericsson.se>
-Date: Mon, 29 Mar 1999 08:53:49 +0000
-Subject: Re: Multi Happy Meal Ethernet problem
-Message-Id: <marc-linux-ultrasparc-92269853502257@msgid-missing>
+From: Karl-Olov Serrander <kase@cntw.com>
+Date: Fri, 12 Mar 1999 10:47:34 +0000
+Subject: ultrapenguin-1.1.9 problems
+Message-Id: <marc-linux-ultrasparc-92123595303143@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92255674631513@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92255674631513@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-David Miller wrote:
+Hi
 
-> You need to update to the latest kernels, it is a bug in setting up
-> interrupts for the 2nd and 3rd cards on PCI.
->
-> Later,
-> David S. Miller
-> davem@redhat.com
+1 During install it was not possible to create a boot floppy.
+  Later when i try to access /dev/fd0 i get:
+    floppy0: probe failed
+    floppy0: probe failed
+    floppy0: probe failed
+    ...
 
-I'm using kernel 2.2.2.  Today I'll try to compile 2.2.4
+  Works ok in solaris7
 
-Thanks,
+2 silo.conf does not seem to be correct. I can only boot
+  linux, not solaris as i have entered during install.
 
-Flavio
+3 I can't choose 1152*900 when configuring X. Sun monitors
+  (in my case 20" GDM-20D10) does not seem to be included
+  in configuration script.
+
+My configuration:
+  Ultra5 with 132 Mb mem
+  no IDE disk
+  SCSI glm0 (53C875)
+  DISK SEAGATE-ST34520W 4.3 Gb
+    slice 1 Solaris
+    slice 2 linux
+    slice 3 solaris swap
+    slice 4 linux swap
+  Monitor Sun 20" GDM-20D10
+
+  I also have a graphics card TECH-SOURCE Raptor GFX 8P
+  which have not tried to use with linux.
 
 
---
-WIRE - Web & Internet Resources at Ericsson
-Flavio Pescuma           phone: +46 (0)8 7263359
-L M Ericsson Data AB     fax:   +46 (0)8 7217207
-125 82 Stockholm Sweden  http://eriweb.ericsson.se
+4 prompt$ /sbin/modinfo
+  The insmod/rmmod combined binary is having an identity crisis.
+  Please give it a proper name.
+
+I have upgraded to XFree86*-3.3.3.1-2.sparc.rpm and kernel*-2.2.2-3.sparc64.rpm
+but floppy still does not work.
+
+5 what is the status for sound ?
+
+Regards
+-- 
+Karl-Olov Serrander kase@cntw.com
