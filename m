@@ -1,49 +1,27 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Wed, 17 Mar 1999 10:29:57 +0000
-Subject: [ANNOUNCE] Test release of rewritten Creator/Creator3D/Elite3D support
-Message-Id: <marc-linux-ultrasparc-92169272206527@msgid-missing>
+From: Matthew Hawkins <matt@mail.goldweb.com.au>
+Date: Wed, 17 Mar 1999 23:59:12 +0000
+Subject: Re: [ANNOUNCE] Test release of rewritten Creator/Creator3D/Elite3D support
+Message-Id: <marc-linux-ultrasparc-92172364000340@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92169272206527@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92169272206527@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+Hi Jakub!
 
-Myself and David Miller would like to announce a test release
-of our Xsun24 rewrite of the Creator/Creator3D/Elite3D driver.
-We've spent on it quite a few months and would like to offer it for public
-use if no showstoppers are found.
-Basically, your Creator/3D/Elite3D should run now much faster, because we
-try to get as much as possible from the chip.
+On Wed, 17 Mar 1999, Jakub Jelinek wrote:
 
-Xmark93 went from 23808 to 39247, Xstones from 86842 to 466236 (both x11perf
-and xbench are benchmarks measuring speed of most commonly used X
-operations). All these numbers are in 32bpp (most of the PCI cards might
-have good numbers in 8bpp (but I doubt it could have nearly 500kXstones),
-but will be slow as pig in 32bpp).
+> Once we integrate it into XFree86 4.0, we'll add support for mixed 32/8bpp
+> windows on the same screen
+[--- snip ---]
 
-For exact numbers and rpms see
-http://ultra.linux.cz/ftp/OS/Linux/Sparc/local/XFree86/
-announcement can be found at
-http://ultra.linux.cz/ftp/OS/Linux/Sparc/local/XFree86/creator.html
+Is this a chipset-specific feature, or is it possible for other X servers to
+be similarly modified?  (I've always wanted to be able to fire up Xnest in a
+depth different to the _real_ server running on :0, and individual windows
+would be even better... I suppose one simply uses -visualid to choose?
 
-We'd like to get some feedback on it, fix last few bugs if some appear and
-then put this into distributions.
-
-Once we integrate it into XFree86 4.0, we'll add support for mixed 32/8bpp
-windows on the same screen and extensive 3D support (even for the 2D
-models), so there are really things to improve.
-
-BTW: The reported bug with mouse cursor disappearing near the left/top edges
-is fixed.
-
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
-Linux version 2.2.3 on a sparc64 machine (3958.37 BogoMips)
-___________________________________________________________________
+-- 
+Matt
