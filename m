@@ -1,47 +1,72 @@
-From: Peter Jones <pjones@redhat.com>
-Date: Thu, 15 Apr 1999 22:03:56 +0000
-Subject: Re: Compile warning...
-Message-Id: <marc-linux-ultrasparc-92421402300529@msgid-missing>
+From: Thierry Lafage <lafage@irisa.fr>
+Date: Fri, 02 Apr 1999 15:35:54 +0000
+Subject: Re: Question about sys32_ioctl()
+Message-Id: <marc-linux-ultrasparc-92306770528448@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92419958220068@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92419958220068@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Thu, 15 Apr 1999, David Miller wrote:
 
->    Date: 	Thu, 15 Apr 1999 13:52:08 -0400 (EDT)
->    From: Peter Jones <pjones@redhat.com>
-> 
->    gargleblaster:/usr/src/linux$ make
->    sed: -e expression #1, char 37: Unknown option to 's'
->    rm -f include/asm
-> 
-> I don't get this...  The first thing I do after a beta RH install is
-> to cvs checkout and build a kernel, so I'd notice something like this,
-> or else it goes by in the build output so fast I don't catch it :-)
+Hello,
 
-Well, I guess I'll look harder for having done something stupid then ;)
+Nobody answered the question I posted yesterday, so I re-post it now
+in case it was taken as a 1st april joke ;-). But this was not, even
+if it sounds stupid from me to put my nose in the kernel sources...
 
->    Which looks like its not pertenant to anything else, at all, anywhere (I
->    just grepped the whole source tree for MAKEOVERRIDES ;)
-> 
->    Can we just take this out?
-> 
-> MAKEOVERRIDES is an internal 'make' variable, it is used even though
-> it is not explicitly referenced.
+The sys32_ioctl() code contains things I really do not understand, but
+since I applied the modification I propose below, I would like to know
+if it is a bad thing for the kernel stability and/or mechanisms. And
+if it is, I apologize for the mailing lists pollution (as I should do
+every time I post here).
 
-Oh, ok.  I guess I'll have to pull it appart some more and figure out why
-my system is doing odd things with it, and read some more make docs...
+Thierry Lafage.
 
-> Later,
-> David S. Miller
-> davem@redhat.com
+------- Start of forwarded message -------
 
- -- Peter
+Hello,
 
-"An age is called dark not because the light fails to shine, but because
-people refuse to see it."
-		-- James Michener, "Space"
+I have made a personal char device driver. For the device, I would
+like to add new ioctl commands (I have read the file
+"Documentation/ioctl-number.txt" for that). But with sparc32 user
+programs, the new ioctl commands cannot be serviced by my char driver:
+
+sys32_ioctl: Unknown cmd fd(3) cmd(2000ee00) arg(00000000)
+
+When looking in the code "arch/sparc64/kernel/ioctl32.c", the
+sys32_ioctl() function never calls such added cmds: 
+
+asmlinkage int sys32_ioctl(unsigned int fd, unsigned int cmd, unsigned long arg)
+{
+[...]
+        switch (cmd) {
+[...]
+        default:
+                do {
+                        static int count = 0;
+                        if (++count <= 20)
+                                printk("sys32_ioctl: Unknown cmd fd(%d) "
+                                       "cmd(%08x) arg(%08x)\n",
+                                       (int)fd, (unsigned int)cmd, (unsigned int)arg);
+                } while(0);
+                error = -EINVAL;
+                break;
+        }
+out:
+        unlock_kernel();
+        return error;
+}
+
+
+Would it be stupid to add something like what follows to the default
+case (inspired from "fs/ioctl.c: sys_ioctl(...)")?
+
+if (filp->f_op && filp->f_op->ioctl && filp->f_dentry && filp->f_dentry->d_inode)
+	       error = filp->f_op->ioctl(filp->f_dentry->d_inode, filp, cmd, arg);
+
+Thierry Lafage.
+- -
+To unsubscribe from this list: send the line "unsubscribe sparclinux" in
+the body of the message to majordomo@vger.rutgers.edu
+------- End of forwarded message -------
