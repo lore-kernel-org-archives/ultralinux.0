@@ -1,33 +1,63 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Tue, 03 Nov 1998 13:00:22 +0000
-Subject: Re: Further changes in UltraPenguin 1.0.9
-Message-Id: <marc-linux-ultrasparc-91009734510093@msgid-missing>
+From: Svante Sormark <svinto@ita.chalmers.se>
+Date: Mon, 16 Nov 1998 17:02:37 +0000
+Subject: ultra 30 again ...
+Message-Id: <marc-linux-ultrasparc-91126985723327@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91003448018926@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91003448018926@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 To: ultralinux@vger.kernel.org
 
-> A suggestion for improving the installation: at the moment it seems
-> to demand a swap partition. That's a nuisance since I only wanted to
-> put Linux on one partition on this box and I had to wipe out a 0.5GB
-> Solaris partition just to satisfy the install program's swap craving.
-> It would be nice if it could be made optional. 
+hi all,
 
-Ok, I'll look into that. redhat 5.0 installer just put out a warning, if you
-don't want to reconsider it, that is apparently there, but some other places
-unconditionally disallows it. I'll be merging differences between rawhide as
-of a week ago and 5.2 into the installer, so that I can call it based on
-rh5.2, today.
+now i've got the silo/initrd problem fixed (thanks again jakub) so here's
+the next one.=20
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.126 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+<cut from boot-messages>
+VFS: Mounted root (ext2 filesystem) readonly.
+change_root: old root has d_count=3D1
+Trying to unmount old root ... okay
+INIT: version 2.71 booting
+Unable to handle kernel NULL pointer dereference<1>tsk->mm->context 0000000=
+000000403
+tsk->mm->pgd =3D fffff80000003000
+              \|/ ____ \|/
+              "@'/ .. \`@"
+              /_| \__/ |_\
+                 \__U_/                                                =20
+init(1): Oops                                                          =20
+TSTATE: 0000000080009606 TPC: 000000000045b780 TNPC: 000000000045b784 Y:
+00000000
+g0: fffff800009c6ac0 g1: 0000000000000000 g2: 0000000000000000 g3:
+0000000000000000
+g4: fffff80000000000 g5: 0000000000000000 g6: fffff80027ef8000 g7:
+0000000000000020
+o0: 0000000000000000 o1: 000000000045b1a0 o2: 000000000045b6fc o3:
+00000000000000f1
+o4: 00000000000000f0 o5: 0000000000000000 sp: fffff80027efb3f1 ret_pc:
+000000000045b6b4
+l0: 0000000000000000 l1: 8000000027d64eb0 l2: fffff80000904d30 l3:
+fffff80000904d60
+l4: fffff80027cb2000 l5: fffff80027d64000 l6: 000000000056fc00 l7:
+0000000000000008
+i0: fffff800009ce440 i1: 0000000000000009 i2: fffffffffffffff7 i3:
+0000000000000000
+i4: 000000000056b2f8 i5: 0000000000000107 i6: fffff80027efb541 i7:
+0000000000459a2c
+Caller[0000000000459a2c]                                               =20
+Caller[00000000004217fc]                                               =20
+Caller[000000000040fe74]                                               =20
+Caller[00000000700a4910]                                               =20
+Instruction DUMP: 10680014  b4103fea  d05e2018 <d65a2070> 02c2c009
+933e6000  90100018  9fc2c000  9407a77f=20
+
+</cut>
+
+
+
+-------------------------------------------------------------------------- =
+=20
+|  Svante S=F6rmark  |  Chalmers IT -avdelning  | utvecklare | 0707 538336 =
+|=20
+-------------------------------------------------------------------------- =
+=20
