@@ -1,24 +1,33 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Thu, 14 May 1998 13:05:26 +0000
-Subject: Re: Mysql on UltraPenguin
-Message-Id: <marc-linux-ultrasparc-90222356531035@msgid-missing>
+From: Jim Nance <jlnance@avanticorp.com>
+Date: Fri, 08 May 1998 14:19:49 +0000
+Subject: Re: mirror of ultrapenguin
+Message-Id: <marc-linux-ultrasparc-90222356530986@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356531003@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356531003@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-Thanks for the report, you probably saw some messages from the kernel
-such as:
+Matthias von Essen wrote:
+> Hi Guys,
+> 
+> I want to give ultrapenguin a try on my sun4c and sun4m. Is there a
+> mirror of the ultrapenguin site (sunsite.mff.cuni.cz) where I can get
+> the latest binaries from? 
 
-Unimplemented SPARC system call 243
+I just asked Donnie Barnes at redhat to do this a few days ago.  It is
+now being mirrored at ftp://ftp.redhat.com/pub/mirrors/ultra
 
-Anyways, I'm fixing it right now, and the mysql should work just fine
-with the next set of kernel RPM's.
+The last time I checked it was not compleatly there yet.  The link is
+very slow.
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+Thanks,
+
+Jim
+
+-- 
+----------------------------------------------------------------------------
+Jim Nance                                                 Avant! Corporation
+(919) 941-6655    Do you have sweet iced tea?       jim_nance@avanticorp.com
+                  No, but theres sugar on the table.
