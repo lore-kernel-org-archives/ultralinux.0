@@ -1,36 +1,27 @@
-From: Steve Dunham <dunham@cse.msu.edu>
-Date: Sun, 10 Oct 1999 05:43:48 +0000
-Subject: Re: tulip under linux sparc?
-Message-Id: <marc-linux-ultrasparc-93953400009796@msgid-missing>
+From: Pete Zaitcev <zaitcev@metabyte.com>
+Date: Mon, 18 Oct 1999 02:17:49 +0000
+Subject: SBus in 2.3
+Message-Id: <marc-linux-ultrasparc-94021308306451@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-93909789806109@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-93909789806109@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-David Cooley <n5xmt@bellsouth.net> writes:
+Fellow 64 bit enabled hackers,
 
-> At 02:35 PM 10/5/1999 +1000, nick wrote:
-> >Anyone,
-> >
-> >Is it possible or not to get a Netgear 10/100 card, based on the tulip
-> >driver, working on a UE10 running Sparc Linux? (redhat 6.0)
+If I understand correctly, 2.3 is in use on sparc64 for some time.
+Do you guys have any problems on Ultra-1/140?
+I did regressions on sparc64 for my sparc putback today as it touches
+some common files and there was some strage problem on U-1,
+which looks like this:
 
-> It's not possible because the netgear card has a bios/microcode setup for a 
-> PC architecture.  The Sun has to have a card that is designed for the OBP 
-> architecture.
+[root@iolab130 /root]# ifconfig eth0 up  
+IRQ: Trying to share non-PCI bucket.
+Lance: Can't get irq 5,7e1
+SIOCSIFFLAGS: Resource temporarily unavailable
 
-This not true.  I've used both a standard PC 3Com 3c905 network card
-and a standard PC Adaptec 2940 card in an Ultra 5.  It works fine with
-Linux.  
+Hmm... I would track it down myself but I do not have good
+access to sparc64's. Any ideas?
 
-(Note that You can't load the kernel from a SCSI disk without the
-right BIOS, but Linux can use the devices without problem after the
-kernel is loaded. - In fact the Ultra 5 that I am typing this on is
-swapping off of a SCSI disk through the standard PC Adaptec controller.)
-
-
-Steve
-dunham@cse.msu.edu
+--Pete
