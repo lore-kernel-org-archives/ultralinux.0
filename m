@@ -1,7 +1,7 @@
-From: TSP SD AKIMOTO DAISUKE <akimoto.qj004@ex.tel.co.jp>
-Date: Wed, 25 Nov 1998 05:13:03 +0000
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Wed, 25 Nov 1998 17:58:35 +0000
 Subject: Re: AHA-2940 o/f Ultra support
-Message-Id: <marc-linux-ultrasparc-91201500230823@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91205076819205@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91133041215343@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91133041215343@msgid-missing>
@@ -10,25 +10,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> I have an Ultra 5 with a AHA-2940 o/f scsi card and
-> when Linux/Ultra is tring to probe devices it gets
-> stuck looking at the 2940.
-> 
-> Any ideas?  I am running 128mb ram with the latest OBP.
-I have same environment and same problem.(Kernel: 2.1.126)
+   From: TSP SD AKIMOTO DAISUKE <akimoto.qj004@ex.tel.co.jp>
+   Date: 	Wed, 25 Nov 1998 14:13:03 +0900
 
-dmesg as followed:
+   Can you give me a hint?
+   Best regards,
 
-Loading aic7xxx module
-(scsi0) <Adaptec AHA-294X SCSI host adapter> found at PCI 1/0
-(scsi0) Narrow Channe, SCSI ID=7, 16/255 SCBs 
-(scsi0) Downloading sequencer code...412 instructions download
-(scsi0) BRKADRINIT error (0x8):
-Squencer Ram Parity Error
+I have such an Adaptec card here, I will test it and see if I can
+reproduce your problem.  If yes, then I will fix it for you.
 
-Can you give me a hint?
-Best regards,
-
-Tokyo Electron Sapporo Limited
-Daisuke Akimoto
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
