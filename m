@@ -1,28 +1,27 @@
-From: Alberto Brealey <beto@alpha.ulatina.ac.cr>
-Date: Wed, 30 Sep 1998 01:53:28 +0000
-Subject: ultrapenguin does not boot
-Message-Id: <marc-linux-ultrasparc-90712024610159@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Wed, 30 Sep 1998 09:32:22 +0000
+Subject: binutiles 2.8.1
+Message-Id: <marc-linux-ultrasparc-90714814421320@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+som1 here can send me the rpm (or point me to a place where i can find it)
+of binutils 2.8.1
 
-when i try to boot my ultrapenguin box, silo tells me that the filesystem
-has "unsupported read-only features"
+i think i have here problems with the 2.9.1
 
-any ideas?
+when i try to install a source file (.tgz or srpm)
+i get a lot of seg faults etc.
 
-so i boot from the net and mount my root partition: when i try to
-reinstall silo it tells me 
+maybe it's also the libc
 
-Fatal error: couldn't find out what device is second stage on
+som1 else have this problems 
 
-what can be wrong?
+most of times segfaults on thing like eval $something
 
+with ./configure
 
-thanks in advance
-
-
-alberto
+so i think binutils is the problem
