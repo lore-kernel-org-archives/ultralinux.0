@@ -1,27 +1,25 @@
-From: Matthew Jacob <mjacob@feral.com>
-Date: Thu, 31 Dec 1998 03:47:23 +0000
-Subject: Re: (FOLLOWUP) Re: wierd NFS problem with UP1.1.9
-Message-Id: <marc-linux-ultrasparc-91510357531747@msgid-missing>
+From: "William Bradley" <wmbradle@samford.edu>
+Date: Fri, 18 Dec 1998 17:22:56 +0000
+Subject: ethernet probs on 1.1.9
+Message-Id: <marc-linux-ultrasparc-91400813832658@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91498590723709@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91498590723709@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+hi,
+I just installed ultrapenguin 1.1.9.  works great accept for one thing.  i
+can't get the ethernet working for anything.  i know the card is good cause
+i was running solaris before.  tried ifconfig and route to no avail. at
+console i keep getting a continuous message
 
-On Wed, 30 Dec 1998, David S. Miller wrote:
+eth0: Carrirer Lost, trying TPE
+eth0: Carrirer Lost, trying AUI
 
-> 
-> What is the NFS server running?
+Does anyone have an idea how to fix this.  I am running it on an older
+<circa 96> Sun Ultra Enterprise 1.
 
-Solaris 2.6.
-
-> 
-> Anyways, my current hunch is that when I merge our tree to 2.2.0-prex
-> this may vanish... and this I'm doing soon as the 2.2.x is now on.
-> 
-
-That's my guess && hope. I had NFS hangs for i386 2.1.132 which seemed
-to go away foer 2.2.X-pre1.
+Thanks
+William Bradley
+wwwadmin@samford.edu
