@@ -1,33 +1,32 @@
-From: "Olivier A. D. Lebaillif" <Olivier.Lebaillif@ifrsys.com>
-Date: Tue, 23 Mar 1999 14:48:21 +0000
-Subject: Solaris emulation !?!
-Message-Id: <marc-linux-ultrasparc-92220050913641@msgid-missing>
+From: Matthew Hawkins <matt@mail.goldweb.com.au>
+Date: Tue, 23 Mar 1999 21:34:12 +0000
+Subject: Re: Solaris emulation !?!
+Message-Id: <marc-linux-ultrasparc-92222515102068@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92220050913641@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92220050913641@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi guys,
+On Tue, 23 Mar 1999, Olivier A. D. Lebaillif wrote:
+> Is there anybody out there who was able to use the Solaris emulation in
+> order to run something more involving than ls ??????
 
-A couple weeks ago I asked Jakub for information on what was needed in
-order to run the Solaris emulation. He pointed out the
-/usr/doc/solemul-* as containing the list of librairies and files needed
-in order to get it working...
+I managed to get a couple of components of Verity's Search97 package to run,
+however the main server required lwp support which solemu doesn't do just
+yet.  A coworker and I intend to fix that small deficiency, however don't
+hold your breath as (and I hate to say it) it's the lowest priority we have
+- closely beaten by sleep ;)
 
-Well, that was a very good hint to start with but unfortunately not
-everything is described in this document (or the list is incomplete :-)
-) ... After moving a lot of stuff around I finaly got 'ls' to work but
-that's about it !!!
+I found the documentation for the package quite concise and complete - get
+your sloaris libraries, whack them in this directory, cross your fingers and
+pray to your favourite deity, try to run something.  I can't remember
+anything special I had to do that wasn't written in the docs.  I think the
+worst that can happen is the program whinges about unimplemented system
+calls, and you'll have to run the thing under the real solaris.  That's your
+cue to implement them! :)
 
-To be able to get rid of Solaris I must run a floating license server,
-this involves a little bit of networking operations :-)
-
-Is there anybody out there who was able to use the Solaris emulation in
-order to run something more involving than ls ??????
-
-Please let me know, I would really appreciate any help in that matter.
-
-Thanks by advance,
-
-Olivier
+-- 
+Matt
