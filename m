@@ -1,29 +1,38 @@
-From: Grant Beattie <Grant.Beattie@fulcrum.com.au>
-Date: Mon, 23 Nov 1998 20:20:52 +0000
-Subject: Re: 1.1 great, netscape?
-Message-Id: <marc-linux-ultrasparc-91190353211681@msgid-missing>
+From: "R. Marc" <rmarc@dimension.net>
+Date: Thu, 05 Nov 1998 10:48:05 +0000
+Subject: Re: UltraPenguin 1.1 release
+Message-Id: <marc-linux-ultrasparc-91031051111669@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91146828828908@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91146828828908@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Mon, Nov 23, 1998 at 02:57:41PM +0100, Thomas Klaube wrote:
+> So, UltraPenguin 1.1 is on FTP. 
 
-> hmm.. I downloaded the Navigator-only binary (which is about 7MB). But
-> they have linked libc++.so.2.8 dynamicly.... Is there a RPM with this
-> lib?  I have tried to build it on my own.... without success :-(.
+So now that 1.1 is out, I'm going to ask about mysql again.  I've been
+running UltraPenguin since 1.0.9 came out and have not managed to get 
+mysqld to work yet.  David Miller responded to me a few times saying
+that it was some problem with this or that (don't exactly remember what
+he said) and that the problem was fixed, just not put into the
+distribution yet.
 
-I'm not sure. libc++ is reasonably new. What problem did you have
-compiling it? I compiled gcc and libc++ no problem on Solaris 2.6
-(sparc).
+So, I tried it again today with 1.1 figuring it would all be better and I
+can get rid of every copy of solaris in the building.
 
-> Someone else in this list said that there is a 4.0x SparcLinux-Verion
-> of the Navigator. So far I could not find any....
+No such luck *sob*
 
-Ah yes my apologies, it would appear I was mistaken. I must have seen
-4.5.
+Starting mysqld demon with databases from /usr/local/mysql-3.21.33b/var
+/usr/local/mysql-3.21.33b/bin/safe_mysqld: line 125: 16682 Segmentation
+fault      nohup $ledir/mysqld --basedir=$MY_BASEDIR_VERSION
+--datadir=$DATADIR --skip-locking "$@" >>$err 2>&1
+mysqld demon ended
 
-grant.
+Somebody please tell me there's an easy solution, "just do X."...or "you
+for got to set the --work-properly flag when you ran configure."  Please.
+
+The client works fine, BTW, just not the daemon.
+
+R. Marc
+
+P.S.  The 1.1 install went remarkably smooth.  Keep up the good work.
