@@ -1,73 +1,32 @@
-From: <pau@readysoft.es>
-Date: Tue, 28 Sep 1999 18:13:46 +0000
-Subject: Re: 2.2.13pre8 on Ultra still crashing
-Message-Id: <marc-linux-ultrasparc-93854395400750@msgid-missing>
+From: "David A. Cooley" <n5xmt@bellsouth.net>
+Date: Sat, 04 Sep 1999 04:55:33 +0000
+Subject: SUN StorEdge D1000
+Message-Id: <marc-linux-ultrasparc-93642093308384@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-93790194403208@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-93790194403208@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Tue, 28 Sep 1999, David S. Miller wrote:
+Hi All,
+I have a Sun Ultra Enterprise 2, Dual 300 MHz CPU's, 256 Meg ram, Turbo GX 
+framebuffer, dual internal 9G drives and a second QLOGIC SCSI interface 
+connected to a Sun StorEdge D1000 with 12 4G drives.  Ran fine under 
+Solaris, but I hate solaris... Loaded UltraPenguin 1.9 and it locked up at 
+the beginning of install on the SCSI bus probe.  Disconnected the D1000 and 
+installed fine.  Downloaded Kernel source 2.2.12 and configured/compiled 
+for my system, again boots fine until I turn on the D1000... probe-scsi-all 
+finds the D1000 and all it's drives fine, but Linux's probe finds the 
+drives, 0-5, 8-13 fine, when it get's to target 14 (D1000's first internal 
+controller) it hangs... says timeout on SCSI bus reset.  Sometimes, the 
+system can be halted and rebooted without the D1000, other times it takes a 
+hard power off-on to get it back.  I'd really like to use the D1000 for my 
+file server.
+Anyone have any ideas on the cause/cure of this?
+Thanks,
+Dave
 
->    Date:   Tue, 21 Sep 1999 10:24:06 +0200 (CEST)
->    From: <pau@readysoft.es>
-> 
->    I attach a new log -ksymoops- caught through the serial console, of
->    an Ultra Axi PCI machine hanging.
-> 
->    I don't know if it'll be enough or if I miss something; if that's
->    the case, could you please tell me how to setup syslogd to log
->    these messages to the console?
-> 
-> Ok, I've been staring at these messages for quite some time.
-> I'm stumped for the moment, it's always dieing in fput() with
-> a completely corrupted stack (it's been totally zero'd)
-> 
-> What do you run on this machine?  Lots of POP and other mail daemons?
-> Any weird networking things enabled such as IP Masquerading or
-> appletalk, things like this?
-
-I'm running a qmail pop3 server that includes delivery to mailboxes, a
-pop3 proxy and yhe qmail popper itself.
-
-I've got quite a few symoops from these last days. If you need them I can
-send them again. Meanwhile I'll unncomment kern.* in syslogd to get more
-input.
-
-> Finally, what does your syslogd.conf look like?
-
-Here it is:
-
-syslogd.conf
-
-----------8<--------------8<----------8<-----------
-
-# Log all kernel messages to the console.
-# Logging much else clutters up the screen.
-#kern.*                                                 /dev/console
-
-# Log anything (except mail) of level info or higher.
-# Don't log private authentication messages!
-*.info;mail.none;authpriv.none                          /var/log/messages
-
-# The authpriv file has restricted access.
-authpriv.*                                              /var/log/secure
-
-# Log all the mail messages in one place.
-mail.*                                                  /var/log/maillog
-
-# Everybody gets emergency messages, plus log them on another
-# machine.
-*.emerg                                                 *
-
-# Save mail and news errors of level err and higher in a
-# special file.
-uucp,news.crit                                          /var/log/spooler
-
-----------8<--------------8<----------8<-----------
-
-Thanks for your help.
-Pau
+=============================            David Cooley N5XMT           Internet: N5XMT@bellsouth.net
+      Packet: N5XMT@KQ4LO.#INT.NC.USA.NA   T.A.P.R. Member #7068
+    Sponges grow in the ocean... Wonder how deep it would be if they didn't?!
+=============================
