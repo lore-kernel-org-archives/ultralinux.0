@@ -1,50 +1,41 @@
 From: Marco Colombo <marco@esi.it>
-Date: Mon, 11 Feb 2002 09:56:26 +0000
-Subject: Re: [Re: [RNDGETENTCNT ioctl]]
-Message-Id: <marc-linux-ultrasparc-101342137630922@msgid-missing>
+Date: Thu, 07 Feb 2002 18:09:47 +0000
+Subject: RNDGETENTCNT ioctl
+Message-Id: <marc-linux-ultrasparc-101310553528841@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-101319395211743@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-101319395211743@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On 8 Feb 2002, Eric wrote:
+Hi, I'd like to read the entropy count via the RNDGETENTCNT
+ioctl, as in the following code:
 
-> Marco Colombo <marco@esi.it> wrote:
-> 
-> > I'm pretty willing to grab another tree and compile it, 
-> > but I'd like to know which one in advance instead of going 
-> > on by trial & error. The system is Red Hat 6.2 so I need a 
-> > 2.2.x kernel.
-> 
-> As DaveM mentioned, that was a patch against the 2.4.x series
-> but the patch is remarkably similar for the 2.2.x kernels.  
-> This is against the linux_2_2 branch of CVS at vger.samba.org.
-> If this does not patch cleanly into your RedHat sources, I am
-> certain a little initiative will get you the rest of the way:
+	int     rfd, res;
+	int     avail_entropy;
 
-Eric, patching is no problem B-)
-that's what I was meaning with my first message.
+	...
+	rfd = open("/dev/random", O_RDONLY);
+	...
+	res = ioctl(rfd, RNDGETENTCNT, &avail_entropy);
 
-Now, I've discovered that my Ultra 1 has a very low entropy bits count,
-as I was suspecting (it's an "headless" server, only network and disk
-I/O). I guess I need an entropy source of some kind, but this is
-a story for another list. B-)
-I'll look closer at the code to try and understand the issues of 32->64bit
-conversion. Before running an entropy collector daemon, I need the 
-others 'R' ioctls (RNDADDENTROPY as a minumum). Some of them do take 
-int * as the third argument, so I guess I need some hacking. If I manage
-to produce an useful patch, I'll post it.
+this happens to work on ix86, but fails on sparc64, with EINVAL.
+I think I've tracked this down to:
 
-Thanks for your support.
+arch/sparc64/kernel/ioctl32.c
 
+where RNDGETENTCNT isn't even mentioned. Is there a patch to add support
+for these "big R" ioctls to ioctl32.c?  Can RNDGETENTCNT simply be 
+added to the list of those that get passed to sys_ioctl() without any
+32->64bit translation? (I'm sorry but I can only vaguely understand the
+issues behind than, so if some hacking is needed, more than just adding
+#includes and case RNDGETENTCNT:, I won't be able to do it myself)
+
+I'm currently running RH 2.2.19-6.2.12 (sparc64) kernel, please flame me
+if I need to switch to the latest vanilla 2.2.x before further reporting.
+
+The HW is Ultra 1 145Mhz.
+
+TIA,
 .TM.
--- 
-      ____/  ____/   /
-     /      /       /			Marco Colombo
-    ___/  ___  /   /		      Technical Manager
-   /          /   /			 ESI s.r.l.
- _____/ _____/  _/		       Colombo@ESI.it
 
