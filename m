@@ -1,59 +1,72 @@
-From: Bj|rn Augustsson <d3august@dtek.chalmers.se>
-Date: Sun, 26 Jul 1998 01:51:00 +0000
-Subject: Observations on CVS kernel
-Message-Id: <marc-linux-ultrasparc-90222358531081@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Sun, 26 Jul 1998 01:56:53 +0000
+Subject: Re: Observations on CVS kernel
+Message-Id: <marc-linux-ultrasparc-90222358531082@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90222358531081@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90222358531081@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+   Date: 	Sun, 26 Jul 1998 03:51:00 +0200
+   From: Bj|rn Augustsson <d3august@dtek.chalmers.se>
 
-I installed ultrapenguin 1.0.9, and then got the latest kernel from CVS,
-to test the new console system. Especially the multihead part.
-The kernel is 1.2.109, from about 1700 26-Jul GMT.
+   I had a few problems with getting modules to work, so I decided to
+   build a monolithic kernel. I had problems getting the nfsd support
+   to compile because of __my_nfsfh_is_too_big() being unresolved in
+   /fs/nfsd/nfsfh.c so I configured without it. Looking at the code, I
+   could probably just have commented the (single) usage of it out,
+   but I don't need the machine to serve NFS anyway.
 
-The machine is a U1140E with two disks, a floppy, a CD, a Creator and a 
-CGsix.
+This is a run time check, the symbol is unresolved on purpose.  If the
+structure in question is small enough the test will be optimized away
+by the compiler.  If you try to "fix" this by removing the test you
+will have an nfsd which will not operate correctly at all and probably
+crash the machine when used.  People are actively working on a fix for
+this.
 
-I had a few problems with getting modules to work, so I decided to build 
-a monolithic kernel. I had problems getting the nfsd support to compile
-because of __my_nfsfh_is_too_big() being unresolved in /fs/nfsd/nfsfh.c
-so I configured without it. Looking at the code, I could probably just
-have commented the (single) usage of it out, but I don't need the machine
-to serve NFS anyway.
+   What's the limit?
 
-Mostly everything seems to work fine, but I have a few questions/comments:
+About 2.6MB
 
-My first try at a monolithic kernel failed to boot because it was to big.
-(Can't remember the error message, but something along the lines of
-"kernel image to big to fit in destination".)
-I stripped some things from it and rebuilt without a problem. 
-The first one was about 1MB compressed, and the new one is about 810K
-compressed. (2.2MB uncompressed)
-What's the limit? 
+   If I do L1A and then "go", the machine hangs. Under Solaris this
+   generally works. (I have never seen it hang, a friend says he saw a
+   panic once.)
 
-If I do L1A and then "go", the machine hangs. Under Solaris this generally
-works. (I have never seen it hang, a friend says he saw a panic once.)
+It doesn't work because the support for it was never added.  Depending
+upon how much of the higher priority work gets done on the sparc64
+kernel, this may or may not ever get implemented.
 
-If I start X (BTW, very neat startup picture!), and then switch VCs, the
-parts of the screen where the "border" (in the textmode) is isn't cleared.
-(I still see sort of like a frame around the text area, where the old X
-graphics are left.)
+   If I start X (BTW, very neat startup picture!), and then switch
+   VCs, the parts of the screen where the "border" (in the textmode)
+   is isn't cleared.  (I still see sort of like a frame around the
+   text area, where the old X graphics are left.)
 
-(X being the X I got when I installed UP 1.0.9. I haven't installed any
-special fbcon X-server. I'm a bit surprised this server worked at all.)
+   (X being the X I got when I installed UP 1.0.9. I haven't installed
+   any special fbcon X-server. I'm a bit surprised this server worked
+   at all.)
 
-How would I go about to set up a dual head? (X or textmode)
-Both framebuffers get detected properly when booting, and the second one
-(the CGsix) does _something_ (the screen clicks), but after that, no 
-activity ever on the second screen.
+We worked to keep the existing X server interface to using the
+graphics card work as it did before.  As for the VC switching problem,
+I'll let Jakub handle it.
 
-Thanks,
-  /August.
--- 
-Wrong on most accounts.  const Foo *foo; and Foo const *foo; mean the same: foo
-being a pointer to const Foo.  const Foo const *foo; would mean the same but is
-illegal (double const).  You are confusing this with Foo * const foo; and const
-Foo * const foo; respectively. -David Kastrup, comp.os.linux.development.system
+   How would I go about to set up a dual head? (X or textmode) Both
+   framebuffers get detected properly when booting, and the second one
+   (the CGsix) does _something_ (the screen clicks), but after that,
+   no activity ever on the second screen.
+
+It might work if you create specific device nodes, or you run the X
+server with explicit device arguments on the command line.
+
+For dual cgsix for example I just do:
+
+mknod /dev/cgsix0 c 29 0
+mknod /dev/cgsix1 c 29 1
+
+or add -dev arguments to the X command line.
+
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
