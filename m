@@ -1,7 +1,7 @@
-From: Dave Wreski <dave@nic.com>
-Date: Wed, 15 Jul 1998 03:31:59 +0000
+From: Ward Deng <wdeng@KachinaTech.COM>
+Date: Wed, 15 Jul 1998 08:07:05 +0000
 Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531040@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531041@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
@@ -10,26 +10,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
->    Based on early pricing estimates I've seen, it should be possible
->    to build a quad-processor @ 300+MHz, 2GB rackmount system for under
->    around $US 20K.
 > 
-> I wonder what the equivalent quad-PPRO system would cost (even with
-> 400MHZ chips...)...  I love the Ultra as everyone knows, but I have to
-> say, price talks bullshit walks... and Sun has a lot of trouble
-> learning this especially on the high end.
+> I thought the real claim to fame of all of Sun's multiprocessing
+> systems (and the SP2, and the Power Challenge, and the...) has always
+> been their really fast/expensive IPC bus, not their interface to
+                                   ^^^^^^^
+What do you mean that?
 
-How about two CPUs for $198,400?  From this month's SunExpert:
+IBM RS6000/SP2 is distributed memory system, or workstations linked with
+external high-speed switch. Sun's MP systems are all SMP design. SGI 
+Power Challenge or Onyx are SMP too. The newer SGI Origin is SMP with
+special memory links -- ccNUMA. They are very different architectures
+while SP nodes are no different from IBM's RS6000 workstations.
 
-"The top-of-the-line Enterprise 6500 can hold a maximum of 30 CPUs, two 8.4-Gig
-disk boards (each containing two drives) more than 375 GB of rack-mounted
-storage in the system cabinet and 30 GB of memory.  A basic configuration with
-8.4 GB of internal storage, 256 MB of memory and two CPUs costs $198,400 for a
-250-Mhz version, and $204,400 for a 336-Mhz version"
-
-Besides the ability to hold 30 GB of RAM, and 1/3 GB of disk, what could
-possibly make it so expensive?  Does the Intel SMP arch support 30 CPUs?
-
-The picture is not very good, but it looks as high as a convention refrigerator.
-
-Dave
+> peripherals.
+> 
+>     rgb
+> 
+> Robert G. Brown	                       http://www.phy.duke.edu/~rgb/
+> Duke University Dept. of Physics, Box 90305
+> Durham, N.C. 27708-0305
+> Phone: 1-919-660-2567  Fax: 919-660-2525     email:rgb@phy.duke.edu
+> 
+> 
+> 
+> 
