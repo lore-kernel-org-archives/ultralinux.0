@@ -1,33 +1,39 @@
-From: Pieter Krul <pkrul@auxio.net>
-Date: Sat, 16 Oct 1999 11:39:41 +0000
-Subject: Re: SCSI adapter for Ultra 10
-Message-Id: <marc-linux-ultrasparc-94007416529712@msgid-missing>
+From: JORGE HERNANDEZ SERRANO <jorgehdz@servidor.unam.mx>
+Date: Sat, 09 Oct 1999 06:51:23 +0000
+Subject: Problem with XF
+Message-Id: <marc-linux-ultrasparc-93945657325858@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-94001499230057@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-94001499230057@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hello Jens,
+Hi every body!
 
-Jens Axboe wrote:
+I've installed RedHat linux 6.0 on an SPARCclassic workstation.
+The Xconfigurator program detected  the following: 
 
-> I'm replacing my Intel PC with an Ultra 10 workstation and
-> therefore I'm looking at getting a SCSI adapter that will
-> work well. By looking at the kernel config options, it
-> seems that at least the Adaptec aic7xxx based controllers
-> and NCR 8xx series are supported. Are they both known
-> to work well? I browsed through the list archives and
-> couldn't find an answer to this.
+ 
+                                  x SBUS probing found a:               x
+                                  x   SBUS Entry: Sun Color3 (cgthree)  x
+                                  x   Resolution: 1024x768              x
+                                  x   X Server  : Sun                   x
+                                  x                                     x
 
-I am using an Adaptec 2940UW PC card in my Ultra5, which
-worked fine after I'd rebuilt the kernel with the sd and
-aic driver.
-You'll have to set the BIOS of the card using a PC before 
-you put it in your machine (if you use the PC variant).
+Then the installation program installed the
+XFree86-Sun-3.3.5-1.6.0.sparc.rpm
 
-Regards,
+I ran the startx script and it works fine but about fiftheen minutes
+working in any graphical enviroment, it crash! Any place i move the mouse
+is delete. It looks like my mouse was an eraser, an the I have to go back
+to one terminal in text mode.
 
-Pieter
+And the terminal where I been executed the startx display the following
+message:
+
+Conetion whit xinit lost.
+
+I hope any one can help me!
+
+                Thanks
+            Jorge Hernandez.
