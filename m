@@ -1,7 +1,7 @@
-From: David Miller <davem@twiddle.net>
-Date: Wed, 28 Apr 1999 15:15:25 +0000
+From: Matthew Kirkwood <weejock@ferret.lmh.ox.ac.uk>
+Date: Wed, 28 Apr 1999 15:41:46 +0000
 Subject: Re: RedHat 6.0 runs on UltraSPARC?
-Message-Id: <marc-linux-ultrasparc-92531296404684@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92531446006729@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92530848032119@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92530848032119@msgid-missing>
@@ -10,32 +10,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   From: mc@ainsystems.com
-   Date: Wed, 28 Apr 1999 08:06:16 -0700
+On Thu, 29 Apr 1999, Anton Blanchard wrote:
 
-   So the previous issues concerning the memory limitations on the
-   AXmp
+> > I hope that Ultra Linux will continue, in some form, so that we can finally
+> > get support for some of the sparcs RedHat is not currently supporting in
+> > 6.0 (i.e. sun4/330).  We may be a minority among all sparc users, but we
+> > are out there.
+>
+> Don't worry, I'll be making sure rh6.0 and above runs on 4/300 and when
+> time permits the other sun4s.
 
-There are no memory limitation on AXmp, we support the maximum
-configuration of 2GB and 4 processors, I've had it running here
-myself.
+Cool.  Out of curiosity, how hard would it be to make SILO or any of the
+other Sparc loaders work on sun4?  My SunOS disk has died, so I can now
+only boot via tftp.  (Handy trick for other sun4 people - drop the kernel
+image in / on a SunOS partition and then you can "b/vmlinux" instead of
+messing around with tftp.)
 
-   Also has RedHat done any work on peripheral support for the Ultra
-   line? I do not believe it would be effective to release 6.0 without
-   supporting the newer Sparc Linux peripherals.
-
-There is nothing "newer" than what was shipped in RH6.0, up until the
-very last moment fixes were constantly being made up to date in the
-release, I made sure of this.
-
-I cannot parse what you are saying though, anything which is supported
-in _any_ Sparc/Linux kernel available is supported in RH6.0, what
-exactly are you particularly after?
-
-Jakub and myself are still the two people doing any of the work, so if
-we've added support for the peripheral, the distributions will have it
-as well.
-
-Later,
-David S. Miller
-davem@redhat.com
+Matthew.
