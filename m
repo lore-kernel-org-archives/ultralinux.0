@@ -1,7 +1,7 @@
-From: "Stephan van Hienen" <ddx@a2000.nu>
-Date: Fri, 30 Nov 2001 15:06:12 +0000
-Subject: RE: openssh 3.0.1 rpm for sparc (redhat 6.x)
-Message-Id: <marc-linux-ultrasparc-100713294404666@msgid-missing>
+From: Ben Collins <bcollins@debian.org>
+Date: Fri, 30 Nov 2001 15:15:07 +0000
+Subject: Re: openssh 3.0.1 rpm for sparc (redhat 6.x)
+Message-Id: <marc-linux-ultrasparc-100713345106729@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-100679315520732@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-100679315520732@msgid-missing>
@@ -10,27 +10,41 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> -----Original Message-----
-> From: David S. Miller [mailto:davem@redhat.com] 
-> Sent: vrijdag 30 november 2001 0:03
-> To: ddx@a2000.nu
-> Cc: tcallawa@redhat.com; ultra@a2000.nu; 
-> sparclinux@vger.kernel.org; ultralinux@vger.kernel.org
-> Subject: Re: openssh 3.0.1 rpm for sparc (redhat 6.x)
+On Fri, Nov 30, 2001 at 04:06:12PM +0100, Stephan van Hienen wrote:
+> > -----Original Message-----
+> > From: David S. Miller [mailto:davem@redhat.com] 
+> > Sent: vrijdag 30 november 2001 0:03
+> > To: ddx@a2000.nu
+> > Cc: tcallawa@redhat.com; ultra@a2000.nu; 
+> > sparclinux@vger.kernel.org; ultralinux@vger.kernel.org
+> > Subject: Re: openssh 3.0.1 rpm for sparc (redhat 6.x)
+> > 
+> > 
+> >    From: Stephan van Hienen <ddx@a2000.nu>
+> >    Date: Thu, 29 Nov 2001 23:58:45 +0100 (CET)
+> > 
+> >    On Thu, 29 Nov 2001, Tom 'spot' Callaway wrote:
+> >    
+> >    > Rebuild from the src rpm available at openssh.org. Should work.
+> >    
+> >    ok tried that :
+> >    
+> > Run "sparc32 bash" before building the rpm.
 > 
+> Thnx, that fixed the problem
 > 
->    From: Stephan van Hienen <ddx@a2000.nu>
->    Date: Thu, 29 Nov 2001 23:58:45 +0100 (CET)
-> 
->    On Thu, 29 Nov 2001, Tom 'spot' Callaway wrote:
->    
->    > Rebuild from the src rpm available at openssh.org. Should work.
->    
->    ok tried that :
->    
-> Run "sparc32 bash" before building the rpm.
+> P.s. why can I rebuild a lot of src.rpms witouth this ?
 
-Thnx, that fixed the problem
+Because a lot of them are smart enough to use CPP macros like
+__sparc_v9__ or __arch64__ to determine things, rather than assuming
+sparc64 = 64-bit || v9 instructions. The compiler is much better at
+determining this (CC="gcc -mcpu=ultrasparc" for example) than `uname'.
 
-P.s. why can I rebuild a lot of src.rpms witouth this ?
 
+Ben
+
+-- 
+ .----------====-=-===-=====-----------===------------=-=-----.
+/                   Ben Collins    --    Debian GNU/Linux                  \
+`  bcollins@debian.org  --  bcollins@openldap.org  --  bcollins@linux.com  '
+ `---=====------====-------------=-=-----=-==-===-------=--=---'
