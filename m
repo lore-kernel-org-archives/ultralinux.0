@@ -1,30 +1,20 @@
-From: Matthew Hawkins <matt@mail.goldweb.com.au>
-Date: Mon, 14 Dec 1998 06:11:54 +0000
-Subject: lwp emulation
-Message-Id: <marc-linux-ultrasparc-91361605107558@msgid-missing>
+From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
+Date: Fri, 11 Dec 1998 15:29:06 +0000
+Subject: trouble getting 1.1.9
+Message-Id: <marc-linux-ultrasparc-91346479421692@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi everyone,
+Has anyone had problems getting the distribution?  In "ncftp" I can't
+see to do a "get -R sparc".  It simply returns to the next line with
+no indication of success or failure, though none of the files were
+downloaded.
 
-To cut a long story short, we got a new UltraSPARC, installed UP-1.1, found
-out that our primary application won't run under emulation as lwp isn't
-implemented (yet), so now we're considering doing the port in our (ha!) spare
-time (the mentality goes something like "I'll do anything to finally rid this
-machine of Solaris" ;)
-
-At Jakub's suggestion we are going the way of reimplementing the Solaris
-threads libraries (well, the API) to do things the Linux (POSIX?) way.
-
-I just wanted some feedback as to what others felt about this little project
-and any suggestions/ideas you might have (all of us are newbie sparc people
-from the dark side (Intel;)) - oh, and is anybody else genuinely interested in
-having this support?
-
-Thanks,
+Could it be that my ftp client is the cause of the problem?  Could it
+be the server?  Please help!  :)
 
 -- 
-Matt                                                  http://www.topic.com.au/
+Ryan
