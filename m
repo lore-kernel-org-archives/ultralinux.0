@@ -1,7 +1,7 @@
-From: Derrick J Brashear <shadow@dementia.org>
-Date: Thu, 12 Nov 1998 21:26:42 +0000
+From: Steve Dunham <dunham@cse.msu.edu>
+Date: Wed, 18 Nov 1998 18:53:52 +0000
 Subject: Re: More detailed UltraPenguin CD-ROM making instructions
-Message-Id: <marc-linux-ultrasparc-91092334931408@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91146943029335@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91084546630118@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91084546630118@msgid-missing>
@@ -10,28 +10,21 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Thu, 12 Nov 1998, Sylvain Pion wrote:
+Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz> writes:
 
-> On Wed, Nov 11, 1998 at 11:28:11PM +0100, Jakub Jelinek wrote:
-> > As I've received a couple of requests for more detailed instructions how to
-> > make the bootable CD, here they are:
-> > 
-> > Grab the UltraPenguin 1.1 distribution, e.g. from
-> > ftp://ultra.penguin.cz/pub/ultrapenguin-1.1/
-> > and put it on an sparclinux or ultralinux box (glibc required).
-> 
-> So to install UltraLinux, you need UltraLinux...
+> As I've received a couple of requests for more detailed instructions how to
+> make the bootable CD, here they are:
 
-Uh, to make a bootable CD you need ultralinux or sparclinux. To install
-ultralinux you only need a machine you can run ftpd or nfs on to export
-the rpms, and a machine you can tftp boot from. (if it's solaris, use
-rarpd/ethers, if a pc linux system, use arp and rarp to set up. i'm sure
-there are instructions around somewhere)
+I followed the instructions, and ended up with a CD that would boot
+the kernel off of the CD, but then fail with:
 
-> Looks like a chicken and egg problem for me.
-> Is there a way to make the CD image on Solaris or on a PC-Linux ?
-> (or get it via ftp directly)
+  "Unable to mount root filesystem on device: 0b:00"
 
-you can do that. read what he said again. 
+Any ideas what is wrong?  It is loading the kernel from the CD and the
+CDROM is the only CDROM attached to the machine.  The above message is
+preceeded by a "media changed on sr0" so I assume it is detecting the
+CD and everything.
 
--D
+
+Steve
+dunham@cse.msu.edu
