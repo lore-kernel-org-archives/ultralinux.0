@@ -1,36 +1,32 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Tue, 14 Sep 1999 19:51:46 +0000
-Subject: Re: bug in 2.2.13pre7 on Ultras
-Message-Id: <marc-linux-ultrasparc-93735292600134@msgid-missing>
+From: "David A. Cooley" <n5xmt@bellsouth.net>
+Date: Fri, 10 Sep 1999 23:07:49 +0000
+Subject: RH 6.0 and Ultra 2
+Message-Id: <marc-linux-ultrasparc-93700556200359@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-93733838218839@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-93733838218839@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+OK.
+Downloaded ALL sparc, noarch and SRPM from the RH update 
+server...  Followed the instructions for the errata on installing them.
+Re-compiled the kernel, re-made the modules etc...
+Boots and runs just fine until I try startx...  Tries to go into the 
+desktop (just get's to crosshatch  screen) then drops back to a text prompt 
+with the following messages:
 
-The dumps seem to be corrupted, it is very crucial for the initial
-oops generated to be completely visible and decoded.  Once the
-first oops happens, the only thing that can really be said about
-subsequent oopses are that they are due to corrupted state generated
-in the first oops, it's difficult then to reason about the true cause.
+ICE default IO error handler doing an exit( ), pid = 684, errno = 0
 
-Also, are you getting correctable ECC memory errors in your kernel
-logs before this happens?  I am very close to starting to encourage
-users to return these AXi boards to Sun and asking for fixed parts
-which do not generate these ECC memory errors.  They addresses
-generating the ECC errors are always at the same exact spot, with the
-same ECC syndrome, regardless of how you arrange the simms.  This is a
-motherboard hardware bug without a doubt, and I'm imagining that a
-large set of AXi boards produced in the past half year have this
-problem. :-(
+waiting for X server to shut down
 
-I know this issue has never turned up on any other UltraSparc's,
-because if they did the machine would lock up at bootup and people
-would have told me about it :-)
+Any ideas what to do now?
+It has all the XFree86 updates, GNOME updates etc...  Everything that was 
+on the update site.
+Thanks,
+Dave
 
-Later,
-David S. Miller
-davem@redhat.com
+=============================            David Cooley N5XMT           Internet: N5XMT@bellsouth.net
+      Packet: N5XMT@KQ4LO.#INT.NC.USA.NA   T.A.P.R. Member #7068
+    Sponges grow in the ocean... Wonder how deep it would be if they didn't?!
+=============================
