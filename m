@@ -1,39 +1,27 @@
-From: sc843@bard.edu
-Date: Wed, 14 Nov 2001 17:15:59 +0000
-Subject: Re: libstdc++ bus errors
-Message-Id: <marc-linux-ultrasparc-100575809507289@msgid-missing>
+From: guido sintoni <gsintoni@libero.it>
+Date: Mon, 26 Nov 2001 11:10:06 +0000
+Subject: hi folks!
+Message-Id: <marc-linux-ultrasparc-100677300618301@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-100562646118090@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-100562646118090@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> > Upgrading binutils to 2.11.2 doesn't solve the problem, because ld.so
-> > doesn't understand R_SPARC_UA32 relocations...
-> Upgrade glibc, then binutils :-)  Current glibc understands
-> the UA32 relocs properly.
-
-I don't think this is the sole cause of the problem. I have glibc 2.2.4, which 
-(according to my hand-checking) includes the fix for R_SPARC_UA32 
-mentioned in an earlier message:
-
-> Ah yes, I found the requisite patch... thanks.
-> http://sources.redhat.com/ml/libc-alpha/2001-07/msg00021.html
-
-...but still C++ programs have bus errors.
-
-Perhaps a related issue could be that I overrode the default behavior of 
-the 32->64 cross compiler to copy all the system headers into 
-$PREFIX/sparc64-linux/sys-includes 
-and instead symlinked that directory to 
-$PREFIX/include
-I don't know what else the problem might be. Must I upgrade to a CVS 
-version of binutils? (I have 2.11)
-
-Would it help if I build gdb and tried to figure out the source of the error 
-more precisely, or is this well-known?
-
-Sincerely,
-Sean Callanan
+hi to everyone!
+i'm a newbie to the list. i'm 27yo, i come from italy and i work in a dot.com 
+developing open source financial software with linux os.
+i'm about buying an old sparcstation 20 with two sm61-2 cpus (60mhz, 2mb 
+cache), 128 (or 256) mb ram, 2x 2gb hard disk.
+currently, i'm told the machine runs solaris 8... obviously, i'd like it to 
+be tux-powered.
+it's the first sun i'm dealing with, and my current background is only the 
+linux-sparc howto... so, take pity on me plz!
+i'd like to have some good advises about the distribution to use (i know it's 
+a very personal opinion... i thought of rh 6.2-sparc), but - mostly - i would 
+like to know if the smp on the machine is supported (the guy who is about 
+selling me the machine says it does, but i read somewhere - i think on a smp 
+howto - that smp doesn't work on sun4m machines).
+thank you in advance,
+ciao
+guido sintoni
