@@ -1,19 +1,21 @@
-From: Anton Blanchard <anton@linuxcare.com>
-Date: Mon, 24 Jul 2000 14:04:22 +0000
-Subject: Re: obsolete sun_serial_con?
-Message-Id: <marc-linux-ultrasparc-96444787723353@msgid-missing>
+From: =?ISO-8859-2?Q?Tomasz_K=B3oczko?= <kloczek@rudy.mif.pg.gda.pl>
+Date: Sat, 15 Jul 2000 13:49:13 +0000
+Subject: Is rescuept, gpart, fixdisktable ...
+Message-Id: <marc-linux-ultrasparc-96366903305503@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-96435311504873@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-96435311504873@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 To: ultralinux@vger.kernel.org
 
- 
-> While cleaning up struct consw, I noticed sun_serial_con is never used
-> (anymore).
 
-Thanks, applied.
+.. is work correctly for restore slice table for sparc/Linux ?
+Or anyone know something about tool for restore this ?
 
-Anton
+kloczek
+--=20
+-----------------------------------------------------------
+*Ludzie nie maj=B1 problem=F3w, tylko sobie sami je stwarzaj=B1*
+-----------------------------------------------------------
+Tomasz K=B3oczko, sys adm @zie.pg.gda.pl|*e-mail: kloczek@rudy.mif.pg.gda.p=
+l*
