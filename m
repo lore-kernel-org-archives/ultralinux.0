@@ -1,41 +1,65 @@
-From: Wesley Hosking <wes@atlantek.com.au>
-Date: Fri, 31 Jul 1998 09:06:48 +0000
-Subject: Loading modules in 2.1.111
-Message-Id: <marc-linux-ultrasparc-90222358531102@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Tue, 21 Jul 1998 16:43:50 +0000
+Subject: Re: CVS kernels
+Message-Id: <marc-linux-ultrasparc-90222358531065@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Does this kernel break modules (or do I need an update of some kind
-from UP 1.0.9 ? ) ?
+> 
+> > I haven't been able to compile CVS kernels for a couple weeks now ("cvs
+> > update -d").  It bombs on suncons.c, after lots of errors involving "struct
+> > suncons_operations".  Is anybody successfully compiling the current CVS
+> > kernel?
 
-bash-2.01# modprobe audio
-/lib/modules/2.1.111/misc/audio.o: module : QM_INFO: Invalid argument
-bash-2.01# pwd
-/lib/modules/2.1.111/misc
-bash-2.01# ls -al
-total 315
-drwxrwxr-x   2 root     root         1024 Jul 31 11:23 .
-drwxrwxr-x   9 root     root         1024 Mar 16 02:27 ..
--rw-rw-r--   1 root     root        19824 Jul 31 15:14 amd7930.o
--rw-rw-r--   1 root     root        38668 Jul 31 15:18 appletalk.o
--rw-rw-r--   1 root     root        18152 Jul 31 15:14 audio.o
--rw-rw-r--   1 root     root        17680 Jul 31 15:14 cs4231.o
--rw-rw-r--   1 root     root         6224 Jul 31 15:14 flash.o
--rw-rw-r--   1 root     root        37037 Jul 31 15:18 ipx.o
--rw-rw-r--   1 root     root        11272 Jul 31 15:14 openprom.o
--rw-rw-r--   1 root     root        20408 Jul 31 15:17 sch_cbq.o
--rw-rw-r--   1 root     root         8136 Jul 31 15:18 sch_csz.o
--rw-rw-r--   1 root     root         6144 Jul 31 15:18 sch_prio.o
--rw-rw-r--   1 root     root         5048 Jul 31 15:18 sch_red.o
--rw-rw-r--   1 root     root         6920 Jul 31 15:18 sch_sfq.o
--rw-rw-r--   1 root     root         6136 Jul 31 15:18 sch_tbf.o
--rw-rw-r--   1 root     root         8480 Jul 31 15:18 sch_teql.o
--rw-rw-r--   1 root     root        96779 Jul 31 15:18 solaris.o
-bash-2.01# modprobe solaris
-/lib/modules/2.1.111/misc/solaris.o: module : QM_INFO: Invalid argument
-bash-2.01# 
+I have fixed this today. All who can, please cvs update -d the 2.1 CVS
+kernel and test it.
+You need to enable fbcon (as soon as I finish the remaining three drivers,
+I'll remove the old sbuscons stuff completely) or PROM con.
+fbcon currently supports creatorfb, atyfb (mach64), cgsixfb, plus support
+for tcxfb, cgthreefb, bwtwofb is written, but needs to be tested heavily.
+Please report any problems you find. cg14, leo/zx and weitek are not yet
+supported, maybe tomorrow (BTW: who uses weitek? Isn't it an orphan? I
+cannot find anybody calling it...). For those who have cg14, leo/zx promcon
+should work even there.
+creatorfb, cgsixfb are pretty fast, use as much acceleration as possible.
+Non-accelerated framebuffers will probably need some hand optimized version
+of fbcon-cfb8, as at least on my tcx I see how it is slow, probably assembly
+version of putcs.
+Nice things about this fbcon move:
+you should be able to spread your consoles accross multiple heads (untested)
+you have some options on the kernel command line:
 
-wes
+console=noprom			! turn off promcon (normally is promcon
+				! started and if some fb is detected, it
+				! takes over the console 
+video=sbus:nomargins		! use full screen, don't leave the "nice"
+				! margins (default is use margins you're used to)
+video=sbus:marginsdx18	! x margin 64 on both sides, y margin 18 (top and bottom)
+video=sbus:font=SUN12x22	! use huge letters (like PROM uses) - for
+				! those who don't like the tiny letters
+you can mix the sbus options, e.g.
+video=sbus:nomargins,font=SUN12x22
+gives me on Creator/1152x900 a nice fast 96x40 color console.
+
+I'll be working on getting 512 char fonts work soon, so that you can have a
+special iso* font, etc.
+
+> 
+> I asked Mr. Miller when he expected to merge his changes back into the
+> main kernel tree but I haven't heard anything back.
+
+Currently you should use the vger CVS for sparc/sparc64, but the full merge
+is scheduled for the next couple of days.
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.109 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
