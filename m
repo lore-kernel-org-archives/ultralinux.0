@@ -1,73 +1,21 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Wed, 04 Nov 1998 16:40:56 +0000
-Subject: Re: Mixed news: new UP 1.0.9 on Ultra5
-Message-Id: <marc-linux-ultrasparc-91020103126578@msgid-missing>
+From: Derrick J Brashear <shadow@dementia.org>
+Date: Fri, 13 Nov 1998 15:59:11 +0000
+Subject: 2.1.126 "make xconfig" problem
+Message-Id: <marc-linux-ultrasparc-91097605519007@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90976646926603@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90976646926603@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> > Aha, I forgot to mention that SBUS fdtwo is not in healthy 
-> > state in the kernel yet, what works perfectly is PCI fdthree
-> > (both fd0 and fd1 whichever it happens), plus maybe sun4m fdtwo, but 
-> > I'm not sure about it. In fact, I'd be graceful if someone with a sun4m
-> > fdtwo could acknowledge if it works in recent kernels (2.1.120+) or not.
-> > If yes, then we have some Ultra/SBUS floppy related bug, otherwise it is
-> > a problem common to fdtwo.
-> 
-> OK, if you want anyone to test any changes, to get it working, just ask.
+So when I was configuring a new kernel for myself, when I got to the point
+where I needed to select sparc 8x16 font, none of the choices were
+selected, the line was *not* greyed out, but i could choose none of the
+options. I had to go back and fix .config and autoconf.h.
 
-I have the floppy drive here myself (well, to be honest, now for a couple of
-days I've exchanged together with my Ultra1/FFB for another Ultra1/cg6), but
-I haven't yet had time to dig into that.
+I assume this is a bug, but the relevant Config.in looks perfectly
+reasonable. 
 
-> 
-> > > tty_io.c: process 1 (init) used obsolete /dev/cua1 - update 
-> > > software to use /dev/ttyS1
-> > 
-> > Ok, this is my bug (well, laziness on my part) in that I have 
-> > not fixed the setserial package to omit overwriting /dev/console
-> > device, so that serial installs do the above. I'll do that in a
-> > couple of minutes.
-> 
-> I've just grabbed the latest changes, and it all works. :)
-> 
-> I noted a few very minor errors though:
-> Xconfigurator tries to run, even though I have not installed
-> any X stuff.
+Any suggestions for the right way to track this?
 
-But you have installed Xconfigurator, that's why it is run.
-You don't have to, and in fact it is not in the Base set, by default only in
-X sets.
-
-> When booting for the first time the root partition was not
-> cleanly unmounted.
-
-Are you sure you were not doing something on tty2? I get the same result
-e.g. when I forgot some mount hanging on tty2...
-
-> I still cannot make a boot disk, but that is probably the floppy drive
-> problem.
-
-Yep.
-> 
-> Now this machine is installed I was going to start using it, but
-> if you want me to test installing ultrapenguin again, I'll wait
-> before doing any work on it, as its the only UltraSPARC machine
-> we've got here.
-
-Go ahead and use it :)
-
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.126 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+-D
