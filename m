@@ -1,23 +1,18 @@
-From: Joshua Uziel <uzi@uzix.org>
-Date: Thu, 18 Oct 2001 18:30:43 +0000
-Subject: Re: SuSE Linux on SPARC
-Message-Id: <marc-linux-ultrasparc-100342983202718@msgid-missing>
+From: ultra@a2000.nu
+Date: Mon, 26 Nov 2001 16:47:21 +0000
+Subject: openssh 3.0.1 rpm for sparc (redhat 6.x)
+Message-Id: <marc-linux-ultrasparc-100679315520732@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-100342906231919@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-100342906231919@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-* Alma Martinez - Student Intern <almam@sunmex.sunmexico.Sun.COM> [011018 11:18]:
-> Could you tell me if there is a list of supported Sun Platforms with
-> SuSE Linux? 
+having problems getting openssh to compile on my redhat 6.1 box (with
+6.2 updates)
+so i was wondering if someone has a working version in rpm ?
+i only found a redhat 7.x version on rpmfind
+(i thought there was never a redhat 7.x for the sparc?)
 
-Usually, you can just look at http://www.ultralinux.org/ ... SuSE seems
-to keep it's list at:
 
-http://www.suse.de/en/products/suse_business/sles/dev_sparc/system_requirements.html
 
-Keep in mind that the latest release of SuSE for SPARC is 7.1 and there
-is currently a 7.3beta2.  A 7.3 release is probably not too far off.
