@@ -1,34 +1,38 @@
-From: Li Shu <lshu@whomping.ne.mediaone.net>
-Date: Wed, 07 Mar 2001 22:27:18 +0000
-Subject: parport_bpp on ultra 1...
-Message-Id: <marc-linux-ultrasparc-98400403806958@msgid-missing>
+From: lars.johansson@ic.ac.uk
+Date: Tue, 13 Mar 2001 12:10:26 +0000
+Subject: iBCS
+Message-Id: <marc-linux-ultrasparc-98448555314821@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hello!
+I'm trying to compile iBCS for kernel v2.2.18 on a sparc32.
+My aim is to get SunOS/Solaris emulation to work. 
+As I understand, the built in emulation only works on sparc64.
+(I tried, but it get segfaults. I have the SunOS/Solaris binaries)
+My problem is; iBCS build scripts doesn't seem to do verry much. They
+definitely does not install any modules anywhere.
+I have supplied the kernel source tree, with a just used configuration
+(the kernel works allright). 
+My questions are; does it requier extra magic?
+Should the "SunOS binary emulation" option be on or off when compileing
+the kernel? (I had it on)
 
-Hi,
+Thanx!
 
-I just upgraded the kernel to 2.4.2 on my ultra 1 with Redhat 6.2 --
-for trying to put HP laserjet 4L on the sbus parallel port (on the mother
-board chasis).  The modules parport, parport_bpp and lp (in that order)
-are loaded without problem.  And the control-panel was used to configure
-the printer in identical ways as it was configured on a x86 machine 
-running redhat 5.1 before.  But it does not print out anything legible
+/Lars Johansson
 
-It seems that data are being sent to the printer (as confirmed by the
-LEDs on the printer)-- and that the problem is most likely that what's
-written to /dev/lp0 is not what the printer receives.  I wonder (forgive
-my boldness) if there are conversion issues because this is a 64-bit
-machine.
+-- 
+Lars M. Johansson                                     +44 (0)7880 633134 
+lars.johansson@ic.ac.uk
 
-Has anyone tried the parport-sunbpp on an ultra 1?
-
--- Li
-
-
+"The UNIX system has a command, nice, which allows a user to voluntarily
+ reduce the priority of his process, in order to be nice to other users.
+ Nobody ever uses it"
+                               A. S. Tanenbaum, Modern Operating Systems
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
