@@ -1,7 +1,7 @@
 From: "David S. Miller" <davem@davemloft.net>
-Date: Thu, 24 Feb 2005 04:42:00 +0000
+Date: Thu, 24 Feb 2005 19:54:30 +0000
 Subject: Re: [RFC/PATCH] envctrl framework and envctrltwo (UE250) driver
-Message-Id: <20050223204200.1487d817.davem@davemloft.net>
+Message-Id: <20050224115430.6e427c72.davem@davemloft.net>
 List-Id: <ultralinux.vger.kernel.org>
 References: <ec7cefb05022210074a5e4fe3@mail.gmail.com>
 In-Reply-To: <ec7cefb05022210074a5e4fe3@mail.gmail.com>
@@ -10,12 +10,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, 23 Feb 2005 20:10:30 -0800
+On Tue, 22 Feb 2005 10:07:55 -0800
 Eric Brower <ebrower@gmail.com> wrote:
 
-> I'm hesitant to provide a patch to a patch, but there was a tiny
-> buglet in how the Thermal Error LED was represented in sysfs.  A
-> patchlet is attached, but I can resend an entire new patch if
-> necessary.  There are probably a few others lurking in there... :)
+> Attached is a patch against a somewhat dated BK 2.6.10 that provides
+> the following:
+> 
+>   1) a basic framework for supporting SUNW,envctrl environmental
+> monitoring flavors
+>   2) an implementation of the framework for basic SUNW,envctrltwo
+> (UE250) support
 
-This relative patch is fine, you don't need to resend the rest.
+I like this a lot.  But I'd like to see the I2C layer maintainer
+take your lost-arbitration changes in before I merge in your
+envctrl driver.  Ok?
+
+It looks like greg@kroah.com is the most active in this area, perhaps
+contacting him might get a quicker response than the lm-sensors folks.
