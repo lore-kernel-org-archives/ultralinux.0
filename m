@@ -1,69 +1,88 @@
-From: Roland Turner <raz@arrakis.com.au>
-Date: Wed, 28 Oct 1998 15:17:09 +0000
-Subject: Re: Trouble installing on Ultra 60
-Message-Id: <marc-linux-ultrasparc-90959386812056@msgid-missing>
+From: Ward Deng <wdeng@KachinaTech.COM>
+Date: Mon, 26 Oct 1998 20:44:15 +0000
+Subject: Re: Floppy on some UltraAX/UltraAXi boxes
+Message-Id: <marc-linux-ultrasparc-90943673306225@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90946703917734@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90946703917734@msgid-missing>
+References: <marc-linux-ultrasparc-90602615026064@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90602615026064@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Darren Tom wrote:
+Jakub,
 
-> I tried installing UltraPenguin 1.09 on the Ultra 60, dual 360MHZ and
-> encountered problems
-> with the built-in peripherals.
+I also tested on Ultra30 too and UltraPenguin maps the floppy as /dev/fd1
+or B: in mtools. I tested with PC style "twisted (pin10-16 crossed)"
+cable but the system did not recognized. It will be easier for end user
+to figure out if it is /dev/fd0. Probably just simbolically link it
+to /dev/fd0.
 
-Whilst I wait for inspiration/assistance on my installation problems
-with an Enterprise I, I decided to tinker with and Ultra 60 (dual
-300MHz, Creator3D). This machine is used for real work by myself and
-others, so there are limits to what I can do, but I decided that I'd
-like to get a little further than I did with the Enterprise I.
+Just to let you all know that this feature exists on all UltraSPARC
+systems I tested including AX/AXi and Sun PCI Ultras (not tested on
+SBus based ones).
 
-Anyway:
+BTW, I felt Xsun24 slower than I expected on a Creator3D FFB so I
+did a Xmark/x11perf test. The result seemed to be ok. Obviously Text 
+can be accelerated. Of course, this card is for 3D performance and X11perf
+is for 2D only. Here is what I got:
 
-> 1) The kernel itself booted successfully from the
-> net, but the built-in NCR 53C875 rev 0x14 was not properly recognized.
-> The error shown on the diagnostic console indicates the controller's
-> cache is not configured correctly.  How do I configure the cache and/or
-> work around this problem?
+Sun Ultra30 Creator3D, 250MHz UltraSPARC II, 128MB RAM, 4.3GBN UWSCSI
+OS: UltraPenguin 1.0.9 with kernel 2.1.125
+Xserver: Xsun24
+Test Resolution: 1280x1024x24bit
+Xmark: 13.00051
+Xspeed: 
+   Graphics :  203192
+       Text :  606097
+    Windows :  129866
 
-You diagnosed a little more than I did. I got as far as noticing the
-claim that there were no hard drives and no controllers available to
-choose, despite /tmp/syslog suggesting that the NCR controller had been
-detected.
+FYR: SGI Onyx RE-2 with IRIX 5.3 xspeed:
+   Graphics :   77300
+       Text :  267100
+    Windows :   20900
+(Of course RE-2 is not for 2D either :-(.)
 
-> 2) The PCI HappyMeal ethernet controller claims to have been recognized,
-> but any attempt to set the ip addr, etc. results in either a complaint
-> about setting the netmask or a hang while the system is trying to
-> determine the hostname. Is there something special about the addresses
-> that I'm missing?  The ip that I'm specifying is set in our dns server.
+--ward
 
-I'm having the same problem. I'm confident that my IP address is
-available to me (it's the same address that the machine uses in
-production use), and I'm on the right network, the netmask is the
-default (0xffffff00), the name server and router are on the same subnet.
-The name server is able to do a reverse lookup of the address, and a
-forward lookup of the resulting name yields the same address. A few
-seconds after pressing Enter, the machine hangs. (I'm using CAPSLOCK
-response to determine the moment of crash.)
 
-Unfortunately the network is switched (and I don't have access to the
-switch), so sniffing the cable to find out what's happening there is
-currently beyond me. I'll try again sometime soon on a non-switched
-segment.
-
-Also, I'm not familiar with RedHat. "ifconfig" appears to be absent! Is
-someone able to build a new boot image with ifconfig on it? Better, is
-someone able to tell me how (or point me to a document) to build new
-boot images, so I can do my own?
-
-Thanks.
-
-> p.s.  solaris 2.6 works perfectly on this workstation.
-
-Likewise.
-
-- Raz
+> Date: Thu, 17 Sep 1998 11:41:08 +0200 (MET DST)
+> From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+> To: ultralinux@vger.rutgers.edu
+> Subject: Floppy on some UltraAX/UltraAXi boxes
+> 
+> Hi!
+> 
+> Just to let you know, on some UltraAX/AXi boxes the single floppy drive you
+> have is unit 1 and not 0 (B: and not A: in DOS terms). To get that working,
+> you have to use recent kernel (e.g. from CVS), plus it will be accessible
+> through /dev/fd1 and not /dev/fd0 as you might expect.
+> If you have a recent kernel, the boot messages will tell you correctly
+> Floppy drive(s): fd1 is 1.44M
+> So if that is your case (if your floppy does not work and prtconf -pv shows
+> you something like:
+> 
+> ....
+>             Node 0x????????
+>                 manual:
+>                 unit:  00000001
+>                 address:  ????????.????????.????????
+>                 device_type: 'block'
+>                 interrupts:  ????????
+>                 reg: ????????.????????.????????.????????.????????.????????.????????.????????.????????
+>                 name: 'fdthree'
+> ....
+> 
+> (the unit: 1 is important), then upgrade your kernel.
+> I'll be making kernel RPMS really soon, once some bug is fixed.
+> 
+> Cheers,
+>     Jakub
+> ___________________________________________________________________
+> Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+> Administrator of SunSITE Czech Republic, MFF, Charles University
+> ___________________________________________________________________
+> Ultralinux - first 64bit OS to take full power of the UltraSparc
+> Linux version 2.1.121 on a sparc64 machine (498.80 BogoMips).
+> ___________________________________________________________________
+> 
