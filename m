@@ -1,7 +1,7 @@
 From: Fredrik Lundholm <exce7@ce.chalmers.se>
-Date: Tue, 29 Dec 1998 14:24:30 +0000
+Date: Wed, 30 Dec 1998 11:31:50 +0000
 Subject: Re: Ultralinux 1.1.9 brick wall....
-Message-Id: <marc-linux-ultrasparc-91494445103825@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91504133809984@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91493348232595@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91493348232595@msgid-missing>
@@ -12,18 +12,43 @@ To: ultralinux@vger.kernel.org
 
 Hello,
 
-> I pulled down the up-1.1.9.iso image from doc.ic.ac.uk's mirror site, and
-> wrote a cd. 
+> This is strange. I thought all E?k patches have made it to the latest kernel
+> on the CD. Can you please try
+> console=prom
+> to see where it actually gets stuck?
 
-On an E4000 w 14CPUs the install goes well. (from CD pulled of ftp.sunet.se)
-When I reboot it after the install the machine hangs at 
-'root child is f002d3a8'
-There is no graphics card in the machine, would a console=serial fix the
-situation?
+Hmm this IS strange, when I tried booting it from the fresh install this
+morning I just missed the silo prompt and pressed break just as Silo loaded
+the kernel and this time it booted alright from the serial console.
+I logged in, installed a few missing packages like telnet and switched to
+the smp-kernel.
 
-(it takes a few minutes to reboot the sucker so I would want to be reasonably
-sure it works, also its tedious to manually type in the prom path to the 
-boot-disk :)
+When I tried to boot smp-2.1.130, it stopped right after:
+' root child at xxxx
+  CPU1 enabled
+  ...
+  CPU14 enabled
+'
+
+so I cut the power and rebooted with console=prom (again with the smp-kernel)
+and it goes as far as:
+' ...
+  6927,16 bogomips
+  ...
+  Sparc Zilog 8530 v1.35
+'
+
+So indeed it seems like something is misbehaving in the serial and or 
+console-driver.
+
+Also I noticed that the hme-driver failed to auto-negotiate 100Mb FD 
+transfers with our Catalyst 5000 switch which it is connected to.
+(when it booted the fresh install the first and only time I got it up)
+I vaugely remeber someone else also noticing this, what was the
+remedy? do the hme-driver accept kernel-arguments? 
+
+> Cheers,
+>     Jakub
 
 /wfr/
 -- 
