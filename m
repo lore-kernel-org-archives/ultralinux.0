@@ -1,33 +1,53 @@
-From: Ralphe Neill <ran@oberon.sub.net.au>
-Date: Sat, 22 Dec 2001 04:49:47 +0000
-Subject: Newbie problems
-Message-Id: <marc-linux-ultrasparc-100899662229184@msgid-missing>
+From: Lennert Buytenhek <buytenh@gnu.org>
+Date: Mon, 31 Dec 2001 03:05:00 +0000
+Subject: [PATCH][RFC][CFT] remove global errno from the kernel, make _syscallX kernel-only
+Message-Id: <marc-linux-ultrasparc-100976861802143@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi all,
+(Apologies for the massive cross-post, but this is a matter that concerns
+all architectures.  For archs that don't have a maintainer listed in
+MAINTAINERS I grabbed a random email address from arch/$arch/kernel/*.
+If you're not the person to answer this for your $arch, please forward
+to an appropriate person/list.)
 
-I just started using KDE a few days ago and am having a major problem
-with the CD player which appears to be set to run as soon as an audio CD
-is put in the drive. This is not quite what I wanted but the problems
-make me really want to get rid of it.
 
-Once it has been used it seems that the CD-ROM drive is being accessed
-almost constantly. Inserting an audio CD then produces TWO players. The
-next time it's FOUR. In the end there were so many of the things hanging
-around that it took about 6 minutes to login.
+Hi,
 
-What do I need to do to stop this behaviour apart from getting rid of
-the Autorun.kdelnk file in Desktop/Autostart
+As I mentioned in my email to l-k with subject '[PATCH][RFC] global
+errno considered harmful' earlier today, having a global errno in the
+kernel doesn't really make sense.
 
-Also, while I'm at it, I found a tool earlier for setting-up a printer
-(model, postscript, etc) but now I simply cannot find it nor any mention
-in the doco. Can somebody jog my memory?
+Referenced patch [1] deletes all mention of a global errno from the
+kernel, fixes up a very small number of callers that were depending on
+it, and fixes up the syscall helpers in include/asm-$arch/unistd.h not
+to write an error code to errno in case of error anymore.
 
-Regards,
+This subtly breaks userspace code that uses these helpers, but the general
+consensus seems to be that userspace code shouldn't be touching these in
+the first place.  Patch [2] fixes up asm-$arch/unistd.h to only define
+_syscallX in case __KERNEL_SYSCALLS__ is defined, to try and actively
+break userspace (ab)users of this code (thanks to Ralf Baechle for
+suggesting I should do something along these lines).
 
-Ralphe Neill
-(Melbourne, Australia)
+What I would like to know from each architecture team:
+- What is your arch's policy on userspace usage of asm/unistd.h, and
+  consequently, what is your opinion on the goal these patches
+  aim for?
+- Are the changes I made in [1] and [2] for your $arch technically
+  correct?
+Please CC me on replies as I'm not on any of the lists posted to.
+
+My intention is to push these to Linus for 2.5 if everyone agrees.
+They're probably too intrusive for 2.4 (although I'd love people
+to convince me otherwise).
+
+
+cheers,
+Lennert
+
+[1] http://www.math.leidenuniv.nl/~buytenh/errno_ectomy-1.diff
+[2] http://www.math.leidenuniv.nl/~buytenh/errno_ectomy-1-to-2.diff
