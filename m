@@ -1,37 +1,56 @@
-From: Grant Beattie <grant@zero.net.au>
-Date: Mon, 08 Jun 1998 03:53:08 +0000
-Subject: signal 11 installing UP 1.0.9
-Message-Id: <marc-linux-ultrasparc-90222357630992@msgid-missing>
+From: Ramiro Estrugo <ramiro@netscape.com>
+Date: Wed, 03 Jun 1998 12:25:07 +0000
+Subject: Which ultra linux for porting mozilla ?
+Message-Id: <marc-linux-ultrasparc-90222357630980@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi all, Jakub, Dave..
+Hi guys,
 
-I have just tried (twice) to install UltraPenguin 1.0.9 on my Sparc5/170
-and both times, part way through the package installation, I get this:
+I work at netscape and i just got an ultra 1 computer.  My hope is to
+port Mozilla and ultimately Communicator to ultra linux.
 
-install exited abnormally -- received signal 11
-sending termination signals...done
-sending kill signals...done
-unmounting filesystems...
-/mnt/usr
-/mnt/var
-/proc
-/mnt/
-you may safely reboot your system
+I already ported both mozilla and communicator to x86 redhat5, so a lot
+of the code already works with glibc2.  We also have Alpha Linux (redhat
+4.x) and MkLinux (redhat 5.x) ports.
 
-(it happened at different points each time, so I don't think it is a
-particular package which is causing it)
+So my question is this:
 
-I've looked at the various alt-F2 etc screens and there is nothing unusual
-logged.
+What distribution should I install ?  Im not too concerned about having
+the most stable system in the world, what I want is mostly this:
 
-I have installed UP1.0.9 on a Classic previously without a problem.
+1.  Whatever will be the most useful to ultra sparc linux users
+2.  Something that can dual boot with solaris
 
-any idea what might be happening?
+Off the top of my head, here is a laundry list of stuff that is needed:
 
-thanks,
-grant.
+a.  jdk 1.1 (since the next release of communicator will support awt1.1)
+b.  The motif shit, since lesstif does not work 100% yet.  On x86,
+motif2.1 works with glibc2 (redhat5-ish).  Motif1.2 works with libc5
+(redhat4-ish).  So I guess it depends on the answer to question 1.
+above.  Are there vendors for this ?  I think Sparc Linux motif2.1 is
+for sale at Metrolink.  Does it work on Ultra Linux ?
+
+Im sure ill have lots of questions.  
+
+I think that there is a bunch of code in communicator that ass-umes 32
+bitness.  This sucks, but its the way it is.  When we did the Alpha
+Linux port, it was barely useable (unstable) because of random
+problems.  But, at least the bugs will get fixed.
+
+Have any of you already build free mozilla on sparc linux ?  I believe
+some folks have already built it on Sparc Linux.  We have someone at
+netscape working on this port too.  This would be the first step.  We
+could then take the changes for the official netscape releases and there
+would be a native communicator on Ultra Linux with java, security and
+all the other forbidden stuff.
+
+I am not on this list - yet.  But if there is interest in this project,
+then ill join.
+
+thanks
+
+-re
