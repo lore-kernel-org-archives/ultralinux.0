@@ -1,17 +1,29 @@
-From: Aaron T Porter <atporter@entropy.muc.muohio.edu>
-Date: Fri, 08 May 1998 15:23:15 +0000
-Subject: Ultrapenguin Mirror
-Message-Id: <marc-linux-ultrasparc-90222356530988@msgid-missing>
+From: Hiroshi Ashida <ashida@bun.kyoto-u.ac.jp>
+Date: Tue, 19 May 1998 07:12:57 +0000
+Subject: dhcpd on ultrapenguin
+Message-Id: <marc-linux-ultrasparc-90222356531052@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hello, can I write to this address?
 
-	Just to let you know, another US Ultrapenguin mirror.  I'll only
-be doing the newest version (1.0.9 now) version at any given time.  Files
-are coming over now (at about 40kb/s) so the mirror should be complete
-sometime this afternoon.
+I've just installed UltraPenguin 1.0.9 on my ultra 1.
+I was quite impressed that the installation was pretty
+easy and the things worked mostly well.
 
-	ftp://ftp.muc.muohio.edu/pub/linux/distributions/
+My question is how I can make the DHCP server work.
+It was in the RPMS directory.  It does not respond
+to any DHCP requests.  According to the document of the 
+ISC DHCP, I suspect the kernel is configured to ignore
+broadcast packets, but I couldn't find how I can change it.
+Could you give me any advice?
+
+best regards,
+hiroshi
+-- 
+Hiroshi Ashida
+Kyoto University, Japan
+ashida@bun.kyoto-u.ac.jp
