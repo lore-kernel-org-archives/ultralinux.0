@@ -1,7 +1,7 @@
-From: Andi Kleen <ak@muc.de>
-Date: Fri, 17 Jul 1998 11:22:47 +0000
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Fri, 17 Jul 1998 12:34:10 +0000
 Subject: Re: VIS
-Message-Id: <marc-linux-ultrasparc-90222358531053@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531054@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531047@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531047@msgid-missing>
@@ -10,29 +10,28 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-"David S. Miller" <davem@dm.cobaltmicro.com> writes:
+   From: Andi Kleen <ak@muc.de>
+   Date: 17 Jul 1998 13:22:47 +0200
 
->    From: Andi Kleen <ak@muc.de>
->    Date: 17 Jul 1998 01:37:07 +0200
-> 
->    "David S. Miller" <davem@dm.cobaltmicro.com> writes:
-> 
->    > (side comment: this *.il inline assembler interface of sunpro is one
->    > of the things I totally think they got wrong and which gcc has a much
->    > superier interface, look at the syntax, it's just gross)
-> 
->    The big advantage of the Sun solution is that their templates are schedulable,
->    while this is just impossible with the gcc inline assembly.
-> 
-> Not true at all, it depends upon how a port was done.  The Sparc
-> backend creates a situation where all use inline asm's are considered
-> multi-instruction.  GCC does not require this.  And if this were
-> changed, inline assembly could be scheduled just like anything else.
+   "David S. Miller" <davem@dm.cobaltmicro.com> writes:
 
-In theory it could be done (by specifying the function units in a fourth
-column similar to what is done in the machine descriptions). The problem with
-that is that it would add horrible compiler version/CPU revision dependencies
-to the code. When I understand it correctly then Sun's approach avoids this
-problem - their templates are not pretty, but portable over revisions.
+   > Not true at all, it depends upon how a port was done.  The Sparc
+   > backend creates a situation where all use inline asm's are considered
+   > multi-instruction.  GCC does not require this.  And if this were
+   > changed, inline assembly could be scheduled just like anything else.
 
--Andi
+   In theory it could be done (by specifying the function units in a fourth
+   column similar to what is done in the machine descriptions).
+
+No, you just need to remove the classification of all asm's as
+type attribute "multi", then any single insn asm can be moved around
+and scheduled just like any other insn.  In fact, if you wrote your
+register constraints like a good little boy gcc will know how to
+handle the dependencies right too (to deal with load latencies to an
+input register used by your asm) etc.
+
+It's totally trivial.
+
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
