@@ -1,26 +1,23 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Tue, 08 Dec 1998 11:09:11 +0000
-Subject: QFE/Quattro support...
-Message-Id: <marc-linux-ultrasparc-91315210312341@msgid-missing>
+From: TSP SD AKIMOTO DAISUKE <akimoto.qj004@ex.tel.co.jp>
+Date: Mon, 21 Dec 1998 08:10:35 +0000
+Subject: UPS monitor tool
+Message-Id: <marc-linux-ultrasparc-91422849706632@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hi.
 
-I just coded up preliminary support for the quad
-fast ethernet cards (both SBUS and PCI).  I have no
-means to test this right at the moment, I hope to be
-able to do so soon.
+Our Linux box absolutely need shutdown cleanly when power failures.
 
-But if people posses some of these cards and have a
-SparcLinux system up and running, and would like to
-give it a test, go grab the latest CVS sources and
-try it out.
+Does Ultrapenguin have any tool which monitor the status of a 
+serial line connected to a UPS?
+I tried compile genpowerd, but it failed for missing signal "SIGPWR"
+ definition.
 
-Please send results to me, thanks.
+Anybody use UPS?
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+Tokyo Electron Sapporo Limited
+Daisuke Akimoto
