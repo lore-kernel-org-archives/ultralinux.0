@@ -1,28 +1,19 @@
-From: 123 <crutch@aci.net>
-Date: Thu, 22 Oct 1998 23:06:06 +0000
-Subject: support for SBUS PCMCIA ????
-Message-Id: <marc-linux-ultrasparc-90909757227823@msgid-missing>
+From: John Gilmore <gnu@toad.com>
+Date: Fri, 23 Oct 1998 01:16:36 +0000
+Subject: Re: support for SBUS PCMCIA ????
+Message-Id: <marc-linux-ultrasparc-90910512430474@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90909757227823@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90909757227823@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-is there any support for the PCMCIA interface on SBUS card???
+> is there any support for the PCMCIA interface on SBUS card???
 
-the SUN part # is X1030A and 595-3375-02
+I have one of these chips in a SPARC Voyager.  No support for it in
+SPARC Linux.  It's not even clear if there's anyone left at Sun who
+can find the documentation on how to program it.
 
-any info is appreciated....
-
-the PCMCIA controller is (according to SUNS sheets)
-a STB4040 PCMCIA controller YET
-looking at the SBUS card it says AT&T doright
-
-according to the SUN docs it supports (under solaris 2.5 or higher):
-
-modems
-serial interfaces
-ethernet
-memory
-flash cards
-ata hard disks
+	John
