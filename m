@@ -1,33 +1,27 @@
-From: =?ISO-8859-2?Q?Tomasz_K=B3oczko?= <kloczek@rudy.mif.pg.gda.pl>
-Date: Thu, 18 Jun 1998 02:03:42 +0000
-Subject: Re: lesstif
-Message-Id: <marc-linux-ultrasparc-90222357631023@msgid-missing>
+From: Lars Kellogg-Stedman <lars@bu.edu>
+Date: Tue, 02 Jun 1998 20:32:05 +0000
+Subject: Floppy install image?
+Message-Id: <marc-linux-ultrasparc-90222357630976@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357631022@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357631022@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, 17 Jun 1998, Alberto Brealey wrote:
+Howdy,
 
->=20
-> does lesstif >=3D 0.84 compiles under ultrapenguin?
+I've got a Sun SS2 at home that I'd like to try running Ultrapenguin on. 
+I can't use the tftpboot image because I don't have any machines that can
+respond to the Sun's rarp requests at boot (unless you know of a Mac based
+rarpd...); unfortunately, the Ultrapenguin mirror at ftp.cobaltmicro.com
+doesn't have a floppy boot image. 
 
-Yes and it ready to use in rpm packages (current is 0.85):
+Does such a beast exist?
 
-ftp://ftp.redhat.com/pub/contrib/hurricane/{SRPMS,sparc}
+Thanks,
 
-or:
+  -- Lars
 
-ftp://ftp.task.gda.pl/pub/people/kloczek/{SRPMS,sparc}
-
-All stuff from above URLs is for UP.
-
-kloczek
------------------------------------------------------------
-*Ludzie nie maj=B1 problem=F3w, tylko sobie sami je stwarzaj=B1*
------------------------------------------------------------
-Tomasz K=B3oczko, sys adm @zie.pg.gda.pl|*e-mail: kloczek@rudy.mif.pg.gda.p=
-l*
+-- 
+Lars Kellogg-Stedman * lars@bu.edu * (617)353-8277
+Office of Information Technology, Boston University
