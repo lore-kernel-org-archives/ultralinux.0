@@ -1,56 +1,42 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Mon, 04 May 1998 16:44:34 +0000
-Subject: UltraPenguin1.0.9 update
-Message-Id: <marc-linux-ultrasparc-90222356530965@msgid-missing>
+From: Thierry Lafage <Thierry.Lafage@irisa.fr>
+Date: Tue, 05 May 1998 10:02:52 +0000
+Subject: Re: UltraPenguin1.0.9 update
+Message-Id: <marc-linux-ultrasparc-90222356530967@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90222356530965@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90222356530965@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
 
-Following things have changes in UP1.1 beta:
+Hi,
 
-update to kernel 2.1.99 (should fix a couple of bugs with Ultra5 machines,
-plus one ugly bug which sometimes killed applications during fork - now
-there are no known bugs, just to make assure you)
+I recently installed UP-1.0.9 on an UltraSPARC I. It seems to work
+well, thanks to the ultralinux team !
 
-update to glibc-2.0.7pre3 plus sparc patches (please, if you can, test
-whether this update does not break anything, I haven't seen any problem, but
-the more people, the more proper testing).
+But, I just tried to first update the kernel with srpm to version
+2.1.99, and I got the following compilation error:
 
-ld.so: ld-linux.so.1 and libc5 apps now should work on both sparc32 and
-	sparc64, not only on sparc64
+make[3]: Entering directory `/var/tmp/kernel/usr/src/linux-2.1.99/drivers/char'
+[...]
+gcc -o conmakehash conmakehash.c
+gcc: Internal compiler error: program cc1 got fatal signal 11
+make[3]: *** [conmakehash] Error 1
+make[3]: Leaving directory `/var/tmp/kernel/usr/src/linux-2.1.99/drivers/char'
+make[2]: *** [first_rule] Error 2
+make[2]: Leaving directory `/var/tmp/kernel/usr/src/linux-2.1.99/drivers/char'
+make[1]: *** [sub_dirs] Error 2
+make[1]: Leaving directory `/var/tmp/kernel/usr/src/linux-2.1.99/drivers'
+make: *** [linuxsubdirs] Error 2
+Bad exit status
 
-mouseconfig: I hope the lockup during serial installation is gone, but
-	things about probing Xserver need still to be solved (for now, don't
-	install Xservers when doing serial console installs - hope to fix
-	this tomorrow)
 
-joe: fix a bug in joe, which caused improper screen size detection
+Any idea about what I must have missed ?
 
-procps: update to 1.2.7, fixed a bug in procps which caused it not to work 
-	with shared libs
+Thierry Lafage.
 
-other minor updates:
-	lpr, hdparm, strace, texinfo, ypbind
-
-The colors in SBUS Xservers are not yet fixed (well, I have a patch which
-fixes it, but am waiting for a fix for Mach64/16+32bpp colormap handling to
-make a shiny new XFree86-3.3.2 RPMS).
-Then, modutils need to be fixed wrt. kerneld, and then I'd like if people
-can remind me on broken packages, so that we can have a release in a week or
-so.
-And if the sparcaudio people help us, we can have full sound support in the
-distribution as well ;) Then just T-shirt time and CD burning time...
-
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.99 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+-- CAPS project -- IRISA, campus de Beaulieu, 35042 Rennes cedex, France
+Phone: +33 2 99 84 25 01 -- Fax: +33 2 99 84 71 71 --
+http://www.irisa.fr/caps/PEOPLE/ThierryL/
