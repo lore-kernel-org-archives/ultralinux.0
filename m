@@ -1,7 +1,7 @@
-From: Andrew Leahy <aleahy@knox.edu>
-Date: Wed, 09 Dec 1998 11:13:58 +0000
+From: alan@lxorguk.ukuu.org.uk (Alan Cox)
+Date: Wed, 09 Dec 1998 15:14:52 +0000
 Subject: Re: the time has come...
-Message-Id: <marc-linux-ultrasparc-91327973607438@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91325552630896@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91319593331633@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91319593331633@msgid-missing>
@@ -10,17 +10,9 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-David S. Miller wrote:
-> 
 > (LM: Check out the quote, from none other than Okin 8-)
 > 
 > http://www.sun.com/smi/Press/sunflash/9812/sunflash.981208.4.html
-> 
-> Later,
-> David S. Miller
-> davem@dm.cobaltmicro.com
 
-So what is the practical impact of this?  How are they helping out?
-
-Andrew Leahy
-aleahy@knox.edu
+Does this mean solaris will finally get clone() as well as the nasty
+kernel pthread stuff ?
