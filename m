@@ -1,72 +1,74 @@
-From: Martin Josefsson <gandalf@wlug.westbo.se>
-Date: Wed, 26 May 2004 06:09:31 +0000
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Thu, 27 May 2004 13:39:01 +0000
 Subject: Re: [PATCH 3/4] Consolidate sys32 select
-Message-Id: <1085551771.969.109.camel@tux.rsn.bth.se>
+Message-Id: <200405271539.05069.arnd@arndb.de>
 MIME-Version: 1
-Content-Type: multipart/mixed; boundary="=-O5w4U+wR40VlljcC40Fp"
+Content-Type: multipart/mixed; boundary="Boundary-02=_49etAllAgQ2zWrw"
 List-Id: <ultralinux.vger.kernel.org>
-References: <26879984$108552555440b3ce3274ba74.46765993@config21.schlund.de>
-In-Reply-To: <26879984$108552555440b3ce3274ba74.46765993@config21.schlund.de>
-To: Arnd Bergmann <arnd@arndb.de>
-Cc: =?iso-8859-1?Q? David_S=2E_Miller ?= <davem@redhat.com>, linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
+References: <26879984$108552555440b3ce3274ba74.46765993@config21.schlund.de> <1085551771.969.109.camel@tux.rsn.bth.se>
+In-Reply-To: <1085551771.969.109.camel@tux.rsn.bth.se>
+To: Martin Josefsson <gandalf@wlug.westbo.se>
+Cc: "David S. Miller" <davem@redhat.com>, linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
 
 
---=-O5w4U+wR40VlljcC40Fp
-Content-Type: text/plain
+--Boundary-02=_49etAllAgQ2zWrw
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-On Wed, 2004-05-26 at 01:10, Arnd Bergmann wrote:
-> Martin Josefsson <gandalf@wlug.westbo.se> schrieb am 26.05.2004,
-> 00:29:13:
->=20
-> > You mean in compat_sys_select() ?
-> > compat_ptr() takes an u32 as argument, needs casting, ugly.
-> > But you want it done that way?
->=20
-> When using compat_ptr properly, you don't need any casts,
-> see the patch below (the patch is probably messed up by my=20
-> broken mailer, but you get the picture).
+On Wednesday 26 May 2004 08:09, Martin Josefsson wrote:
 
-Yes,  my brain didn't go the extra distance, davem responded before I
-could get to bed and I just had to respond :)
+> Your patch will fix the problem, I don't even need to test it.
+> Thanks, looking forward to see a fix in mainline :)
 
-Your patch will fix the problem, I don't even need to test it.
-Thanks, looking forward to see a fix in mainline :)
+I have thought about it again and am no longer sure it is really=20
+the right fix. Can anyone explain why this problem only happens=20
+for the fifth argument, but not for the other pointers (inp, outp,
+exp)?
 
-> =3D=3D=3D=3D=3D fs/compat.c 1.24 vs edited =3D=3D=3D=3D=3D
-> --- 1.24/fs/compat.c	Sat May 22 06:31:47 2004
-> +++ edited/fs/compat.c	Wed May 26 00:57:49 2004
-> @@ -1300,13 +1300,15 @@
-> =20
->  asmlinkage long
->  compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t
-> __user *outp,
-> -		compat_ulong_t __user *exp, struct compat_timeval __user *tvp)
-> +		compat_ulong_t __user *exp, compat_uptr_t utv)
->  {
->  	fd_set_bits fds;
-> +	struct compat_timeval __user *tvp;
->  	char *bits;
->  	long timeout;
->  	int ret, size, max_fdset;
-> =20
-> +	tvp =3D compat_ptr(utv);
->  	timeout =3D MAX_SCHEDULE_TIMEOUT;
->  	if (tvp) {
->  		time_t sec, usec;
---=20
-/Martin
+If sparc64 has this problem only for the fifth syscall argument,=20
+does that mean that e.g. compat_sys_futex and=20
+compat_sys_mq_timed{send,receive} have the same bug? If this is
+a more general, i.e. not limited to the last argument, there is a
+potential problem in lots of syscalls.
 
---=-O5w4U+wR40VlljcC40Fp
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: This is a digitally signed message part
+	Arnd <><
+
+> > =3D=3D=3D=3D=3D fs/compat.c 1.24 vs edited =3D=3D=3D=3D=3D
+> > --- 1.24/fs/compat.c=A0=A0Sat May 22 06:31:47 2004
+> > +++ edited/fs/compat.c=A0=A0=A0=A0=A0=A0=A0=A0Wed May 26 00:57:49 2004
+> > @@ -1300,13 +1300,15 @@
+> > =A0
+> > =A0asmlinkage long
+> > =A0compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t
+> > __user *outp,
+> > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0compat_ulong_t __user *exp, str=
+uct compat_timeval __user *tvp)
+> > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0compat_ulong_t __user *exp, com=
+pat_uptr_t utv)
+> > =A0{
+> > =A0=A0=A0=A0=A0=A0fd_set_bits fds;
+> > +=A0=A0=A0=A0=A0struct compat_timeval __user *tvp;
+> > =A0=A0=A0=A0=A0=A0char *bits;
+> > =A0=A0=A0=A0=A0=A0long timeout;
+> > =A0=A0=A0=A0=A0=A0int ret, size, max_fdset;
+> > =A0
+> > +=A0=A0=A0=A0=A0tvp =3D compat_ptr(utv);
+> > =A0=A0=A0=A0=A0=A0timeout =3D MAX_SCHEDULE_TIMEOUT;
+> > =A0=A0=A0=A0=A0=A0if (tvp) {
+> > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0time_t sec, usec;
+
+--Boundary-02=_49etAllAgQ2zWrw
+Content-Type: application/pgp-signature
+Content-Description: signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.4 (GNU/Linux)
 
-iD8DBQBAtDSbWm2vlfa207ERAgUBAKCQJe65Ix2fWrvj8HB/adXLkPuYMACfUSwG
-T0nbXipob+aBCzSEe5plwzI=
-=0RgW
+iD8DBQBAte945t5GS2LDRf4RAvP6AJ49HaqqHZLigQC+6wrCmW2B7qY9BACfWZrg
+oepLKPiPzWnX0G0hZWUgV6Y=
+=feld
 -----END PGP SIGNATURE-----
 
---=-O5w4U+wR40VlljcC40Fp--
+--Boundary-02=_49etAllAgQ2zWrw--
