@@ -1,7 +1,7 @@
-From: Stephan van Hienen <ddx@cable.a2000.nl>
-Date: Wed, 04 Nov 1998 10:55:00 +0000
+From: Malcolm Beattie <mbeattie@sable.ox.ac.uk>
+Date: Wed, 04 Nov 1998 12:29:47 +0000
 Subject: Re: Still no go with 10mb on 100mb card
-Message-Id: <marc-linux-ultrasparc-91017745314389@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91018491117455@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91009247508389@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91009247508389@msgid-missing>
@@ -10,8 +10,7 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, 4 Nov 1998, David S. Miller wrote:
-
+David S. Miller writes:
 >    Date: 	Wed, 4 Nov 1998 10:37:54 +0000 (GMT)
 >    From: Malcolm Beattie <mbeattie@sable.ox.ac.uk>
 > 
@@ -24,18 +23,19 @@ On Wed, 4 Nov 1998, David S. Miller wrote:
 >    removing the card completely after which an installation went fine
 >    with the on-board hme (apart from later non-network problems that I
 >    mention in the other message).
-this looks like my problem
-
-
 > 
 > There were some problems with scsi/eth PCI cards on Ultra5's earlier,
 > when was the most recent kernel you have tried with the card in the
 > machine?  We believe this particular to be fixed by now.
-kernel 2.1.125 (from rpm's)
 
+This was with Jakub's UP 1.0.9 update last Friday (30 Oct). For more
+details, see my "Mixed news" message. I'm about to follow that up
+right now with details of my attempt today with Jakub's latest
+update that he put there on Monday.
 
-> 
-> Later,
-> David S. Miller
-> davem@dm.cobaltmicro.com
-> 
+--Malcolm
+
+-- 
+Malcolm Beattie <mbeattie@sable.ox.ac.uk>
+Unix Systems Programmer
+Oxford University Computing Services
