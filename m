@@ -1,7 +1,7 @@
-From: Guglielmo Bondioni <g.bondioni@informex.it>
-Date: Wed, 09 Feb 2000 15:07:25 +0000
+From: Isaiah Weiner <iweiner@redhat.com>
+Date: Wed, 09 Feb 2000 15:28:47 +0000
 Subject: Re: CD ripper/MP3 encoder
-Message-Id: <marc-linux-ultrasparc-95010935124803@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95011076426332@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-95005914224137@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-95005914224137@msgid-missing>
@@ -10,11 +10,12 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Isaiah Weiner wrote:
->         My opinion of Ultra5/10s is not very high. ;)
-I bet!
-The only Sun class thing about U5/10s is the price ;-)
-I think the U10 is the only 'tower' machine that has to be opened
-upside-down...
+> I think the U10 is the only 'tower' machine that has to be opened
+> upside-down...
 
-bond
+	And the little metal flaps below (or above, if you've got the case
+off)  the floppy have to be bent to add another drive.  It's very
+frustrating, and I cut my hands on those more than any other case I've
+ever messed with.
+
+	- Isaiah
