@@ -1,7 +1,7 @@
 From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Thu, 05 Nov 1998 21:37:38 +0000
+Date: Fri, 06 Nov 1998 09:08:51 +0000
 Subject: Re: ultrapenguin-1.0.9 on ultra30
-Message-Id: <marc-linux-ultrasparc-91031034311604@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91035590627298@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91029286902028@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91029286902028@msgid-missing>
@@ -19,31 +19,31 @@ To: ultralinux@vger.kernel.org
 > with initrd... when i reboot after installing i get:
 > 
 > initrd overwritten ([some address] > [some other address]) - disabling it
-
-Can you tell me those some addresses and some other addresses? How much
-memory do you have? What size is your /boot/initrd*.img (provided you get
-tftprescue.img working - see below).
 > 
 > and after this it of course can't mount root. is there a way to tell silo
 > to load a module?
 
-There is no way to do that, you have to get either initrd working, or
-compile the required modules into the kernel.
-> 
-> 2 - tftprescue.img fails horribly: 
-> 
-> <paste>
-> 2f9000 TILO
-> copy 31A000 1538F0 1726398
-> copy 260000 9A276 759418
-> Memory Address not Aligned
-> </paste>
-> 
-> 
-> any hints?
+Further question: can you on the SILO prompt do the following:
+type
 
-Grab the most recent tftprescue.img, it should not fail horribly (I assume
-you don't have it, as it should not print the copy messages).
+xxdebug ENTER
+
+then
+
+cd /virtual-memory
+.properties
+cd /memory
+.properties
+
+and tell me from virtual-memory's properties how does the last line of
+translations look like (it should be something like 
+00000000.00002000.00000000.XXXXXXXX.800000000.00002XXX or similar (the first
+two numbers are virtual address and I'm interested in the lowest one - I
+need to know the X numbers).
+From memory's properties if you could type all the reg: numbers.
+
+Thanks for your cooperation. If I get those info (and the one I asked in the
+last mail), then I can fix SILO...
 
 Cheers,
     Jakub
