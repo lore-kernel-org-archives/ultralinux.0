@@ -1,7 +1,7 @@
-From: Elliott Hughes <Elliott.Hughes@genedata.com>
-Date: Mon, 22 Mar 1999 12:38:17 +0000
+From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
+Date: Mon, 22 Mar 1999 19:53:09 +0000
 Subject: Re: [ANNOUNCE] Test release of rewritten Creator/Creator3D/Elite3D support
-Message-Id: <marc-linux-ultrasparc-92210688715104@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92213274703528@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92169272206527@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92169272206527@msgid-missing>
@@ -10,20 +10,38 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> What kernel are you running and where did you get it from?
+David Miller writes:
 
-i was running 2.2.0-pre5, but i've since switched to 2.2.4 as
-you suggested, and i've had no trouble since. i've been doing
-the same kind of stuff as i was doing yesterday -- i tried to
-repeat exactly what i did yesterday -- and haven't been able
-to provoke a crash.
+ > Please grab the latest kernel and try to reproduce.  I can almost
+ > guarentee that you will not be able to as I have been doing an
+ > enormous amount of stress testing of things.
+ >
+ > There are two ways to get the latest at the moment:
+ > 
+ > 1) http://cvs.on.openprojects.net/
+ > 
+ >    Follow the instructions for the vger kernel mirror repository
+ >    and checkout the cvs module named "linux"
+ > 
+ > 2) Grab the latest 2.2.3 linux sources and apply the latest
+ >    2.2.4 pre-patch on top, this will be essentially the same
+ >    thing as what you'd get from method #1.
+ > 
+ >    ftp://ftp.xx.kernel.org/pub/linux/kernel/v2.2/linux-2.2.3.tar.bz2
+ >    ftp://ftp.xx.kernel.org/pub/linux/kernel/testing/pre-patch-2.2.4-6.gz
+ > 
+ >    Replace "xx" with your country code, it may take a little while for
+ >    the pre-patch to reach the mirrors.
+ > 
+ > Please report back to me asap as Linus is going to release the real
+ > 2.2.4 some time tomorrow and if this is a kernel bug I need to fix it
+ > before tomorrow morning.
 
-i'll shout if anything goes wrong, but so far it looks as if you
-can assume it's fixed.
+Dave,
 
-thanks,
-Elliott
+I have the kernel source, however I don't know how to compile/install
+it.  I am very familiar with the Intel version but not the Sparc
+version.  Is there a HOWTO?
 
 -- 
-"Plan 9? Ah, yes: Plan 9 deals with the resurrection of the dead."
-	http://plan9.bell-labs.com/plan9/
+Ryan
