@@ -1,39 +1,40 @@
-From: Greg Boyce <gboyce@rakis.net>
-Date: Mon, 21 Oct 2002 15:17:10 +0000
-Subject: Problems with Networking on Ultra 1 Creator
-Message-Id: <marc-linux-ultrasparc-103521349411848@msgid-missing>
+From: brandoo@globe.net.nz
+Date: Mon, 21 Oct 2002 03:40:24 +0000
+Subject: Quota Problems
+Message-Id: <marc-linux-ultrasparc-103517160809006@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Folks,
+Hello, 
 
-I've been attempting to track down a problem I've been having lately with
-my Ultra 1 Creator.  When transfering files to/from the machine, it ends
-up hanging for short periods of time giving the following errors:
+I'm having problems using Quotas on a Sparc Ultra Server 1 (Debian Woody with 
+Kernel 2.4.19 [VFS: Diskquotas version dquot_6.4.0 initialized]) 
 
-eth0: transmit timed out, resetting
-eth0: Happy Status 00000000 TX[000003ff:00000401]
-eth0: Auto-Negotiation unsuccessful, trying force link mode
+I've got the Quota package installed: 
+ii  quota          3.07-1         An implementation of the disk quota system. 
 
-I've been attempting to locate a fix in the archives, but none of the
-fixes I've found so far seem to work for me.
+And the quota.user file exists in the root path of the mount I wish to enable 
+quotas (/home -> /dev/sdb1). 
 
-I attempted applying the patch found here:
-http://www.uwsg.iu.edu/hypermail/linux/kernel/0208.1/0764.html
+No matter how I create the quota.user (quotacheck -a, quotacheck -aF vfsold, 
+quotacheck -aFvfsv0), whenever quotaon is run, I get the following message: 
 
-And the patch located here:
-http://www.uwsg.iu.edu/hypermail/linux/kernel/0208.1/0798.html
+quotaon: using /home/quota.user on /dev/sdb1 [/home]: 
+Invalid argument quotaon: Maybe create new quota files with quotacheck(8)? 
 
-I've also tried upgrading from 2.4.18 to 2.4.19 after reading the problem
-was fixed in one of the 2.4.19-pre* kernels, and I attempted to downgrade
-to 2.2.20.  None of these things worked.
+Has anyone else had issues with Quotas on a SPARC ? 
 
-Does anyone have a definitive fix for this problem?  If not, does anyone
-have any possible fixes they'd like me to try out for testing?
+I've just tried setting up quotas on an i386 the same way as I'm trying to 
+install on the SPARC, and it all works perfectly... 
 
--- 
-Gregory Boyce
+Any info/help appreciated 
 
+Regards 
+
+John 
+
+-------------------------------------------------
+This mail sent through IMP: http://horde.org/imp/
