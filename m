@@ -1,7 +1,7 @@
-From: Thomas Klaube <Klaube@noc.dfn.de>
-Date: Fri, 26 Mar 1999 20:31:33 +0000
+From: David Miller <davem@twiddle.net>
+Date: Fri, 26 Mar 1999 21:23:43 +0000
 Subject: Re: Multi Happy Meal Ethernet problem
-Message-Id: <marc-linux-ultrasparc-92248096026444@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92248355428340@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92255674631513@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92255674631513@msgid-missing>
@@ -10,83 +10,21 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> Flavio,
+   Date: 	Fri, 26 Mar 1999 15:20:19 -0500 (EST)
+   From: Peter Jones <pjones@redhat.com>
 
-Hi,
+   Although, this brings up a reasonable point -- if they're all on
+   the same IP subnet, then you may very well only notice one of them
+   getting traffic.
 
-> 
-> Are you trying to put all three (or four) Ethernet connections on that 
-> Ultra30 in the same domain?  If not, disregard the following.
-> 
-> As far as I know, each ethernet connection from a given system must be in a 
-> different domain, otherwise one default connection (usually eth0) always 
-> defines that system's interface. 
+The bug is in the PCI specific code in that old kernel still in the
+UP-1.1.9 distribution, upgrade to the latest sparc kernels and all of
+the happy meals will work just fine.  And in fact the problem was that
+interrupts were not being setup properly so the other cards would
+never see them.
 
-hmm.. domain isnt the right word. Each Network connection of a host (not only
-ethernet) must be in a different subnet. There is one exception:
-If you want to bridge between 2 segments, you must have the network
-devices in the same subnet. But I dont think Flavio wants to do that :-).
+Let's stop speculating please...
 
-But another question to Flavio: are all interfaces recognized by the
-machine? What does a ifconfig say? 
-
-Regards
-Thomas 
-
-> 
-> David
-> ------
-> ------------- Begin Forwarded Message -------------
-> 
-> Date: Fri, 26 Mar 1999 09:10:48 -0800 (PST)
-> From: Bob Hogg <bob@jacklondon.net>
-> To: Flavio Pescuma <edtfopa@malmen.ericsson.se>
-> cc: ultralinux@vger.rutgers.edu
-> Subject: Re: Multi Happy Meal Ethernet problem
-> MIME-Version: 1.0
-> X-Loop: majordomo@vger.rutgers.edu
-> X-Orcpt: rfc822;ultralinux-outgoing
-> 
-> Hm....I've got an Ultra 1 that has 2 HME's and they work fine - I'm using
-> that machine as a router at the moment, actually.....it's working quite
-> well.
-> 
-> -bob
-> 
-> On Fri, 26 Mar 1999, Flavio Pescuma wrote:
-> 
-> > Hi,
-> > 
-> > I have just succeeded to install ultralinux-1.1.9 on a Ultra 30
-> > machine.  This machine has three Happy Meal ethernet cards, the problem
-> > I have is that eth0 works fine but the other two doesn't.  The module
-> > seems to work perfectly because it recognize the three of them,  but
-> > neither eth1 nor eth2 receive any traffic at all.
-> > 
-> > Thanks in advance,
-> > 
-> > Flavio
-> > 
-> > 
-> > 
-> > --
-> > WIRE - Web & Internet Resources at Ericsson
-> > Flavio Pescuma           phone: +46 (0)8 7263359
-> > L M Ericsson Data AB     fax:   +46 (0)8 7217207
-> > 125 82 Stockholm Sweden  http://eriweb.ericsson.se
-> > 
-> > 
-> > 
-> > 
-> 
-> 
-> ------------- End Forwarded Message -------------
-> 
-> 
-> David Andrew                Tel:  781-442-2316   Internal:   22316
-> Market Development Engineer - I/O Technologies   FAX:  781-442-1520	
-> Sun Microsystems, 1 Network Drive - M/S UBUR01-203,   Burlington, MA 01803	 
-> e-mail:  david.andrew@sun.com
-> 
-> 
+Later,
+David S. Miller
+davem@redhat.com
