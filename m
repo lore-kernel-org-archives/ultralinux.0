@@ -1,7 +1,7 @@
 From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Mon, 16 Nov 1998 06:48:58 +0000
+Date: Mon, 16 Nov 1998 07:57:08 +0000
 Subject: Re: 2.1.126 still no sparc64 autofsu
-Message-Id: <marc-linux-ultrasparc-91123103802894@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91123103602888@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91107863319189@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91107863319189@msgid-missing>
@@ -10,21 +10,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> Problem is that autofs passes an "unsigned long" in the ioctl()
-> *argument*, not in a structure; 
+> 
+>    From: "H. Peter Anvin" <hpa@transmeta.com>
+>    Date: Sun, 15 Nov 1998 15:49:21 -0800 (PST)
+> 
+>    Problem is that autofs passes an "unsigned long" in the ioctl()
+>    *argument*, not in a structure; also it passes data to the daemon via
+>    a packetized protocol on a pipe.
+> 
+> Ok, we have a similar issue for rtnetlink on sparc64 running 32-bit
+> binaries.  That piece is so complex that I've decided to tell people
+> for now to wait until we have a 64-bit userland if they want to run
+> programs like gated :-)
+> 
+> I looked at this patch, and it occurs to me, why to make it an
+> unsigned long ever?  For one thing this wait_queue_token seems to be
+> set by an int counter (autofs_next_wait_queue).
 
-That's no problem. In fact, 32bit syscall entry code zero extends already in
-assembly, so handling this is really a nop.
-
-> also it passes data to the daemon via
-> a packetized protocol on a pipe.
-
-That's the only problem I'd have with autofs and that's why it was not
-working. I was thinking about overriding the f_ops of the pipe file
-descriptor, so that it points to a special write method which would do the
-conversion of the structure before sending it over the pipe, but your
-autofs_wqt_t patch is of course much better, as it does not need additional 
-code and complexity. Thanks.
+I guess probably just for alpha compatibility. So the best would be to use a
+u32 everywhere and have a special case for alpha - u64 - to keep it binary
+compatible.
 
 Cheers,
     Jakub
