@@ -1,33 +1,26 @@
-From: Tethys <tethys@ml.com>
-Date: Wed, 20 May 1998 16:17:16 +0000
-Subject: Upgrade from RH4.2?
-Message-Id: <marc-linux-ultrasparc-90222356531058@msgid-missing>
+From: Lencses Gabor <lgaby@mail.euroweb.hu>
+Date: Tue, 05 May 1998 09:57:47 +0000
+Subject: updates
+Message-Id: <marc-linux-ultrasparc-90222356530966@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hi!
 
-It is possible to upgrade from RedHat 4.2 to UltraPenguin? I need
-to use my machine on a day to day basis for work, and don't want
-to risk a complete reinstall. However, some things about RH4.2 are
-proving to be a real problem -- the lack of a working gdb springs
-to mind. I've recompiled from source, too, but that still doesn't
-fix it. There are other problems too (e.g., buggy X server that I
-can't debug due to 1. lack of time and 2. lack of a  debugger!)
+The kernel update rpm [kernel-2.1.99-1.sparc64.rpm] needs a lilo in it's
+spec files. :) Or at least it should not remove the old kernel.
 
-Will the change from libc5 to glibc2 be enough to make an upgrade
-more hassle than it's worth?
+Regards
+LGaby
 
-It's an SS20/HyperSparc with dual CG6 framebuffers. I'll probably
-wait for ultrapenguin-devel to become ultrapenguin-current, first
-(assuming it doesn't take too long!).
+ps. joe still has minor term flaws. as with the older redhat packages,
+it's status lines are white on black, instead of black on white. It's ok
+on RH5-i386 or if you set an older term like vt100. I know it's joe bug,
+but I forgot who ironed it out in RH-i386. 
 
-Tet
+yeah, I am maximalist. :)
 
--- 
-``Live free or die; death is not the worst of evils'' - General George Stark
---------------------+--------------+----------------------------------------
-tethys@ml.com       |  Micro$oft:  | Linux,  the choice of a GNU generation.
-tet@astradyne.co.uk | Just say no! | See http://www.uk.linux.org for details
+and sadly don't play paintball...
