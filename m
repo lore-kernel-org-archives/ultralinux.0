@@ -1,22 +1,32 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Fri, 30 Nov 2001 22:29:25 +0000
-Subject: Re: openssh 3.0.1 rpm for sparc (redhat 6.x)
-Message-Id: <marc-linux-ultrasparc-100715958517222@msgid-missing>
+From: "Sean Elble" <S_Elble@yahoo.com>
+Date: Thu, 01 Nov 2001 01:56:55 +0000
+Subject: Re: for help
+Message-Id: <marc-linux-ultrasparc-100457991129356@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-100679315520732@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-100679315520732@msgid-missing>
+References: <marc-linux-ultrasparc-100457925428107@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-100457925428107@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="windows-1254"
+Content-Transfer-Encoding: base64
 To: ultralinux@vger.kernel.org
 
-   From: "Stephan van Hienen" <ddx@a2000.nu>
-   Date: Fri, 30 Nov 2001 16:06:12 +0100
-
-   > Run "sparc32 bash" before building the rpm.
-   
-   Thnx, that fixed the problem
-   
-   P.s. why can I rebuild a lot of src.rpms witouth this ?
-
-Because we lack a 64-bit build environement on many distributions.
+SXQgc291bmRzIGFzIHRob3VnaCB0aGF0IHRoZSBrZXJuZWwgdGhhdCBSZWQgSGF0IHNoaXBwZWQg
+d2l0aCA2LjIgZG9lc24ndApzdXBwb3J0IHRoZSBTQ1NJIGNvbnRyb2xsZXIgdGhhdCB5b3VyIEUz
+NTAwIGhhczsgeW91IG1pZ2h0IG5lZWQgdG8gbWFrZSBhCmN1c3RvbSBib290IGRpc2ssIGFuZCBi
+b290IGZyb20gdGhhdCBmb3IgdGhlIGluc3RhbGwuIEhvcGUgdGhhdCBoZWxwcy4KCi0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClNlYW4gUC4gRWxibGUKRWRp
+dG9yLCBXcml0ZXIsIENvLVdlYm1hc3RlcgpSZWFjdGl2ZUxpbnV4LmNvbSAoRm9ybWVybHkgTWF4
+aW11bUxpbnV4Lm9yZykKaHR0cDovL3d3dy5yZWFjdGl2ZWxpbnV4LmNvbS8KZWxibGVzQHJlYWN0
+aXZlbGludXguY29tCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tCgotLS0tLSBPcmlnaW5hbCBNZXNzYWdlIC0tLS0tCkZyb206IDx3YW5neWFuZ0BqZWVnby5j
+b20+ClRvOiA8dWx0cmFsaW51eEB2Z2VyLmtlcm5lbC5vcmc+ClNlbnQ6IFdlZG5lc2RheSwgT2N0
+b2JlciAzMSwgMjAwMSA5OjQxIFBNClN1YmplY3Q6IGZvciBoZWxwCgoKPiBoZWxsbywKPiB3aHkg
+SSBhbSB0b2xkIFwiY2Fubm90IGZpbmQgbWVkaWEgdG8gaW5zdGFsbCB0aGUgc3lzdGVtXCIgZHVy
+aW5nCj4gaW5zdGFsbGluZyBSZWRIYXQgTGludXggNi4yIGZvciBTVU4gRTM1MDA/Cj4gdGhhdCBt
+ZWFucyBjYW5ub3QgZmluZCBoYXJkZGlzayxidXQgaGFyZCBkaXNrIGhhcyBubyBwcm9ibGVtcwo+
+IGJlY2F1c2Ugc29sYXJpcyBvbiBpdCB3b3JrcyB3ZWxsLgo+Cj4KPiBiZXN0IHJlZ2FyZHMKPgo+
+IHdhbmd5YW5nCj4KPgo+IE6ycnmasrZ2lrpuiZaWxoV3arG2jqKBej+K3pmo6K0/P9+hq2G22n/+
++B6uR6ud6Wg/5mo6K3aJqIp36IbZpQoKLQpUbyB1bnN1YnNjcmliZSBmcm9tIHRoaXMgbGlzdDog
+c2VuZCB0aGUgbGluZSAidW5zdWJzY3JpYmUgdWx0cmFsaW51eCIgaW4KdGhlIGJvZHkgb2YgYSBt
+ZXNzYWdlIHRvIG1ham9yZG9tb0B2Z2VyLmtlcm5lbC5vcmcKTW9yZSBtYWpvcmRvbW8gaW5mbyBh
+dCAgaHR0cDovL3ZnZXIua2VybmVsLm9yZy9tYWpvcmRvbW8taW5mby5odG1sCg==
