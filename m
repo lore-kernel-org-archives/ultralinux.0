@@ -1,25 +1,30 @@
-From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
-Date: Thu, 03 Dec 1998 19:02:14 +0000
-Subject: well it finally crashed
-Message-Id: <marc-linux-ultrasparc-91275514001095@msgid-missing>
+From: Matthew Hawkins <matt@mail.goldweb.com.au>
+Date: Mon, 14 Dec 1998 06:11:54 +0000
+Subject: lwp emulation
+Message-Id: <marc-linux-ultrasparc-91361605107558@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I have been using UltraLinux 1.1 since the day after it was released
-and it finally crashed for the first time.  Here's what happened.
+Hi everyone,
 
-I was using X and running all X clients locally except for Netscape
-which was running on a Solaris box.  Suddenly funny stuff appeared at
-the top of the screen.  I then realized that I was back at a console,
-however I couldn't see anything I typed except that when I moved the
-cursor around it blanked out stuff on the screen.  Here is the error
-message that appeared at the top of the screen in the Linux console
-font.
+To cut a long story short, we got a new UltraSPARC, installed UP-1.1, found
+out that our primary application won't run under emulation as lwp isn't
+implemented (yet), so now we're considering doing the port in our (ha!) spare
+time (the mentality goes something like "I'll do anything to finally rid this
+machine of Solaris" ;)
 
-128.155.65.24 sent an invalid ICMP error to a broadcast.
+At Jakub's suggestion we are going the way of reimplementing the Solaris
+threads libraries (well, the API) to do things the Linux (POSIX?) way.
+
+I just wanted some feedback as to what others felt about this little project
+and any suggestions/ideas you might have (all of us are newbie sparc people
+from the dark side (Intel;)) - oh, and is anybody else genuinely interested in
+having this support?
+
+Thanks,
 
 -- 
-Ryan
+Matt                                                  http://www.topic.com.au/
