@@ -1,27 +1,23 @@
-From: Keith Owens <kaos@sgi.com>
-Date: Mon, 04 Feb 2002 02:48:10 +0000
-Subject: Re: Announce: kdb v2.1 is available for kernel 2.4.17
-Message-Id: <marc-linux-ultrasparc-101279090706741@msgid-missing>
+From: "Holzrichter, Bruce" <bruce.holzrichter@monster.com>
+Date: Fri, 15 Feb 2002 19:41:05 +0000
+Subject: 2.5.5pre1 changes.....
+Message-Id: <marc-linux-ultrasparc-101380206631112@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Well,
 
-Content-Type: text/plain; charset=us-ascii
+I was trying to get 2.5.5pre1 to boot on my Ultra5...
 
-Thanks to Ethan Solomita and Tom Duffy, kdb is now supported on
-sparc64.  ftp://oss.sgi.com/projects/kdb/download/v2.1, use the latest
-common patch plus the latest sparc64 patch.
+  No such luck, anyone have luck with this one?  
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.0.4 (GNU/Linux)
-Comment: Exmh version 2.1.1 10/15/1999
+I see that they have changed switch_to() in scheduler from three arguments
+to two.  I don't see the relevant changes to the asm-sparc64 include files.
+That's a bit beyond my talent to look at.  Anyone checking these changes
+out?  Not sure how to proceed with making changes to these files...
 
-iD8DBQE8XfZoi4UHNye0ZOoRAqxIAJ9kB7P8vniG9mNp/3sktiqqvN4rZgCeOTc7
-gmnGuh3JkHfyRj0ruEpcczs=Ook0
------END PGP SIGNATURE-----
-
+Thanks,
+Bruce H.
