@@ -1,7 +1,7 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Fri, 11 Dec 1998 10:10:47 +0000
+From: Peter Jones <pjones@redhat.com>
+Date: Mon, 14 Dec 1998 16:57:55 +0000
 Subject: Re: How do I compile the kernel?
-Message-Id: <marc-linux-ultrasparc-91345163418249@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91366144128662@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91337098916875@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91337098916875@msgid-missing>
@@ -10,14 +10,16 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+On Fri, 11 Dec 1998, David S. Miller wrote:
 
-You need to use CVS, read:
+> 
+> You need to use CVS, read:
+> 
+> ftp://vger.rutgers.edu/pub/Linux/README.CVS
 
-ftp://vger.rutgers.edu/pub/Linux/README.CVS
+ftp://vger.rutgers.edu/pub/linux/README.CVS even.
 
-for how to do that.  We are out of sync with the normal Linux-2.1.x
-tree once again until I remerge our latest stuff with him.
+ -- Peter
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+The object of war is not to die for your country but to make the
+  other bastard die for his. --Gen. George Patton (1885-1945)
