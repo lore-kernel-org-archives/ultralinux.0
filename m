@@ -1,30 +1,29 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Thu, 22 Oct 1998 16:57:17 +0000
-Subject: Stable kernel RPMS
-Message-Id: <marc-linux-ultrasparc-90907595015836@msgid-missing>
+From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
+Date: Wed, 14 Oct 1998 19:18:36 +0000
+Subject: installation trouble
+Message-Id: <marc-linux-ultrasparc-90843265407437@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+I have tried to install UltraLinux over the network with a "boot net"
+command but have had no success.  When I type "boot net" the computer
+begins to download the "tftpboot.img" and then begins to boot the
+kernel, however it hangs part way through.  This is where it dies.
 
-I've made new kernel rpms, at the moment for sparc64 ('cause sparc32 compile
-still goes on). You can get it temporarily from
-ftp://ultra.linux.cz/OS/Linux/Sparc/ultrapenguin-1.0.9/contrib/misc/kernel*.rpm
-All the corruptions should be gone in those, please tell us if that is not
-the case.
-Boot images will be there on monday/tuesday, as I'm now leaving for two days
-for a polish linux conference.
-Enjoy.
+Sparc Zilog8530 serial driver version 1.20
+Kernel panic: zilog: address property
+Press L1-A to return to the boot prom
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.125 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+...but at this point the computer is frozen solid and a message in the 
+normal console font reads...
+
+WHOOPS: proplen for address was -1, need multiple of 4
+
+I have an Ultra 2 Creator 3D.
+Does anyone have any suggestions?
+
+Thanks in advance,
+Ryan
