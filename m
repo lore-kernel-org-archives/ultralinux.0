@@ -1,7 +1,7 @@
-From: Edwin Kremer <edwin@cs.uu.nl>
-Date: Wed, 11 Nov 1998 10:05:36 +0000
+From: David Van Beveren <dvb@eis.com>
+Date: Wed, 11 Nov 1998 22:52:03 +0000
 Subject: Re: UltraPenguin 1.1 release
-Message-Id: <marc-linux-ultrasparc-91079274005361@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91084812430940@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91031051111669@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91031051111669@msgid-missing>
@@ -10,27 +10,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Tue, Nov 10, 1998 at 01:06:24PM -0500, Peter Jones wrote:
+> I've just completed a mirror of that one, excluding the SRPMS for the
+> time being, at:
+>
+>         ftp://ftp.cs.uu.nl/mirror/Linux/UltraPenguin/ultrapenguin-1.1/
 
-  : Maybe I'm just not paying enough attention, but whats the full URL for
-  : that?  I'm unable to find it on the FTP site.
+Are there other mirrors (preferrably US) available. We are having a terrible time
+maintaining an ftp connection (from our T1) to .cz and cannot locate any local
+(North America, US preferred) mirror, or any mirror at all for that matter.
 
-The main web page is at
-	http://ultra.penguin.cz/
+Thanks in advance,
 
-learn from there that the 1.1 release ftp url is
-	ftp://ultra.linux.cz/OS/Linux/Sparc/ultrapenguin-1.1/
-
-
-I've just completed a mirror of that one, excluding the SRPMS for the
-time being, at:
-
-	ftp://ftp.cs.uu.nl/mirror/Linux/UltraPenguin/ultrapenguin-1.1/
-
-
-Best regards,
-
--- 
-Edwin H. Kremer, systems- and network administrator.          <edwin@cs.uu.nl>
-Dept. of Computer Science,  Utrecht University, The Netherlands  [WHOIS: ehk3]
--------------------- http://www.cs.uu.nl/people/edwin/ -----------------------
+dvb
