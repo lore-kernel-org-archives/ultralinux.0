@@ -1,33 +1,33 @@
-From: Jakub Jelinek <jakub@redhat.com>
-Date: Mon, 07 Feb 2000 21:35:24 +0000
-Subject: Re: Sun Ultra80
-Message-Id: <marc-linux-ultrasparc-94995983511321@msgid-missing>
+From: "Pat O'Rourke" <orourke@missioncriticallinux.com>
+Date: Fri, 11 Feb 2000 17:08:10 +0000
+Subject: serial console
+Message-Id: <marc-linux-ultrasparc-95030299721929@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-94994968400721@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-94994968400721@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Mon, Feb 07, 2000 at 10:49:16AM -0800, Ric Tappero wrote:
-> Installed RedHat 6.1 on Sun Ultra80 with 4 processor and 2GB RAM with Elite3d
-> graphics card. When using Gnome/Enlightenment redraw is about
-> 1/8 the speed of a Pentium II 300Mhz. For debugging purposes, in
-> installed same on Sun Ultra 10 with single 333 Mhz and Creator 3d card 
-> and it runs fine.
-> 
-> I am suspecting an issue with the Elite3d, any pointers or ideas welcome.
+I have an Ultra-1 clone whose console is redirected to the serial port,
+Console: ttyS0 (SAB82532), however it is only working intermittently when
+linux boots.  By "working" I mean no output is seen, nor is any input
+possible.
 
-Yes, it is an issue with Elite3d. It can be mostly fixed by downloading
-firmware to the card, but we have still no permission to package that
-firmware in Linux.
-If you have Solaris Elite3d packages, then you can check out afs module from
-vger CVS (which is the firmware loader) and extract firmware from Solaris.
+Messages sent directly to the prom seem okay, i.e. at the'ok' prompt or via
+prom_printf() calls.  I tried various incantations of the serial= option to
+noavail.  This problem is only when linux is booted, if I shutdown the OS
+the console comes back and I can interact with OBP.
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jakub@redhat.com | http://sunsite.mff.cuni.cz/~jj
-Linux version 2.3.42 on a sparc64 machine (1343.49 BogoMips)
-___________________________________________________________________
+It seems that if I power cycle the machine the serial console will work,
+but on subsequent reboots it does not.  Has anyone else encountered this?
+The behavior is the same whether I am booting a 2.2.x or 2.3.x kernel.
+
+Any suggestions would be greatly appreciated.
+
+Thanks in advance,
+
+Pat
+
+-- 
+Patrick O'Rourke
+orourke@missioncriticallinux.com
