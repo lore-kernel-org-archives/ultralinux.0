@@ -1,31 +1,63 @@
-From: Joe_Pfaltzgraff@patapsco.com
-Date: Mon, 08 Jan 2001 19:15:08 +0000
-Subject: Segmentation Fault in mke2fs
-Message-Id: <marc-linux-ultrasparc-97898135230465@msgid-missing>
+From: Eric <ebrower@usa.net>
+Date: Thu, 25 Jan 2001 12:46:35 +0000
+Subject: Re: [Re: [Re: Linux Status for Sun Netra T1 200 ]]
+Message-Id: <marc-linux-ultrasparc-98045569732543@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hmm.  It seems the new Netra (200) is significantly different
+from the (100) model.  Whereas the 100 is based upon the CP1500
+boardset, the 200 is probably closer to the AXe boardset.
+
+Anyhow, I'd be interested in seeing the prtconf.  The LOM 
+looks interesting.
+
+E
+
+Eric <ebrower@usa.net> wrote:
+"David S. Miller" <davem@redhat.com> wrote:
+
+> Michael Pruznick writes:
+
+>>   For deployment, stand alone boot will be required.  Will the f/w let
+>>   me boot from a local scsi disk?  What about user flash?  Will f/w let
+>>   me store/boot an initrd kernel image from a flash device?
+
+> What do you mean by "user flash"?  There is no place to burn a flash
+> outside of the OBP firmware image itself.
+
+The Netra t1 boardset is very similar (if not identical) to the
+CompactPCI CP1500 boardset, which contains two userflash devices
+with 4MB each.  I am currently looking into support for the userflash devices
+on the CP1500, so I assume this would work for Netra as well.
+In the interim, you might be able to hack the jsflash driver for 
+userflash, but I am investigating support via the MTD subsystem.
+
+Aside from the current work on userflash, the CP1500 is fully supported.
+Unfortunately, SMCC seems to have a 'flavor of the week' approach to
+OBP device node naming, unlike SME, so I'd bet much of Netra t1 can 
+be supported with a little hand-waving in the current drivers.
+
+Once you get the box, please send me (offline) the output from 
+'prtconf -pv' under Linux to satisfy my curiosities.
+
+E
 
 
 
 
-Joe Pfaltzgraff@PATAPSCO
-01/08/2001 02:15 PM
-
-I am trying to install RedHat 6.2 on a SparcStation 5.  When ever I try to run
-mke2fs to format the Linux partition, it goes for a little bit, and then exits
-saying "Segmentation fault"  I've tried everything that I can think of.  It is a
-IBM 2GB drive.  Please let me know any ideas that you might have to remedy my
-situation...
-
-Thanks,
-Joe Pfaltzgraff
-IT Dept.
+____________________________________________________________________
+Get free email and a permanent address at http://www.netaddress.com/?N=1
+-
+To unsubscribe from this list: send the line "unsubscribe ultralinux" in
+the body of a message to majordomo@vger.kernel.org
 
 
+____________________________________________________________________
+Get free email and a permanent address at http://www.netaddress.com/?N=1
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
