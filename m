@@ -1,7 +1,7 @@
-From: Stephan van Hienen <ddx@cable.a2000.nl>
-Date: Tue, 07 Jul 1998 07:39:36 +0000
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Tue, 07 Jul 1998 10:46:25 +0000
 Subject: Re: UltraPenguin109 + Ultra5 = Bad
-Message-Id: <marc-linux-ultrasparc-90222358531004@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531006@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531001@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531001@msgid-missing>
@@ -10,15 +10,24 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Mon, 6 Jul 1998, David.Andrew wrote:
-
-> Hi Ken,
 > 
-> The latest open boot prom version is 3.11.9.  Send me a note if you would like
-> to update your OBP to the latest version.  I'll let the Linux technical guys
-> address the rest of the message.
-i have here a sun ultra 10 
-also with open prom 3.11.6
+> Quoting Jakub Jelinek (jj@sunsite.ms.mff.cuni.cz):
+> [ .. ]
+> > I cannot give you latest kernel from CVS, as the console stuff rewrite is
+> > not finished yet.
+> > 
+> Any idea when we will be able to again compile a kernel from the CVS tree ?
 
-what is better with 3.11.9 ? 
-and how to get an update
+It is possible, and it will run just fine with Creator console or PROM
+console. CG6 is broken right now, mach64 and the rest of SBUS drivers are
+not written yet.
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.107 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
