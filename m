@@ -1,30 +1,44 @@
-From: "R. Marc" <rmarc@dimension.net>
-Date: Tue, 19 May 1998 22:50:36 +0000
-Subject: Re: List archives ?
-Message-Id: <marc-linux-ultrasparc-90222356531053@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Wed, 13 May 1998 17:10:41 +0000
+Subject: Wrong 'w' and 'ps' (bug in procps?)
+Message-Id: <marc-linux-ultrasparc-90222356531022@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356531047@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356531047@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> I couldn't find an archive for this list. Didn't I looked hard
+hi just installed 1.0.9
+and now this 'bug' ?
 
-In response to this, I've hacked together a quick archive using the messages
-I have saved.  I do this since I've looked for an archive myself.
+:
 
-If anyone has a mailbox with all the entries in this list and could
-tar, gzip and mail 'em to me, I can have a more complete archive
-available.
+[ddx@sun ddx]$ w
+  6:07pm  up 16:51,  4 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU  WHAT
+root     tty9                       6:59am 11:06m  0.00s   ?     -
+ddx      ttyp0    ddx.ml.org        8:25am  1:56m  0.00s   ?     -
+ddx      ttyp1    ddx.ml.org        6:07pm 26.00s  0.00s   ?     -
+ddx      ttyp2    ddx.ml.org        6:07pm  0.00s  0.00s   ?     -
+[ddx@sun ddx]$ ps
+  PID TTY STAT TIME COMMAND
+  655  ?  S    0:00 /bin/login -h ddx.ml.org -p
+  656  ?  S    0:00 -bash
+  667  ?  S    0:05 BitchX
+ 1127  ?  S    0:00 login -p -h ddx.ml.org -f ddx
+ 1128  ?  S    0:00 -bash
+ 1147  ?  S    0:00 login -p -h ddx.ml.org ddx
+ 1148  ?  S    0:00 -bash
+ 1157  ?  R    0:00 ps                           
 
-If this is totally uneccessary and racked with silliness, lemme know and I 
-won't bother maintaining it.  Otherwise, the address is:
+PCPU and the TTY are not logged ok i think
 
-http://ultrapenguin.copacetic.net
+but :
 
-As soon as mysqld runs on UltraPenguin, I'll be moving it to a Ultra Sparc.
-For the time being it's running on my PC :).
+[ddx@sun ddx]$ who
+root     tty9     May 13 06:59
+ddx      ttyp0    May 13 08:25 (ddx.ml.org)
+ddx      ttyp1    May 13 18:07 (ddx.ml.org)
+ddx      ttyp2    May 13 18:07 (ddx.ml.org)     
 
-R. Marc
+gives it ok
