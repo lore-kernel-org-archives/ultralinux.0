@@ -1,7 +1,7 @@
-From: Dave Wreski <dave@nic.com>
-Date: Sat, 14 Nov 1998 05:01:31 +0000
-Subject: RE: where can you get a cd distribution of ultralinux
-Message-Id: <marc-linux-ultrasparc-91107861719129@msgid-missing>
+From: Jes Sorensen <Jes.Sorensen@cern.ch>
+Date: Sun, 15 Nov 1998 10:39:34 +0000
+Subject: Re: where can you get a cd distribution of ultralinux
+Message-Id: <marc-linux-ultrasparc-91112719900349@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91100461132369@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91100461132369@msgid-missing>
@@ -10,10 +10,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+>>>>> "Craig" = Bartelloni, Craig <craigb@seussnt.stratus.com> writes:
 
-On 13-Nov-98 Bartelloni, Craig wrote:
-> where can you get a cd distribution of ultralinux
+Craig> where can you get a cd distribution of ultralinux 
 
-No need to be so descriptive next time.  You can get the image at:
+I think 1.0.9 is part of the Rough Cuts CD from Red Hat, you can find
+it on their Web pages.
 
-ftp://1000e.ms.mff.cuni.cz/private/local/jj/UltraLinux/up11cd/
+Jes
