@@ -1,34 +1,46 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Fri, 09 Feb 2001 16:40:11 +0000
-Subject: Re: a bug in sparc/sparc64: test_bit()?
-Message-Id: <marc-linux-ultrasparc-98173705530908@msgid-missing>
+From: Eric <ebrower@usa.net>
+Date: Fri, 16 Feb 2001 11:36:47 +0000
+Subject: Re: [Netra T1 200 status...]
+Message-Id: <marc-linux-ultrasparc-98235244025411@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-98172782300242@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-98172782300242@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+It is an entirely new boardset, so probably has different
+controllers, etc.  It *might* help to have Solaris prtconf
+output for others to look at, but probably won't be supported
+until one of the 'big guns' gets their hands on one.
 
-Ralf Liesegang writes:
- > if i disassemble the function I see, that the CPU "loop" in: 
- > 
- > #define	tasklet_unlock_wait(t) while (test_bit(TASKLET_STATE_RUN, &(t)->state))
- > 
- > include/asm-sparc64/bitops.h: test_bit() do:
- > 
- > 	return (1UL & (((__const__ long *) addr)[.....]
- > 
+If you can send the output of the failed bootup to the list,
+that would be a good start as well.
 
-The correct fix is to put a memory barrier ("rmb()") in the
-test_bit while loop of tasklet_unlock_wait.
+E
 
-Thanks for pointing this out.
+Valery Brasseur <vbrasseur@laposte.net> wrote:
+I have a Netra T1 200 for a small amount of time... I try to boot RH6.2
+ultralinux on it !
+SILO is loading ok, then the install menu of RH6.2 is display.
+when I select "standard" the kernel is loading... then nothing, machine
+is hang !
 
-Later,
-David S. Miller
-davem@redhat.com
+did someone have an idea ?
+thanks
+valery
+
+-- 
+Valery BRASSEUR                | Phone # +33 320 60 7982 
+Atos Branche Multimedia        | Fax   # +33 320 60 7649
+Ce que vous voyez est tout ce que vous obtenez
+  -- Brian Kernigham
+-
+To unsubscribe from this list: send the line "unsubscribe ultralinux" in
+the body of a message to majordomo@vger.kernel.org
+
+
+____________________________________________________________________
+Get free email and a permanent address at http://www.netaddress.com/?N=1
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
