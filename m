@@ -1,44 +1,46 @@
-From: Kevin Maguire <kmaguire@eso.org>
-Date: Fri, 19 May 2000 12:47:09 +0000
-Subject: Mandrake-7.0 on an Ultra 10
-Message-Id: <marc-linux-ultrasparc-95874068230518@msgid-missing>
+From: franks@plk.af.mil
+Date: Wed, 03 May 2000 16:14:30 +0000
+Subject: Re:
+Message-Id: <marc-linux-ultrasparc-95737119116786@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi
 
-I want to install Mandrake-7.0 on my ultra10.
+------- Forwarded Message
 
-I have Solaris installed on the internal IDE disk, but
-have an external SCSI disk with plenty of space.
+To: "ultralinux@vger.rutgers.edu" <ultralinux@vger.rutgers.edu>
+Subject: Help!! sparc Ultra5 w/ RH6.1 crashing
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Sender: owner-ultralinux@vger.rutgers.edu
+Precedence: bulk
+X-Loop: 	majordomo@vger.rutgers.edu
+X-Orcpt: rfc822;ultralinux-outgoing
 
-I have a bootable CD, and I can boot from it from the OK prompt.
+I have an Ultra5 that hangs every 2 weeks or so for no reason (that's
+clear to me...)
 
-But the graphical installer fails, and when I try a text install
-it doesn't give me an option of "fdisk"-ing the scsi disk, just the IDE one.
+(deletia...)
 
-Ideas and/or suggestions
+The only log entries in any of the logs during the time just before the
+last crash was someone probing our ftp server (proftpd 1.2.0pre10) Is
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    could you elucidate on this in more detail?
 
-I used this ISO file
+there any script kiddie methods of bringing down the box that I haven't heard
+of?
 
-ls -l *.iso
--rw-r--r--   1 root     other    679903232 Apr  4 13:23 mandrake70.usparc.iso
+( more deletia...)
 
-Thanks
-Kevin
-                         \\\|///
-                       \\  - -  //
-                        (  @ @  )
-+---------------------oOOo-(_)-oOOo-------------------------+
-| Kevin Maguire                                Unix Support |
-| kmaguire@eso.orgk           European Southern Observatory |
-| Tel:+49 (0)89 3200 6387      Karl-Schwarzschild-Strasse 2 |
-| Fax:+49 (0)89 3200 6380     D-85748 Garching bei Muenchen |
-+-----------------------------Oooo--------------------------+
-                       oooO   (   )
-                      (   )    ) /
-                       \ (    (_/
-                        \_)
+------- End of Forwarded Message
+
+ed
+
+-- 
+  Ed Franks                      |  Contracted to :    
+  SysAdmin - Solaris/SunOS/Linux |    CIO Office    
+  UNISYS Federal Systems         |    Air Force Research Lab
+  Albuquerque, NM                |    Kirtland AFB
