@@ -1,59 +1,57 @@
-From: Steve Dunham <dunham@cse.msu.edu>
-Date: Thu, 29 Apr 1999 21:02:27 +0000
-Subject: Debian 2.1 is Available for Sparc and UltraSparc
-Message-Id: <marc-linux-ultrasparc-92542351018174@msgid-missing>
+From: Andrew Mansfield <andrzejm@netnet.net>
+Date: Wed, 14 Apr 1999 03:48:01 +0000
+Subject: kswapd eating CPU cycles after upgrade to 2.2.5
+Message-Id: <marc-linux-ultrasparc-92406838615128@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+I've been having troubles with the new 2.2.5 kernel on my Sparc 10.
+I recently installed RH 5.2 and updates after I somehow corrupted the
+boot area on my hard disk and wiped out my older 5.1 install forcing
+me to wipe the disk and start from scratch..
 
-I was asked by the guy who usually does Debian Announcements (Nils
-Lohner) to post to let people on these lists know that the latest
-Debian release (2.1) includes support for Sparc and UltraSparc
-systems.  (Some of you may have noticed the Ultra5 at Debian's booth
-at LinuxWorldExpo - graciously provided by Sun Microsystems.)
+I'm using the stock 2.0.35 kernel and downloaded the 2.2.5 kernel srpm
+from the UP 1.1.9 distribution along with the UP mod-utils, net-cfg
+and util-linux rpms from the UP ftp site mirror at rpmfind.net. I want
+to upgrade to a 2.2.x kernel as it seemed to solve a number of
+problems for me and run better when I upgraded to a 2.2.3 version
+before my aforementioned disk troubles.
 
+I configured and compiled the kernel and booted into it. It seemed to
+be much slower causing the console to hesitate during keyboard entry
+when I logged in and started X (which crashed..)
 
-This was be the first official release to include Sparc support
-(released on March 9, 1999).
+I noticed that kswapd was the most active process, eating up somewhere
+between 20%-50% CPU time.. This seemed to be the cause of the trouble
+as it is hardly noticeable when running the stock kernel. I tried to
+upgrade to a newer net-tools (1.51) from the Rawhide directory but it
+dumped core and fouled up all the network processes (eg hostname
+didn't work, etc..) which I believe was caused by using a different
+compiler version? The net-tools-1.51 srpm didn't want to rebuild as it
+got hung up on the man pages (the last thing in the rebuild
+process..!) so I ended up using the UP one but I still get the same
+kswapd problem..
 
-Relevant Info:
+I noticed ipchains and some other things weren't in the UP directory,
+as well as the newer recommended versions of the utility packages
+which were required to upgrade to 2.2.x.. The UP ones seem to be
+slightly older
 
-   Debian Home page is:  http://www.debian.org
- Release Notes for 2.1:  http://www.debian.org/releases/stable/
- (incl. install manual, pointers to numerous mirrors and CD vendors)
-       Sparc Port Page:  http://www.debian.org/ports/sparc/
+Can I use the UP 1.1.9 rpms with my RH 5.2 install like I have done?
 
-Install help and general Debian help is usually available in the
-#debian channel on irc.debian.org.  (For general Linux and/or RedHat
-stuff, try #linpeople.)  
+Any ideas on what might be causing the kswapd process to eat up CPU?
 
-The sparc mailing list is "debian-sparc@lists.debian.org".
+What packages do I need to compile and run a new kernel?
 
+Thanks,
 
-Why use Debian?  To put it simply: we have lots of stuff.  The 2.1
-distribution for the Sparc has about 1500 packages and takes up 2
-binary and 2 source CDs.  
+Andrew Mansfield
 
-You will find that what we don't have is KDE, and Gnome 1.0, while
-available, is not in the 2.1 distribution (same goes for the newer
-3.3.3.1 X servers).  (They are in staging areas and will soon be put
-into the current developmental distribution.)
+-- 
+			E Pluribus Unix.
 
-
-If you do find the time try it out, you will learn that both Debian
-and RedHat have their own strengths and weaknesses and will be able to
-choose the right one for your needs.  (I use both RH and Debian at
-work - depending on the situation.)  At the very least, you'll be able
-to use up some of that spare time that you've been wondering what to
-do with.
-
-
-(I'd also like to thank David Miller and Jakub Jelinek for all the
-work they've done getting Linux to run on the UltraSparc.)
-
-
-Steve Dunham
-dunham@cse.msu.edu
+"The hope that springs eternal, springs right up your behind."
+		Ian Dury and the Blockheads
