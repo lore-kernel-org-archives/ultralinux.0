@@ -1,49 +1,32 @@
-From: David Van Beveren <dvb@eis.com>
-Date: Fri, 08 Jan 1999 20:33:11 +0000
-Subject: Dual-Boot Solaris/Linux
-Message-Id: <marc-linux-ultrasparc-91593068425848@msgid-missing>
+From: * Andre <aniljin@usa.net>
+Date: Wed, 13 Jan 1999 17:32:45 +0000
+Subject: UltraPenguin Setup
+Message-Id: <marc-linux-ultrasparc-91623183500039@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-We have the 1.1.9 release as of 12-30-98, and have successfully
-installed from Bootable CDROM and via NFS + Boot Floppy. Both
-installations have the same issue.
+Dear sirs!
+I have problems with installation UltraPenguin on SPARCstation1+.
+I have SUN SPARCstation1+ (RAM 16 Mb, HDD 1.3Gb, GX) and UltraPenguin 1.1.
+When there is an installation of packages the computer works very slowly (I
+can't wait the ending of process of installation and I terminated it). The
+system shows the messages on the screen monitor:
 
-Solaris 2.6 is installed on a separate disk, and when we get to the
-bootloader screen, we select /dev/sda1 as a desired alternate boot
-device, and label it "SOLARIS2.6". The next screen says "mount failed".
-We then clear the label on the laternate boot device, so linux is the
-only selected device, and get the same error. The bottom line is we
-cannot successfully get through the boot loader screen when the Solaris
-disk is present.
+     <4> EXT2-fs warning: checktime reached, running e2fsck recommended
+	 UFS: Mounted root (ext2 filesystem).
+	 Portmap: RPC call returned error 61.
+	 RPC: task of released request still quened!
+	 RPC: (task is on xprt_pending).
+	 Lockd _ up: makesock failed, error = -61.
 
-When I disconnect the Solaris disk altogether, installation works fine.
+RedHat 5.2 was installed OK.
 
-Is this a known problem? We would manually set up the silo.conf file,
-but it seems that man page is missing, and we do not have a reference
-point.
+Sincerely,
+Andre.
 
-Does someone have a silo.conf with the same or a similar configuration
-that we can start from, and detailed silo.conf documentation?
 
-I would also be interested in a silo.conf file with both Solaris and
-Linux on the same disk.
-
-Configuration is:
-Ultra AXi motherboard
- Onboard SCSI
-  Toshiba 32X SCSI CD
-  Seagate ST34573W 4.5GB Barracuda for Solaris
-  Seagate ST39173W 9.1GB Barracuda for Linux
- Mach64 video
-Sun kbd/mouse
-333MHz CPU
-256MB RAM
-
-Thanks in advance to all.
-
-David Van Beveren
-EIS Computers, Inc.
+____________________________________________________________________
+Get free e-mail and a permanent address at http://www.netaddress.com/?N=1
