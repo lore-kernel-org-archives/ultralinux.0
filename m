@@ -1,24 +1,30 @@
-From: Kenneth Preslan <kpreslan@lcse.umn.edu>
-Date: Tue, 07 Jul 1998 16:51:52 +0000
-Subject: UltraPenguin109 + Ultra5 = GettingBetter
-Message-Id: <marc-linux-ultrasparc-90222358531008@msgid-missing>
+From: Rajesh Vaidheeswarran <rv@fore.com>
+Date: Thu, 02 Jul 1998 15:42:44 +0000
+Subject: SILO problems with UltraPenguin on a SparcStation 2
+Message-Id: <marc-linux-ultrasparc-90222358530990@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Thanks to Jakub Jelinek's suggestion and David Andrew's OBP upgrade I have
-2.1.106 booting ok on my Ultra 5.  It now panics looking for a root 
-filesystem.
+Hi,
 
-My new question is how do I package this new kernel together with a root
-filesystem to install from.  The new kernel doesn't appear to be able
-to do nfsroot, and it doesn't recognize the SCSI disk I attached to the
-machine.
+I just loaded the latest ultrapenguin distribution from 
+sunsite.unc.edu and when the installation gets to the point
+of loading SILO, it fails with "Resource Busy". 
 
-Any suggestions on what I should do next?
+One more piece of history: I had previously installed the
+4.2 Redhat code on that machine without problems. SILO in 4.2
+had problems though, but trying to boot "boot linux" usually
+succeeded form then open prom.
 
-Thanks,
+Currently, my machine dies after printing SI at the open prom.
 
-Ken
+Anyone seen this before?
+
+Any help will be appreciated a lot.
+
+Thanks in advance
+
+rv
