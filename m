@@ -1,74 +1,96 @@
-From: Eric Brower <ebrower@gmail.com>
-Date: Mon, 04 Apr 2005 18:11:01 +0000
+From: "David S. Miller" <davem@davemloft.net>
+Date: Mon, 04 Apr 2005 19:21:35 +0000
 Subject: Re: Weird Mouse Behaviour with 2.6
-Message-Id: <ec7cefb050404111120b5c75@mail.gmail.com>
+Message-Id: <20050404122135.2cb19553.davem@davemloft.net>
 List-Id: <ultralinux.vger.kernel.org>
+References: <ec7cefb050404111120b5c75@mail.gmail.com>
+In-Reply-To: <ec7cefb050404111120b5c75@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Apr 3, 2005 12:32 PM, Tomas Cernaj <tcernaj@gmx.de> wrote:
-> Am Sonntag, den 03.04.2005, 12:09 +0200 schrieb Tomas Cernaj:
-> > David S. Miller <davem@davemloft.net> wrote:
-> >
-> > [... mouse problem on ultras ...]
-> >
-> > > Yes, there is some problem initializing the serial line that the
-> > > keyboard and mouse use.  The break characters that get detected
-> > > when the baud rate is incorrect are not showing up for some reason.
-> > >
-> > > What kind of machine is this?  It only happens with certain serial
-> > > controllers, not all, which is why your machine type is important.
+On Mon, 4 Apr 2005 11:11:01 -0700
+Eric Brower <ebrower@gmail.com> wrote:
 
-Not sure if this is related, but I've been tracking down serial
-(console) issues on an E250 with 2.6.12rc1, which uses sunsab as the
-console.
+> In tty_ioctl.c tty_wait_until_sent() if the timeout variable is set to
+> zero (which many callers do explicitly) it gets reassigned to
+> MAX_SCHEDULE_TIMEOUT (this is LONG_MAX).  If there are no characters
+> waiting to be sent (!tty->driver->chars_in_buffer(tty)) we drop out of
+> our loop and supply the timeout variable to uart_wait_until_sent
+> (tty->driver->wait_until_sent).  The problem is uart_wait_until_sent
+> is specified with a timeout argument of type int, not long.  This
+> becomes -1 in uart_wait_until_sent, which I don't think is intended. 
+> If your port->timeout value in this function is also zero (as seems
+> the case with sunsab), this seems doubly bad and leads to massive
+> mdelay times in uart_wait_until_sent.  This will appear to you as a
+> hung getty.
 
-I can't claim I fully understand the new serial/console code yet, but
-the following seems broken:
+Good catch.  That third argument should be "unsigned long timeout"
+indeed.  I've pointed this out in private email to Russell, Linus
+and Andrew.
 
-In tty_ioctl.c tty_wait_until_sent() if the timeout variable is set to
-zero (which many callers do explicitly) it gets reassigned to
-MAX_SCHEDULE_TIMEOUT (this is LONG_MAX).  If there are no characters
-waiting to be sent (!tty->driver->chars_in_buffer(tty)) we drop out of
-our loop and supply the timeout variable to uart_wait_until_sent
-(tty->driver->wait_until_sent).  The problem is uart_wait_until_sent
-is specified with a timeout argument of type int, not long.  This
-becomes -1 in uart_wait_until_sent, which I don't think is intended. 
-If your port->timeout value in this function is also zero (as seems
-the case with sunsab), this seems doubly bad and leads to massive
-mdelay times in uart_wait_until_sent.  This will appear to you as a
-hung getty.
+uart_update_timeout() calls done by the driver (in this case sunsab.c)
+should be updating the port->timeout value properly.  Indeed, sunsab.c
+fails to call uart_update_timeout() at all.
 
-My current workaround, until i understand the lay of the land a bit
-better, is the following.  I'd wager the better bet is to modify
-uart_wait_until_sent to take a "long" (or unsigned long) argument for
-timeout rather than an "int" arg.  This works on x86 only as a
-side-effect.
+Hmmm, I wonder if the port->uartclk we use in sunsab.c needs to be
+multiplied by 16, like sunsu.c does.
 
-=== tty_ioctl.c 1.19 vs edited ==--- 1.19/drivers/char/tty_ioctl.c       2005-01-10 17:29:36 -08:00
-+++ edited/tty_ioctl.c  2005-04-01 16:14:31 -08:00
-@@ -58,8 +58,10 @@
-                set_current_state(TASK_INTERRUPTIBLE);
-                if (signal_pending(current))
-                        goto stop_waiting;
--               if (!tty->driver->chars_in_buffer(tty))
-+               if (!tty->driver->chars_in_buffer(tty)) {
-+                       timeout = 0;
-                        break;
-+               }
-                timeout = schedule_timeout(timeout);
-        } while (timeout);
-        if (tty->driver->wait_until_sent)
+Anyways, this patch below should be a step in the right direction.
 
-To complicate things, my GCC [gcc (GCC) 3.3.5 (Debian 1:3.3.5-5)] 
-doesn't seem to properly initialize char_time to 0 with the syntax
-"unsigned long char_time, expire;" in uart_wait_until_sent() or
-something is getting trashed (I've not investigated that much yet).
-
-Like I said, I don't quite understand the new serial subsystem yet,
-but it seems like a lot of side-effects are in play.
-
--- 
-E
+=== drivers/serial/sunsab.c 1.38 vs edited ==--- 1.38/drivers/serial/sunsab.c	2004-12-08 21:31:16 -08:00
++++ edited/drivers/serial/sunsab.c	2005-04-04 12:17:25 -07:00
+@@ -682,7 +682,8 @@
+ 
+ /* Internal routine, port->lock is held and local interrupts are disabled.  */
+ static void sunsab_convert_to_sab(struct uart_sunsab_port *up, unsigned int cflag,
+-				  unsigned int iflag, int baud)
++				  unsigned int iflag, unsigned int baud,
++				  unsigned int quot)
+ {
+ 	unsigned int ebrg;
+ 	unsigned char dafo;
+@@ -766,6 +767,9 @@
+ 		up->port.ignore_status_mask |= (SAB82532_ISR0_RPF |
+ 						SAB82532_ISR0_TCD);
+ 
++	uart_update_timeout(&up->port, cflag,
++			    (up->port.uartclk / (16 * quot)));
++
+ 	/* Now bang the new settings into the chip.  */
+ 	sunsab_cec_wait(up);
+ 	sunsab_tec_wait(up);
+@@ -784,10 +788,11 @@
+ {
+ 	struct uart_sunsab_port *up = (struct uart_sunsab_port *) port;
+ 	unsigned long flags;
+-	int baud = uart_get_baud_rate(port, termios, old, 0, 4000000);
++	unsigned int baud = uart_get_baud_rate(port, termios, old, 0, 4000000);
++	unsigned int quot = uart_get_divisor(port, baud);
+ 
+ 	spin_lock_irqsave(&up->port.lock, flags);
+-	sunsab_convert_to_sab(up, termios->c_cflag, termios->c_iflag, baud);
++	sunsab_convert_to_sab(up, termios->c_cflag, termios->c_iflag, baud, quot);
+ 	spin_unlock_irqrestore(&up->port.lock, flags);
+ }
+ 
+@@ -880,7 +885,7 @@
+ {
+ 	struct uart_sunsab_port *up = &sunsab_ports[con->index];
+ 	unsigned long flags;
+-	int baud;
++	unsigned int baud, quot;
+ 
+ 	printk("Console: ttyS%d (SAB82532)\n",
+ 	       (sunsab_reg.minor - 64) + con->index);
+@@ -926,7 +931,8 @@
+ 				SAB82532_IMR1_XPR;
+ 	writeb(up->interrupt_mask1, &up->regs->w.imr1);
+ 
+-	sunsab_convert_to_sab(up, con->cflag, 0, baud);
++	quot = uart_get_divisor(&up->port, baud);
++	sunsab_convert_to_sab(up, con->cflag, 0, baud, quot);
+ 	sunsab_set_mctrl(&up->port, TIOCM_DTR | TIOCM_RTS);
+ 
+ 	spin_unlock_irqrestore(&up->port.lock, flags);
