@@ -1,24 +1,33 @@
-From: David Miller <davem@twiddle.net>
-Date: Wed, 28 Apr 1999 16:07:11 +0000
-Subject: Re: Raid5 on a 450 problem
-Message-Id: <marc-linux-ultrasparc-92531581808759@msgid-missing>
+From: Steve Dunham <dunham@cse.msu.edu>
+Date: Tue, 27 Apr 1999 13:58:08 +0000
+Subject: Mach64 problems in UltraPenguin 1.1.9
+Message-Id: <marc-linux-ultrasparc-92522154306389@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92531492507466@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92531492507466@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: 	Wed, 28 Apr 1999 17:37:03 +0200
-   From: Flavio Pescuma <edtfopa@malmen.ericsson.se>
+Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz> writes:
 
-   Even fdisk doesn't recognize the parameters of the disks which I
-   need to re-enter manually
+> Hi!
+> 
+> Updates in UP1.1.9:
 
-Do not start partitions at cylinder 0 which will be part of a raid,
-begin them at cylinder 1 instead, the same goes for swap partitions.
+> XFree86-3.3.3.1-5	further FFB fixes, Mach64 fixes (requires the above
+> 			kernel), Leo/ZX support (including acceleration).
 
-Later,
-David S. Miller
-davem@redhat.com
+The Mach64 X server is broken (I first tried applying your patches to
+the Debian server, and then tried running your binary with the same results.)
+
+Ther kernel is the latest CVS kernel (numbered 2.2.7).  The card is
+2MB, and I am running the server in 16bit mode. The colors come out
+very wrong, and the cursor is mangled.  (In 8-bit mode, the colors are
+correct, but the cursor is still mangled. - and, yes, the cursor does
+look like it has an endian problem.)
+
+Any ideas?
+
+
+Steve
+dunham@cse.msu.edu
