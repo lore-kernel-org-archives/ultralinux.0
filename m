@@ -1,37 +1,29 @@
 From: "David S. Miller" <davem@redhat.com>
-Date: Tue, 15 Aug 2000 06:59:02 +0000
-Subject: Re: Ultra 5 with 1GB of memory
-Message-Id: <marc-linux-ultrasparc-96632360931274@msgid-missing>
+Date: Tue, 22 Aug 2000 01:09:14 +0000
+Subject: Vger lists have moved
+Message-Id: <marc-linux-ultrasparc-96691402411174@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-96632223129402@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-96632223129402@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: 	Mon, 14 Aug 2000 11:57:09 -0400
-   From: Daniel Bidwell <bidwell@andrews.edu>
 
-   It will not boot with more then 512MB of memory (using the memQ2m
-   boot option).  Anything over that gives a:
+The old lists run at vger.rutgers.edu have been moved to
+vger.kernel.org due to an irrecoverable hard-disk failure of the old
+machine, the lists were planned to be moved anyways.
 
-	   WARNING: not all physical memory mapped in IOMMU
+If you are receiving this email, it means you were subscribed to
+one of the vger Linux mailing lists as of the crash of the old
+system last week.
 
-   The prom-property for "virtual-dma" is c0000000 [20000000] for 512MB.
+You are not subscribed to the new lists at vger.kernel.org, you will
+have to manually re-subscribe yourself.
 
-Right, Linux does not support more than 512MB of physical memory on
-Ultra5/10 in the 2.2.x kernels.
+The new site uses the same mailing list software, Majordomo.  So the
+subscription mechanism is the same as on the old system.
 
-   Does anyone know how to change this to 80000000 [40000000] for 1024MB?
-   Solaris 8 knows how to do this as I have two other machines just like
-   this running Solaris 8.
-
-Solaris is not changing the virtual-dma property, instead it does what
-Linux-2.4.x does, use dynamic dma mapping so that the amount of
-supportable memory is independant of the size of the DMA region.
-
-2.4.x kernels are your only bet if you wish to use all 1GB of memory.
+Thanks for your patience and understanding.
 
 Later,
 David S. Miller
