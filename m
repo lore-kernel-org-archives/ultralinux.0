@@ -1,171 +1,29 @@
-From: <pau@readysoft.es>
-Date: Wed, 15 Sep 1999 07:23:15 +0000
+From: "David S. Miller" <davem@redhat.com>
+Date: Wed, 15 Sep 1999 07:34:04 +0000
 Subject: Re: bug in 2.2.13pre7 on Ultras (more oops)
-MIME-Version: 1
-Content-Type: multipart/mixed; boundary="131399203-834041166-937380195=:17082"
-Message-Id: <marc-linux-ultrasparc-93738047523759@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93738120024390@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-93738047523759@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-93738047523759@msgid-missing>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-  Send mail to mime@docserver.cac.washington.edu for more info.
+   From: pau@readysoft.es
+   Date: Wed, 15 Sep 1999 09:23:15 +0200 (CEST)
 
---131399203-834041166-937380195=:17082
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+   > Also, are you getting correctable ECC memory errors in your
+   > kernel logs before this happens?  I am very close to starting to
+   > encourage
 
-On Tue, 14 Sep 1999, David S. Miller wrote:
+   If it should log anything, I don't get it. No errors in the logs or
+   the console but the ones I include.
 
-> The dumps seem to be corrupted, it is very crucial for the initial
-> oops generated to be completely visible and decoded.  Once the
-> first oops happens, the only thing that can really be said about
-> subsequent oopses are that they are due to corrupted state generated
-> in the first oops, it's difficult then to reason about the true cause.
+What kernel are you running?  Maybe you are running a kernel which
+just ignores the CEE errors and does not log them, current 2.2.x
+kernels log all correctable ECC memory errors in the dmesg logs.
 
-Ok, now I'm sure I include the first one, but also the rest, just in case.
-
-> Also, are you getting correctable ECC memory errors in your kernel
-> logs before this happens?  I am very close to starting to encourage
-
-If it should log anything, I don't get it. No errors in the logs or the
-console but the ones I include.
-
-> users to return these AXi boards to Sun and asking for fixed parts
-> which do not generate these ECC memory errors.  They addresses
-> generating the ECC errors are always at the same exact spot, with the
-> same ECC syndrome, regardless of how you arrange the simms.  This is a
-> motherboard hardware bug without a doubt, and I'm imagining that a
-> large set of AXi boards produced in the past half year have this
-> problem. :-(
-
-In fact these are Sparc compatible, but they have passed Sun the hardware
-compatibility tests -twice :)-
-And they don't fail with Solaris 2.7 :(((
-I got 2 of them replaced, but the problems didn't disappear.
-
-> I know this issue has never turned up on any other UltraSparc's,
-> because if they did the machine would lock up at bootup and people
-> would have told me about it :-)
-
-Well, maybe with the new logs you can reach other conclusions.
-If you need to know the gcc compiler used, the prom settings or something
-else, just ask it.
-
-Thanks
-Pau
-
---131399203-834041166-937380195=:17082
-Content-Type: APPLICATION/octet-stream; name="ultra_sparc_ksymoops-1999091501.bz2"
-Content-Transfer-Encoding: BASE64
-Content-ID: <Pine.LNX.4.10.9909150923150.17082@pc254.worldonline.es>
-Content-Description: 
-Content-Disposition: attachment; filename="ultra_sparc_ksymoops-1999091501.bz2"
-
-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
---131399203-834041166-937380195=:17082--
+Later,
+David S. Miller
+davem@redhat.com
