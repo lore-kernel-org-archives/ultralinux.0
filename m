@@ -1,74 +1,66 @@
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Thu, 27 May 2004 13:39:01 +0000
-Subject: Re: [PATCH 3/4] Consolidate sys32 select
-Message-Id: <200405271539.05069.arnd@arndb.de>
-MIME-Version: 1
-Content-Type: multipart/mixed; boundary="Boundary-02=_49etAllAgQ2zWrw"
+From: =?iso-8859-1?Q?Arnd_Bergmann?= <arnd@arndb.de>
+Date: Tue, 25 May 2004 23:10:01 +0000
+Subject: =?iso-8859-1?Q?Re:_[PATCH_3/4]_Consolidate_sys32_select?=
+Message-Id: <26879984$108552555440b3ce3274ba74.46765993@config21.schlund.de>
 List-Id: <ultralinux.vger.kernel.org>
-References: <26879984$108552555440b3ce3274ba74.46765993@config21.schlund.de> <1085551771.969.109.camel@tux.rsn.bth.se>
-In-Reply-To: <1085551771.969.109.camel@tux.rsn.bth.se>
-To: Martin Josefsson <gandalf@wlug.westbo.se>
-Cc: "David S. Miller" <davem@redhat.com>, linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: =?iso-8859-1?Q?Martin_Josefsson?= <gandalf@wlug.westbo.se>
+Cc: =?iso-8859-1?Q? David_S=2E_Miller ?= <davem@redhat.com>, arnd@arndb.de, linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
 
 
---Boundary-02=_49etAllAgQ2zWrw
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Martin Josefsson <gandalf@wlug.westbo.se> schrieb am 26.05.2004,
+00:29:13:
 
-On Wednesday 26 May 2004 08:09, Martin Josefsson wrote:
+> You mean in compat_sys_select() ?
+> compat_ptr() takes an u32 as argument, needs casting, ugly.
+> But you want it done that way?
 
-> Your patch will fix the problem, I don't even need to test it.
-> Thanks, looking forward to see a fix in mainline :)
+When using compat_ptr properly, you don't need any casts,
+see the patch below (the patch is probably messed up by my 
+broken mailer, but you get the picture).
 
-I have thought about it again and am no longer sure it is really=20
-the right fix. Can anyone explain why this problem only happens=20
-for the fifth argument, but not for the other pointers (inp, outp,
-exp)?
+> I see this problem when compat_sys_select() is called directly from
+> syscall, not via sunos_select() which uses compat_ptr()
 
-If sparc64 has this problem only for the fifth syscall argument,=20
-does that mean that e.g. compat_sys_futex and=20
-compat_sys_mq_timed{send,receive} have the same bug? If this is
-a more general, i.e. not limited to the last argument, there is a
-potential problem in lots of syscalls.
+Which brings us to a more global question on the syscall handlers.
 
-	Arnd <><
+There are currently different strategies on how to handle argument
+extension for the compat syscall handlers. s390 always goes through
+assembly wrappers (arch/s390/kernel/compat_wrapper.S), ppc64 does
+something similar in C (arch/ppc64/kernel/sys_ppc32.c). Since the
+other architectures appear to need conversion only for potentially 
+negative integer values (and sparc64 pointers), it's far less 
+consistant there.
 
-> > =3D=3D=3D=3D=3D fs/compat.c 1.24 vs edited =3D=3D=3D=3D=3D
-> > --- 1.24/fs/compat.c=A0=A0Sat May 22 06:31:47 2004
-> > +++ edited/fs/compat.c=A0=A0=A0=A0=A0=A0=A0=A0Wed May 26 00:57:49 2004
-> > @@ -1300,13 +1300,15 @@
-> > =A0
-> > =A0asmlinkage long
-> > =A0compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t
-> > __user *outp,
-> > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0compat_ulong_t __user *exp, str=
-uct compat_timeval __user *tvp)
-> > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0compat_ulong_t __user *exp, com=
-pat_uptr_t utv)
-> > =A0{
-> > =A0=A0=A0=A0=A0=A0fd_set_bits fds;
-> > +=A0=A0=A0=A0=A0struct compat_timeval __user *tvp;
-> > =A0=A0=A0=A0=A0=A0char *bits;
-> > =A0=A0=A0=A0=A0=A0long timeout;
-> > =A0=A0=A0=A0=A0=A0int ret, size, max_fdset;
-> > =A0
-> > +=A0=A0=A0=A0=A0tvp =3D compat_ptr(utv);
-> > =A0=A0=A0=A0=A0=A0timeout =3D MAX_SCHEDULE_TIMEOUT;
-> > =A0=A0=A0=A0=A0=A0if (tvp) {
-> > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0time_t sec, usec;
+There may be some more corner cases (e.g. reporting a wrong error
+value for a negative syscall arguments) where this goes bad on one
+architecture or another. This makes me wonder if the s390 wrapper
+mechanism should be generalized to get on the safe side here. I
+already have a sed script to generate the s390 compat_wrapper.S
+from the syscall prototypes, but there should be a way to do the
+same in an architecture independent way.
 
---Boundary-02=_49etAllAgQ2zWrw
-Content-Type: application/pgp-signature
-Content-Description: signature
+      Arnd <><
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.4 (GNU/Linux)
-
-iD8DBQBAte945t5GS2LDRf4RAvP6AJ49HaqqHZLigQC+6wrCmW2B7qY9BACfWZrg
-oepLKPiPzWnX0G0hZWUgV6Y=
-=feld
------END PGP SIGNATURE-----
-
---Boundary-02=_49etAllAgQ2zWrw--
+=== fs/compat.c 1.24 vs edited ==--- 1.24/fs/compat.c	Sat May 22 06:31:47 2004
++++ edited/fs/compat.c	Wed May 26 00:57:49 2004
+@@ -1300,13 +1300,15 @@
+ 
+ asmlinkage long
+ compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t
+__user *outp,
+-		compat_ulong_t __user *exp, struct compat_timeval __user *tvp)
++		compat_ulong_t __user *exp, compat_uptr_t utv)
+ {
+ 	fd_set_bits fds;
++	struct compat_timeval __user *tvp;
+ 	char *bits;
+ 	long timeout;
+ 	int ret, size, max_fdset;
+ 
++	tvp = compat_ptr(utv);
+ 	timeout = MAX_SCHEDULE_TIMEOUT;
+ 	if (tvp) {
+ 		time_t sec, usec;
