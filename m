@@ -1,26 +1,37 @@
-From: Derrick J Brashear <shadow@DEMENTIA.ORG>
-Date: Wed, 11 Nov 1998 13:26:23 +0000
-Subject: Re: audio-2.0.35-981109.tar.gz
-Message-Id: <marc-linux-ultrasparc-91080757813407@msgid-missing>
+From: John Adamson <John.Adamson@East.Sun.COM>
+Date: Tue, 17 Nov 1998 13:25:32 +0000
+Subject: AHA-2940 o/f Ultra support
+Message-Id: <marc-linux-ultrasparc-91133041215343@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91066532118015@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91066532118015@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Mon, 9 Nov 1998, Derrick J Brashear wrote:
+I have an Ultra 5 with a AHA-2940 o/f scsi card and
+when Linux/Ultra is tring to probe devices it gets
+stuck looking at the 2940.
 
-> Has a few fixes including some type changes for 2.1 VFS. As before, works
-> on 2.0, builds on 2.1, should work on 2.1, probably won't work on sparc64.
+Any ideas?  I am running 128mb ram with the latest OBP.
 
-So, anyone with UltraPenguin on a SS4/SS5/Ultra 1/Ultra 2 tried this? I'm
-curious how close to a working 4231 driver there is for 2.1 with this (I
-know that the amd driver works)
+Thanks for your time.
 
-Also, because my employers recently ordered a few dozen new PCI-based
-Ultras for various tasks, I should be able to use a spare (well, it's
-spare for now) and get audio working on ebus Ultras, with any luck.
-
--D
+                                                         (o o)
+===========================oOO=(_)=OOo======
+     /\                                  |
+     \ \                                 |        John D. Adamson Sr.
+    \ \ /          /\  | | |\ |          |	    A.R.S.  W1HZH
+   \ \ / /         \   | | |\ |          |      
+  / \/ \/ /\        \  | | | \|          |      Technical Support Engineer
+ / /     / /       \/  \_/ | \|          |    North American Solution Center
+ \/ /\ /\ /      CUSTOMER SERVICES       |     
+   / / \ \                               |         Voice: (978)442-1256 
+    / \ \   "When you build great        |         FAX #: (978)244-2140
+     \ \      technologies, the support  |     
+      \/       comes naturally."         |   Email: john.adamson@East.Sun.COM 
+               
+If a man does not keep pace with his companions, perhaps it is because he
+hears a different drummer. Let him step to the music which he hears,
+however measured or far away. 
+			               --Henry David Thoreau
+=======================================
