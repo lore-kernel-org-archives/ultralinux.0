@@ -1,27 +1,28 @@
-From: Charu Chaubal <chaubal@ha3mpk.Eng.Sun.COM>
-Date: Fri, 02 Apr 1999 16:53:21 +0000
-Subject: order of disk recognition
-Message-Id: <marc-linux-ultrasparc-92307233031541@msgid-missing>
+From: David Miller <davem@twiddle.net>
+Date: Fri, 02 Apr 1999 17:00:09 +0000
+Subject: Re: order of disk recognition
+Message-Id: <marc-linux-ultrasparc-92307274831829@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92307233031541@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92307233031541@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I was wondering how to force the kernel to always assign the same device drive 
-letter to the same physical disk.  I have two SCSI controllers.  Attached to one 
-is the disk which contains my UltraPenguin distribution.  On the second one, I 
-sometimes have disks attached, and sometimes not.  If I don't have disks 
-attached, it labels the disks on the first controller as sda and sdb.  However, 
-if I *do* have disks on the second controller, then those get labeled sda, sdb, 
-sdc, and the disks on the first controller get labeled sdd and sde.  This causes 
-problems because it is setup to mount partitions sdb1, sdb2, sdb3, etc.
+   Date: 	Fri, 2 Apr 1999 08:53:21 -0800 (PST)
+   From: Charu Chaubal <chaubal@ha3mpk.Eng.Sun.COM>
 
-short of having two versions of /etc/fstab, how could I have the first 
-controller always be recognized first?  I believe it would involve adding 
-something to the kernel boot parameters, eg. in silo.conf have a line 
-"append=xxx=yyy", but I'm not exactly sure what to fill in for the xxx and yyy.  
-Something to do with a driver name and base address?
+Short answer, there is nothing you can really do.
+(Didn't I tell you this in private email?)
 
-Thanks (please ask if you need more details),
-	Charu
+   Thanks (please ask if you need more details),
+
+Longer answer, you may get something a little bit satisfatory on PCI
+systems if you specify the "pci=onboardfirst", at least here the
+device ordering will be slightly more sane but it's a hack and doesn't
+provide a real solution.
+
+Later,
+David S. Miller
+davem@redhat.com
