@@ -1,37 +1,28 @@
-From: Flavio Pescuma <Flavio.Pescuma2@edt.ericsson.se>
-Date: Wed, 24 Feb 1999 20:18:13 +0000
-Subject: Multi Happy Meal Ethernet problem
-Message-Id: <marc-linux-ultrasparc-92255674631513@msgid-missing>
+From: David Van Beveren <dvb@eis.com>
+Date: Sun, 28 Mar 1999 00:22:09 +0000
+Subject: Post 1.2 development
+Message-Id: <marc-linux-ultrasparc-92258097010860@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
+While waiting eagerly for the 1.2 release, I have a few questions about
+future development:
 
+1. What can we expect in the way of a time frame for a peek at 64-bit
+userland? Are we talking about 1-2 months, 6 months or a year? This is a
+really critical piece of information for ISVs contemplating porting to
+UltraPenguin.
 
-This is the way I want to connect my Ultra 30
+2. What is the outlook for Solaris emulation? Will this always require
+Solaris shared libs, and a corresponding Solaris license?
 
+3. Has anyone considered tackling the Sun PCi card, the one with the AMD
+CPU onboard, and scoping out the task of running Win95 on this card
+under Linux, like Sun does under Solaris?
 
+Thanks in advance for any insight.
 
-192.168.1.0    ______________________________
-                                                |
-                                                | eth0
-                                        Ultra
-30-----eth2--------------------!----------------! 192.168.3.1
-                                                | eth1
-                                                |
-192.168.2.1  ---------------------------
-
-Each card is connected to a different network.  The Kernel recognizes
-all cards connected,  I've configured route for each network, but
-neither eth1 nor eth2 receive any traffic.  I've also tried to set eth0
-down eth1 down and configure eth2 alone to eth0 old network
-(192.168.1.0) and try to reach the same hosts that I could reach with
-etho, but didn=B4t work.  It looks like even though eth1 and 2 are seeing
-by the driver, this cant receive or forward packets through them.
-
-Thanks for your suggestions,
-
-Flavio
+David
