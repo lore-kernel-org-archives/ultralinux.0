@@ -1,31 +1,26 @@
-From: "Gary R. Combs - SE King of Prussia" <Gary.Combs@East.Sun.COM>
-Date: Wed, 16 Dec 1998 17:49:54 +0000
-Subject: UltraPenguin CDROM ???
-Message-Id: <marc-linux-ultrasparc-91383201415526@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Tue, 08 Dec 1998 11:09:11 +0000
+Subject: QFE/Quattro support...
+Message-Id: <marc-linux-ultrasparc-91315210312341@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-How do I order the UltraPenguin CDROM??
 
-TIA,
-Gary
+I just coded up preliminary support for the quad
+fast ethernet cards (both SBUS and PCI).  I have no
+means to test this right at the moment, I hope to be
+able to do so soon.
 
--------------------------------------------------------------------------
-      ______          Gary Combs
-     /_____/\         Foundation Regional Support Specialist
-    /____ \\ \        Sun Microsystems Computer Corp.
-   /_____\ \\ /       620 Freedom Business Center
-  /_____/ \/ / /      Suite 105
- /_____/ /   \//\     King of Prussia, PA 19406
- \_____\//\   / /     
-  \_____/ / /\ /      Email:  gary.combs@East.Sun.COM
-   \_____/ \\ \       Phone:  (610) 962-5644
-    \_____\ \\        Fax:    (610) 337-8124
-     \_____\/         Internal Home Page: http://stargate.east/~grc/
-		      Pager: 1-800-SKY-PAGE  PIN:1416855
+But if people posses some of these cards and have a
+SparcLinux system up and running, and would like to
+give it a test, go grab the latest CVS sources and
+try it out.
 
-I love defenseless animals, especially in a good gravy
--------------------------------------------------------------------------
+Please send results to me, thanks.
+
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
