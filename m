@@ -1,29 +1,26 @@
-From: Derrick J Brashear <shadow@dementia.org>
-Date: Sat, 27 Mar 1999 15:47:40 +0000
-Subject: Re: Sound on Sun Ultra 5
-Message-Id: <marc-linux-ultrasparc-92254994528110@msgid-missing>
+From: Peter Jones <pjones@redhat.com>
+Date: Mon, 22 Mar 1999 00:46:26 +0000
+Subject: questions about FBCON stuff...
+Message-Id: <marc-linux-ultrasparc-92206416028188@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92211633922106@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92211633922106@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, 26 Mar 1999, Zach Metzinger wrote:
+I've noticed that CONFIG_FB_ATY is defined at more than a few places, and
+have been working on consolidating this a bit to make the entire script
+at least a little more sane.  I'm wondering several things, for anybody
+who might know:
 
-> On Tue, Mar 23, 1999 at 12:06:24AM -0500, Derrick J Brashear wrote:
-> 
-> > Either, finish writing the driver, or wait until I have time:-)
-> > 
-> > Basically, I've been quite busy as I'm working and finishing my degree,
-> > only 4 years late, so the ebus version of the 4231 driver isn't done yet.
-> 
-> Then perhaps it should be removed from the list of "supported"
-> hardware on ultra.linux.cz. Knowing this, I'll stick with sol 2.6 on
-> my u10 as I really don't like living without my mpeg :)
+Is CONFIG_FB_ATY supposed to be dependant on CONFIG_EXPERIMENTAL ?  At
+some places it is, and at some it isn't. (same with CONFIG_FB_MATROX and
+CONFIG_FB_IGA)  Also, is CONFIG_FB_IGA sparc only, as it appears to be
+currently defined, or will it work on other hardware as well.  Its PCI, so
+unless there is some very specific reason it should only be in the sparc
+tree, I think in my cleanup I'm going to make it more generic...
 
-The 4231 *is* supported, just not on the PCI based machines. So removing
-it from the list is also wrong:-)
+ -- Peter
 
--D
+"A witty saying proves nothing."
+		-- Voltaire
