@@ -1,36 +1,21 @@
-From: Ralphe Neill <ran@oberon.sub.net.au>
-Date: Sat, 01 Dec 2001 11:57:10 +0000
-Subject: Ultra1 monitor
-Message-Id: <marc-linux-ultrasparc-100720769418063@msgid-missing>
+From: "David S. Miller" <davem@redhat.com>
+Date: Sun, 02 Dec 2001 23:43:52 +0000
+Subject: Re: Ultra1 monitor
+Message-Id: <marc-linux-ultrasparc-100742437111299@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-100720769418063@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-100720769418063@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi all,
+   From: Ralphe Neill <ran@oberon.sub.net.au>
+   Date: Sat, 1 Dec 2001 22:57:10 +1100 (EST)
+   
+   Does anybody have any experience with this monitor or can offer me some
+   advice?
 
-I'm probably taking a bit of a liberty again by asking what is
-essentially a hardware question but I never seem to get much response
-from comp.sys.sun.hardware and I figure there's got to be a great deal
-of UltraSPARC expertise on this mailing list.
-
-Now, I've got to admit that I've always had some reservations about
-Linux but I guess that I'm a new convert from SunOS after acquiring two
-Ultra1 boxes running UltraLinux. At the moment the systems are networked
-to an old (is there any other kind) Sun 386i and using it as an
-X-terminal. It is, of course, far from ideal and, because the systems
-came without a monitor, I'm looking at getting one.
-
-The monitor that used to be with one of the boxes was a Sun-badged
-GDM-17E20 (17"). Sony cannot tell me if they have an exact equivalent
-but I'm looking at a 19" CPDG420 (which, I gather, replaced the earlier
-CPDE420). Sony's consultant assures me that it will work (it has the
-usual multisync/resolution ranges).
-
-Does anybody have any experience with this monitor or can offer me some
-advice?
-
-Thanks,
-
-Ralphe Neill
+You can basically use any SVGA/VESA monitor, ie. the ones the rest of
+the world uses, you just need to get an adapter from Sun's graphics
+card adapter to SVGA.  I've seen them quite often at computer stores.
