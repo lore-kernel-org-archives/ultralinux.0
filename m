@@ -1,32 +1,40 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Tue, 22 Aug 2000 01:09:14 +0000
-Subject: Vger lists have moved
-Message-Id: <marc-linux-ultrasparc-96692458922603@msgid-missing>
+From: Alessandro Rubini <rubini@gnu.org>
+Date: Mon, 14 Aug 2000 21:18:45 +0000
+Subject: [PATCH] __u64 in user space
+Message-Id: <marc-linux-ultrasparc-96628836405720@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-96691402411174@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-96691402411174@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-The old lists run at vger.rutgers.edu have been moved to
-vger.kernel.org due to an irrecoverable hard-disk failure of the old
-machine, the lists were planned to be moved anyways.
+Disclaimer: I'm not subcribed to this list.
 
-If you are receiving this email, it means you were subscribed to
-one of the vger Linux mailing lists as of the crash of the old
-system last week.
+I'm currently looking at the data types used in the kernel/user
+interface, and I think include/asm-sparc64/types.h has a problem in
+how the __u64 and __s64 symbols are defined. Since user space has
+32-bit-wide longs, they end out being 32 bits wide. A quick check
+shows that the type is seldom use, and it may never have appeared in
+sparc64 user space.
 
-You are not subscribed to the new lists at vger.kernel.org, you will
-have to manually re-subscribe yourself.
+I think this patch is good, but I'm not an expert of sparc issues.
+(this is taken against the current 2.4 CVS, but the same problem
+applies to 2.2).
 
-The new site uses the same mailing list software, Majordomo.  So the
-subscription mechanism is the same as on the old system.
-
-Thanks for your patience and understanding.
-
-Later,
-David S. Miller
-davem@redhat.com
+--- ./types.h.orig	Mon Aug 14 23:13:33 2000
++++ ./types.h	Mon Aug 14 23:14:37 2000
+@@ -26,8 +26,13 @@
+ typedef __signed__ int __s32;
+ typedef unsigned int __u32;
+ 
++#ifdef __sparc_v9__
+ typedef __signed__ long __s64;
+ typedef unsigned long __u64;
++#else
++typedef __signed__ long long __s64;
++typedef unsigned long long __u64;
++#endif
+ 
+ #ifdef __KERNEL__
+ 
