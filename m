@@ -1,7 +1,7 @@
-From: Peter Jones <pjones@redhat.com>
-Date: Fri, 26 Mar 1999 16:06:01 +0000
+From: David Miller <davem@twiddle.net>
+Date: Fri, 26 Mar 1999 21:50:17 +0000
 Subject: Re: Am I just crazy...?
-Message-Id: <marc-linux-ultrasparc-92246499513946@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92248503529823@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92246168210534@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92246168210534@msgid-missing>
@@ -10,38 +10,49 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, 26 Mar 1999, Jakub Jelinek wrote:
+   Date: 	Fri, 26 Mar 1999 10:14:10 -0500 (EST)
+   From: Peter Jones <pjones@redhat.com>
 
-> > [pjones@bart 01]$ od -tx1 -Ax 03.0 
-> > 000000 95 10 46 06 05 00 80 02 03 8f 01 01 00 40 00 00
-> > 000010 01 00 c0 00 09 00 c0 00 11 00 c0 00 19 00 c0 00
-> > 000020 21 00 c0 00 00 00 00 00 00 00 00 00 95 10 46 06
-> > 000030 00 00 00 00 00 00 00 00 00 00 00 00 00 01 02 04
-> > 000040
-> > 
-> > That says its on IRQ 4, right?  (I'm actually somewhat unsure that its not
-> > saying IRQ of 02, becuase there appears to be some byte order wierdness
-> > here) 
-> 
-> PCI_INTERRUPT_LINE is at offset 0x3c, AFAIK, so it is IRQ_LINE 0, IRQ_PIN 1, 
-> I think.
+   Somebody let me know if I've read something wrong someplace, or if
+   I'm just nuts (and if I am, I'd like to learn something from this,
+   so give me a good explaination of why I'm nuts ;)
 
-OK, right.  That makes sense.  I had been looking at a book that appears
-to be fairly accurate regarding PCI, but doesn't really take byte ordering
-into account as much as it should.  You're right, include/linux/pci.h
-says its at 0x3c.
+Jakub gave a response, but I'll respond too to try and maybe clarify a
+few issues.
 
-> But really, interrupts are not so straightforward on sparc64.
-> PCI bridge sends interrupt packets with identification which
-> device/function/pin is pending (and btw you can disable/enable each such
-> pin individually), so this is the second interrupt number (called INO), then
-> Linux receives a IRQ trap and based on this INO finds out which interrupt to
-> post, thus a third and final irq number comes in, this one is called PIL
-> (and this is the number you see in /proc/interrupts) and queues that PIL for
-> delivery.
+Ideally, the driver author reads the pci_dev struct and gets the
+32-bit irq number from there and just passes it into request_irq() and
+all is fine.
 
-Oh.  Well, ok, that kindof makes sense.  It explains why I'm seeing
-numbers that don't seem related, at least ;)  Thanks.
+This 32-bit irq number has no bearing at all with the IRQ "level" at
+which the interrupt is serviced on the processor, this is the PIL that
+Jakub referred to.
 
-> Cheers,
->     Jakub
+The 32-bit number actually is a pointer to an ino_bucket structure
+which is all the information we need to manipulate that interrupt on
+sparc64.
+
+INO's are UltraSparc (actually "sun5 architecture") interrupt numbers,
+it is composed of two parts, one part (the higher bits) says who the
+interrupt is coming from (PCI controller 1, CPU 3, Creator Graphics
+card, SBUS controller 2, etc.) the lower bits say which device (or
+more generally: which interrupt source) within that top level
+controller generated the interrupt.
+
+INO's are sent as packets to cpus, the cpu receives the interrupt,
+reads the INO in the packet, and uses this to lookup the appropriate
+ino_bucket entry in a table so it knows what PIL to service the
+interrupt at.  It then sends itself a local software PIL interrupt at
+that level and returns from the INO packet trap.
+
+The next time the cpu's interrupt listening level is such that the PIL
+posted will be heard, it will service the interrupt and call the
+handler in the device driver.
+
+More details available upon request.  The above is just for the
+curious who want to know how the guts work, a PCI driver author should
+not need to know any of it :-)
+
+Later,
+David S. Miller
+davem@redhat.com
