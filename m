@@ -1,35 +1,50 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Sat, 14 Nov 1998 08:38:28 +0000
-Subject: Re: bootable CD image
-Message-Id: <marc-linux-ultrasparc-91108324521083@msgid-missing>
+From: rick@dgii.com (Rick Richardson)
+Date: Wed, 18 Nov 1998 23:25:52 +0000
+Subject: Re: Still no go with the happy meal on the scsi/hme card on sun ultra 10
+Message-Id: <marc-linux-ultrasparc-91148320602842@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91097603618920@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91097603618920@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Stephan van Hienen writes...
+> tried the new cvs kernel (2.1.128)
 > 
-> Jakub et al,
+> but still get timeouts on the happy meal eth0 card in my kernel
 > 
-> Would it not be possible to create a partitioned bootable CD image
-> similar to SunOS/Solaris install CDs which could contain a bootable
-> partition for sun4c/m/u and a second partition for sun4?
+> eth1 (onboard happy meal)
+> eth2,eth3 (dec 450)
+> work ok
+> 
+> this was on the list before, but i hoped it was fixed
+> 
+> som1 is looking at this ?
+> 
+> i can look for things here, but since i'm not a programmer myself, i can't
+> try to fix it :(
 
-It would be possible to have there just the 40k of the installer on the
-other partition. SILO already handles multiple kernels (sun4u uses a
-different one to sun4c/m/d). The problem is that noone wrote sun4 support
-for SILO, and I don't have any sun4 machines nor access to them, so I cannot
-write it. I was already asking on the list if anyone wants to write it, but
-noone answered.
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.127 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+I just tried to load UP1.1 on an Ultra 30.  This particular ultra
+30 has a broken onboard ethernet controller, so we have a scsi/hme
+card in it.
+
+The tftpboot (boot /pci@1f,4000/pci@4/SUNW,hme@0,1) works (yippee,
+first time we've gotten even this far on an Ultra 30) and we get to
+the install screens.
+
+But thats it.  The ethernet driver keeps complaining that "Link down,
+Cable problem?" when it tries to access the NFS mirror.  But of course
+there is no cable problem, since the tftpboot process worked fine.
+
+So I guess I can confirm that there seems to be something wrong with
+the ethernet driver, if that helps.
+
+Unfortunately, I *am* a programmer, but I can't do anything to help
+this situation until I get at least one of these confounded Ultra's
+loaded in the first place.
+
+-Rick
+
+-- 
+Rick "The Hack" Richardson  rick@dgii.com http://RickRichardson.freeservers.com
