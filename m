@@ -1,38 +1,31 @@
-From: Jim Nelson <james4765@verizon.net>
-Date: Sun, 26 Dec 2004 15:58:14 +0000
-Subject: Re: [PATCH] sparc64: remove x86-specific SMP reference in Kconfig
-Message-Id: <41CEDF96.7000408@verizon.net>
+From: James Nelson <james4765@verizon.net>
+Date: Sun, 26 Dec 2004 13:47:00 +0000
+Subject: [PATCH] sparc64: remove x86 bootloader reference in Kconfig
+Message-Id: <20041226134721.11731.74495.27433@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20041226134715.11731.39190.49206@localhost.localdomain> <Pine.LNX.4.61.0412260839020.17702@montezuma.fsmlabs.com>
-In-Reply-To: <Pine.LNX.4.61.0412260839020.17702@montezuma.fsmlabs.com>
+References: <20041226134715.11731.39190.49206@localhost.localdomain>
+In-Reply-To: <20041226134715.11731.39190.49206@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Zwane Mwaikambo <zwane@arm.linux.org.uk>
-Cc: ultralinux@vger.kernel.org, akpm@osdl.org, linux-kernel@vger.kernel.org
+To: ultralinux@vger.kernel.org
+Cc: akpm@osdl.org, linux-kernel@vger.kernel.org, James Nelson <james4765@verizon.net>
 
-Zwane Mwaikambo wrote:
-> On Sun, 26 Dec 2004, James Nelson wrote:
-> 
-> 
->>Remove inapplicable references to x86 SMP configuration in arch/sparc64/Kconfig.
->>
->> 	  People using multiprocessor machines who say Y here should also say
->> 	  Y to "Enhanced Real Time Clock Support", below. The "Advanced Power
->> 	  Management" code will be disabled if you say Y here.
-> 
-> 
-> APM isn't applicable to sparc64 either.
-> 
-> 
->> 	  See also the <file:Documentation/smp.txt>,
->>-	  <file:Documentation/i386/IO-APIC.txt>,
->> 	  <file:Documentation/nmi_watchdog.txt> and the SMP-HOWTO available at
-> 
-> 
-> Nor is the nmi watchdog.
-> 
+Removes refences to x86-specific bootloader in arch/sparc64/Kconfig.
 
-Right.  Let me re-work and re-submit.
+Signed-off-by: James Nelson <james4765@gmail.com>
 
-Jim
+diff -urN --exclude='*~' linux-2.6.10-original/arch/sparc64/Kconfig linux-2.6.10/arch/sparc64/Kconfig
+--- linux-2.6.10-original/arch/sparc64/Kconfig	2004-12-24 16:35:25.000000000 -0500
++++ linux-2.6.10/arch/sparc64/Kconfig	2004-12-26 08:29:28.653936457 -0500
+@@ -79,8 +79,8 @@
+ 	  terminal (/dev/tty0) will be used as system console. You can change
+ 	  that with a kernel command line option such as "console=tty3" which
+ 	  would use the third virtual terminal as system console. (Try "man
+-	  bootparam" or see the documentation of your boot loader (lilo or
+-	  loadlin) about how to pass options to the kernel at boot time.)
++	  bootparam" or see the documentation of your boot loader (silo)
++	  about how to pass options to the kernel at boot time.)
+ 
+ 	  If unsure, say Y.
+ 
