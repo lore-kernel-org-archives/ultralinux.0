@@ -1,48 +1,37 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Mon, 16 Nov 1998 16:31:48 +0000
-Subject: Re: ultrapenguin-1.0.9 on ultra30
-Message-Id: <marc-linux-ultrasparc-91126439921350@msgid-missing>
+From: Eric Bautsch <eric.bautsch@pobox.com>
+Date: Fri, 20 Nov 1998 14:13:40 +0000
+Subject: hme on E4000
+Message-Id: <marc-linux-ultrasparc-91163585212502@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91029286902028@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91029286902028@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> 
-> On Thu, 5 Nov 1998, Jakub Jelinek wrote:
-> 
-> >Can you tell me those some addresses and some other addresses? How much
-> >memory do you have? What size is your /boot/initrd*.img (provided you get
-> >tftprescue.img working - see below).
-> 
-> initrd overwritten (0xfffff800509c4000 < 0xfffff8005162a000) - disabling
-> it.
-> Memory: 256296k available (1304k kernel code, 3688k data, 128k init)
-> [fffff80000000000,fffff80073f4c000]
-> 
-> initrd-2.1.126.img: 212428
-> 
-> is that enough?
+Hi Ultralinux!
 
-Yep, thanks a lot for all the info.
-Quick solution (requires a screwdriver): reposition your SIMMs to the other
-bank (check in the PROM then if the /memory reg property is something like
+Hope this goes to the right address...
 
-	00000000.00000000.00000000.08000000
-	00000000.10000000.00000000.04000000
-	00000000.20000000.00000000.04000000
+I tried to install UltraPenguin-1.1 on a 2.5GB Mem, 8CPU E4000 with 2 I/O
+Boards via the net (own NFS server). The install procedure found the hme
+interface but had serious problems keeping it up and running. The interface
+would only come online (I checked with pings) for a couple of seconds at a
+time but was mostly offline. Installation failed (how far I got in the 
+installation process was different each time I tried).
 
-Slow solution: wait until I release SILO 0.8.3
+Installation on a SS1000 worked perfectly by the way (well, apart from the
+swap and 1GB thing... but got that sorted).
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.128 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+I was also wondering whether it had anything to do with the fact that there
+are two I/O boards (i.e. two hme interfaces) in the machine?
+
+Can you give me a hint?
+
+Ciao,
+Eric
+
+      ____
+     /          .                           Eric A. Bautsch
+    /--   __       ___                ______________________________________
+   /     /    /   /                  /
+  (_____/____(___(__________________/       email: eric.bautsch@pobox.com
