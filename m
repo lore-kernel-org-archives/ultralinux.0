@@ -1,7 +1,7 @@
-From: Peter Jones <pjones@redhat.com>
-Date: Fri, 26 Mar 1999 20:20:19 +0000
+From: Thomas Klaube <Klaube@noc.dfn.de>
+Date: Fri, 26 Mar 1999 20:31:33 +0000
 Subject: Re: Multi Happy Meal Ethernet problem
-Message-Id: <marc-linux-ultrasparc-92248095826426@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92248096026444@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92255674631513@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92255674631513@msgid-missing>
@@ -10,41 +10,83 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Oh, right, ethernet domain.  Still, this shouldn't have that effect unless
-you're doing something thats requiring arp to function correctly.  Normal
-TCP/IP stuff is still going to depend on routing tables.  
+> 
+> Flavio,
 
-Although, this brings up a reasonable point -- if they're all on the same
-IP subnet, then you may very well only notice one of them getting traffic.
-
- -- Peter
-
-"Any sufficiently advanced technology is indistinguishable from magic."
-		-- Arthur C. Clarke
-
-On Fri, 26 Mar 1999, Miguel Barreiro Paz wrote:
+Hi,
 
 > 
-> > > As far as I know, each ethernet connection from a given system must be in a 
-> > > different domain, otherwise one default connection (usually eth0) always 
-> > > defines that system's interface. 
-> > > 
-> > > David
+> Are you trying to put all three (or four) Ethernet connections on that 
+> Ultra30 in the same domain?  If not, disregard the following.
+> 
+> As far as I know, each ethernet connection from a given system must be in a 
+> different domain, otherwise one default connection (usually eth0) always 
+> defines that system's interface. 
+
+hmm.. domain isnt the right word. Each Network connection of a host (not only
+ethernet) must be in a different subnet. There is one exception:
+If you want to bridge between 2 segments, you must have the network
+devices in the same subnet. But I dont think Flavio wants to do that :-).
+
+But another question to Flavio: are all interfaces recognized by the
+machine? What does a ifconfig say? 
+
+Regards
+Thomas 
+
+> 
+> David
+> ------
+> ------------- Begin Forwarded Message -------------
+> 
+> Date: Fri, 26 Mar 1999 09:10:48 -0800 (PST)
+> From: Bob Hogg <bob@jacklondon.net>
+> To: Flavio Pescuma <edtfopa@malmen.ericsson.se>
+> cc: ultralinux@vger.rutgers.edu
+> Subject: Re: Multi Happy Meal Ethernet problem
+> MIME-Version: 1.0
+> X-Loop: majordomo@vger.rutgers.edu
+> X-Orcpt: rfc822;ultralinux-outgoing
+> 
+> Hm....I've got an Ultra 1 that has 2 HME's and they work fine - I'm using
+> that machine as a router at the moment, actually.....it's working quite
+> well.
+> 
+> -bob
+> 
+> On Fri, 26 Mar 1999, Flavio Pescuma wrote:
+> 
+> > Hi,
 > > 
-> > Um.... I'm failing to see how that makes any sense at all.  If he's got
-> > individual IPs for each of the cards, and he's got a route for each of
-> > them, then they _should_ all work.  DNS doesn't have anything to do
-> > with that.
+> > I have just succeeded to install ultralinux-1.1.9 on a Ultra 30
+> > machine.  This machine has three Happy Meal ethernet cards, the problem
+> > I have is that eth0 works fine but the other two doesn't.  The module
+> > seems to work perfectly because it recognize the three of them,  but
+> > neither eth1 nor eth2 receive any traffic at all.
 > > 
-> >  -- Peter
+> > Thanks in advance,
+> > 
+> > Flavio
+> > 
+> > 
+> > 
+> > --
+> > WIRE - Web & Internet Resources at Ericsson
+> > Flavio Pescuma           phone: +46 (0)8 7263359
+> > L M Ericsson Data AB     fax:   +46 (0)8 7217207
+> > 125 82 Stockholm Sweden  http://eriweb.ericsson.se
+> > 
+> > 
+> > 
+> > 
 > 
-> 	Unless PCI suns are any different, the hardware MAC address for
-> ethernet cards on sparc depends on the machine hostid. So, if you have 3
-> cards, they all share a common MAC address. It's OK if they are not in the
-> same _ethernet_ domain (not the same DNS domain). 
 > 
-> Regards,
+> ------------- End Forwarded Message -------------
 > 
-> Miguel
+> 
+> David Andrew                Tel:  781-442-2316   Internal:   22316
+> Market Development Engineer - I/O Technologies   FAX:  781-442-1520	
+> Sun Microsystems, 1 Network Drive - M/S UBUR01-203,   Burlington, MA 01803	 
+> e-mail:  david.andrew@sun.com
 > 
 > 
