@@ -1,16 +1,42 @@
-From: Scott Michel <scottm@rushe.aero.org>
-Date: Wed, 02 Feb 2000 01:59:25 +0000
-Subject: RH 6.0 -> 6.1
-Message-Id: <marc-linux-ultrasparc-94945721804374@msgid-missing>
+From: Eric <ebrower@usa.net>
+Date: Wed, 09 Feb 2000 03:09:49 +0000
+Subject: Re: [Adobe Acrobat (acroread) ?]
+Message-Id: <marc-linux-ultrasparc-95006578927649@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Well, now that aero.org is off the RBL black hole list for this week...
-Is it sufficient to upgrade the packages via 'rpm -F' to u/g to 6.1 or
-do I really need to go through the installer scriptage?
+There is a Java version of the reader available at
+
+     http://www.adobe.com/products/acrviewer/main.html
+
+Freshmeat lists an "Xpdf" at
+
+     http://www.freshmeat.net/search.php3?query=PDF
+
+     -or-
+
+     http://www.foolabs.com/xpdf/
+
+If you want to live on the edge, you could try the 
+Solaris/SPARC or SunOS/SPARC Adobe binaries via
+emulation, though I don't know the state of that
+work.
+
+E
 
 
--scooter
+
+Brent Jay Thorpe <brent.thorpe@sun.com> wrote:
+Anyone know where or if there is a port of acrobat (or any pdf reader)
+for Linux on sparc?
+
+TIA
+
+Brent
+
+
+____________________________________________________________________
+Get free email and a permanent address at http://www.netaddress.com/?N=1
