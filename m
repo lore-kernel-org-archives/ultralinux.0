@@ -1,25 +1,31 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Wed, 29 Jul 1998 01:09:16 +0000
-Subject: Re: Oops when starting X (2.1.111)
-Message-Id: <marc-linux-ultrasparc-90222358531096@msgid-missing>
+From: Bob Drzyzgula <bob@drzyzgula.org>
+Date: Sat, 11 Jul 1998 18:36:06 +0000
+Subject: Ultra AXmp
+Message-Id: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222358531094@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222358531094@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: 	Tue, 28 Jul 1998 16:24:33 +0200
-   From: Kris Boulez <kris@belbone.be>
 
-   I can't get ksymoops to compile, so no more info :(.
+Sun's newly announced Ultra AXmp board is a pretty interesting
+platform. Based on early pricing estimates I've seen, it should
+be possible to build a quad-processor @ 300+MHz, 2GB rackmount
+system for under around $US 20K. I have a lot of Solaris applications
+for this board, but I also wonder what capabilities one would
+expect ULtraLinux to have on this machine...
 
-Look up the hex addresses printed out in your System.map file and tell
-us what symbols you find.
+http://www.sun.com/microelectronics/SPARCengineUltraAXmp/ 
+http://www.sun.com/microelectronics/SPARCengineUltraAXmp/805-5865.pdf
+http://www.sun.com/microelectronics/SPARCengineUltraAXmp/s7-mod.pdf
+http://www.sun.com/microelectronics/SPARCengineUltraAXmp/cover980706.html
+http://www.sun.com/smi/Press/sunflash/9807/sunflash.980706.1.html
 
-ksymoops does not work on sparc...
+--Bob
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+-- 
+==============================
+Bob Drzyzgula                             It's not a problem
+bob@drzyzgula.org                until something bad happens
+==============================
