@@ -1,7 +1,7 @@
-From: Chris Osicki <osk@gd2.swissptt.ch>
-Date: Wed, 17 May 2000 10:25:53 +0000
-Subject: Solaris emulation
-Message-Id: <marc-linux-ultrasparc-95855941130556@msgid-missing>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Sat, 22 Jul 2000 18:33:21 +0000
+Subject: obsolete sun_serial_con?
+Message-Id: <marc-linux-ultrasparc-96435311504873@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
@@ -9,23 +9,28 @@ Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-Hi,
+While cleaning up struct consw, I noticed sun_serial_con is never used
+(anymore).
 
-Please excuse my ignorance as I am new to Linux on Sparc.
+--- linux-2.4.0-test5-pre4/arch/sparc64/kernel/setup.c	Tue Jul 18 13:59:17 2000
++++ geert-consw-2.4.0-test5-pre4/arch/sparc64/kernel/setup.c	Sat Jul 22 20:31:35 2000
+@@ -444,8 +444,6 @@
+ 
+ static struct pt_regs fake_swapper_regs = { { 0, }, 0, 0, 0, 0 };
+ 
+-extern struct consw sun_serial_con;
+-
+ void register_prom_callbacks(void)
+ {
+ 	prom_setcallback(prom_callback);
 
-I built a new kernel in order to be able to use Solaris emulation.
-insmod solaris results in a long list on unresolved symbols, ie:
-solaris_syscall
-I checked the source and found it ifdef-ed by
- #ifdef CONFIG_SOLARIS_EMUL_MODULE
-but there is no such option in my .config file, only CONFIG_SOLARIS_EMUL
+Gr{oetje,eeting}s,
 
-Am I missing something? The search engine on redhat.com where a I was 
-hoping to get some infos from couldn't find glimpse index.
+						Geert
 
-It is kernel source 2.2.14, installed from kernel-source-2.2.14-5.0.rpm
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-Thanks for your help,
-Chris
-
-PS Please Cc: to me as I'm not yet subscribed to the list.
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+							    -- Linus Torvalds
