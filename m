@@ -1,40 +1,36 @@
-From: Thunder from the hill <thunder@ngforever.de>
-Date: Fri, 12 Jul 2002 22:14:23 +0000
-Subject: Re: L1_CACHE_SHIFT on sparc64
-Message-Id: <marc-linux-ultrasparc-102651216908201@msgid-missing>
+From: Thiemo Seufer <ica2_ts@csv.ica.uni-stuttgart.de>
+Date: Fri, 05 Jul 2002 12:33:46 +0000
+Subject: [PATCH] Fix zs.c serial callout driver
+Message-Id: <marc-linux-ultrasparc-102587243614878@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-102651148307513@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-102651148307513@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
+[please CC me for replies, I'm not on this list]
 
-On Fri, 12 Jul 2002, David S. Miller wrote:
-> Right.  But who needs L1_CACHE_SHIFT?
+Hello,
 
-fs/dquot.c uses it.
+this should fix the serial callout driver for the non-devfs case.
+I haven't tested it because I have no such hardware.
 
-> Nothing generic should reference it.  Did something get added to 2.5.x
-> that needs it now?
 
-Must have been 2.5, but not since 2.5.24.
+Thiemo
 
-> I wouldn't have noticed yet as I've been away for nearly half a month
-> on vaction until a day or two ago.
 
-Welcome back!
-
-							Regards,
-							Thunder
--- 
-(Use http://www.ebb.org/ungeek if you can't decode)
-------BEGIN GEEK CODE BLOCK------
-Version: 3.12
-GCS/E/G/S/AT d- s++:-- a? C++$ ULAVHI++++$ P++$ L++++(+++++)$ E W-$
-N--- o?  K? w-- O- M V$ PS+ PE- Y- PGP+ t+ 5+ X+ R- !tv b++ DI? !D G
-e++++ h* r--- y- 
-------END GEEK CODE BLOCK------
-
+diff -BurpNX /bigdisk/src/dontdiff source-linux-orig/drivers/sbus/char/zs.c source-linux/drivers/sbus/char/zs.c
+--- source-linux-orig/drivers/sbus/char/zs.c	Fri Jul  5 08:31:49 2002
++++ source-linux/drivers/sbus/char/zs.c	Fri Jul  5 08:55:05 2002
+@@ -2406,7 +2414,11 @@ int __init zs_init(void)
+ 	 * major number and the subtype code.
+ 	 */
+ 	callout_driver = serial_driver;
++#ifdef CONFIG_DEVFS_FS
+ 	callout_driver.name = "cua/%d";
++#else
++	callout_driver.name = "cua";
++#endif
+ 	callout_driver.major = TTYAUX_MAJOR;
+ 	callout_driver.subtype = SERIAL_TYPE_CALLOUT;
+ 
