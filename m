@@ -1,114 +1,81 @@
-From: Martin Josefsson <gandalf@wlug.westbo.se>
-Date: Tue, 25 May 2004 22:02:13 +0000
-Subject: Re: [PATCH 3/4] Consolidate sys32_select
-Message-Id: <1085522532.969.91.camel@tux.rsn.bth.se>
-MIME-Version: 1
-Content-Type: multipart/mixed; boundary="=-HFNHQ274hDOAivtaNVv6"
+From: Jamie Lokier <jamie@shareable.org>
+Date: Wed, 30 Jun 2004 03:05:03 +0000
+Subject: A question about PROT_NONE on Sparc and Sparc64
+Message-Id: <20040630030503.GA25149@mail.shareable.org>
 List-Id: <ultralinux.vger.kernel.org>
-References: <200404161800.22367.arnd@arndb.de>
-	 <200404161805.55224.arnd@arndb.de>
-In-Reply-To: <200404161805.55224.arnd@arndb.de>
-To: Arnd Bergmann <arnd@arndb.de>
-Cc: linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: "Keith M. Wesolowski" <wesolows@foobazco.org>, sparclinux@vger.kernel.org, "David S. Miller" <davem@redhat.com>, ultralinux@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
 
+Hi folks,
 
---=-HFNHQ274hDOAivtaNVv6
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+I'm doing a survey of the different architectural implementations of
+PROT_* flags for mmap() and mprotect().  I'm looking at linux-2.6.5.
 
-On Fri, 2004-04-16 at 18:05, Arnd Bergmann wrote:
+The Sparc and Sparc64 implementations are very similar to plain x86:
+read implies exec, exec implies read and write implies read.
 
-Hi Arnd.
+(Aside: A comment in include/asm-sparc/pgtsrmmu.h says that finer-grained
+access is possible.  Quite a few other architectures do implement
+finer-grained access, and even x86 is getting it now, so you may want
+to revisit that.  The code is already available, and tested, if you
+cut that part out of the PaX security patch).
 
-> sys32_select has seven mostly but not exactly identical versions,
-> so consolidate them as compat_sys_select. Based on the ppc64
-> implementation, which most closely resembles sys_select.
-> One bug that was not caught by LTP has been fixed since the
-> first version of this patch.
->=20
-> tested x86_64, ia64 and s390.
+I see a potential bug with PROT_NONE.  I'm not sure if it's real, so
+could you please confirm?  I don't know the Sparc well enough to tell.
 
-This breaks sparc64. rsync -> select() -> compat_sys_select() with a
-user pointer that has bit (1<<32) set.
-I came to this conclusion after having added lots of debug printk's.
-Here's the debug printk:
+In include/asm-sparc64/pgtable.h, there's:
 
-compat_sys_select: before verify_area 00000001efff6468
+#define __ACCESS_BITS   (_PAGE_ACCESSED | _PAGE_READ | _PAGE_R)
+#define PAGE_NONE       __pgprot (_PAGE_PRESENT | _PAGE_ACCESSED | _PAGE_CACHE)
+#define PAGE_READONLY   __pgprot (_PAGE_PRESENT | _PAGE_VALID | _PAGE_CACHE | \
+                                  __ACCESS_BITS)
 
-The address printed is the address of the tvp argument.
-The only weird thing with it is the (1<<32) bit, otherwise it looks like
-the other pointers (this doesn't happen for all select()'s but I have a
-testcase with rsync that reproduces it every time in exactly the same
-way)
+PAGE_NONE has the hardware _PAGE_PRESENT bit set.  However unlike
+PAGE_READONLY, it doesn't have the hardware _PAGE_R and software
+_PAGE_READ bits.
 
-When this happens __get_user() generates a pagefault and we somehow get
-stuck in a pagefault loop, we livelock.
-(verify_area() is a noop on sparc64)
+I guess that means that PAGE_NONE pages aren't readable from
+userspace.  Presumably the TLB handler takes care of it.
+Does it prevent reads from kernel space as well?
 
-How it used to look in arch/sparc64/kernel/sys_sparc32.c
+I.e. can you confirm that write() won't succeed in reading the data
+from a PROT_NONE page on Sparc64?  I think that's probably the case.
+You'll see why I ask, from the next one:
 
-> -asmlinkage int sys32_select(int n, u32 *inp, u32 *outp, u32 *exp, u32 tv=
-p_x)
-> -{
-> -	fd_set_bits fds;
-> -	struct compat_timeval *tvp =3D (struct compat_timeval *)AA(tvp_x);
-[snip]
-> -		if ((ret =3D verify_area(VERIFY_READ, tvp, sizeof(*tvp)))
-> -		    || (ret =3D __get_user(sec, &tvp->tv_sec))
-> -		    || (ret =3D __get_user(usec, &tvp->tv_usec)))
-> -			goto out_nofds;
+In include/asm-sparc/pgtsrmmu.h, there's:
 
-What it looks like now:
+#define SRMMU_PAGE_NONE    __pgprot(SRMMU_VALID | SRMMU_CACHE | \
+				    SRMMU_PRIV | SRMMU_REF)
+#define SRMMU_PAGE_RDONLY  __pgprot(SRMMU_VALID | SRMMU_CACHE | \
+				    SRMMU_EXEC | SRMMU_REF)
 
-asmlinkage long
-compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t __user =
-*outp,
-		compat_ulong_t __user *exp, struct compat_timeval __user *tvp)
-{
-[snip]
-		time_t sec, usec;
+This one bothers me.  The difference is that PROT_NONE pages are not
+accessible to userspace, and not executable.
 
-		if ((ret =3D verify_area(VERIFY_READ, tvp, sizeof(*tvp)))
-		    || (ret =3D __get_user(sec, &tvp->tv_sec))
-		    || (ret =3D __get_user(usec, &tvp->tv_usec)))
-			goto out_nofds;
+So userspace will get a fault if it tries to read a PROT_NONE page.
 
+But what happens when the kernel reads one?  Don't those bits mean
+that the read will succeed?  I.e. write() on a PROT_NONE page will
+succeed, instead of returning EFAULT?
 
-This combined with this comment from arch/sparc64/kernel/sys_sparc32.c
+If so, this is a bug.  A minor bug, perhaps, but nonetheless I wish to
+document it.
 
-/* Things to consider: the low-level assembly stub does
-   srl x, 0, x for first four arguments, so if you have
-   pointer to something in the first four arguments, just
-   declare it as a pointer, not u32. On the other side,
-   arguments from 5th onwards should be declared as u32
-   for pointers, and need AA() around each usage.
+I don't know if you would be able to rearrange the pte bits so that a
+PROT_NONE page is not accessible to the kernel either.  E.g. on i386
+this is done by making PROT_NONE not set the "physical" present bit
+but a different bit, and "pte_present()" tests both of those bits to
+test the virtual present bit.
 
+Alternatively, perhaps in this case simply omitting the SRMMU_REF bit
+would be enough?  Would that cause the TLB handler to be entered, and
+the TLB handler could then refuse access?  Again, I don't know enough
+about Sparc to say more.
 
-I added some simple casting to get rid of the high-bit and now rsync
-works just fine and we don't livelock.
+Looking at pgtsun4.h and pgtsun4c.h, I'm not sure about those either.
 
-Do you have any ideas how to cleanly get this working again?
-Masking argument five and onwards with 0xffffffffUL ?
-
-On a related note, a quick look through fs/compat.c indicates that we
-have the same problem with these compat functions as well:
-
-compat_sys_io_getevent
-compat_sys_mount
-
---=20
-/Martin
-
---=-HFNHQ274hDOAivtaNVv6
-Content-Type: application/pgp-signature; name=signature.asc
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.4 (GNU/Linux)
-
-iD8DBQBAs8JkWm2vlfa207ERAoO1AJ0eCxPM3sktmHbdr7/kf8hYtMpP1ACfQAzU
-jD4JXZsaPW5yNYE5RVyF+YM=
-=m3H2
------END PGP SIGNATURE-----
-
---=-HFNHQ274hDOAivtaNVv6--
+Thanks,
+-- Jamie
