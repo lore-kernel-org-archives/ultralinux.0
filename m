@@ -1,36 +1,39 @@
-From: Thiemo Seufer <ica2_ts@csv.ica.uni-stuttgart.de>
-Date: Fri, 05 Jul 2002 12:33:46 +0000
-Subject: [PATCH] Fix zs.c serial callout driver
-Message-Id: <marc-linux-ultrasparc-102587243614878@msgid-missing>
+From: Thunder from the hill <thunder@ngforever.de>
+Date: Sat, 13 Jul 2002 02:26:49 +0000
+Subject: Lots of outdated LVM stuff in the kernel...
+Message-Id: <marc-linux-ultrasparc-102652722717369@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-[please CC me for replies, I'm not on this list]
+Hi,
 
-Hello,
+In arch/sparc64/kernel/ioctl32.c (and some other 64-bit architectures), we 
+find lots of old and broken LVM code, for example:
 
-this should fix the serial callout driver for the non-devfs case.
-I haven't tested it because I have no such hardware.
+static void put_lv_t(lv_t *l)
+{
+        if (l->lv_current_pe) vfree(l->lv_current_pe);
+        if (l->lv_block_exception) vfree(l->lv_block_exception);
+        kfree(l);
+}
 
+lv_t doesn't have lv_current_pe and lv_block_exception any more for ages. 
+The code should either be updated or removed completely.
 
-Thiemo
+Wondering why I'm hitting this all? I'm currently doing make allmodconfig 
+(kbuild-2.5) on a sparc64...
 
+							Regards,
+							Thunder
+-- 
+(Use http://www.ebb.org/ungeek if you can't decode)
+------BEGIN GEEK CODE BLOCK------
+Version: 3.12
+GCS/E/G/S/AT d- s++:-- a? C++$ ULAVHI++++$ P++$ L++++(+++++)$ E W-$
+N--- o?  K? w-- O- M V$ PS+ PE- Y- PGP+ t+ 5+ X+ R- !tv b++ DI? !D G
+e++++ h* r--- y- 
+------END GEEK CODE BLOCK------
 
-diff -BurpNX /bigdisk/src/dontdiff source-linux-orig/drivers/sbus/char/zs.c source-linux/drivers/sbus/char/zs.c
---- source-linux-orig/drivers/sbus/char/zs.c	Fri Jul  5 08:31:49 2002
-+++ source-linux/drivers/sbus/char/zs.c	Fri Jul  5 08:55:05 2002
-@@ -2406,7 +2414,11 @@ int __init zs_init(void)
- 	 * major number and the subtype code.
- 	 */
- 	callout_driver = serial_driver;
-+#ifdef CONFIG_DEVFS_FS
- 	callout_driver.name = "cua/%d";
-+#else
-+	callout_driver.name = "cua";
-+#endif
- 	callout_driver.major = TTYAUX_MAJOR;
- 	callout_driver.subtype = SERIAL_TYPE_CALLOUT;
- 
