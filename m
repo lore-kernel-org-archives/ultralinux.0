@@ -1,19 +1,34 @@
-From: Derrick J Brashear <shadow@DEMENTIA.ORG>
-Date: Sun, 20 Sep 1998 15:50:55 +0000
-Subject: lib5 compat question
-Message-Id: <marc-linux-ultrasparc-90631031919991@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Tue, 01 Sep 1998 21:49:58 +0000
+Subject: new binutils rpms
+Message-Id: <marc-linux-ultrasparc-90469253526469@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-am i correct in believing that in order to use an X application from my
-RedHat 4.2 system (dynamically linked against X libs) I need to copy those
-into the sparc-libc5 lib directory, which is to say, I can't just use
-libc.so.5, libm.so.5, and newer libraries whose API has not changed?
+HI!
 
-(and if this is the case, i'm guessing it's because ld-linux.so.1 and
-ld-linux.so.2 don't play nicely?)
+New binutils 2.9.1.0.10-4 are available from UltraPenguin 1.0.9.
+Highlights of the release:
+in addition to dual arch support (sparc-ultrapenguin-linux and
+sparc64-ultrapenguin-linux) it finally allows to assemble/disassemble a
+couple of v9a instructions which were broken before, such as
+edge8, edge8l
+edge16, edge16l
+fcmpgt8 ..., fcmpgt16 ...
+fb*,a,pn %fcc3,X
 
--D
+Available from ftp://ultra.linux.cz/OS/Linux/Sparc/ultrapenguin-1.0.9/
+and mirrors.
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.119 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
