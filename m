@@ -1,7 +1,7 @@
-From: <pau@readysoft.es>
-Date: Mon, 12 Apr 1999 14:32:49 +0000
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Mon, 12 Apr 1999 17:15:40 +0000
 Subject: Re: Quota un (ultra)sparc linux
-Message-Id: <marc-linux-ultrasparc-92393752608821@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92396700903364@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92392639829067@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92392639829067@msgid-missing>
@@ -10,16 +10,19 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Mon, 12 Apr 1999 ultra@a2000.nu wrote:
+> 
+> (Repeat of posting some time ago)
+> 
+> hmms
 
-> and quota is not working
-> what is wrong ?
-> 
-> ps. kernel 2.2.5
-> 
-> 
-> >rpm -qa |grep quota
-> quota-1.66-1
+Sorry. I just found what the problem is, so am now trying to solve it.
 
-I can confirm it.
-Pau
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
+Linux version 2.2.5 on a sparc64 machine (3958.37 BogoMips)
+___________________________________________________________________
