@@ -1,7 +1,7 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Sat, 06 May 2000 13:13:37 +0000
+From: Jes Sorensen <Jes.Sorensen@cern.ch>
+Date: Mon, 08 May 2000 07:50:11 +0000
 Subject: Re: Oops with 2.2.14 on Ultra 1.
-Message-Id: <marc-linux-ultrasparc-95761999417370@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95777246003199@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-95754803607277@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-95754803607277@msgid-missing>
@@ -10,16 +10,15 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+>>>>> "David" = David S Miller <davem@redhat.com> writes:
 
-/dev/port is not supported on Sparc, any behavior from accessing it
-is guarenteed to be dependant on the phase of the moon, and other
-random sources.
+David> /dev/port is not supported on Sparc, any behavior from
+David> accessing it is guarenteed to be dependant on the phase of the
+David> moon, and other random sources.
 
-Ie. figure out what program is messing with /dev/port and get rid
-of it.
+David> Ie. figure out what program is messing with /dev/port and get
+David> rid of it.
 
-This is not a kernel bug.
+Why not just disable /dev/port access like it's done on the m68k?
 
-Later,
-David S. Miller
-davem@redhat.com
+Jes
