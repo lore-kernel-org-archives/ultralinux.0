@@ -1,25 +1,40 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Sat, 01 Aug 1998 07:53:46 +0000
-Subject: Re: boot problems with cvs kernel...
-Message-Id: <marc-linux-ultrasparc-90223508402783@msgid-missing>
+From: Phil Marsden <wavejump@nautilus.phys.soton.ac.uk>
+Date: Fri, 14 Aug 1998 12:34:28 +0000
+Subject: Getting onto your mailing list and SILO...
+Message-Id: <marc-linux-ultrasparc-90309336020589@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: 	Fri, 31 Jul 1998 16:22:48 -0600 (CST)
-   From: Alberto Brealey <beto@alpha.ulatina.ac.cr>
+Hi!
 
-   it's just here or the latest cvs kernel locks up the screen on boot?
-   (Ultra 5 running UP 1.0.9)
+We are trying to install UltraPenguin onto a SPARC 5.. we have got most of
+the install going by using the sun4u.img from the contrib/misc directory.
 
-If you check the machine is running just fine and boots up all the
-way, the screen is just blank.  You can telnet in and use it once it
-fully boots.
+However, when silo tries to install we get the message
 
-This bug is being worked on.
+Fatal error: Couldn't find what device is second stage on.
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+This appears to come from silocheck, as when we try this on the kernel
+image we get a very similar message.
+
+Any ideas?
+
+Oh, and how do we get onto this mailing list?
+
+Thanks in advance,
+
+Phil
+
+---
+
+Phil Marsden 
+Optoelectronic Research Centre
+University of Southampton
+U.K.
+
+Tel:   +44 1703 59 4527/4529
+Email: pam@orc.soton.ac.uk
+WWW:   www.orc.soton.ac.uk/~pam
