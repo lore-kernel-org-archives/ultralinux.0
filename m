@@ -1,22 +1,19 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Tue, 05 Jan 1999 23:15:54 +0000
-Subject: Re: weird messages in dmesg (Bash is saying oops)
-Message-Id: <marc-linux-ultrasparc-91563672626000@msgid-missing>
+From: =?ISO-8859-1?Q?=C0=CC=C1=A4=C0=B1?= <jeongyun@netian.com>
+Date: Fri, 08 Jan 1999 12:30:40 +0000
+Subject: wmaker at 16 bpp, X crashes
+Message-Id: <marc-linux-ultrasparc-91588845410084@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91553799013232@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91553799013232@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-Can I have a copy of the System.map file for this kernel?
-And also the kernel version, and maybe even when you last CVS updated
-to get it if from vger?  Thanks.
+ultrapenguin 1.1.9, xf86 3.3.2.3-26, kernel 2.2.0pre4
 
-Then I can track it down.
+is this a known bug? tmw and fvwm2 works just fine at 16 bpp
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+
+-- 
+ / http://www.elim.net/~jeongyun /
+/ mailto:jeongyun@elim.net      /
