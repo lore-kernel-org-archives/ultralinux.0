@@ -1,29 +1,46 @@
-From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
-Date: Wed, 14 Oct 1998 19:18:36 +0000
-Subject: installation trouble
-Message-Id: <marc-linux-ultrasparc-90843265407437@msgid-missing>
+From: Roland Turner <raz@arrakis.com.au>
+Date: Mon, 26 Oct 1998 22:35:30 +0000
+Subject: Difficulty with network+serial console install
+Message-Id: <marc-linux-ultrasparc-90944611310785@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I have tried to install UltraLinux over the network with a "boot net"
-command but have had no success.  When I type "boot net" the computer
-begins to download the "tftpboot.img" and then begins to boot the
-kernel, however it hangs part way through.  This is where it dies.
+Hi there.
 
-Sparc Zilog8530 serial driver version 1.20
-Kernel panic: zilog: address property
-Press L1-A to return to the boot prom
+Sorry if this has already been covered in this list, I can't find its
+archive. This is more a "help with installation" issue than a bug.
 
-...but at this point the computer is frozen solid and a message in the 
-normal console font reads...
+I am attempting to install ultrapenguin-1.0.9 on a Sun "Ultra Enterprise
+1". This machine has no floppy drive and no frame buffer, so I am
+attempting to perform a network install with a serial console.
 
-WHOOPS: proplen for address was -1, need multiple of 4
+Whilst I know Linux rather well, I know very little about SPARC
+hardware.
 
-I have an Ultra 2 Creator 3D.
-Does anyone have any suggestions?
+I have not been able to work out from the user's guide how to proceed.
+The section on installing via a serial console suggests that I type
+"linux serial" at the SILO prompt, but the SILO installation
+instructions assume that I already have Linux installed. This sounds
+like a chicken and egg problem.
 
-Thanks in advance,
-Ryan
+I have tried "boot net linux serial" and "boot net serial", but in both
+cases I see "Resetting ..." on the serial console, then nothing.
+
+Snooping the network from elsewhere, I see the RARP query and answer and
+the complete TFTP transfer (>5000 512 byte packets, all acknowledged),
+then nothing. No network activity, no serial console output.
+
+I have tried all three boot images. Their md5sums are:
+
+0143f3e25fc446bf94f4ced54478d718  tftpboot.img
+52aad0a57d86c1ad70221967b2a03074  tftpboot.img.old
+cbedf6ffad15888c3310d523ea4c947d  tftpboot.img.veryold
+
+Can anyone suggest what's wrong?
+
+Thanks
+
+- Raz
