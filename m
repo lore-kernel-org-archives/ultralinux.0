@@ -1,58 +1,58 @@
-From: Wesley Hosking <wes@atlantek.com.au>
-Date: Mon, 28 Sep 1998 07:01:48 +0000
-Subject: Re: shm problems ?
-Message-Id: <marc-linux-ultrasparc-90696509909734@msgid-missing>
+From: "Nils Lohner" <lohner@ICD.Teradyne.COM>
+Date: Thu, 24 Sep 1998 01:12:00 +0000
+Subject: glibc building
+Message-Id: <marc-linux-ultrasparc-90664428512210@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90671327306006@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90671327306006@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-David S. Miller writes:
- >=20
- > Upgrade to and install latest CVS kernel.
- >=20
- > ftp://vger.rutgers.edu/pub/linux/README.CVS
- >=20
-It turned out I had to do both....
-Jakub put a fix into the CVS archive for sg.o
-(the generic scsi device)=20
 
-AND it required the stuff below (I changed the 1024's for SHMMAX to
-4096)...=20
+This is a problem I ran into while trying to compile glibc 2.0.96 on an 
+ultra.  I'm not sure where the error is... it could well be the compiler, 
+which I recompiled with -static in the gcc directory after a complete build 
+(cd gcc;make clean;env LDFLAGS=-static make)
 
-(cdrecord requires a 4Mbyte chunk to ensure the SCSI flow is kept=20
-full to the CD - I just made it 4 * larger to make sure ;-)
+The egcs configure script ignores the LDFLAGS passed to it by 
+env LDFLAGS=-static ./configure --prefix=/usr --host=sparc-sun-linux
 
-It works fine ! (now).
+If this is a kernel issue, I plan on recompiling the kernel to the latest 
+CVS snapshot tomorrow, and also do some more digging into this.
 
-wes
+Thanks, Nils.
 
 
-In response to Wesley Hosking writes:
- > I am VGER 2.1.121 with shm enabled, on an Ultra 30.
- >=20
- > When I use xcdroast to burn a CD it gives me :
- > /usr/lib/xcdroast-0.96d/bin/cdrecord-1.6: Invalid argument. shmget failed
- > Cdrecord release 1.6 Copyright (C) 1995-1998 J=F6rg Schilling
- >=20
- > (I also get the same in sparc32 mode :
- >=20
- > /usr/lib/xcdroast-0.96d/bin/cdrecord-1.6: Invalid argument. shmget failed
- > Cdrecord release 1.6 Copyright (C) 1995-1998 J=F6rg Schilling
- >=20
- > .....
- >=20
- > ok - its probably the=20
- > #define SHMMAX (1024 * 1024)
- > in include/asm-sparc64/shmparam.h  =20
- >=20
- >=20
- > cdrecord requires a 4M chunk...
- > will try it at 16Mb, and see if that is the problem.
- >=20
- > If you don't hear from me there thats probably what the fix is ;-)
- >=20
- > wes
+gcc   -shared -o sysdeps/../libc.so  -Wl,-dynamic-linker=/lib/ld-linux.so.2 
+-Bsysdeps/../csu/  -Wl,-soname=libc.so.6  -nostdlib -nostartfiles -e 
+__libc_main -L. -Lsysdeps/../math -Lsysdeps/../elf -Lsysdeps/../nss 
+-Lsysdeps/../nis -Lsysdeps/../db2 -Lsysdeps/../rt -Lsysdeps/../resolv 
+-Lsysdeps/../linuxthreads -Wl,-rpath-link=.:sysdeps/../math:sysdeps/../elf:sy
+sdeps/../nss:sysdeps/../nis:sysdeps/../db2:sysdeps/../rt:sysdeps/../resolv:sy
+sdeps/../linuxthreads -Wl,--whole-archive sysdeps/../elf/soinit.os 
+sysdeps/../libc_pic.os sysdeps/../elf/sofini.os sysdeps/../elf/interp.os 
+sysdeps/../elf/ld.so  -lgcc
+/usr/lib/gcc-lib/sparc-sun-linux/egcs-2.92.11/libgcc.a(_bb.o): In function 
+`__bb_exit_func':
+/home/lohner/work/egcs_tree/egcs/6build/gcc/../../gcc/libgcc2.c(.text+0x274):
+ multiple definition of `__bb_exit_func'
+sysdeps/../libc_pic.os:/home/lohner/utils/glibc-2.0.96/gmon/bb_exit_func.c:47
+: first defined here
+/usr/sparc-sun-linux/bin/ld: Warning: size of symbol `__bb_exit_func' 
+changed from 308 to 1864 in _bb.o
+/usr/lib/gcc-lib/sparc-sun-linux/egcs-2.92.11/libgcc.a(_bb.o): In function 
+`__bb_init_func':
+/home/lohner/work/egcs_tree/egcs/6build/gcc/../../gcc/libgcc2.c(.text+0x9bc):
+ multiple definition of `__bb_init_func'
+sysdeps/../libc_pic.os:/home/lohner/utils/glibc-2.0.96/gmon/../sysdeps/generi
+c/bb_init_func.c:33: first defined here
+/usr/sparc-sun-linux/bin/ld: Warning: size of symbol `__bb_init_func' 
+changed from 116 to 100 in _bb.o
+collect2: ld returned 1 exit status
+gcc: file path prefix `sysdeps/../csu/' never used
+make: *** [sysdeps/../libc.so] Error 1
+$[lohner@xia01 glibc-2.0.96]$ gcc --version
+egcs-2.92.11
+[lohner@xia01 glibc-2.0.96]$ uname -a
+Linux xia01 2.1.99 #1 Sat May 2 18:35:38 1998 sparc64 unknown
+[lohner@xia01 glibc-2.0.96]$ 
