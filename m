@@ -1,17 +1,11 @@
-From: Robbie Stone <robbie@serendipity.palo-alto.ca.us>
-Date: Wed, 07 Apr 1999 22:15:37 +0000
-Subject: Re: Mirror
-Message-Id: <marc-linux-ultrasparc-92352545810498@msgid-missing>
+From: Shawn Hooton <shooton@cms.cendant.com>
+Date: Wed, 28 Apr 1999 20:45:00 +0000
+Subject: Redhat 6.0, sound cards for an Ultra 5/10...
+Message-Id: <marc-linux-ultrasparc-92533276432217@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92352059506014@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92352059506014@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-try linux.lanl.gov, it might have the image.
--- 
-Robbie Stone 
-Serendipity Simplex 
-Email: robbie@serendipity.palo-alto.ca.us
+Does Redhat 6.0 support the crystal sound cards on an Ultra 5/10?
