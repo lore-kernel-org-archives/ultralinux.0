@@ -1,7 +1,7 @@
-From: Zach Metzinger <wizkid@ksu.edu>
-Date: Fri, 26 Mar 1999 22:21:16 +0000
+From: Derrick J Brashear <shadow@dementia.org>
+Date: Sat, 27 Mar 1999 15:47:40 +0000
 Subject: Re: Sound on Sun Ultra 5
-Message-Id: <marc-linux-ultrasparc-92248733831781@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92254994528110@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92211633922106@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92211633922106@msgid-missing>
@@ -10,15 +10,20 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Tue, Mar 23, 1999 at 12:06:24AM -0500, Derrick J Brashear wrote:
+On Fri, 26 Mar 1999, Zach Metzinger wrote:
 
-> Either, finish writing the driver, or wait until I have time:-)
+> On Tue, Mar 23, 1999 at 12:06:24AM -0500, Derrick J Brashear wrote:
 > 
-> Basically, I've been quite busy as I'm working and finishing my degree,
-> only 4 years late, so the ebus version of the 4231 driver isn't done yet.
+> > Either, finish writing the driver, or wait until I have time:-)
+> > 
+> > Basically, I've been quite busy as I'm working and finishing my degree,
+> > only 4 years late, so the ebus version of the 4231 driver isn't done yet.
+> 
+> Then perhaps it should be removed from the list of "supported"
+> hardware on ultra.linux.cz. Knowing this, I'll stick with sol 2.6 on
+> my u10 as I really don't like living without my mpeg :)
 
-Then perhaps it should be removed from the list of "supported"
-hardware on ultra.linux.cz. Knowing this, I'll stick with sol 2.6 on
-my u10 as I really don't like living without my mpeg :)
+The 4231 *is* supported, just not on the PCI based machines. So removing
+it from the list is also wrong:-)
 
---- Zach
+-D
