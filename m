@@ -1,56 +1,56 @@
-From: Andreas Jaeger <aj@suse.de>
-Date: Fri, 01 Dec 2000 08:24:02 +0000
-Subject: Re: glibc 2.1.3 Build - locale/C-ctype.c
-Message-Id: <marc-linux-ultrasparc-97566038823150@msgid-missing>
+From: Eric <ebrower@usa.net>
+Date: Mon, 29 Jan 2001 12:04:20 +0000
+Subject: Re: [Linux Status for Sun Netra T1 200 ]
+Message-Id: <marc-linux-ultrasparc-98079874113446@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 To: ultralinux@vger.kernel.org
 
->>>>> Sean Upton writes:
+Can you send the boot-sequence output from Linux and the
+'prtconf -pv' output to the list?  If the boardset is not
+already supported to a bootable level, I'd suggest we wait
+for DaveM, et. al. to get their hands on one of those
+boards-- I'm probably not qualified to do that kind of work
+without having a box and documentation in front of me. =20
 
- > 2 quick questions... 
- > I have sort of naively stumbled on to a problem and
- > solution in building glibc 2.1.3 on sparc.  Buillding
- > a custom distro, and I was trying to build glibc 2.1.3
- > on an Ultra 10 in sparc32 mode, and had a problems
- > building it with gcc 2.95.3 and 2.95.2, because
- > compile failed due to parse error in locale/C-ctype.c
- > that seemsed sort of weird.  I believe this issue was
- > a syntax problem that prevented compilation on
- > big-endian arcitectures (look at the code, you'll see
- > what I mean).  I added a comma to line 377 and tried
- > rebuilding, with 100% success.  diff output is
- > attached.  Has anyone else seen this, and would
- > patching this file in this manner cause problems for
- > little-endian boxes?  
+If it does boot, and is simply lacking support for a few
+onboard components, that would be another issue with which
+I probably could be of help.
 
- > 2.1.3 deals with endian issues with preprocessor
- > directives, from looking at the code in glibc 2.2, it
- > deals with the endian issues differently, so this
- > should be a non-issue with 2.2.  Has anyone had decent
- > luck using glibc running on sparc/linux?
+E
 
- > C-ctype.c:379: parse error before `{'
- > C-ctype.c:382: parse error before `}'
- > make[2]: ***
- > [/lfs/usr/src/glibc-build/locale/C-ctype.o] Error 1
 
-Check the CVS archive via http://sources.redhat.com/glibc for this
-patch to the 2.1 branch:
 
-2000-03-07  H.J. Lu  <hjl@gnu.org>
+Brasseur Val=E9ry <Valery.Brasseur@atosorigin.com> wrote:
+I have access for a small amount of time (# 1 month) to a Netra t1 200 ...
+I have try to net-boot Linux on it and for now, it doesn't work...
 
-	* locale/C-ctype.c (_nl_C_LC_CTYPE): Fix the initializer order
-	for _NL_CTYPE_TOXXXER32_EX.
+I have seen your mail from 2001-01-25 12:46:35,
+may be looking from the Solaris 8 already installed I can help to identify
+what's going wrong ?
 
-Andreas
--- 
- Andreas Jaeger
-  SuSE Labs aj@suse.de
-   private aj@arthur.inka.de
-    http://www.suse.de/~aj
+You look interested in seeing the prtconf, I can't already send you the
+output as the netra isn't on my network for now and output is very huge !!!
+but from running it on the console I cant give you some hints :
+  the first line said "SUNW,UltraAX-2"
+  there is a lom, a flashprom, pci, i2c, usb port....
+
+If I can be of any help, I will try, as I am very interested in making Linux
+working on it (note : I can be new kernel if needed as I have already a t1
+105 running under ultralinux )
+
+thanks in advance for your help
+valery
+---
+Valery BRASSEUR                      | Phone # +33 320 60 7982=20
+Atosorigin Branche Multimedia        | Fax   # +33 320 60 7649
+Unix is like a wigwam -- no Gates, no Windows, and an Apache inside.
+
+
+____________________________________________________________________
+Get free email and a permanent address at http://www.netaddress.com/?N=3D1
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
