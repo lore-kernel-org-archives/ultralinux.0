@@ -1,24 +1,21 @@
-From: Stephan van Hienen <ddx@cable.a2000.nl>
-Date: Sun, 15 Nov 1998 20:51:42 +0000
-Subject: Still no go with the happy meal on the scsi/hme card on sun ultra
-Message-Id: <marc-linux-ultrasparc-91117918117094@msgid-missing>
+From: Phil Hunt <huntp@isone.com>
+Date: Thu, 12 Nov 1998 20:49:12 +0000
+Subject: when is the real 1.1 for ultra coming out?
+Message-Id: <marc-linux-ultrasparc-91091553728267@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-tried the new cvs kernel (2.1.128)
+hi
 
-but still get timeouts on the happy meal eth0 card in my kernel
+I have 1.09.
 
-eth1 (onboard happy meal)
-eth2,eth3 (dec 450)
-work ok
+It has some xfree issues....
 
-this was on the list before, but i hoped it was fixed
+When is it really coming out?
 
-som1 is looking at this ?
+1.09 has been here since april, with a real soon now msg forever!!
 
-i can look for things here, but since i'm not a programmer myself, i can't
-try to fix it :(
+phil
