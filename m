@@ -1,29 +1,28 @@
-From: Grant Beattie <grant@zero.net.au>
-Date: Sun, 14 Jun 1998 08:08:53 +0000
-Subject: Re: UP 1.0.9 on ss5/170
-Message-Id: <marc-linux-ultrasparc-90222357631020@msgid-missing>
+From: Robert Macomber <robertm@usweb.com>
+Date: Mon, 29 Jun 1998 23:34:03 +0000
+Subject: Ultralinux for Sun newbies?
+Message-Id: <marc-linux-ultrasparc-90222357631046@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357631014@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357631014@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Jakub Jelinek writes:
+With a few changes coming up at my place of work, I've been thinking
+(for various reasons) about getting a Sun workstation for home use, and,
+naturally, I've also been thinking about what operating system to use. 
+While I am by no means a newcomer to Linux, or even Unix in general, I
+have virtually no experience with Sun hardware.  So, my question is, is
+Ultralinux for me?
 
-> > It seems that way. Although gcc dies with a sig 11 more often than not,
-> > and /usr/bin/telnet seems to be flaky too :/
-> > 
-> > I'm not sure if this is a generic problem or only on the ss5/170.
-> 
-> That's exactly the behaviour like TurboSPARC port currently works (and has
-> for at least half a year).
-> It is flaky, it is probably some cache flushing issue or whatever.
-> If you'd have time and want to do that, I could tell you how you can debug
-> it and what to look at.
-
-Sure, I'd be glad to help out. email me what you'd like me to check out
-and I'll see what I can do.
-
-grant.
+I know that the UltraSparc port is a work in progress, but I've been
+reading this mailing list for a few months now -- at least as far back
+as 3 April, which is when the first message I saved was dated -- and as
+far as I can tell, if I get Linux to boot at all, it will be
+sufficiently stable for my needs.  My question, then, is: is this a
+correct impression?  Should I get the workstation and install Linux,
+keep Solaris around until UltraPenguin 1.1 is released, or get another
+Intel box with Linux?
+-- 
+Rob Macomber
+robertm@usweb.com
