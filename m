@@ -1,47 +1,44 @@
-From: John Gilmore <gnu@toad.com>
-Date: Wed, 20 May 1998 19:54:43 +0000
-Subject: Re: Decompression error with silo and new kernel
-Message-Id: <marc-linux-ultrasparc-90222356531061@msgid-missing>
+From: Mike Bennett <mbennett@netcom.com>
+Date: Sat, 16 May 1998 16:52:55 +0000
+Subject: UltraSPARC lock performance
+Message-Id: <marc-linux-ultrasparc-90222356531041@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356531054@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356531054@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> So, for now, modularize your kernel a bit. I will in the mean time try to
-> think how to make SILO able to handle larger sizes (but there will probably
-> be a limitation 3M-100K even then). The problem is SILO is statically linked
-> to 0x280000 address, which is caused by old Suns where they guarantee only
-> 3M of contiguous mapped memory.
+Hi -
 
-It was very easy to make SPARC machine code location-independent, at
-least in the v7-v8 days, particularly if you only need to relocate it
-on large boundaries (e.g. move it in 64K or 16MB increments).  GCC can
-generate such code (for shared libraries).  SILO is probably a small
-enough program that making it able to relocate itself to avoid the
-memory of the incoming kernel is possible without much work.
+I've looked with great interest at the UltraLinux codebase; great
+accomplishment!
 
-Another alternative is to have it decompress the kernel image into
-available (high) memory, then use a small location-independent loop to
-copy it into its final resting place.
+I've recently been doing a deal of performance work on SPARC/Solaris, and
+had a suggestion with regards to SMP lock performance.
 
-A third alternative would be to remap the virtual address space to do
-the same thing, avoiding the final memory-to-memory copy.  The kernel
-should be able to handle starting itself up from *any* set of physcial
-memory pages (i.e. it can't assume that it's in low physical memory --
-low phys memory might be broken, so the ROMs are designed to allocate
-other memory to low virtual addresses in that case).
+Currently, I see (based on the 2.1.102 release snapshot shown by the
+LXR folks) that the locking primitive used is the ldstub primitive.
+I've been doing performance analysis of wait-free algorithms and have 
+found a very striking performance difference between using ldstub 
+and the 'cas' (compare-and-swap) uSPARC instruction to implement locking 
+primitives.
 
-If you want the kernel to end up in low *physical* memory as well as
-low *virtual* memory, one thing you could do is relocate SILO in physical
-memory as it starts.  Copy SILO into non-conflicting physical memory,
-change the VM to map the new copy of SILO instead of the old one,
-change the VM to map the kernel's low physical memory location into
-contiguous (high) virtual addresses, decompress it into there, then
-reset the VM to a nice flat map and jump to the kernel.  You'd still 
-have to only use the physical page frames that the ROMs had handed you,
-rather than assume that all memory from location 0 exists and works.
+On a single processor, cas outperforms ldstub by a good margin.  On an
+SMP machine, the difference is extreme.  One of the properties of ldstub
+on the 2+ cpu uSPARCS is the requirement that ldstub lock the bus; cas
+does not have this characteristic.
 
-	John
+If you take a simple lock call implemented with 'ldstub' and one with 'cas'
+and time it on a 3-way or better system, a graph of execution time shows
+a cas primitive having a fairly linear improvement in throughput; however,
+ldstub takes a HUGE performance hit on the 3rd cpu and gets progressively
+worse as you add cpus.  Moral, is, if you use ldstub don't run more than
+2 cpus (2 is slightly better performing than one, but nowhere near the
+speed of 'cas').
+
+There are sample 'cas' lock implementations in the SPARC v9 architecture
+manual (section J?).  For a kernel implementation, it might be worthwhile
+to check it out for yourself.
+
+Great work; hope this helps -
+  -mike bennett  (mbennett@netcom.com)
