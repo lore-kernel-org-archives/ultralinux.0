@@ -1,41 +1,58 @@
-From: Marco Colombo <marco@esi.it>
-Date: Thu, 07 Feb 2002 18:09:47 +0000
-Subject: RNDGETENTCNT ioctl
-Message-Id: <marc-linux-ultrasparc-101310553528841@msgid-missing>
+From: "Holzrichter, Bruce" <bruce.holzrichter@monster.com>
+Date: Thu, 14 Feb 2002 19:50:20 +0000
+Subject: 2.5.5pre1 Sparc64 build problem
+Message-Id: <marc-linux-ultrasparc-101371622209387@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi, I'd like to read the entropy count via the RNDGETENTCNT
-ioctl, as in the following code:
+Hello,
 
-	int     rfd, res;
-	int     avail_entropy;
+I am running into a problem building 2.5.5pre1 on a Ultra5 platform.  I get
+the following error when doing: make vmlinux
 
-	...
-	rfd = open("/dev/random", O_RDONLY);
-	...
-	res = ioctl(rfd, RNDGETENTCNT, &avail_entropy);
+gcc -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer -o
+scripts/split-include 
+scripts/split-include.c
 
-this happens to work on ix86, but fails on sparc64, with EINVAL.
-I think I've tracked this down to:
+scripts/split-include include/linux/autoconf.h include/config
 
-arch/sparc64/kernel/ioctl32.c
+sparc64-linux-gcc -D__KERNEL__ -I/usr/src/linux-2.5.4/include -Wall
+-Wstrict-pro
+totypes -Wno-trigraphs -O2 -fomit-frame-pointer -fno-strict-aliasing
+-fno-common
+ -m64 -pipe -mno-fpu -mcpu=ultrasparc -mcmodel=medlow -ffixed-g4
+-fcall-used-g5 
+-fcall-used-g7 -Wno-sign-compare -Wa,--undeclared-regs
+-DKBUILD_BASENAME=main 
+-c -o init/main.o init/main.c
 
-where RNDGETENTCNT isn't even mentioned. Is there a patch to add support
-for these "big R" ioctls to ioctl32.c?  Can RNDGETENTCNT simply be 
-added to the list of those that get passed to sys_ioctl() without any
-32->64bit translation? (I'm sorry but I can only vaguely understand the
-issues behind than, so if some hacking is needed, more than just adding
-#includes and case RNDGETENTCNT:, I won't be able to do it myself)
+In file included from /usr/src/linux-2.5.4/include/asm/pgtable.h:17,
 
-I'm currently running RH 2.2.19-6.2.12 (sparc64) kernel, please flame me
-if I need to switch to the latest vanilla 2.2.x before further reporting.
+                 from /usr/src/linux-2.5.4/include/linux/mm.h:27,
 
-The HW is Ultra 1 145Mhz.
+                 from /usr/src/linux-2.5.4/include/linux/pagemap.h:10,
 
-TIA,
-.TM.
+                 from /usr/src/linux-2.5.4/include/linux/blkdev.h:9,
+
+                 from /usr/src/linux-2.5.4/include/linux/blk.h:4,
+
+                 from init/main.c:25:
+
+/usr/src/linux-2.5.4/include/asm/mmu_context.h:37: #error update this
+function. 
+make: *** [init/main.o] Error 1  
+
+If I am reading this correctly (and I doubt that I am :O) ) this is from the
+include file mmu_context.h correct?  I diff'ed against 2.5.4 and they are
+the same, and 2.5.4 compiled.  (Though I couldn't get 2.5.4 to boot on the
+system.. but that's another story....)
+
+Thoughts on were I am going wrong here?
+
+
+Thanks,
+Bruce H.
 
