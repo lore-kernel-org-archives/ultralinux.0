@@ -1,7 +1,7 @@
-From: Thierry Lafage <lafage@irisa.fr>
-Date: Tue, 23 Mar 1999 09:11:29 +0000
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Tue, 23 Mar 1999 09:20:38 +0000
 Subject: Re: Header files conflicts
-Message-Id: <marc-linux-ultrasparc-92218055401139@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92218116701467@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92212191626693@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92212191626693@msgid-missing>
@@ -11,47 +11,36 @@ Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 > 
-> Hello,
+> > 
+> > Hello,
+> > 
+> > The header files in /usr/include/linux seriously conflict with some
+> > from glibc-devel-2.0.7-29 in my ultrasparc-I box running UP-1.1.9 and
+> > kernel 2.2.4.
+> > 
+> > Here is a sample example (using <sys/types.h>):
+> [...]
+> > What may have missed?
+> > 
+> > Thierry Lafage.
 > 
-> The header files in /usr/include/linux seriously conflict with some
-> from glibc-devel-2.0.7-29 in my ultrasparc-I box running UP-1.1.9 and
-> kernel 2.2.4.
-> 
-> Here is a sample example (using <sys/types.h>):
-[...]
-> What may have missed?
-> 
-> Thierry Lafage.
+> Here is another example (trying to include <linux/types.h>):
 
-Here is another example (trying to include <linux/types.h>):
+That's what you get on i386 with glibc as well, simply linux/types.h is
+incompatible with glibc headers, it has been like that for quite some time.
+Generally, you should use glibc headers and if you ever need something from
+linux/ headers which include linux/types.h or similar headers, just handle
+it somehow. If you look into most low level packages which do this, you'll
+see they either use their own copy of kernel headers, thus are independent
+on the actual kernel version installed during build (which is a good thing),
+or #define some define which will prevent those headers to be included.
 
-In file included from /usr/include/_G_config.h:9,
-                 from /usr/include/libio.h:31,
-                 from /usr/include/stdio.h:29,
-                 from emul_error.h:6,
-                 from traps-handle.h:30,
-                 from traps-handle.c:7:
-/usr/include/gnu/types.h:75: warning: `__NFDBITS' redefined
-/usr/include/linux/posix_types.h:30: warning: this is the location of the previous definition
-/usr/include/gnu/types.h:77: warning: `__FDMASK' redefined
-/usr/include/linux/posix_types.h:42: warning: this is the location of the previous definition
-In file included from /usr/include/stdlib.h:210,
-                 from trace.h:12,
-                 from traps-handle.h:32,
-                 from traps-handle.c:7:
-/usr/include/sys/types.h:117: warning: `__BIT_TYPES_DEFINED__' redefined
-/usr/include/linux/types.h:73: warning: this is the location of the previous definition
-In file included from /usr/include/stdlib.h:210,
-                 from trace.h:12,
-                 from traps-handle.h:32,
-                 from traps-handle.c:7:
-/usr/include/sys/types.h:33: warning: redefinition of `u_char'
-/usr/include/linux/types.h:61: warning: `u_char' previously declared here
-/usr/include/sys/types.h:34: warning: redefinition of `u_short'
-/usr/include/linux/types.h:62: warning: `u_short' previously declared here
-/usr/include/sys/types.h:35: warning: redefinition of `u_int'
-[...]
-
-Any idea?
-
-Thierry Lafage.
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
+Linux version 2.2.3 on a sparc64 machine (3958.37 BogoMips)
+___________________________________________________________________
