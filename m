@@ -1,7 +1,7 @@
-From: ebrower@usa.net
-Date: Wed, 18 Nov 1998 19:14:12 +0000
+From: Matthew Jacob <mjacob@feral.com>
+Date: Thu, 19 Nov 1998 16:05:45 +0000
 Subject: Re: [Q] ultrapenguin-1.1 on UE4000
-Message-Id: <marc-linux-ultrasparc-91144367719057@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91152778930816@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91139210917441@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91139210917441@msgid-missing>
@@ -11,20 +11,43 @@ Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-[DaveM]> Ugh, are all of your disks hung off of the fibre channel cards?
+I have a SOC+ card in a sun4m and a wad of FC disks. If I had time, I'd
+write the SOC+ driver- but I really don't have much time. I have the
+interest in doing a FC-4 (FCP)- but my current jobs and contracts make it
+difficult to find time to even finish the Qlogic FC driver for linux
+which has been 'ready to go except for Linux 2.1 && sparc/alpha
+crosscheck' for months now.
 
-None.  To keep things simple, I've only attached one external drive
-to the SCSI on system board two. Other than the CDROM and TAPE, there 
-are no peripherals.
 
-I decided not to muck with using the A1000 array, as it probably needs
-a non-existent driver for the SBus Wide Intelligent Ultra SCSI Differential 
-Host Adapter.
- 
-[Jakub]> If you have Solaris on the box, can you please send me
-[Jakub]> prtconf -pv | mail -s "E4000" jj@ultra.linux.cz
 
-I don't, but I'll slap it on there now.  When an updated SILO is
-available, I'll be in line to give it a shot.
+On Wed, 18 Nov 1998, Jakub Jelinek wrote:
 
-E
+> > 
+> > 
+> > Ugh, are all of your disks hung off of the fibre channel cards?
+> 
+> Don't worry. At least the CD is apparently on some ESP, but I think E?000
+> boxes don't have FC-AL internal disks, only E?500 boxes do.
+> I've started already looking into SOC+ manual, plus have read most of the
+> FC-AL, FC-PLDA and other stuff, but still don't have enough knowledge to
+> write the socal and fcal drivers without access to the physical hardware.
+> I should be getting a E3500 in 3 month, but even there I doubt it will have
+> any FC-AL disks in it, as it is pretty costy (7000$ to buy necessary boards
+> and one single FC-AL 9GB disk :( ).
+> 
+> > Crap... Jakub, you know why it fails if this is true.
+> > 
+> > One quick hack would be to hook up a spare SCSI disk to one of the
+> > normal scsi controllers on the machine, or else wait for a fix from
+> > either myself or Jakub.
+> 
+> Cheers,
+>     Jakub
+> ___________________________________________________________________
+> Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+> Administrator of SunSITE Czech Republic, MFF, Charles University
+> ___________________________________________________________________
+> Ultralinux - first 64bit OS to take full power of the UltraSparc
+> Linux version 2.1.128 on a sparc64 machine (498.80 BogoMips).
+> ___________________________________________________________________
+> 
