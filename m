@@ -1,7 +1,7 @@
-From: Marc Stuermer <sam@unix.franken.de>
-Date: Sat, 24 Oct 1998 20:01:16 +0000
+From: Rich Sahlender <rsahlen@voicenet.com>
+Date: Mon, 26 Oct 1998 14:22:23 +0000
 Subject: Re: sparc64-linux-gcc
-Message-Id: <marc-linux-ultrasparc-90926141516043@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90941213024569@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90917418725059@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90917418725059@msgid-missing>
@@ -10,17 +10,21 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, 23 Oct 1998 16:22:31 -0400, Rich Sahlender <rsahlen@voicenet.com> 
-wrote:
+Ouch! I'm sure I did a "find" before asking on the list. I guess I
+mis keyed the search. Thanks... <sigh>
 
-> After a fresh install "Everything" from ultra.linux.cz on an
-> Ultra 1 Creator I get:
+Steve Dunham wrote:
+> Rich Sahlender <rsahlen@voicenet.com> writes:
 > 
-> /bin/bash: sparc64-linux-gcc: command not found
+> > After a fresh install "Everything" from ultra.linux.cz on an
+> > Ultra 1 Creator I get:
 > 
-> while trying to build a new kernel...
+> > /bin/bash: sparc64-linux-gcc: command not found
+> 
+> > while trying to build a new kernel...
+> 
+> You have to add /usr/local/bin to your path first.  (IMHO, RPMs don't
+> belong in /usr/local, but I didn't make the packages...)
+> 
 
-Make sure that /usr/local/bin is in your PATH-environment.
-
--- 
--+= Marc Stuermer -=- http://www.swin.de/~sam =+-
+agreed...
