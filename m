@@ -1,34 +1,43 @@
-From: Lennert Buytenhek <buytenh@gnu.org>
-Date: Wed, 16 Jan 2002 17:57:50 +0000
-Subject: Re: [buytenh@gnu.org: [cry for advice] sparc64 bridging troubles]
-Message-Id: <marc-linux-ultrasparc-101120455203629@msgid-missing>
+From: Sean Callanan <sc843@bard.edu>
+Date: Tue, 15 Jan 2002 19:39:12 +0000
+Subject: Lots of 64-bit success!
+Message-Id: <marc-linux-ultrasparc-101112385609135@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-101068859405697@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-101068859405697@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Dear mailing list:
 
-On Wed, Jan 16, 2002 at 09:54:51AM -0800, David S. Miller wrote:
+I would like to report that with the help of many people on this list (Ben
+Collins, Jakub Jelinek, and others - thank you!) I have managed to get a
+LinuxFromScratch system working on an UltraSparc computer, with a hybrid
+32-bit/64-bit userland which is so complete that I can compile Emacs and
+the XFree86 libraries for sparc64 with no more difficulty than for sparc.
 
->    From: Lennert Buytenhek <buytenh@gnu.org>
->    Date: Wed, 16 Jan 2002 12:46:46 -0500
->    
->    Yup.  The attached patch (plus some userspace changes) is what makes
->    things tick again, but it's not exactly a marvel of beauty.. :(
-> 
-> I'm not applying this patch ever to my tree.  What about other private
-> ioctls overloaded to SIOCDEVPRIVATE+3?
+I also have X 4.1.0 working on my Ultra 5, thanks again to Ben Collins for
+pointing to Dave S. Miller's patch.
 
-I'm not suggesting you should..
+The combination of software I used to do this was:
+  - GCC 3.0.3 unpatched - first 32-bit native, then 32->64 cross, then
+    64-bit native
+  - Binutils 2.11.2 unpatched - same as above
+  - glibc 2.2.4 unpatched
 
+I'm also using devfs for my /dev tree, which has so far worked wonderfully
+(I use the /dev/disk/... entries in my fstab, and use /dev/misc/sunmouse
+for X).
 
-> See why none of this SIOCDEVPRIVATE crap can ever work properly?
+Would there be any interest in my tar-ing everything up and putting it on
+an ISO for people who want to experiment with a 64-bit userland?
 
-My point exactly.. glad we understand eachother :-)
+Thanks again for all the help, everybody.
 
+Sincerely,
+Sean Callanan
 
-cheers,
-Lennert
+--
+"The surest sign of intelligent life in the universe is that none of it
+has tried to contact us." -- Calvin (www.calvinandhobbes.com)
+
