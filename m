@@ -1,54 +1,42 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Mon, 02 Nov 1998 19:31:24 +0000
-Subject: Further changes in UltraPenguin 1.0.9
-Message-Id: <marc-linux-ultrasparc-91003448018926@msgid-missing>
+From: Malcolm Beattie <mbeattie@sable.ox.ac.uk>
+Date: Tue, 03 Nov 1998 11:04:03 +0000
+Subject: Re: Further changes in UltraPenguin 1.0.9
+Message-Id: <marc-linux-ultrasparc-91009119107975@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-91003448018926@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-91003448018926@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+Jakub Jelinek writes:
+> I've updated the ftp area of UltraPenguin.
+> I've tried to fix all bugs with tftp/floppy install I discovered,
+> particularly:
+> 
+> timeconfig/ntsysv are fixed
+> boot loader should be installed just fine
 
-I've updated the ftp area of UltraPenguin.
-I've tried to fix all bugs with tftp/floppy install I discovered,
-particularly:
+I'll give it another try on my Ultra5. I mirrored it the first time
+and I've left it trying to mirror each night. Apologies if I should
+have let you know in advance but I was eager to try it. Unfortunately,
+recent mirror don't seem to have succeeded due to timeouts or failed
+connections but I'll try running it manually. For those who are
+interested, the mirror is
+    ftp://ftp.ox.ac.uk/pub/linux/ultralinux
 
-timeconfig/ntsysv are fixed
-boot loader should be installed just fine
+A suggestion for improving the installation: at the moment it seems
+to demand a swap partition. That's a nuisance since I only wanted to
+put Linux on one partition on this box and I had to wipe out a 0.5GB
+Solaris partition just to satisfy the install program's swap craving.
+It would be nice if it could be made optional. Congratulations on
+pulling everything together and getting it to the stage where it's
+pretty much a straightforward install.
 
-plus I've added a bunch of new things:
+--Malcolm
 
-support for swaps 48k-2GB on sparc32, at the moment (due to kernel bug)
-just 88k-2GB on sparc64, but that will change to 32TB once that bug is fixed
-(waiting for Linus to merge it in)
-support for SMP kernels (on SMP machines you should get the SMP kernel as
-label smp in silo, plus with the rc.sysinit changes (I'll make rpm tomorrow)
-I've made today you can just switch from SMP to UP and back at any time by
-just typing a different boot label.
-added rescue images:
-rescue.img is a floppy image meant as second floppy with the boot floppy
-created by the installer (that's a new thing as well)
-tftprescue.img is a swiss-army knife for anyone in trouble. Due to some
-strange kernel bug on sparc64 it will just work on sparc32 (the kernel has
-problems to boot if somebody touched space above 4MB virtual from PROM
-mapping - I'm still investigating)
-New rpms:
-silo-0.8.2	a new, fixed version of the boot loader
-mkbootdisk	this is similar to that thingie in rawhide on Intel
-genromfs	this is needed by mkbootdisk and by any program creating
-		bootable romfs floppies
-
-I'm close to get bootable CDs working and installing, but if you want that
-soon, please test if you can what I'm just putting out and report any bugs
-you'll see to me.
-
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.126 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+-- 
+Malcolm Beattie <mbeattie@sable.ox.ac.uk>
+Unix Systems Programmer
+Oxford University Computing Services
