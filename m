@@ -1,66 +1,114 @@
-From: =?iso-8859-1?Q?Arnd_Bergmann?= <arnd@arndb.de>
-Date: Tue, 25 May 2004 23:10:01 +0000
-Subject: =?iso-8859-1?Q?Re:_[PATCH_3/4]_Consolidate_sys32_select?=
-Message-Id: <26879984$108552555440b3ce3274ba74.46765993@config21.schlund.de>
+From: Martin Josefsson <gandalf@wlug.westbo.se>
+Date: Tue, 25 May 2004 22:02:13 +0000
+Subject: Re: [PATCH 3/4] Consolidate sys32_select
+Message-Id: <1085522532.969.91.camel@tux.rsn.bth.se>
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="=-HFNHQ274hDOAivtaNVv6"
 List-Id: <ultralinux.vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: =?iso-8859-1?Q?Martin_Josefsson?= <gandalf@wlug.westbo.se>
-Cc: =?iso-8859-1?Q? David_S=2E_Miller ?= <davem@redhat.com>, arnd@arndb.de, linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
+References: <200404161800.22367.arnd@arndb.de>
+	 <200404161805.55224.arnd@arndb.de>
+In-Reply-To: <200404161805.55224.arnd@arndb.de>
+To: Arnd Bergmann <arnd@arndb.de>
+Cc: linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
 
 
-Martin Josefsson <gandalf@wlug.westbo.se> schrieb am 26.05.2004,
-00:29:13:
+--=-HFNHQ274hDOAivtaNVv6
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-> You mean in compat_sys_select() ?
-> compat_ptr() takes an u32 as argument, needs casting, ugly.
-> But you want it done that way?
+On Fri, 2004-04-16 at 18:05, Arnd Bergmann wrote:
 
-When using compat_ptr properly, you don't need any casts,
-see the patch below (the patch is probably messed up by my 
-broken mailer, but you get the picture).
+Hi Arnd.
 
-> I see this problem when compat_sys_select() is called directly from
-> syscall, not via sunos_select() which uses compat_ptr()
+> sys32_select has seven mostly but not exactly identical versions,
+> so consolidate them as compat_sys_select. Based on the ppc64
+> implementation, which most closely resembles sys_select.
+> One bug that was not caught by LTP has been fixed since the
+> first version of this patch.
+>=20
+> tested x86_64, ia64 and s390.
 
-Which brings us to a more global question on the syscall handlers.
+This breaks sparc64. rsync -> select() -> compat_sys_select() with a
+user pointer that has bit (1<<32) set.
+I came to this conclusion after having added lots of debug printk's.
+Here's the debug printk:
 
-There are currently different strategies on how to handle argument
-extension for the compat syscall handlers. s390 always goes through
-assembly wrappers (arch/s390/kernel/compat_wrapper.S), ppc64 does
-something similar in C (arch/ppc64/kernel/sys_ppc32.c). Since the
-other architectures appear to need conversion only for potentially 
-negative integer values (and sparc64 pointers), it's far less 
-consistant there.
+compat_sys_select: before verify_area 00000001efff6468
 
-There may be some more corner cases (e.g. reporting a wrong error
-value for a negative syscall arguments) where this goes bad on one
-architecture or another. This makes me wonder if the s390 wrapper
-mechanism should be generalized to get on the safe side here. I
-already have a sed script to generate the s390 compat_wrapper.S
-from the syscall prototypes, but there should be a way to do the
-same in an architecture independent way.
+The address printed is the address of the tvp argument.
+The only weird thing with it is the (1<<32) bit, otherwise it looks like
+the other pointers (this doesn't happen for all select()'s but I have a
+testcase with rsync that reproduces it every time in exactly the same
+way)
 
-      Arnd <><
+When this happens __get_user() generates a pagefault and we somehow get
+stuck in a pagefault loop, we livelock.
+(verify_area() is a noop on sparc64)
 
-=== fs/compat.c 1.24 vs edited ==--- 1.24/fs/compat.c	Sat May 22 06:31:47 2004
-+++ edited/fs/compat.c	Wed May 26 00:57:49 2004
-@@ -1300,13 +1300,15 @@
- 
- asmlinkage long
- compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t
-__user *outp,
--		compat_ulong_t __user *exp, struct compat_timeval __user *tvp)
-+		compat_ulong_t __user *exp, compat_uptr_t utv)
- {
- 	fd_set_bits fds;
-+	struct compat_timeval __user *tvp;
- 	char *bits;
- 	long timeout;
- 	int ret, size, max_fdset;
- 
-+	tvp = compat_ptr(utv);
- 	timeout = MAX_SCHEDULE_TIMEOUT;
- 	if (tvp) {
- 		time_t sec, usec;
+How it used to look in arch/sparc64/kernel/sys_sparc32.c
+
+> -asmlinkage int sys32_select(int n, u32 *inp, u32 *outp, u32 *exp, u32 tv=
+p_x)
+> -{
+> -	fd_set_bits fds;
+> -	struct compat_timeval *tvp =3D (struct compat_timeval *)AA(tvp_x);
+[snip]
+> -		if ((ret =3D verify_area(VERIFY_READ, tvp, sizeof(*tvp)))
+> -		    || (ret =3D __get_user(sec, &tvp->tv_sec))
+> -		    || (ret =3D __get_user(usec, &tvp->tv_usec)))
+> -			goto out_nofds;
+
+What it looks like now:
+
+asmlinkage long
+compat_sys_select(int n, compat_ulong_t __user *inp, compat_ulong_t __user =
+*outp,
+		compat_ulong_t __user *exp, struct compat_timeval __user *tvp)
+{
+[snip]
+		time_t sec, usec;
+
+		if ((ret =3D verify_area(VERIFY_READ, tvp, sizeof(*tvp)))
+		    || (ret =3D __get_user(sec, &tvp->tv_sec))
+		    || (ret =3D __get_user(usec, &tvp->tv_usec)))
+			goto out_nofds;
+
+
+This combined with this comment from arch/sparc64/kernel/sys_sparc32.c
+
+/* Things to consider: the low-level assembly stub does
+   srl x, 0, x for first four arguments, so if you have
+   pointer to something in the first four arguments, just
+   declare it as a pointer, not u32. On the other side,
+   arguments from 5th onwards should be declared as u32
+   for pointers, and need AA() around each usage.
+
+
+I added some simple casting to get rid of the high-bit and now rsync
+works just fine and we don't livelock.
+
+Do you have any ideas how to cleanly get this working again?
+Masking argument five and onwards with 0xffffffffUL ?
+
+On a related note, a quick look through fs/compat.c indicates that we
+have the same problem with these compat functions as well:
+
+compat_sys_io_getevent
+compat_sys_mount
+
+--=20
+/Martin
+
+--=-HFNHQ274hDOAivtaNVv6
+Content-Type: application/pgp-signature; name=signature.asc
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.2.4 (GNU/Linux)
+
+iD8DBQBAs8JkWm2vlfa207ERAoO1AJ0eCxPM3sktmHbdr7/kf8hYtMpP1ACfQAzU
+jD4JXZsaPW5yNYE5RVyF+YM=
+=m3H2
+-----END PGP SIGNATURE-----
+
+--=-HFNHQ274hDOAivtaNVv6--
