@@ -1,57 +1,60 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Mon, 02 Feb 2004 00:12:58 +0000
-Subject: Re: Problem with ioctl(fd, TUNSETIFF, ...)
-Message-Id: <20040201161258.361538b2.davem@redhat.com>
+From: Mark Clegg <mark.clegg@scoutmail.org.uk>
+Date: Sat, 20 Mar 2004 19:56:17 +0000
+Subject: PROBLEM: 2.6.4 Sun Crossbow Mouse fails on Sun Ultra 5
+Message-Id: <200403201956.17926.mark.clegg@scoutmail.org.uk>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, 30 Jan 2004 11:21:46 -0800
-Eric Brower <ebrower@usa.net> wrote:
+I've been having problems getting the Sun Crossbow
+mouse to work on a Sun Ultra-5, connected via a Type-6 UK
+keyboard.
 
-> The definition of TUNSETIF is:
-> 
->    #define TUNSETIFF     _IOW('T', 202, int)
-> 
-> indicating the argument is an "int" rather than a "struct ifreq*".  This 
->   trickery (as I understand it) would work on 32-bit systems, but not 
-> 64-bit.
+It appears that the SU driver does auto-baudrate detection
+on the mouse port by detecting line break conditions.
 
-Good spotting Eric, this should fix it in 2.4.x
+Under 2.4.x this works fine, but under 2.6.x the break
+condition never seems to get raised on my Ultra 5
+unless either...
 
-# This is a BitKeeper generated patch for the following project:
-# Project Name: Linux kernel tree
-# This patch format is intended for GNU patch command version 2.5 or higher.
-# This patch includes the following deltas:
-#	           ChangeSet	1.1306  -> 1.1307 
-#	arch/sparc64/kernel/ioctl32.c	1.45    -> 1.46   
-#
-# The following is the BitKeeper ChangeSet Log
-# --------------------------------------------
-# 04/02/01	davem@nuts.davemloft.net	1.1307
-# [SPARC64]: Fix TUNSETIFF ioctl compat, it takes an ifreq ptr not an int.
-# 
-# Thanks to Eric Brower for spotting this.
-# --------------------------------------------
-#
-diff -Nru a/arch/sparc64/kernel/ioctl32.c b/arch/sparc64/kernel/ioctl32.c
---- a/arch/sparc64/kernel/ioctl32.c	Sun Feb  1 16:08:53 2004
-+++ b/arch/sparc64/kernel/ioctl32.c	Sun Feb  1 16:08:53 2004
-@@ -4524,7 +4524,6 @@
- /* Big T */
- COMPATIBLE_IOCTL(TUNSETNOCSUM)
- COMPATIBLE_IOCTL(TUNSETDEBUG)
--COMPATIBLE_IOCTL(TUNSETIFF)
- COMPATIBLE_IOCTL(TUNSETPERSIST)
- COMPATIBLE_IOCTL(TUNSETOWNER)
- /* Big V */
-@@ -5146,6 +5145,7 @@
- HANDLE_IOCTL(SIOCGIFPFLAGS, dev_ifsioc)
- HANDLE_IOCTL(SIOCGIFTXQLEN, dev_ifsioc)
- HANDLE_IOCTL(SIOCSIFTXQLEN, dev_ifsioc)
-+HANDLE_IOCTL(TUNSETIFF, dev_ifsioc)
- HANDLE_IOCTL(SIOCETHTOOL, ethtool_ioctl)
- HANDLE_IOCTL(SIOCBONDENSLAVE, bond_ioctl)
- HANDLE_IOCTL(SIOCBONDRELEASE, bond_ioctl)
+a) You warm boot into 2.6 from 2.4    - or -
+b) You cold boot into 2.6, unplug the mouse, and plug it back in.
+
+It strikes me that a baud-rate mismatch will also result in
+framing errors so I've patched drivers/serial/sunsu.c to
+accept either a break or framing error to trigger the
+baudrate change.
+
+I don't have any other sparcs available, so my testing is
+minimal but I am hoping for feedback from other sparc
+users on the gentoo sparc forum.
+
+Mark.
+
+
+
+--- sunsu.c     2004-02-24 19:59:22.000000000 +0000 
+ +++ new.sunsu.c 2004-03-20 19:07:33.275554791 +0000 
+ @@ -498,6 +498,8 @@ 
+         sunsu_change_speed(&up->port, up->cflag, 0, quot); 
+ 
+         spin_lock(&up->port.lock); 
+ + 
+ +       printk("Adjusted mouse to %d baud\n",new_baud); 
+  } 
+ 
+  static void receive_kbd_ms_chars(struct uart_sunsu_port *up, struct pt_regs *regs, int is_break) 
+ @@ -537,9 +539,9 @@ 
+         if (!(serial_in(up, UART_IIR) & UART_IIR_NO_INT)) { 
+                 unsigned char status = serial_inp(up, UART_LSR); 
+ 
+ -               if ((status & UART_LSR_DR) || (status & UART_LSR_BI)) 
+ +               if ((status & UART_LSR_DR) || (status & UART_LSR_BI) || (status & UART_LSR_FE)) 
+                         receive_kbd_ms_chars(up, regs, 
+ -                                            (status & UART_LSR_BI) != 0); 
+ +                                            (status & (UART_LSR_BI | UART_LSR_FE)) != 0); 
+         } 
+ 
+         return IRQ_HANDLED; 
