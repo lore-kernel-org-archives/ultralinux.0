@@ -1,37 +1,36 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Wed, 02 Dec 1998 16:12:30 +0000
-Subject: New Sun keymaps
-Message-Id: <marc-linux-ultrasparc-91263202706583@msgid-missing>
+From: Aric Hagberg <aric@t7.lanl.gov>
+Date: Thu, 03 Dec 1998 02:19:49 +0000
+Subject: no bootp request made?
+Message-Id: <marc-linux-ultrasparc-91269733830271@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+I'm trying to get my ultrapenguin machine to bootp
+it's network information and having no sucess.
 
-I have added Czech/US, US/Czech Sun Type 5 keymaps, plus modified all
-but french to handle Euro and Cent. Could you test it if you can and report
-any problems to me?
-Euro is usually shown by 
-AltGr E, Compose e Cent by
-AltGr C
-In order to keep the AltGr HexDigit HexDigit working, I had to change the
-bindings, so that for A-F hex digits you need to hold shift as well, ie.
-you type character 0xEE by 
-AltGr Shift E, AltGr Shift E
-in fact, for A-B,D,F letters you don't need to hold the shift.
+I have the kernel (2.1.126) configured 
+CONFIG_IP_PNP=y
+CONFIG_IP_PNP_BOOTP=y
+# CONFIG_IP_PNP_RARP is not set
+and
+CONFIG_NFS_FS=y
+CONFIG_ROOT_NFS=y
 
-I'll be putting fonts that will be useful with latin0, latin1 and latin2
-unicode maps (all will have Euro in) together with console-tools RPM in
-UP1.2.
+The machine sucessfully gets it's IP address from a rarp 
+but doesn't seem to make a bootp request.
+I get the error
+IP-Config: Incomplete network configuration information
+IP-Config: Auto-configuration of network failed
+and then in bombs tyring to mount a nfs root filesystem.
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.130 on a sparc64 machine (3958.37 BogoMips)
-___________________________________________________________________
+I am fairly confident my bootp server is set up correctly
+since I am booting two other Sparc5s this way (with a much
+older sparc kernel).  And bootpd is not reporting that it
+got a request.  Also no traffic on the network to that machine.
+
+Does anyone have this working or can make a suggestion to debug it?
+
+Aric
