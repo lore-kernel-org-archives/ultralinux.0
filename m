@@ -1,55 +1,36 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Mon, 16 Nov 1998 17:17:38 +0000
-Subject: UltraPenguin-1.1 mirrors
-Message-Id: <marc-linux-ultrasparc-91127004023399@msgid-missing>
+From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
+Date: Wed, 04 Nov 1998 20:18:43 +0000
+Subject: post-installation troubles
+Message-Id: <marc-linux-ultrasparc-91021573302850@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi!
+On November 2nd I downloaded ultrapenguin-1.0.9 to attempt to install
+on my Ultra 2 Creator 3D.  Here is how that installation went.
 
-I've put a .message file into ultrapenguin-1.1/ directory with the mirrors
-which have been found by ftpsearch. If there are some more mirrors or if
-some of them are incomplete or do not work at all, please let me know.
+Linux booted over the network and appeared to install correctly.
 
-ftp> cd pub/ultrapenguin-1.1
-250-You can get UltraPenguin-1.1 distribution from the master site:
+After installation the computer rebooted and I typed "boot disk1",
+since my first disk is for Solaris.  I got the SILO prompt.  I waited
+and then the kernel loaded and booted.  The last thing printed to the
+screen follows.
 
- (Czech Republic) ftp://ultra.penguin.cz/pub/ultrapenguin-1.1/
+eth0: HAPPY MEAL (SBUS) 10/100baseT Ethernet 08:00:20:a0:aa:f7
+eth0: Link is up using internal transceiver at 10 Mb/s, Half Duplex.
 
- and from the following mirrors:
+At this point it appears as though the computer is hung, however
+that's not quite true.  I went to another computer on the network and
+was able to ping it.  I then attempted to rlogin, which, to my
+surprise, brought up a login prompt!  I tried to log in as "root",
+however it didn't work.  I assume this is because by default "root"
+logins over the network are disabled.  Finally, I attempted to boot
+single user in hopes that a shell would be started so that I could
+turn on some gettys, however no shell was ever started.  Bummer.  If I 
+can provide some more information to assist with this problem I will
+be happy to do so.
 
- Europe:
- (UK)             ftp://ftp.ox.ac.uk/pub/linux/ultralinux/ultrapenguin-1.1/
-                  ftp://sunsite.doc.ic.ac.uk/Mirrors/ultra.linux.cz/pub/ultrapenguin-1.1/
- (Sweden)         ftp://ftp.it.kth.se/people/jj/Ultralinux/ultrapenguin-1.1/
-                  ftp://ftp.sunet.se/pub4/os/Linux/distributions/ultrapenguin/ultrapenguin-1.1/
- (Danmark)        ftp://ftp.sunsite.auc.dk/disk2/ultra.linux.cz/OS/Linux/Non-x86/Sparc/local/ultrapenguin-1.1/
- (Netherlands)    ftp://ftp.cs.uu.nl/mirror/Linux/UltraPenguin/ultrapenguin-1.1/
- (Russia)         ftp://ftp.nc.orc.ru/pub/mirrors/ultra.linux.cz/OS/Linux/Sparc/ultrapenguin-1.1/
- (Germany)        ftp://ftp.uni-trier.de/pub/unix/systems/linux/Sparc/sunsite/local/ultrapenguin-1.1/
- (Poland)         ftp://ftp.icm.edu.pl/vol/jwr6/linux-sparc/local/ultrapenguin-1.1/
-
- North America:
- (US California)  ftp://ftp.cobaltnet.com/pub/users/davem/mirrors/sunsite.ms.mff.cuni.cz/OS/Linux/Sparc/local/ultrapenguin-1.1/
- (US Ohio)        ftp://ftp.muc.muohio.edu/pub/linux/distributions/ultrapenguin-1.1/
-
- If some other site mirrors this, please let me know the physical location
- and URL.
- Web site for this distribution is at http://ultra.penguin.cz/, for Linux on
- sparc64 go to http://ultra.linux.cz/.
- Browsable by WWW (http://sunsite.mff.cuni.cz/ftp/pub/ultrapenguin-1.1) as well.
-250 CWD command successful.
-
-
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.128 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+-- 
+Ryan
