@@ -1,38 +1,52 @@
-From: Stephan van Hienen <ddx@cable.a2000.nl>
-Date: Mon, 28 Sep 1998 19:36:33 +0000
-Subject: Re: Ultralinux mailinglist dead ?
-Message-Id: <marc-linux-ultrasparc-90701303330285@msgid-missing>
+From: Phil Hunt <phil@isone.net>
+Date: Sat, 12 Sep 1998 23:52:22 +0000
+Subject: MAJOR 1.09 problem!!!!!!
+Message-Id: <marc-linux-ultrasparc-90564416421025@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90650709127366@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90650709127366@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, 23 Sep 1998, Jakub Jelinek wrote:
+hi
 
-> > 
-> > is there something wrong here? 
-> > i submitted some real bugs here about the kernel on my sun ultra 10
-> 
-> We were fixing some TLB related bugs which I think is the case of the
-> segfault you encountered during last few days, there is probably one more to
-> be fixed. So you just pointed to a known bug were hunting.
-> Once we fix it, you're encouraged to try it (in fact, I'm delaying making
-> rpms and boot images because of that corruption) and if you'll still see
-> some bugs, your bug report will be welcomed.
-ok the real bugs i have here 
+I have a Sun Ultra 10, 300mhz processor, 256meg memory,
+startup header is:
 
-1:	eth0 (sun happy meal) is not working on 10mb/sec half duplex
-	it just times out and tries again
-	eth1 (also sun happy meal) is working ok at 100mb/sec full duples
-	i just need 10mb/sec cause i have a cable modem hooked up at it
+Sun Ultra 5/10 UPA/PCI  (UltraSparc IIi - 300mHZ)
+Open Boot 3.11, 256Meg memory installed
 
-2:	quoto is just crashing my computer (all tools of it edquota
-	checkquota / quotaon etc.) no errors reported etc. just stops all
-	input/output etc.
 
-3:	nfs is crashing when i try to copy a big file from /nfsmount/ to
-	/nfsmount/ (i heard this is a general 2.1.x problem (nfs is not
-	that stable)
+I net booted it using the 1.09 kit, got through RARP, and tftpboot.img load.
+
+Install started.....
+
+Right after it read hdlist, the following error appeared:
+
+Comps Error
+Missing package
+GLIB
+at line 220
+
+I hit ok, and it proceeded  (I looked in RPMS, glib-1 was there).
+
+After total install, whether SILO is installed or not....upon reboot, the Sun
+white screen said:
+
+Boot Device: disk:b  File and args:
+The File just loaded does not appear to be executable.
+
+Tries that twice, then comes to an OK prompt
+
+Any ideas whats wrong??????
+
+HELP!  I am stuck!!!
+phil
+
+
+
+===================================
+Phil Hunt                                               phil@isone.net
+System Administrator                              work:  (603)424-5278
+Internet Services of New England                  WWW:   www.isone.net
+Merrimack, NH 03054                    "New England Internet for less"
