@@ -1,75 +1,25 @@
-From: Keith Owens <kaos@ocs3.ocs-net>
-Date: Sat, 02 Sep 2000 02:18:46 +0000
-Subject: 2.4.0 do_fork() change, all architectures - take 2
-Message-Id: <marc-linux-ultrasparc-96786106301125@msgid-missing>
+From: Rajiv Mordani <mode@chinet.com>
+Date: Fri, 06 Oct 2000 08:23:07 +0000
+Subject: Wheel mouse with sparclinux.
+Message-Id: <marc-linux-ultrasparc-97082043706821@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-------- Blind-Carbon-Copy
+Hi All,	
+	I have a Sun interface converter and connect a Happy Hacking lite
+keyboard and a wheel mouse. What do I need to do to get the wheel (for
+scrolling) and also the 3rd mouse button (pressing on the wheel) working in 
+linux on an ultra 1?
 
-X-Mailer: exmh version 2.1.1 10/15/1999
-From: Keith Owens <kaos@ocs.com.au>
-To: linux-kernel@vger.kernel.org
-Subject: 2.4.0 do_fork() change, all architectures - take 2
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Date: Sat, 02 Sep 2000 13:18:46 +1100
-Message-ID: <8893.967861126@ocs3.ocs-net>
-
-DaveM pointed out that my 2.4.0-test8-pre1 do_fork patch would generate
-better sparc assembler if the extra parameter to do_fork was added at
-the end instead of in the middle.  So change all do_fork(flags,sp,0,&regs)
-to do_fork(flags,sp,&regs,0);
-
-I'm not going to mail the complete patch again, you can get it from
-ftp://ftp.ocs.com.au/pub/do_fork-2.4.0-test8-take2.gz.  The only
-significant difference is this bit to IA64, untested.
-
-Index: 0-test8-pre1.1/arch/ia64/kernel/entry.S
-- --- 0-test8-pre1.1/arch/ia64/kernel/entry.S Tue, 15 Aug 2000 17:50:48 +1000 kaos (linux-2.4/c/c/16_entry.S 1.3.1.1.1.2 644)
-+++ 0-test8-pre1.2(w)/arch/ia64/kernel/entry.S Sat, 02 Sep 2000 12:49:16 +1100 kaos (linux-2.4/c/c/16_entry.S 1.3.1.1.1.2 644)
-@@ -68,8 +68,8 @@
- 	mov loc1=r16				// save ar.pfs across do_fork
- 	UNW(.body)
- 	mov out1=in1
-- -	mov out2=in2
-- -	adds out3=IA64_SWITCH_STACK_SIZE+16,sp	// out3 = &regs
-+	mov out3=in2
-+	adds out2=IA64_SWITCH_STACK_SIZE+16,sp	// out2 = &regs
- 	mov out0=in0				// out0 = clone_flags
- 	br.call.sptk.few rp=do_fork
- .ret1:	UNW(.restore sp)
-@@ -87,8 +87,8 @@
- 	mov loc1=r16				// save ar.pfs across do_fork
- 	UNW(.body)
- 	mov out1=in1
-- -	mov out2=0
-- -	adds out3=IA64_SWITCH_STACK_SIZE+16,sp	// out3 = &regs
-+	mov out3=0
-+	adds out2=IA64_SWITCH_STACK_SIZE+16,sp	// out2 = &regs
- 	mov out0=in0				// out0 = clone_flags
- 	br.call.sptk.few rp=do_fork
- .ret2:	UNW(.restore sp)
-Index: 0-test8-pre1.1/arch/ia64/ia32/ia32_entry.S
-- --- 0-test8-pre1.1/arch/ia64/ia32/ia32_entry.S Tue, 15 Aug 2000 17:50:48 +1000 kaos (linux-2.4/c/c/25_ia32_entry 1.3.1.1 644)
-+++ 0-test8-pre1.2(w)/arch/ia64/ia32/ia32_entry.S Sat, 02 Sep 2000 12:49:58 +1100 kaos (linux-2.4/c/c/25_ia32_entry 1.3.1.1 644)
-@@ -91,8 +91,8 @@
- 	UNW(.body)
- 
- 	mov out1=0
-- -	mov out2=0
-- -	adds out3=IA64_SWITCH_STACK_SIZE+16,sp
-+	mov out3=0
-+	adds out2=IA64_SWITCH_STACK_SIZE+16,sp	// out2 = &regs
- 	br.call.sptk.few rp=do_fork
- .ret3:	mov ar.pfs=loc1
- 	UNW(.restore sp)
+- Rajiv
 
 
-------- End of Blind-Carbon-Copy
+-- 
+  UNIX _is_ user friendly, 
+  he's just very picky about who his friends are.
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
