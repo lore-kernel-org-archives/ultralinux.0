@@ -1,26 +1,36 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Wed, 04 Aug 1999 04:59:36 +0000
-Subject: Re: TV Card Problems
-Message-Id: <marc-linux-ultrasparc-93374277614892@msgid-missing>
+From: "Raymond Hall H." <kovalski@ife.org.mx>
+Date: Fri, 06 Aug 1999 19:47:33 +0000
+Subject: serial port overrruns
+Message-Id: <marc-linux-ultrasparc-93396885301754@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-93374249514763@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-93374249514763@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date:   Wed, 4 Aug 1999 12:51:13 -0400 (EDT)
-   From: Christopher Salter <ctsalter@eos.ncsu.edu>
+Hello,
 
-   Anyone else have this problem, or better yet, know how to fix?
+I'm running mgetty on an Enterprise 3000 for UUCP mail.
+The modem is a V.42 USR.
+On ocassions, when recieving a call, the machine literally freezes.
+I have to log via console, send it a break and when at the prom prompt, 
+before typing "go", reset the modem. After resuming system operation, I 
+get a console message saying ttyS1: 1 input overrun(s).
 
-I plan on playing around with the coax input problem, I have it too.
+The serials report:
+Jul 13 20:34:31 andromeda kernel: Sparc Zilog8530 serial driver version 1.40
+Jul 13 20:34:31 andromeda kernel: tty00 at 0xf0902004 (irq = 12,2b9) is a 
+Zilog8530
+Jul 13 20:34:31 andromeda kernel: tty01 at 0xf0902000 (irq = 12,2b9) is a 
+Zilog8530
+Jul 13 20:34:31 andromeda kernel: tty02 at 0xf0904004 (irq = 12,2b9) is a 
+Zilog8530
+Jul 13 20:34:31 andromeda kernel: tty03 at 0xf0904000 (irq = 12,2b9) is a 
+Zilog8530
 
-Now, for the color issue, are you using a Creator framebuffer or a
-mach64?  I had mach64 working at 16bpp and I just checked and I can
-still get proper xawtv over S-video with my Nintendo64...
+My worry comes not so much from the overrun itself or from loosing data, 
+but from the machine hanging when this happens.
 
-Later,
-David S. Miller
-davem@redhat.com
+I'd appreciate any suggestions. 
+Thanks,
+Raymond Hall
