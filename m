@@ -1,30 +1,42 @@
-From: Clint Adams <schizo@debian.org>
-Date: Wed, 24 Dec 2003 17:04:35 +0000
-Subject: Re: [Re: environmental monitoring]
-Message-Id: <marc-linux-ultrasparc-107228562828004@msgid-missing>
+From: Stephane Bortzmeyer <stephane@laperouse.internatif.org>
+Date: Tue, 09 Dec 2003 05:50:50 +0000
+Subject: Installing Linux on a E250 with serial console: cannot get the boot prompt
+Message-Id: <marc-linux-ultrasparc-107094852316886@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-107225664808375@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-107225664808375@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-lspci output from a 200
+Hello, everybody,
 
-0000:00:00.0 Host bridge: Sun Microsystems Computer Corp. Ultra IIe
-0000:00:01.0 PCI bridge: Sun Microsystems Computer Corp. Simba Advanced PCI Bridge (rev 13)
-0000:00:01.1 PCI bridge: Sun Microsystems Computer Corp. Simba Advanced PCI Bridge (rev 13)
-0000:00:01.2 Non-VGA unclassified device: Unknown device 0042:0042
-0000:01:03.0 Non-VGA unclassified device: ALi Corporation M7101 PMU
-0000:01:05.1 Ethernet controller: Sun Microsystems Computer Corp. RIO GEM (rev 01)
-0000:01:05.3 USB Controller: Sun Microsystems Computer Corp. RIO USB (rev 01)
-0000:01:07.0 ISA bridge: ALi Corporation M1533 PCI to ISA Bridge [Aladdin IV]
-0000:01:0c.0 Bridge: Sun Microsystems Computer Corp. RIO EBUS (rev 01)
-0000:01:0c.1 Ethernet controller: Sun Microsystems Computer Corp. RIO GEM (rev 01)
-0000:01:0c.3 USB Controller: Sun Microsystems Computer Corp. RIO USB (rev 01)
-0000:01:0d.0 IDE interface: ALi Corporation M5229 IDE (rev c3)
-0000:02:08.0 SCSI storage controller: LSI Logic / Symbios Logic 53c896 (rev 07)
-0000:02:08.1 SCSI storage controller: LSI Logic / Symbios Logic 53c896 (rev 07)
+I try to boot a Sun E250 which has no monitor or keyboard. Following
+the instructions in the UltraLinux FAQ
+<URL:http://www.ultralinux.org/faq.html>, I configured a PC with
+FreeBSD and minicom to act as the serial console. (I also tried
+minicom on a RedHat, without more success.)
 
-I note plenty of references to the ALi M7101 in the kernel source.
+When I power on the machine in the Diagnostics position, I see the
+boot messages. So my cables and emulator are OK. But sending Break
+with Ctrl-A F does not seem to have any result: I cannot get the boot
+prompt (ok).
+
+When I power on the machine in Power-On mode, I get nothing on the
+screen, not one message.
+
+Last screen of messages in Diagnostics mode (after that, nothing
+moves):
+
+Primary I/O probing
+Probing /pci@1f,4000 at Device 1  network
+Probing /pci@1f,4000 at Device 3  scsi disk tape scsi disk tape
+Probing /pci@1f,4000 at Device 2  Nothing there
+Probing /pci@1f,4000 at Device 4  Nothing there
+Probing /pci@1f,4000 at Device 5  Nothing there
+Probing /pci@1f,2000 at Device 0  This slot excluded from probing...
+Probing /pci@1f,2000 at Device 1  Nothing there
+Probing /pci@1f,2000 at Device 2  Nothing there
+Probing /pci@1f,2000 at Device 3  Nothing there
+Probing /pci@1f,2000 at Device 4  Nothing there
+Probing /pci@1f,2000 at Device 5  Nothing there
+
