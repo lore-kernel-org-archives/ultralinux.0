@@ -1,7 +1,7 @@
 From: Ward Deng <wdeng@KachinaTech.COM>
-Date: Tue, 21 Jul 1998 23:29:41 +0000
+Date: Sat, 25 Jul 1998 23:34:59 +0000
 Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531066@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531077@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
@@ -10,40 +10,51 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Thu, 16 Jul 1998, Luis Ponce de Leao wrote:
+> 
+> >From what I have seen on the various lists I belong to, I believe that
+> 80-90% of parallelizable problems fall in the coarse-to-medium grain
+> category that is optimally accessible by a beowulf-type architecture.
+> 10-20% (with some overlap -- the distinctions are not sharp) are
+> optimally accessible by garden variety "parallel supercomputers" like
+> the ones discussed above, and 1-2% are accessible only by exotic
+> systems like current generation Crays or homemade/custom/dedicated
+> parallel systems.
 
-> Date: Thu, 16 Jul 1998 00:22:53 +0100 (WET DST)
-> From: Luis Ponce de Leao <lmmdpl@camoes.rnl.ist.utl.pt>
-> To: linux-smp@vger.rutgers.edu
-> Cc: ultralinux@vger.rutgers.edu
-> Subject: Re: Ultra AXmp
-> 
-> 
-> Sun multi-processors systems and SGI Challenge are *SMP* systems,
-> SGI Onyx and Origin as well as Cray T3D/E are distributed
-  ^^^^^^^^
+My background is computational mechanics and I have been working in 
+fluid dynamics and solid mechnics for many many years. I can say most of
+the applications in these fields are not "multi-body" type, ie. Beowulf
+type problems. If you guys are interested in the problems/applications,
+look into the "blue book" or its website (http://www.hpcc.gov/pubs/blue98). 
 
-Onyx is an SMP system while Onyx-2 is the ccNUMA architecture. Onyx the
-workstation version of Challege while Onyx-2 is workstation version of 
-Origin. NUMA architectue is pretty much SMP nodes with local memory 
-inerlinked together. 
+It has been hard to communicate computer scientists (:-) since most of them
+do not understand what PDE stands for. ;-) To put it in short, the difficulty
+is from the view of level of discretization. Almost any problem that needs to 
+be simulated numerically is impossible to start from particle level (atoms,
+molecules...). Instead we use _continuum_ to discribe it. In mathmatical
+formulae, we "smoothen" the physical domain and treat it "infinite dimension" 
+(remember Newton's calculus...) then we partition the domain into "finite 
+dimension" such as "cells," "grids" and "elements" so we can calculate 
+the mathematical formulae to get the approximate solutions under certain
+_boundary_ and/or _initial_ conditions. You can just imagine Beowulf problem
+consists around 1 million particles of rigid bodies. How many particles 
+are involved in one cubic-foot of soil in the foundation of your house? How do
+you deal with the particles with irregular shapes with only statistical data
+available? How about add plasticity (soil particle will change its shape)
+and viscousity (moisture...)?
 
-T3D/E, Paragon, CM-5 and n-CUBE are in another category. Traditionally
-they are called MPP (Massive Parallel Processor). They distributed 
-memory systems with dedicated processor linkage.
- 
-> memory systems, CC/NUMA (non-uniform memory access with cache
-> coherency) and SP2 is a message passing based systems, it's
-> simply a cluster of RS/6000 workstations connected by a very high speed 
-> network. 
-> 
-> > On Wed, 15 Jul 1998, Ward Deng wrote:
-> > 
-> > > What do you mean that?
-> > > 
-> > > IBM RS6000/SP2 is distributed memory system, or workstations linked with
-> > > external high-speed switch. Sun's MP systems are all SMP design. SGI 
-> > > Power Challenge or Onyx are SMP too. The newer SGI Origin is SMP with
-> > > special memory links -- ccNUMA. They are very different architectures
-> > > while SP nodes are no different from IBM's RS6000 workstations.
-> 
+Of course, we dream someday we can use super-supercomputer to solve our
+problems starting from discrete domain but it is not possible in a forseeable
+future. Beowulf-type COTS systems are very exciting but the majority of 
+numerical problems are not in that category. Searching for low-latency,
+high-throughput inter-processor communication should be still listed high
+on our agenda. At least this is my view.
+
+Just add a little bit noise into this interesting discussion.
+
+--ward deng
+
+Ward Deng, Ph.D                   |  Kachina Technologies, Inc.
+Vice President and COO            |  4708 Douglas MacArthur Road NE,
+Tel: 505-888-5934                 |  Albuquerque NM 87110
+Fax: 505-888-5902                 |  info@KachinaTech.COM
+Email: Ward.Deng@KachinaTech.COM  |  URL: http://www.KachinaTech.COM
