@@ -1,7 +1,7 @@
 From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Mon, 11 Jan 1999 17:10:04 +0000
-Subject: Jan11 changes in UP1.1.9
-Message-Id: <marc-linux-ultrasparc-91609546631757@msgid-missing>
+Date: Fri, 08 Jan 1999 18:34:26 +0000
+Subject: kernel*2.2.0.pre5.*.rpm
+Message-Id: <marc-linux-ultrasparc-91592376123141@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
@@ -10,41 +10,23 @@ To: ultralinux@vger.kernel.org
 
 Hi!
 
-The changes made today in
-ftp://ultra.linux.cz/pub/ultrapenguin-1.1.9/
-are mostly related to the installer:
+kernel 2.2.0.pre5-2 rpms are out in the UP 1.1.9 area, it was a bad idea to
+call pre4 2.2.0-pre4-1, as rpm womits on it. 2.2.0.pre5 has some serious
+changes in memory management, quite some SPARC bugfixes, e.g. TCX users
+should be more happy as the cursor should not be recolored twice a second...
 
-- Fixed tape install, now it should work with all tape blocksizes
-  and all combinations of selected packages. Please note that at least
-  my SS20 does not handle blocksizes larger than 16K for tapeboot.img
-  (ie. the bootable image at the beginning of the tape).
-- Fix for bootdisk making/installing bootloader for kernels 2.2.0*pre*
-  (it got confused by kernel called 2.2.0.pre*, while uname and files
-  in it being 2.2.0-pre*). That's why e.g. installing SILO failed
-  with Jan, 8th kernel.
-- Fixes to the Alt+F3,Alt+F4 and Alt+F5 logging (RedHat made it wrong)
-  (there is one more bug I forgot to fix with exec.log for serial
-  install, but it is not harmful; I'll fix it in the next release).
+Also, I have been hacking the installer for SCSI Tape install, so that it
+eats any blocksize up to 64k. So it should work fine even on ExaBYTE, etc.,
+and should be much faster. But I have noticed that in some package
+configurations rpm library sorts packages differently than they are on tape.
+I'll be looking into it once I cure myself a little bit (I'm feeling sick
+right now). So, at the moment for tape installs I can guarantee just full
+installations, although many other configurations should work as well.
+Other install method do not suffer from this.
 
-The last bugfix revealed some broken packages, so here are fixes:
+The CD has not been updated yet, I'll do it in the evening...
 
-XFree86-ISO8859-2		- prerequires textutils, otherwise
-				  does not install properly
-XFree86-ISO8859-9		- ditto
-ld.so				- prerequires sh-utils, grep, fileutils
-				  (this explains e.g. why ld-linux.so.1
-				  used to be a hard link to ld4cdm-linux.so.1
-				  even on Ultra - ie. did not work on sun4u)
-pamconfig			- prerequires textutils
-pam				- security fix from RedHat
-
-The updated CD will be there in a few minutes.
-
-Next release should hopefully include updated glibc, so that the default
-nsswitch.conf does not mention nis/nisplus (the well known tar slowdowns),
-plus implement vfork, as it will speed several things a lot.
-Many packages already use vfork, which has been till now the same function
-as fork.
+Enjoy.
 
 Cheers,
     Jakub
@@ -53,5 +35,5 @@ Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
 Administrator of SunSITE Czech Republic, MFF, Charles University
 ___________________________________________________________________
 UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
-Linux version 2.2.0-pre6 on a sparc64 machine (3958.37 BogoMips)
+Linux version 2.2.0-pre5 on a sparc64 machine (3958.37 BogoMips)
 ___________________________________________________________________
