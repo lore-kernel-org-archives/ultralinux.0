@@ -1,23 +1,13 @@
 From: Eric <ebrower@usa.net>
-Date: Thu, 25 Jan 2001 12:46:35 +0000
-Subject: Re: [Re: [Re: Linux Status for Sun Netra T1 200 ]]
-Message-Id: <marc-linux-ultrasparc-98045569732543@msgid-missing>
+Date: Thu, 25 Jan 2001 12:21:54 +0000
+Subject: Re: [Re: Linux Status for Sun Netra T1 200 ]
+Message-Id: <marc-linux-ultrasparc-98045419728287@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hmm.  It seems the new Netra (200) is significantly different
-from the (100) model.  Whereas the 100 is based upon the CP1500
-boardset, the 200 is probably closer to the AXe boardset.
-
-Anyhow, I'd be interested in seeing the prtconf.  The LOM 
-looks interesting.
-
-E
-
-Eric <ebrower@usa.net> wrote:
 "David S. Miller" <davem@redhat.com> wrote:
 
 > Michael Pruznick writes:
@@ -47,13 +37,6 @@ Once you get the box, please send me (offline) the output from
 E
 
 
-
-
-____________________________________________________________________
-Get free email and a permanent address at http://www.netaddress.com/?N=1
--
-To unsubscribe from this list: send the line "unsubscribe ultralinux" in
-the body of a message to majordomo@vger.kernel.org
 
 
 ____________________________________________________________________
