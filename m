@@ -1,22 +1,23 @@
-From: Derrick J Brashear <shadow@dementia.org>
-Date: Fri, 26 Mar 1999 21:07:54 +0000
-Subject: Re: 'nother dippy question
-Message-Id: <marc-linux-ultrasparc-92248298327912@msgid-missing>
+From: "Corey R. Engstrom" <cengstrom@wcom.net>
+Date: Mon, 22 Mar 1999 20:11:54 +0000
+Subject: Sound on Sun Ultra 5
+Message-Id: <marc-linux-ultrasparc-92211633922106@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92239744103536@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92239744103536@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Thu, 25 Mar 1999, Scott Michel wrote:
+I am running Ultra Linux on a SUN ULTRA 5 and the sound is not working
+properly.  The problem I am having is as follows:
 
-> Is there a mail archive for this list somewhere?
+When running sndconfig it start to play the file and I hear Hello and
+then my terminal locks up.  It sounds like an IRQ issue to me but I can
+not locate a file to try to change this setting.
 
-I have one in an IMAP folder:
-imap://jooky.trafford.dementia.org/lists.ultralinux
+If you have any suggestion they would be greatly appreciated.
 
-Warning: the network to my house is lousy.
-
--D
+Thanks
+Corey R. Engstrom
+Network Engineer
+MCI WORLDCOM Advanced Networks
