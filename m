@@ -1,49 +1,56 @@
-From: Derrick J Brashear <shadow@DEMENTIA.ORG>
-Date: Sun, 18 Oct 1998 04:47:55 +0000
-Subject: Re: sparc32 2.1.121 problems
-Message-Id: <marc-linux-ultrasparc-90870069522231@msgid-missing>
+From: Rich Sahlender <rsahlen@voicenet.com>
+Date: Thu, 29 Oct 1998 14:17:26 +0000
+Subject: sparc64 mt race?
+Message-Id: <marc-linux-ultrasparc-90967139815468@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90682217607462@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90682217607462@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Sat, 26 Sep 1998, Derrick J Brashear wrote:
+I'm not sure if this is a kernel, scsi, or 32 .vs. 64 bit issue...
 
-> also, i saw someone complaining of it about their PC on linux-kernel, so
-> this may not be any of us, but Brent complained when he was testing that
-> the dbri module usage went negative, and that it appeared the release
-> function was called a few times when it shouldn't have been, apparently
-> when the fd referring to the audio device was dup'd and then the parent
-> closed it's copy. i've observed that, but haven't yet been able to come up
+Using the latest 2.1.126 from vger cvs with ultrapenguin-1.0.9 on an
+Ultra1, a simple "mt -f /dev/st0 off" to unload a tape sends the cpu
+to 100%. Running processes continue but cannot terminate, new processes
+will not start. dmesg shows:
 
-Now, I can reproduce the negative module use count. 
-[root@panaphonics ~]# lsmod
-Module                  Size  Used by
-amd7930                 7872   0  (unused)
-audio                   9252   1  [amd7930]
-autofs                  9432   1  (autoclean)
-[root@panaphonics ~]# cat /usr/tmp/eclipse.au > /dev/audio
+esp0: IRQ 3,7e0 SCSI ID 7  Clock 40 MHz CCF=8 Time-Out 167 NCR53C9XF(espfast) detected
+esp0: FAST chip is fasHME (family, version=5)
+ESP: Total of 1 ESP hosts found, 1 actually in use.
+scsi0 : Sparc ESP366-HME
+scsi : 1 host.
+  Vendor: SEAGATE   Model: ST32171W SUN2.1G  Rev: 7462
+  Type:   Direct-Access                      ANSI SCSI revision: 02
+Detected scsi disk sda at scsi0, channel 0, id 0, lun 0
+  Vendor: EXABYTE   Model: EXB-85008SQANXBA  Rev: 07J0
+  Type:   Sequential-Access                  ANSI SCSI revision: 02
+Detected scsi tape st0 at scsi0, channel 0, id 4, lun 0
+  Vendor: TOSHIBA   Model: XM5701TASUN12XCD  Rev: 0997
+  Type:   CD-ROM                             ANSI SCSI revision: 02
+Detected scsi CD-ROM sr0 at scsi0, channel 0, id 6, lun 0
+scsi : detected 1 SCSI tape 1 SCSI cdrom 1 SCSI disk total.
+esp0: Disabling sync for buggy Toshiba CDROM.
+esp0: Disabling DISCONNECT for target 6 lun 0
+esp0: target 6 asynchronous
+Uniform CDROM driver Revision: 2.14
+esp0: Disabling DISCONNECT for target 0 lun 0
+esp0: 16 byte WIDE transfers enabled for target 0.
+esp0: target 0 [period 100ns offset 15 20.00MHz FAST-WIDE SCSI-II]
+SCSI device sda: hdwr sector= 512 bytes. Sectors= 4157201 [2029 MB] [2.0 GB]
+sunhme.c:v1.2 10/Oct/96 David S. Miller (davem@caipfs.rutgers.edu)
+eth0: HAPPY MEAL (SBUS) 10/100baseT Ethernet 08:00:20:8d:21:cd
+Partition check:
+ sda: sda1 sda2 sda3 sda4 sda6 sda7 sda8
+VFS: Mounted root (ext2 filesystem) readonly.
+Adding Swap: 151224k swap-space (priority -1)
+Swansea University Computer Society IPX 0.38 for NET3.037
+IPX Portions Copyright (c) 1995 Caldera, Inc.
+eth0: Link is up using internal transceiver at 100Mb/s, Full Duplex.
+sunmouse: Successfully adjusted to 1200 baud.
 
-[root@panaphonics ~]# lsmod
-Module                  Size  Used by
-amd7930                 7872  -2 
-audio                   9252  -1  [amd7930]
-autofs                  9432   1  (autoclean)
+Nothing unusual there nor in syslog. Is there anything else I can
+provide to help?
 
-I had instrumented the audio module, and I see:
-Oct 18 00:41:54 panaphonics kernel: increasing module use in register
-Oct 18 00:41:54 panaphonics kernel: amd7930 at 0xfd017000 irq 61
-Oct 18 00:42:39 panaphonics kernel: increasing module use in open for 4
-Oct 18 00:42:39 panaphonics kernel: decreasing module use in release
-Oct 18 00:42:45 panaphonics last message repeated 2 times
-
-So release is apparently being called too often. Am I supposed to be doing
-something in release to make sure it's not being called bogusly, or is
-something else broken? 
-
-(Of course, now I can't unload the damn module either)
-
--D
+Regards,
+Rich
