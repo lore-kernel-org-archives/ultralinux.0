@@ -1,27 +1,23 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Sat, 21 Nov 1998 08:25:12 +0000
-Subject: Re: hme on E4000
-Message-Id: <marc-linux-ultrasparc-91168461127908@msgid-missing>
+From: Romulo Curty Cerqueira <curty@computer.org>
+Date: Thu, 05 Nov 1998 11:43:50 +0000
+Subject: Ultra Penguin 1.0.9 using Red Hat 5.1: Is it possible?
+Message-Id: <marc-linux-ultrasparc-91026617621760@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91163585212502@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91163585212502@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: 	Fri, 20 Nov 1998 15:13:40 +0100 (MET)
-   From: Eric Bautsch <eric.bautsch@pobox.com>
+Hi !
 
-   I was also wondering whether it had anything to do with the fact that there
-   are two I/O boards (i.e. two hme interfaces) in the machine?
+I have bought "Red Hat 5.1 for SPARC" disk set.
+I decided to test "Ultra Penguin 1.0.9" but it was made for 5.0 version.
+It's difficult to me to buy another Red Hat package.
+Does anybody knows if "Red Hat 5.1 for SPARC" can be used to setup "Ultra
+Penguin 1.0.9" in a Ultra 1 machine?
+If doesn't: Is there a fast site in the WEB to download "Red Hat 5.0 for
+SPARC" disk(s)?
 
-   Can you give me a hint?
+Thanks
 
-There are several problems on E4000 machines that I am working out
-with another tester.  Jakub will put up fixes to try on Monday if all
-goes well.
-
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+RCC
