@@ -1,81 +1,65 @@
-From: Svante Sormark <svinto@ita.chalmers.se>
-Date: Mon, 16 Nov 1998 17:15:27 +0000
-Subject: Re: ultra 30 again ...
-Message-Id: <marc-linux-ultrasparc-91127038123515@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Wed, 11 Nov 1998 22:28:11 +0000
+Subject: More detailed UltraPenguin CD-ROM making instructions
+Message-Id: <marc-linux-ultrasparc-91084546630118@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91126985723327@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91126985723327@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hi!
 
-never mind this, i must have screwed something up when messing with
-initrd or something. i works like a charm now!
+As I've received a couple of requests for more detailed instructions how to
+make the bootable CD, here they are:
 
-On Mon, 16 Nov 1998, Svante Sormark wrote:
+Grab the UltraPenguin 1.1 distribution, e.g. from
+ftp://ultra.penguin.cz/pub/ultrapenguin-1.1/
+and put it on an sparclinux or ultralinux box (glibc required).
 
->hi all,
->
->now i've got the silo/initrd problem fixed (thanks again jakub) so here's
->the next one.=20
->
-><cut from boot-messages>
->VFS: Mounted root (ext2 filesystem) readonly.
->change_root: old root has d_count=3D1
->Trying to unmount old root ... okay
->INIT: version 2.71 booting
->Unable to handle kernel NULL pointer dereference<1>tsk->mm->context >00000=
-00000000403
->tsk->mm->pgd =3D fffff80000003000
->              \|/ ____ \|/
->              "@'/ .. \`@"
->              /_| \__/ |_\
->                 \__U_/                                                =20
->init(1): Oops                                                          =20
->TSTATE: 0000000080009606 TPC: 000000000045b780 TNPC: 000000000045b784 Y:
->00000000
->g0: fffff800009c6ac0 g1: 0000000000000000 g2: 0000000000000000 g3:
->0000000000000000
->g4: fffff80000000000 g5: 0000000000000000 g6: fffff80027ef8000 g7:
->0000000000000020
->o0: 0000000000000000 o1: 000000000045b1a0 o2: 000000000045b6fc o3:
->00000000000000f1
->o4: 00000000000000f0 o5: 0000000000000000 sp: fffff80027efb3f1 ret_pc:
->000000000045b6b4
->l0: 0000000000000000 l1: 8000000027d64eb0 l2: fffff80000904d30 l3:
->fffff80000904d60
->l4: fffff80027cb2000 l5: fffff80027d64000 l6: 000000000056fc00 l7:
->0000000000000008
->i0: fffff800009ce440 i1: 0000000000000009 i2: fffffffffffffff7 i3:
->0000000000000000
->i4: 000000000056b2f8 i5: 0000000000000107 i6: fffff80027efb541 i7:
->0000000000459a2c
->Caller[0000000000459a2c]                                               =20
->Caller[00000000004217fc]                                               =20
->Caller[000000000040fe74]                                               =20
->Caller[00000000700a4910]                                               =20
->Instruction DUMP: 10680014  b4103fea  d05e2018 <d65a2070> 02c2c009
->933e6000  90100018  9fc2c000  9407a77f=20
->
-></cut>
->
->
->
->--------------------------------------------------------------------------=
- =20
->|  Svante S=F6rmark  |  Chalmers IT -avdelning  | utvecklare | 0707 538336=
- |=20
->--------------------------------------------------------------------------=
- =20
->
->
->
+lets assume it is in directory /usr/ultrapenguin-1.1
+Now do
 
--------------------------------------------------------------------------- =
-=20
-|  Svante S=F6rmark  |  Chalmers IT -avdelning  | utvecklare | 0707 538336 =
-|=20
--------------------------------------------------------------------------- =
-=20
+cd /usr/ultrapenguin-1.1/
+# This step can be omited, if you don't want to put source RPMS on the CD,
+# but IMHO it is a waste of space to make a 300M CD only if you can make
+# a 600M.
+mv -f SRPMS sparc/
+cd sparc
+# Then make sure your mirror has copied the dev/ directory well:
+rm -f dev/*
+mknod dev/console c 5 1; chmod 600 dev/console
+mknod dev/initctl p; chmod 600 dev/initctl
+mknod dev/null c 1 3; chmod 644 dev/null
+mknod dev/openprom c 10 139; chmod 644 dev/openprom
+mknod dev/ram b 1 1; chmod 640 dev/ram
+for i in 1 2 3 4 5; do mknod dev/tty$i c 4 $i; chmod 600 dev/tty$i; done
+mknod dev/zero c 1 5; chmod 644 dev/zero
+# then 
+chown -R 0.0 /usr/ultrapenguin-1.1/sparc
+DEVICE=/dev/loop0
+FILE=/usr/up-1.1.iso
+UPCD=/usr/ultrapenguin-1.1/sparc
+MNT=/mnt/cdrom
+mkisofs -A "UltraPenguin 1.1" -o $FILE -P "The UltraLinux team" -p "Jakub Jelinek <jj@ultra.linux.cz>" -R -V "UltraPenguin" $UPCD/
+insmod loop
+losetup $DEVICE $FILE
+mount -r -t iso9660 $DEVICE $MNT
+cd $MNT/misc/src/trees/
+./mkcdboot $MNT $DEVICE
+cd /
+umount $MNT
+losetup -d $DEVICE
+
+then bring the /usr/up-1.1.iso file to your favourite CD burner and burn it.
+
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.127 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
