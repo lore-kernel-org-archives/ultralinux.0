@@ -1,7 +1,7 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Fri, 17 Sep 1999 22:32:39 +0000
+From: "David S. Miller" <davem@redhat.com>
+Date: Sat, 18 Sep 1999 01:38:40 +0000
 Subject: Re: Install options on AXi
-Message-Id: <marc-linux-ultrasparc-93761557212524@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93762033615533@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-93760525605213@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-93760525605213@msgid-missing>
@@ -10,34 +10,34 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, Sep 17, 1999 at 03:43:22PM -0400, Brent Jay Thorpe wrote:
-> All,
-> 
-> I have to make a customer presentation about install options with Linux
-> on AXi (CDROM, Floppy, Network.)  I have been doing some homework in
-> making the "slideware" and found that you could get the initial boot
-> loader from a floppy device (as well as tftp.)  In following the
-> instructions on creating the floppy, I found that my system does not
-> recognize the floppy device as a valid block device.  In other words, it
-> cannot see the floppy device at all.  
+   Date:   Fri, 17 Sep 1999 17:21:09 -0400
+   From: "David A. Cooley" <n5xmt@bellsouth.net>
 
-Have you tried /dev/fd0 or /dev/fd1 as the device? Some AX and AXi boxes
-have these swapped, so even if you only have one floppy, it might be
-/dev/fd1. See bootup dmesg which one do you have. (It is a hardware issue).
+   I believe the AXi is an UltraSparc based board... None of the Linux
+   ports to sparc support the Floppy for boot, and the lp port is only
+   supported experimentally.
 
-> I also found out that it does not
-> recognize the printer port (lp0) either.  Anyone know what is the
-> correct device for both the floppy and printer on an AXi?
+This is not true at all.  The situation in a nutshell is:
 
-Have you loaded all the required modules for the parallel port?
-You need probably parport_ax, parport and lp modules.
+1) All 32-bit Sparc systems should work with a floppy boot.
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
-Linux version 2.3.18 on a sparc64 machine (1343.49 BogoMips)
-___________________________________________________________________
+2) Most UltraSparc systems do not, these include all SBUS UltraSparc
+   systems and Ultra10, Ultra5, Ultra30, Ultra60 PCI systems.  This
+   is due to a bug in the OBP firmware shipped in those machines, and
+   is not our doing :-)
+
+   All system level board UltraSparc/PCI systems shipped by SME
+   such as the AXi and AXmp should work with floppy boot because they
+   lack the OBP firmware bug, as far as we've been told.
+
+3) parallel port is fully supported on PCI systems, it is only
+   experimental and not fully supported on SBUS systems, we are
+   working to correct this SBUS issue for 2.4.x kernels
+
+   Most people having problems with the parallel port on PCI
+   UltraSparcs turn out to not have loaded the appropriate kernel
+   modules.
+
+Later,
+David S. Miller
+davem@redhat.com
