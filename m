@@ -1,33 +1,74 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Mon, 18 Oct 1999 05:53:37 +0000
-Subject: Re: SBus in 2.3
-Message-Id: <marc-linux-ultrasparc-94022629814353@msgid-missing>
+From: bob hubbard <rhubbard@amdahl.com>
+Date: Sat, 09 Oct 1999 02:22:00 +0000
+Subject: Cross compiler !!! egcs for intel host with target Sparc64
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="------------15669419C0B1FB2C7B889698"
+Message-Id: <marc-linux-ultrasparc-93944515221060@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-94021308306451@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-94021308306451@msgid-missing>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   From: Pete Zaitcev <zaitcev@metabyte.com>
-   Date:   Sun, 17 Oct 1999 19:17:49 -0700 (PDT)
+This is a multi-part message in MIME format.
+--------------15669419C0B1FB2C7B889698
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-   [root@iolab130 /root]# ifconfig eth0 up  
-   IRQ: Trying to share non-PCI bucket.
-   Lance: Can't get irq 5,7e1
-   SIOCSIFFLAGS: Resource temporarily unavailable
+Hello ,
 
-   Hmm... I would track it down myself but I do not have good
-   access to sparc64's. Any ideas?
+  I'm attempting to X-compile  from an I686 host for a Target system of
+Sparc64-*-linux
 
-Two SBUS devices have the same INO irq number in their sbus_dev
-state structure, or the Lance driver is registering it twice.
+My stock compiler is ..
+root@localhost src]# gcc -v
+Reading specs from /usr/lib/gcc-lib/i686-pc-linux-gnu/pgcc-2.91.66/specs
 
-It's extremely hard to screw this up, if you made the new
-code behave identically in drivers/sbus/sbus.c for the sparc64
-IRQ probing cases.
+gcc version pgcc-2.91.66 19990314 (egcs-1.1.2 release)
+[root@localhost src]#
 
-Later,
-David S. Miller
-davem@redhat.com
+I downloaded latest  egcs from Cygnus and this appears to not work  for
+x-compiler .
+
+[root@localhost bin]# ./gcc -v
+Reading specs from /usr/X/lib/gcc-lib/sparc64-*-linux/2.95.1/specs
+gcc version 2.95.1 19990816 (release)
+
+
+I looked around and found a mention that the x-compile is broken for
+sparc64 ? .
+
+
+If someone has this working correctly then a simple YES will suffice me
+for a user error , or an alternative known x-compiler .
+
+running 2.2.12    Kernel .
+
+
+
+Thanks for input .
+
+
+
+
+
+--------------15669419C0B1FB2C7B889698
+Content-Type: text/x-vcard; charset=us-ascii;
+ name="rhubbard.vcf"
+Content-Transfer-Encoding: 7bit
+Content-Description: Card for bob hubbard
+Content-Disposition: attachment;
+ filename="rhubbard.vcf"
+
+begin:vcard 
+n:Hubbard;Bob
+tel;cell:Calling me from USA 011 44 7967 109138
+tel;home:Cellular from UK - 07967 109138
+tel;work:+44(0)1252 386293
+x-mozilla-html:TRUE
+org:Amdahl
+version:2.1
+email;internet:rhubbard@amdahl.com
+adr;quoted-printable:;;Note - Please use or contact me on my mobile .=0D=0AAvailable for messages and contactable globally .=0D=0A;;;;
+x-mozilla-cpt:;-18784
+fn:Bob Hubbard
+end:vcard
+
+--------------15669419C0B1FB2C7B889698--
