@@ -1,8 +1,10 @@
 From: "Polyglot" <info@polyglot.com.cn>
-Date: Thu, 08 Aug 2002 09:14:57 +0000
+Date: Fri, 09 Aug 2002 02:12:09 +0000
 Subject: Polyglot Translation
-Message-Id: <marc-linux-ultrasparc-102879830314351@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-102885919413425@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-102879830314351@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-102879830314351@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="gb2312"
 Content-Transfer-Encoding: base64
