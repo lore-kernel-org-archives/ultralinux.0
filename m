@@ -1,8 +1,10 @@
 From: abbas@pumbaa.fsc.fujitsu.com
 Date: Tue, 21 Mar 2000 23:00:49 +0000
 Subject: new email address
-Message-Id: <marc-linux-ultrasparc-95370171223340@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95370761127328@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-95370171223340@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-95370171223340@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
