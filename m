@@ -1,69 +1,108 @@
-From: Ben Collins <bcollins@debian.org>
-Date: Sun, 30 Sep 2001 18:06:10 +0000
-Subject: Re: More sparc64-libc questions
-Message-Id: <marc-linux-ultrasparc-100187330504680@msgid-missing>
+From: Martin Schulze <joey@finlandia.infodrom.north.de>
+Date: Wed, 12 Sep 2001 15:49:19 +0000
+Subject: Invitation to the 6th Linux Developers Meeting in Oldenburg
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="dgjlcl3Tl+kb3YDk"
+Message-Id: <marc-linux-ultrasparc-100030994123383@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-100187097332030@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-100187097332030@msgid-missing>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Sun, Sep 30, 2001 at 01:20:50PM -0400, Sean Callanan wrote:
-> 
-> >Yes, it's known to work. Debian contains a gcc-3.0-sparc64 package along
-> >with a libc6-sparc64. The tricky part is that gcc is hardcoded to use
-> >/lib64/ld-linux.so.2. You should make a symlink from /lib64 to
-> >/usr/local/sparc64-linux/lib for your setup to work, and then add /lib64
-> >to /etc/ld.so.conf and rerun ldconfig.
-> 
-> I did what you suggested, adding /lib64 to /etc/ld.so.conf, and rerunning 
-> ldconfig. But now the program segfaults.
-> 
-> % sparc64-linux-gcc -m64 -o hello hello.c
-> % ./hello
-> Segmentation fault
-> 
-> It doesn't dump core, either. (not that my 32-bit gdb would do much good)
-> 
-> By the way, how difficult would it be to use a file in /etc to determine 
-> the 64-bit library location (such as, maybe /etc/ld64.so.conf)?
 
-ldconfig is smart enought to handle 32-bit and 64-bit API's from the
-same ld.so.cache. That's not the problem. I beleive you can use a
-different ld.so.conf (maybe .64 extension? can't remember).
-
-%cat hello.c
-#include <stdio.h>
-
-int main() { puts("Hello World!"); return 0; }
-%gcc-3.0 -m64 hello.c
-%./a.out
-Hello World!
-%file a.out
-a.out: ELF 64-bit MSB executable, SPARC V9, version 1, dynamically linked (uses shared libs), not stripped
-%ldd a.out
-        libc.so.6 => /lib/64/libc.so.6 (0xfffff80000120000)
-        /lib/64/ld-linux.so.2 => /lib/64/ld-linux.so.2 (0xfffff80000000000)
-%gcc-3.0 -v
-...
-gcc version 3.0.2 20010908 (Debian prerelease)
+--dgjlcl3Tl+kb3YDk
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 
 
-Note, I am also using a subreg-byte patch so that fpu works correctly.
-And yes, I setup Debian to use /lib/64 instead of /lib64, but that's
-just my preference, and required patching gcc and glibc (glibc 2.2.4).
-
-If you are using the latest glibc, then the segv occurs in
-ld-linux.so.2 (try executing it directory, you'll see), and I haven't
-had time to diagnose it yet.
+              -----------------------------------------
+	      6th Linux Developers Meeting in Oldenburg
 
 
-Ben
+	       Thursday, September 27th to Sunday, 30th
 
--- 
- .----------====-=-===-=====-----------===------------=-=-----.
-/                   Ben Collins    --    Debian GNU/Linux                  \
-`  bcollins@debian.org  --  bcollins@openldap.org  --  bcollins@linux.com  '
- `---=====------====-------------=-=-----=-==-===-------=--=---'
+
+		   University of Oldenburg, Wechloy
+              -----------------------------------------
+
+
+This is the public invitation for Linux developers to attend this
+years' Linux Developers Meeting in Oldenburg.  The scope of this
+meeting is to port Linux to non-intel architectures. It is derived
+from the linux/m68k meeting 1995 in Solingen , though, recently there
+were a lot of other architectures as well.
+
+Just like the last years, the purpose of this meeting is to get as
+much of the Linux/m68k core developers and active users together to
+discuss current problems, show off projects, exchange news, and
+generally to have fun.
+
+Like last year, the meeting will take place from thursday afternoon
+(September 27th) to sunday evening (September 30th).  You don't have
+to attend from thursday, it's an offer for those of you who would like
+to and who can afford coming early.  If you can't make it that early,
+just join when you can afford it.  The meeting will take place at the
+same place like last year (that is University of Oldenburg, Wechloy).
+
+For those of you, who don't know Oldenburg yet, it's in the northern
+part of Germany.  That means, you'll find lots of green areas (trees,
+meadows etc.), good air and less industries.  The meeting will be held
+at the science building of the University of Oldenburg, in Oldenburg
+Wechloy.
+
+If you would like to attend the meeting, please send back this form,
+so I can calculate space, power, food and stuff.  Space, power and
+connectivity will thankfully be sponsored by the University, food and
+stuff will be sponsored by ffis e.V., except dinner in restaurants.
+We will be able to use showers inside of the sport building.
+
+You'll need to take with you these things: machines, monitors,
+technical documentation (very important), enough triple plugs for your
+machines, some network cabling, some hubs/switches, sleeping bag, air
+mattress, towel, shower stuff, plate, cutlery, coffee mug.
+
+Comprehensive Information are on the web:
+http://oldenburger.linuxtage.de/Oldenburg2001/
+
+
+Regards,
+
+        Joey
+
+---------- 8< ---------- 8< ---------- 8< ---------- 8< ----------
+
+Linux Developer's Meeting in Oldenburg 2001 - Sept 27th - 30th
+
+Name  :
+E-Mail:
+
+I'd like to attend on these days:
+
+    [ ] Thursday, September 27th
+    [ ] Friday, September 28th
+    [ ] Saturday, September 29th
+    [ ] Sunday, September 30th
+
+    Dinner will be from 7pm - 9pm or something.  If you plan to arrive
+    within this period, make sure you know how to reach me mobile.
+
+Number of machines ...........:
+Number of monitors ...........:
+
+Name may be placed on web page: ( ) yes
+                                ( ) no
+
+---------- 8< ---------- 8< ---------- 8< ---------- 8< ----------
+
+--dgjlcl3Tl+kb3YDk
+Content-Type: application/pgp-signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.0.6 (GNU/Linux)
+Comment: For info see http://www.gnupg.org
+
+iD8DBQE7n4P/W5ql+IAeqTIRAv7+AJ9SHUH5c8PqV9YIE8beUzlUStZj/gCcCRpK
+EjM0a/Wm5UnnwhVNlq6PWdo=
+=Oqd1
+-----END PGP SIGNATURE-----
+
+--dgjlcl3Tl+kb3YDk--
