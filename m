@@ -1,7 +1,7 @@
-From: David Cooley <n5xmt@bellsouth.net>
-Date: Tue, 05 Oct 1999 13:10:32 +0000
+From: "David S. Miller" <davem@redhat.com>
+Date: Tue, 05 Oct 1999 13:22:46 +0000
 Subject: Re: tulip under linux sparc?
-Message-Id: <marc-linux-ultrasparc-93912863529206@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93912976030407@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-93909789806109@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-93909789806109@msgid-missing>
@@ -10,18 +10,24 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-At 02:35 PM 10/5/1999 +1000, nick wrote:
->Anyone,
->
->Is it possible or not to get a Netgear 10/100 card, based on the tulip
->driver, working on a UE10 running Sparc Linux? (redhat 6.0)
+   Date:   Tue, 05 Oct 1999 09:10:32 -0400
+   From: David Cooley <n5xmt@bellsouth.net>
 
+   It's not possible because the netgear card has a bios/microcode
+   setup for a PC architecture.  The Sun has to have a card that is
+   designed for the OBP architecture.
 
-It's not possible because the netgear card has a bios/microcode setup for a 
-PC architecture.  The Sun has to have a card that is designed for the OBP 
-architecture.
+_Please_ don't spread around misinformation like this, it simply isn't
+true.
 
-=============================David Cooley N5XMT Internet: N5XMT@bellsouth.net
-Packet: N5XMT@KQ4LO.#INT.NC.USA.NA T.A.P.R. Member #7068
-We are Borg... Prepare to be assimilated!
-=============================
+The issue is that these NetGEAR cards are LiteON Tulip based, and not
+supported by the de4x5 driver, but the tulip.c one which I haven't
+done the "endianness/64-bit" portability fixes to.
+
+I use all sorts of Tulip based cards, even quad-tulip Adaptec ones,
+all the time in my Ultra/PCI machines.  All of them have x86 bios's,
+which mean you just can't boot from them under OBP, nothing more.
+
+Later,
+David S. Miller
+davem@redhat.com
