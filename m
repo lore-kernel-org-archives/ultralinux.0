@@ -1,38 +1,29 @@
-From: Douglas Eadline <deadline@plogic.com>
-Date: Sun, 26 Jul 1998 13:57:45 +0000
-Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531088@msgid-missing>
+From: "D.Forbes" <D.Forbes@Bradford.ac.uk>
+Date: Fri, 17 Jul 1998 14:51:53 +0000
+Subject: Ultra penguin
+Message-Id: <marc-linux-ultrasparc-90222358531058@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Sat, 25 Jul 1998, Ward Deng wrote:
-> 
-> Of course, we dream someday we can use super-supercomputer to solve our
-> problems starting from discrete domain but it is not possible in a forseeable
-> future. Beowulf-type COTS systems are very exciting but the majority of 
-> numerical problems are not in that category. Searching for low-latency,
-> high-throughput inter-processor communication should be still listed high
-> on our agenda. At least this is my view.
+This may sound a bit naive but....
 
-I think the point is that there are many problems that do fit the
-"beowulf" model that previously were very expensive to solve. 
-There will always be a case for the very high end (read as expensive)
-machines.  But, a class of hardware that was previously unavailable
-to many people just a few years ago is now very much in reach. 
+I am trying to perform an FTP install of UltraPenguin 1.0.9 onto an 
+Ultra10. The first step involves using rawrite to put the boot image 
+file onto a floppy disk.
 
-We (Paralogic) are helping customers answer the question "will
-a beowulf cluster work for me?"  And it all depends on
-the application (problem) ....
+The image file is 2.5MB and a floppy disk is 1.44MB. As I suspected, 
+rawrite cannot put tftpboot.img onto the floppy disk.
 
-Doug
+Am I missing something here?
 
--------------------------------------------------------------------
-Paralogic, Inc.           |     PEAK     |      Voice:+610.861.6960
-115 Research Drive        |   PARALLEL   |        Fax:+610.861.8247
-Bethlehem, PA 18017 USA   |  PERFORMANCE |    http://www.plogic.com
--------------------------------------------------------------------
+I am using the distribution on ftp://sunsite.doc.ic.ac.uk
+/packages/linux/sunsite.unc-mirror/distributions/ultra/sparc64/
+
+.............................................................
+. D.Forbes@Bradford.ac.uk     http://www.eesf.brad.ac.uk    .
+. University of Bradford, Bradford BD7 1DP Yorkshire, UK    .
+. Code:+44 1274    Tel:232323 ext4063  Direct:234063        .
+.............................................................
