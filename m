@@ -1,26 +1,75 @@
-From: dan carter <dcarter@waitaki.otago.ac.nz>
-Date: Wed, 13 Sep 2000 23:09:34 +0000
-Subject: Re: PC keyboard and mouse.
-Message-Id: <marc-linux-ultrasparc-96888656011813@msgid-missing>
+From: Keith Owens <kaos@ocs3.ocs-net>
+Date: Sat, 02 Sep 2000 02:18:46 +0000
+Subject: 2.4.0 do_fork() change, all architectures - take 2
+Message-Id: <marc-linux-ultrasparc-96786106301125@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-96882183205151@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-96882183205151@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Rajiv Mordani wrote:
-> 
-> Hi All,
->         I am using a PC keyboard and mouse with my ultra 1 box. I use KDE and
-> the only thing that I am unable to use is the ALT key. In other words ALT
-> Tab, ALT F4 etc none of the shortcuts work anymore.. Any suggestions??
+------- Blind-Carbon-Copy
 
-This should work best, but i don't have specifics for it, go into your
-XConfig and change the mapping for the Alt key to the Meta.
-Alternatively, to just fix KDE stuff, go into the Control
-Centre/Keyboard Shortcuts/Global Keys
+X-Mailer: exmh version 2.1.1 10/15/1999
+From: Keith Owens <kaos@ocs.com.au>
+To: linux-kernel@vger.kernel.org
+Subject: 2.4.0 do_fork() change, all architectures - take 2
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Date: Sat, 02 Sep 2000 13:18:46 +1100
+Message-ID: <8893.967861126@ocs3.ocs-net>
+
+DaveM pointed out that my 2.4.0-test8-pre1 do_fork patch would generate
+better sparc assembler if the extra parameter to do_fork was added at
+the end instead of in the middle.  So change all do_fork(flags,sp,0,&regs)
+to do_fork(flags,sp,&regs,0);
+
+I'm not going to mail the complete patch again, you can get it from
+ftp://ftp.ocs.com.au/pub/do_fork-2.4.0-test8-take2.gz.  The only
+significant difference is this bit to IA64, untested.
+
+Index: 0-test8-pre1.1/arch/ia64/kernel/entry.S
+- --- 0-test8-pre1.1/arch/ia64/kernel/entry.S Tue, 15 Aug 2000 17:50:48 +1000 kaos (linux-2.4/c/c/16_entry.S 1.3.1.1.1.2 644)
++++ 0-test8-pre1.2(w)/arch/ia64/kernel/entry.S Sat, 02 Sep 2000 12:49:16 +1100 kaos (linux-2.4/c/c/16_entry.S 1.3.1.1.1.2 644)
+@@ -68,8 +68,8 @@
+ 	mov loc1=r16				// save ar.pfs across do_fork
+ 	UNW(.body)
+ 	mov out1=in1
+- -	mov out2=in2
+- -	adds out3=IA64_SWITCH_STACK_SIZE+16,sp	// out3 = &regs
++	mov out3=in2
++	adds out2=IA64_SWITCH_STACK_SIZE+16,sp	// out2 = &regs
+ 	mov out0=in0				// out0 = clone_flags
+ 	br.call.sptk.few rp=do_fork
+ .ret1:	UNW(.restore sp)
+@@ -87,8 +87,8 @@
+ 	mov loc1=r16				// save ar.pfs across do_fork
+ 	UNW(.body)
+ 	mov out1=in1
+- -	mov out2=0
+- -	adds out3=IA64_SWITCH_STACK_SIZE+16,sp	// out3 = &regs
++	mov out3=0
++	adds out2=IA64_SWITCH_STACK_SIZE+16,sp	// out2 = &regs
+ 	mov out0=in0				// out0 = clone_flags
+ 	br.call.sptk.few rp=do_fork
+ .ret2:	UNW(.restore sp)
+Index: 0-test8-pre1.1/arch/ia64/ia32/ia32_entry.S
+- --- 0-test8-pre1.1/arch/ia64/ia32/ia32_entry.S Tue, 15 Aug 2000 17:50:48 +1000 kaos (linux-2.4/c/c/25_ia32_entry 1.3.1.1 644)
++++ 0-test8-pre1.2(w)/arch/ia64/ia32/ia32_entry.S Sat, 02 Sep 2000 12:49:58 +1100 kaos (linux-2.4/c/c/25_ia32_entry 1.3.1.1 644)
+@@ -91,8 +91,8 @@
+ 	UNW(.body)
+ 
+ 	mov out1=0
+- -	mov out2=0
+- -	adds out3=IA64_SWITCH_STACK_SIZE+16,sp
++	mov out3=0
++	adds out2=IA64_SWITCH_STACK_SIZE+16,sp	// out2 = &regs
+ 	br.call.sptk.few rp=do_fork
+ .ret3:	mov ar.pfs=loc1
+ 	UNW(.restore sp)
+
+
+------- End of Blind-Carbon-Copy
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
