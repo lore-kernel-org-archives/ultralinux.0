@@ -1,7 +1,7 @@
-From: Tethys <tethys@ml.com>
-Date: Fri, 08 May 1998 16:58:49 +0000
+From: Donnie Barnes <djb@redhat.com>
+Date: Fri, 08 May 1998 17:55:37 +0000
 Subject: Re: mirror of ultrapenguin
-Message-Id: <marc-linux-ultrasparc-90222356530992@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222356530993@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222356530986@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222356530986@msgid-missing>
@@ -11,28 +11,24 @@ Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
->It's now complete...see the URL above.  Thanks to Jim for pointing out
->that we weren't mirroring the right thing.
+> >It's now complete...see the URL above.  Thanks to Jim for pointing out
+> >that we weren't mirroring the right thing.
+> 
+> Are there any plans to have an official RedHat 5 for Sparc, or are
+> you intending to just let UltraPenguin carry on from where you left
+> off?
 
-Are there any plans to have an official RedHat 5 for Sparc, or are
-you intending to just let UltraPenguin carry on from where you left
-off?
+We do intend to have another SPARC release.  It will be 5.1, though,
+and will likely be a few weeks after the Intel 5.1 is done.
 
-There are a huge number of Sparcs in the commercial world, but they're
-unlikely to run Linux without the backing of a visible organisation.
-Given that RedHat now has commercial support options available, RedHat
-on Linux becomes a viable proposition for those companies that are too
-paranoid to try anoything unless they have someone to blame (like mine!)
+I'm not sure when *our* release will support the Ultra, though.  We
+currently don't have an Ultra in house.
 
-BTW, Craftworks was apparently prepared to support RedHat 4.2/Sparc
-anyway, but whether they'd support UltraPenguin or not, I don't know.
 
-Just curious...
+--Donnie
 
-Tet
 
 --
-``Live free or die; death is not the worst of evils'' - General George Stark
---------------------+--------------+----------------------------------------
-tethys@ml.com       |  Micro$oft:  | Linux,  the choice of a GNU generation.
-tet@astradyne.co.uk | Just say no! | See http://www.uk.linux.org for details
+ Donnie Barnes    http://www.redhat.com/~djb    djb@redhat.com   "Bah."
+   Challenge Diversity.  Ignore People.  Live Life.  Use Linux.  879.
+My Dad used to say I have deceptive quickness.  I'm slower than I look.
