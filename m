@@ -1,7 +1,7 @@
-From: Grant Beattie <Grant.Beattie@fulcrum.com.au>
-Date: Thu, 19 Nov 1998 09:45:57 +0000
+From: Peter Jones <pjones@redhat.com>
+Date: Thu, 19 Nov 1998 19:32:32 +0000
 Subject: Re: 1.1 great, netscape?
-Message-Id: <marc-linux-ultrasparc-91150137915667@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91155100206410@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91146828828908@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91146828828908@msgid-missing>
@@ -10,20 +10,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, Nov 18, 1998 at 10:45:40AM -0700, Aric Hagberg wrote:
+On Wed, 18 Nov 1998, Aric Hagberg wrote:
 
+> Hi,
+> 
+> I had an extra Ultra I with a Creator card lying around in my
+> office and last eve was inspired to put Ultrapenguin on it.
+> It installed perfectly and took about 30 minutes total from
+> reading the instructions to login.  Great job!
+> 
 > What is the current status of Netscape with ultrapenguin?
 > Native binary?  Solaris emulation?
+> 
+> Aric
 
-I believe there is a native Sparclinux binary these days. Not for 4.08
-when I looked the other day, but 4.07 should be there.
+There's a native sparc/linux bin that should work on
+ftp://ftp.netscape.com/pub/communicator/4.5/english/unix/unsupported/linux20_sparc_glibc2/complete_install/communicator-v45-export.sparc-unknown-linux2.0.tar.gz
 
-in the 'unsupported' tree I think.
+That has got to be the single most obscene directory tree naming scheme
+i've seen all day.  Anyway, It should work fine.  Some people have had
+problems with it core dumping if you use the install script.  Read the
+script, it has stuff telling how to do it by hand.  Dunno why this is, I
+havn't looked very hard.
 
-g.
+ -- Peter
 
---
-   /\    The Fulcrum Consulting Group              Grant Beattie - Consultant
-  /\O\   Professional Services For Operation     Grant.Beattie@fulcrum.com.au
- /   /\  Of A Networked Computing Environment             ph: +61-3-9621-2100
-/o   | \ 12/10-16 Queen St, Melbourne VIC 3000, Aust      fx: +61-3-9621-2724
+Teach a man to use food stamps, he'll eat for a day.  Teach a man to *forge*
+food stamps, he'll eat for a lifetime."
+		-- Dossy
