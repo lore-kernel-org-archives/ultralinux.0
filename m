@@ -1,29 +1,33 @@
-From: Harald Barth <haba@pdc.kth.se>
-Date: Fri, 17 Aug 2001 09:17:19 +0000
-Subject: RE: Modifying an entry in sys_call_table in a portable way
-Message-Id: <marc-linux-ultrasparc-99803997905449@msgid-missing>
+From: Sean Callanan <sc843@bard.edu>
+Date: Sun, 30 Sep 2001 17:20:50 +0000
+Subject: More sparc64-libc questions
+Message-Id: <marc-linux-ultrasparc-100187097332030@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-"Holzrichter, Bruce" wrote:
-> I am not a developer by trade, but you may want to forward your messages
-> along to ultralinux@vger.kernel.org, as that's the primary 64bit Sparc
-> Mailing list as I have found out after some time online here.=20
 
-Oh, stupid me, I thought it was the top one mentioned on
-http://www.ultralinux.org/lists.html ;-)
+>Yes, it's known to work. Debian contains a gcc-3.0-sparc64 package along
+>with a libc6-sparc64. The tricky part is that gcc is hardcoded to use
+>/lib64/ld-linux.so.2. You should make a symlink from /lib64 to
+>/usr/local/sparc64-linux/lib for your setup to work, and then add /lib64
+>to /etc/ld.so.conf and rerun ldconfig.
 
-Ok, you folk who only read ultralinux, you may want to check out
+I did what you suggested, adding /lib64 to /etc/ld.so.conf, and rerunning 
+ldconfig. But now the program segfaults.
 
-http://marc.theaimsgroup.com/?l=3Dlinux-sparc&m=99627512117169&w=3D2
+% sparc64-linux-gcc -m64 -o hello hello.c
+% ./hello
+Segmentation fault
 
-It is about a problem that will get you in mixed 32-64 bit land.
+It doesn't dump core, either. (not that my 32-bit gdb would do much good)
 
-> Good luck.
+By the way, how difficult would it be to use a file in /etc to determine 
+the 64-bit library location (such as, maybe /etc/ld64.so.conf)?
 
-Thanks, I might need that.
+Sincerely,
 
-Harald.
+Sean Callanan 
+
