@@ -1,39 +1,33 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Tue, 23 Mar 1999 08:04:44 +0000
-Subject: Re: Boot Floppy
-Message-Id: <marc-linux-ultrasparc-92217677631265@msgid-missing>
+From: Thierry Lafage <Thierry.Lafage@irisa.fr>
+Date: Mon, 15 Mar 1999 15:49:02 +0000
+Subject: menuconfig not ok
+Message-Id: <marc-linux-ultrasparc-92151387520817@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92217376228904@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92217376228904@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> I tried to make a boot floppy under DOS.
-> Initializes floppy and write a "boot.img" by "RAWRITE.EXE". or
-> make a boot floppy under UNIX with "fdformat" and "dd"
-> 
-> Then I boot a ULTRA30(Creater3D) with  the both floppy.
-> But I can not booting.
-> messages:
->     Bad Magic Number in label block
-> 
-> 
-> 
-> 
-> Why??
 
-No SMCC UltraSPARC machines are able to boot floppy AFAIK (only UltraAX/AXi
-handle it).
+Hi, 
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
-Linux version 2.2.3 on a sparc64 machine (3958.37 BogoMips)
-___________________________________________________________________
+Just trying to configure ultrapenguin-1.1.9 kernel 2.2.2 with
+menuconfig. While trying to put <N> in 
+Fibre Channel support  ---> Fibre Channel and FC4 SCSI support
+
+Menuconfig has encountered a possible error in one of the kernel's
+configuration files and is unable to continue.  Here is the error
+report:
+
+ Q> scripts/Menuconfig: =: command not found
+
+Please report this to the maintainer <mec@shout.net>.  You may also
+send a problem report to <linux-kernel@vger.rutgers.edu>.
+
+Please indicate the kernel version you are trying to configure and
+which menu you were trying to enter when this error occurred.
+
+make: *** [menuconfig] Error 1
+
+
+Thierry Lafage.
