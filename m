@@ -1,32 +1,29 @@
-From: Peter Jones <pjones@redhat.com>
-Date: Mon, 11 Sep 2000 13:59:26 +0000
-Subject: Re: Need help with RedHat post install- sound, keyboard
-Message-Id: <marc-linux-ultrasparc-96868058911162@msgid-missing>
+From: "David S. Miller" <davem@redhat.com>
+Date: Sat, 02 Sep 2000 01:23:13 +0000
+Subject: Re: 2.4.0 do_fork() change, all architectures
+Message-Id: <marc-linux-ultrasparc-96785844931380@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-96843062507029@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-96843062507029@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, 8 Sep 2000, Edward J. Bradshaw wrote:
 
->     I just loaded Red Hat 6.2 on a Sparc Ultra60 and have just a few
-> minor problems.
-> 
-> First - My audio works fine on the internal speaker but I can't figure
-> out how to switch it over to the audio out on the back of the sytem.
-> Under Solaris 2.6 you would go to the audio tool to switch this.
+UGH, I thought you said you just added the new argument at the end of
+do_fork's argument list?  That way makes the assembler come out the
+easiest (ie. the one line changes I sent you) on Sparc and on other
+architectures as well.
 
-You want audioctl(1).
+Any chance to change this so that the stack_top thing is added
+as the last arg to do_fork?
 
--- 
-        Peter
+Thus, currently, the asm I sent you doesn't work.  I would not have
+made this mistake if you had sent me the patch and not just an english
+explanation of the change :-(
 
-Gravity is a habbit that is hard to shake off.
-		-- Pratchett
-
+Later,
+David S. Miller
+davem@redhat.com
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
