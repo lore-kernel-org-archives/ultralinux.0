@@ -1,21 +1,77 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Mon, 05 Jan 2004 21:03:29 +0000
-Subject: Re: [PATCH] [SPARC64] use drivers/block/Kconfig
-Message-Id: <20040105130329.55e96b5f.davem@redhat.com>
+From: Clint Adams <schizo@debian.org>
+Date: Thu, 08 Jan 2004 05:25:42 +0000
+Subject: wireless ioctl compat
+Message-Id: <20040108052542.GA2049@scowler.net>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20040103164847.GK6982@parcelfarce.linux.theplanet.co.uk>
-In-Reply-To: <20040103164847.GK6982@parcelfarce.linux.theplanet.co.uk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Sat, 3 Jan 2004 16:48:47 +0000
-Matthew Wilcox <willy@debian.org> wrote:
+32-bit wireless tools don't currently work on sparc64.  With the
+following patch, some of the ioctls work.
+SIOCSIWESSID and SIOCGIWESSID do not; the latter results in a buffer
+size error.
 
-> Hi Dave.  Sparc64 is actually missing a few options at the moment
-> (like Cryptoloop) because it has its own block menu rather than using
-> the generic one.  I don't see a reason to not use the generic one,
-> so here's a patch.
+I have very little idea what I'm doing and don't know how to fix that.
 
-Applied, thanks Matthew.
+--- linux-2.6.0/arch/sparc64/kernel/ioctl32.c	2003-12-17 21:59:36.000000000 -0500
++++ wioctl/arch/sparc64/kernel/ioctl32.c	2004-01-07 23:28:56.000000000 -0500
+@@ -20,6 +20,7 @@
+ #include <asm/openpromio.h>
+ #include <asm/audioio.h>
+ #include <asm/watchdog.h>
++#include <linux/wireless.h>
+ 
+ /* Use this to get at 32-bit user passed pointers. 
+  * See sys_sparc32.c for description about it.
+@@ -1144,6 +1145,49 @@
+ COMPATIBLE_IOCTL(DM_TARGET_STATUS)
+ COMPATIBLE_IOCTL(DM_TARGET_WAIT)
+ #endif
++
++/* wireless */
++COMPATIBLE_IOCTL(SIOCSIWCOMMIT)
++COMPATIBLE_IOCTL(SIOCGIWNAME)
++COMPATIBLE_IOCTL(SIOCSIWNWID)
++COMPATIBLE_IOCTL(SIOCGIWNWID)
++COMPATIBLE_IOCTL(SIOCSIWFREQ)
++COMPATIBLE_IOCTL(SIOCGIWFREQ)
++COMPATIBLE_IOCTL(SIOCSIWMODE)
++COMPATIBLE_IOCTL(SIOCGIWMODE)
++COMPATIBLE_IOCTL(SIOCSIWSENS)
++COMPATIBLE_IOCTL(SIOCGIWSENS)
++COMPATIBLE_IOCTL(SIOCGIWRANGE)
++COMPATIBLE_IOCTL(SIOCGIWPRIV)
++COMPATIBLE_IOCTL(SIOCGIWSTATS)
++COMPATIBLE_IOCTL(SIOCSIWSPY)
++COMPATIBLE_IOCTL(SIOCGIWSPY)
++COMPATIBLE_IOCTL(SIOCSIWTHRSPY)
++COMPATIBLE_IOCTL(SIOCGIWTHRSPY)
++COMPATIBLE_IOCTL(SIOCSIWAP)
++COMPATIBLE_IOCTL(SIOCGIWAP)
++COMPATIBLE_IOCTL(SIOCGIWAPLIST)
++COMPATIBLE_IOCTL(SIOCSIWSCAN)
++COMPATIBLE_IOCTL(SIOCGIWSCAN)
++COMPATIBLE_IOCTL(SIOCSIWESSID)
++COMPATIBLE_IOCTL(SIOCGIWESSID)
++COMPATIBLE_IOCTL(SIOCSIWNICKN)
++COMPATIBLE_IOCTL(SIOCGIWNICKN)
++COMPATIBLE_IOCTL(SIOCSIWRATE)
++COMPATIBLE_IOCTL(SIOCGIWRATE)
++COMPATIBLE_IOCTL(SIOCSIWRTS)
++COMPATIBLE_IOCTL(SIOCGIWRTS)
++COMPATIBLE_IOCTL(SIOCSIWFRAG)
++COMPATIBLE_IOCTL(SIOCGIWFRAG)
++COMPATIBLE_IOCTL(SIOCSIWTXPOW)
++COMPATIBLE_IOCTL(SIOCGIWTXPOW)
++COMPATIBLE_IOCTL(SIOCSIWRETRY)
++COMPATIBLE_IOCTL(SIOCGIWRETRY)
++COMPATIBLE_IOCTL(SIOCSIWENCODE)
++COMPATIBLE_IOCTL(SIOCGIWENCODE)
++COMPATIBLE_IOCTL(SIOCSIWPOWER)
++COMPATIBLE_IOCTL(SIOCGIWPOWER)
++
+ /* And these ioctls need translation */
+ /* NCPFS */
+ HANDLE_IOCTL(NCP_IOC_NCPREQUEST_32, do_ncp_ncprequest)
