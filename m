@@ -1,39 +1,46 @@
-From: Ben Collins <bcollins@debian.org>
-Date: Sat, 12 Jan 2002 04:42:46 +0000
-Subject: Re: XFree86 4.1.0 and PCI patch
-Message-Id: <marc-linux-ultrasparc-101081058408673@msgid-missing>
+From: "ANSHUL SARIN" <anshul.sarin@wipro.com>
+Date: Thu, 03 Jan 2002 18:51:27 +0000
+Subject: linux for ultrasparc
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="----=_NextPartTM-000-87a9bfae-0068-11d6-af7e-0080c8048dde"
+Message-Id: <marc-linux-ultrasparc-101008408805690@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-101080710404970@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-101080710404970@msgid-missing>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, Jan 11, 2002 at 10:43:47PM -0500, Sean Callanan wrote:
-> Dear mailing list:
-> 
-> In short, I have compiled XFree86 4.1.0 on a Sun Ultra 5 with the ATI
-> Mach64 video card. Compilation was relatively smooth - should I give some
-> patches that fix sparc compilation with GCC 3.0.3?
-> 
-> My question is: the server gives the error
-> --
-> Could not mmap PCI memory
-> --
-> I know this is a known issue because there are several other messages
-> about this on Google, that's why I don't provide more complete server
-> error logs.
-> 
-> There is a patch mentioned for this, from David S. Miller, but I can't
-> track it down. Should I apply the massive debian patch (4.1.0-4.1.0.11) or
-> is there a smaller patch around just for sparc?
 
-Why not just install the Debian packages? If you want to build it, there
-is a patch in the Debian sources just for this issue.
+This is a multi-part message in MIME format.
 
--- 
- .----------====-=-===-=====-----------===------------=-=-----.
-/                   Ben Collins    --    Debian GNU/Linux                  \
-`  bcollins@debian.org  --  bcollins@openldap.org  --  bcollins@linux.com  '
- `---=====------====-------------=-=-----=-==-===-------=--=---'
+------=_NextPartTM-000-87a9bfae-0068-11d6-af7e-0080c8048dde
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Hi All,
+
+    Any pointers on as to where the linux for ultrasparc platform can be
+downloaded and which is the best suited for performance.
+
+Regards
+Anshul
+
+
+------=_NextPartTM-000-87a9bfae-0068-11d6-af7e-0080c8048dde
+Content-Type: text/plain;
+	name="Wipro_Disclaimer.txt"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="Wipro_Disclaimer.txt"
+
+----------------------------------------------------------------------------------------------------------------------
+Information transmitted by this E-MAIL is proprietary to Wipro and/or its Customers and
+is intended for use only by the individual or entity to which it is
+addressed, and may contain information that is privileged, confidential or
+exempt from disclosure under applicable law. If you are not the intended
+recipient or it appears that this mail has been forwarded to you without
+proper authority, you are notified that any use or dissemination of this
+information in any manner is strictly prohibited. In such cases, please
+notify us immediately at mailto:mailadmin@wipro.com and delete this mail
+from your records.
+----------------------------------------------------------------------------------------------------------------------
+
+
+------=_NextPartTM-000-87a9bfae-0068-11d6-af7e-0080c8048dde--
