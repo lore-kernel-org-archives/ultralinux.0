@@ -1,7 +1,7 @@
-From: Xavier Beaudouin <kiwi@oav.net>
-Date: Mon, 13 Jul 1998 12:09:29 +0000
+From: "Robert G. Brown" <rgb@phy.duke.edu>
+Date: Mon, 13 Jul 1998 13:59:33 +0000
 Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531023@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531024@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
@@ -10,61 +10,54 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> If Sun can fill up the DIMMS with good price, then I don't need
-> to worry about mem upgrade. But from my last experience, it
-> will cost you 3-4 times higher than a PC (Intel or Alpha).
+On Sat, 11 Jul 1998, Matthew Jacob wrote:
 
-This is really a problem... I use 2 alpha and 5 sun sparc boxes... The
-main problem is the cost of these memory upgrades since thoses boxes are
-second hand...
+> 
+> 
+> 
+> >    Date: Sat, 11 Jul 1998 19:21:14 -0700 (PDT)
+> >    From: Matthew Jacob <mjacob@feral.com>
+> > 
+> >    Yes, but at the high end costs of CPUs are irrelevant since it
+> >    usually becomes storage and network infrastructure costs that
+> >    predominate.
+> > 
+> > This argument sounds %100 logical and correct.
+> > 
+> > But then why doesn't Intel just cause 4 way SMP machines to cost $20k
+> > just like Sun?
+> > 
+> 
+> Good question, although the answer may be "Intel is not in
+> the system's business".
+> 
+> 
+> 
+> 
 
-Seems that some alpha motherboard are now compatible with those cheap PC
-memory... That's good, but sun boxes not... This is really a pain I think,
-for example in France for a 64Mb upgrade for SS10 I must pay 1000FF 
-without the VAT (about $200 !!) a this price I've got about 256 Mb of ram
-(okay, in 4 DIMMS) and this price is with the VAT.
+...and "manufacturer's who use Intel chips in 4+ CPU SMP machines have to
+actually compete in an open market"....
 
-Since today, the main problem with Sparc and Alpha boxes is not the CPU (I
-don't care, if I need some more CPU power for one usage I add a new Alpha
-or Sparc), but the RAM... 
+I'm also not sure about the original premise.  At the high end of
+multiprocessing systems (or even at the low end:-), I would have
+expected the bulk of the cost to be in the design and implementation
+of the bus structure that connects the processors to enable shared
+access to memory, peripherals, and each other to facilitate high speed
+IPC's.  Disk is cheap (especially when packaged for a standard
+interface, i.e. -- SCSI UW on a PCI bus) and really NIC's (similarly
+packaged) are too.  Getting disk and networks onto a bus (proprietary
+or otherwise) and interfaced with lots of processors and memory and
+working out all the DMA issues and cache coherence issues and
+busmastering issues -- that's expensive.
 
-> I am not sure what other PC PCI card that I can put there.
-> We have SGI O2s with PCI slots. But I almost cannot put
-> any PCI card from retail store, since it is not compatible
-> with O2 or there is simply no driver for it (you may develop
-> your own, if you really want.). The problem is that these
-> SUN and SGI PCI systems are not open-architecture. And there
-> market is so small, compare with PC quantity, There are
-> almost no third party vendors are interested in develop a
-> driver for them. We saw the same the same problem for Apple,
-> too.
+I thought the real claim to fame of all of Sun's multiprocessing
+systems (and the SP2, and the Power Challenge, and the...) has always
+been their really fast/expensive IPC bus, not their interface to
+peripherals.
 
-?? Hugh ? For Apple, I currently use PC video card and some capture card
-without any problems, on Linux PPC (this maybe why I don't have any
-problems ?). About PCI under non x86 boxes, seems that all my PCI card I
-have tested on an Alpha (AlphaStation 4/266) are really working without
-any problems : Video (S3, Cirrus, Matrox), Networking (3C900 / 3C590 /
-Tulip), Some BUSLOGICS PCI (I don't use them for boot !) and the NCR
-compatible PCI SCSI for ASUS...
+    rgb
 
-I think the main problem for PCI card is :
-
- 1- OS drivers for specific hardware... This is the problem
-    of the manufacturer _and_ the OS (for example OpenBSD and Linux!)
- 2- Some of PCI card use some ROM on it... Good, but allmost time
-    this is x86 code... ;-( 
-    -> Alpha Box have an x86 bios emulator... What about SGI and SUN ?
-       
-
-/Xavier
-
---
- Cybernet Consulting Associates - I.S.P. & Network Design and Consulting
- Xavier Beaudouin   -   Network Designer & Consultant   -   kiwi@oav.net
- Phone/Fax : +33 (0)1 4734 3366     -      Cellular : +33 (0)6 6026 5108
- Web sites : http://oav.net/  - http://cybernet.fr/  - http://kazar.com/
- [---------------------------------------------------------------------]
-There's been no top authority saying what marijuana does to you.  I
-really don't know that much about it.  I tried it once but it didn't do
-anything to me.
-		-- John Wayne
+Robert G. Brown	                       http://www.phy.duke.edu/~rgb/
+Duke University Dept. of Physics, Box 90305
+Durham, N.C. 27708-0305
+Phone: 1-919-660-2567  Fax: 919-660-2525     email:rgb@phy.duke.edu
