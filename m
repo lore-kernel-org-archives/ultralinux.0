@@ -1,28 +1,25 @@
-From: "David A. Cooley" <n5xmt@bellsouth.net>
-Date: Sat, 18 Sep 1999 16:30:16 +0000
-Subject: Re: Kernel probs...
-Message-Id: <marc-linux-ultrasparc-93767262909621@msgid-missing>
+From: Brent Jay Thorpe <brent.thorpe@sun.com>
+Date: Fri, 17 Sep 1999 19:43:22 +0000
+Subject: Install options on AXi
+Message-Id: <marc-linux-ultrasparc-93760525605213@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-93761559912745@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-93761559912745@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-At 06:17 PM 9/18/99 +0200, Ingo Molnar wrote:
+All,
 
+I have to make a customer presentation about install options with Linux
+on AXi (CDROM, Floppy, Network.)  I have been doing some homework in
+making the "slideware" and found that you could get the initial boot
+loader from a floppy device (as well as tftp.)  In following the
+instructions on creating the floppy, I found that my system does not
+recognize the floppy device as a valid block device.  In other words, it
+cannot see the floppy device at all.  I also found out that it does not
+recognize the printer port (lp0) either.  Anyone know what is the
+correct device for both the floppy and printer on an AXi?
 
->2.2.12 (and the pre-2.2.13 patches) are better than the 2.2.11 kernel. If
->you apply the 2.2.11 patch to 2.2.12 then you'll get a single reject,
->which you can safely ignore. (it tries to add something that has already
->been merged into the main tree)
+thanks in advance
 
-
-Where do I get the pre-2.2.13 patches?
-Looked on kernel.org but they weren't there.
-
-=============================            David Cooley N5XMT           Internet: N5XMT@bellsouth.net
-      Packet: N5XMT@KQ4LO.#INT.NC.USA.NA   T.A.P.R. Member #7068
-    Sponges grow in the ocean... Wonder how deep it would be if they didn't?!
-=============================
+Brent
