@@ -1,20 +1,40 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Mon, 20 Jan 2003 06:01:24 +0000
-Subject: Re: strange sparc64 -> i586 intermittent but reproducible NFS write
-Message-Id: <marc-linux-ultrasparc-104304248432185@msgid-missing>
+From: Nix <nix@esperi.demon.co.uk>
+Date: Mon, 20 Jan 2003 20:53:00 +0000
+Subject: Re: strange sparc64 -> i586 intermittent but reproducible NFS write errors to one and only one fs
+Message-Id: <marc-linux-ultrasparc-104309645228838@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-104300775807656@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-104300775807656@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="macroman"
+Content-Transfer-Encoding: base64
 To: ultralinux@vger.kernel.org
 
-On Sun, 2003-01-19 at 13:00, Trond Myklebust wrote:
-> It sounds rather strange that this particular patch should introduce
-> an EIO, but here it is (fresh from BitKeeper)
-
-It is possible in the context of the change causing a miscompile.
-Another possibility is just timing differences causing different
-sequences of events to occur than before.
-
+T24gMTkgSmFuIDIwMDMsIERhdmlkIFMuIE1pbGxlciBtdXR0ZXJlZCBkcnVua2VubHk6Cj4gT24g
+U3VuLCAyMDAzLTAxLTE5IGF0IDEzOjAwLCBUcm9uZCBNeWtsZWJ1c3Qgd3JvdGU6Cj4+IEl0IHNv
+dW5kcyByYXRoZXIgc3RyYW5nZSB0aGF0IHRoaXMgcGFydGljdWxhciBwYXRjaCBzaG91bGQgaW50
+cm9kdWNlCj4+IGFuIEVJTywgYnV0IGhlcmUgaXQgaXMgKGZyZXNoIGZyb20gQml0S2VlcGVyKQo+
+IAo+IEl0IGlzIHBvc3NpYmxlIGluIHRoZSBjb250ZXh0IG9mIHRoZSBjaGFuZ2UgY2F1c2luZyBh
+IG1pc2NvbXBpbGUuCj4gQW5vdGhlciBwb3NzaWJpbGl0eSBpcyBqdXN0IHRpbWluZyBkaWZmZXJl
+bmNlcyBjYXVzaW5nIGRpZmZlcmVudAo+IHNlcXVlbmNlcyBvZiBldmVudHMgdG8gb2NjdXIgdGhh
+biBiZWZvcmUuCgpJJ2xsIGJlIHJlYm9vdGluZyB3aXRoIC1wcmUxMC1taW51cy1Ucm9uZCdzLXBh
+dGNoIGxhdGVyIHRvbmlnaHQsIGFuZAp0Y3BkdW1waW5nIHRoZSBORlMgY29udmVyc2F0aW9uIHRv
+IGRlYXRoIGlmIGl0IGhhc24ndCBiZWVuIGN1cmVkLgoKRldJVywgdGhlIE1UVSBvbiB0aGUgc3Vi
+bmV0IHRoYXQgYm90aCB0aGVzZSBtYWNoaW5lcyBhcmUgb24gaGFzIE1UVQo1NzYuIEkgcmVhbGx5
+IGRvdWJ0IHRoaXMgYWZmZWN0cyBhbnl0aGluZzsgSSBtZW50aW9uIGl0IG1lcmVseSBiZWNhdXNl
+Cml0J3MgYSBiaXQgdW51c3VhbCBvbiBFdGhlcm5ldCBuZXR3b3Jrcy4gQW5kIGFsbCB0aGVzZSBG
+U2VuIGFyZSBtb3VudGVkCndpdGggLW8gZGVmYXVsdHMscnNpemWBOTIsd3NpemWBOTIuCgpJIHRo
+aW5rIHRoZSBwcm9ibGVtICptdXN0KiBiZSBzb21laG93IHRpbWluZy1yZWxhdGVkOyBJIGNhbid0
+IHNlZQphbnl0aGluZyBlbHNlIHRoYXQgY291bGQgY2F1c2Ugd3JpdGVzIHRvIGZhaWwgd2hlbiB3
+cml0aW5nIHRvIG9uZQpORlMtZXhwb3J0ZWQgZmlsZXN5c3RlbSBidXQgbm90IHRvIGFub3RoZXIg
+KG9mIHRoZSBzYW1lIHR5cGUpIG9uIHRoZQpzYW1lIG1hY2hpbmUsIHNhdmUgdGhhdCB0aGUgdHdv
+IGZzZW4gYXJlIG9uIGRpZmZlcmVudCBwaHlzaWNhbCBkaXNrcwp3aGljaCBoYXZlIHJhdGhlciBk
+aWZmZXJlbnQgdGltaW5nIGNoYXJhY3RlcmlzdGljcy4KCihFaXRoZXIgdGhhdCBvciB0aGUgbWFj
+aGluZSBqdXN0IGhhdGVzIG1lLikKCi0tIApgSSBrbmV3IHRoYXQgdGhlcmUgaGFkIHRvIGJlIGFs
+aWVucyBzb21ld2hlcmUgaW4gdGhlIHVuaXZlcnNlLiAgV2hhdCBJCiBkaWQgbm90IGtub3cgdW50
+aWwgbm93IHdhcyB0aGF0IHRoZXkgcmVhZCBVU0VORVQuJyAtLS0gTWFyayBIdWdoZXMsCiAgICAg
+IG9uIHRob3NlIHdobyB1bmFjY291bnRhYmx5IGZhaWwgdG8gbGlrZSBfQSBGaXJlIFVwb24gVGhl
+IERlZXBfCi0KVG8gdW5zdWJzY3JpYmUgZnJvbSB0aGlzIGxpc3Q6IHNlbmQgdGhlIGxpbmUgInVu
+c3Vic2NyaWJlIHVsdHJhbGludXgiIGluCnRoZSBib2R5IG9mIGEgbWVzc2FnZSB0byBtYWpvcmRv
+bW9Admdlci5rZXJuZWwub3JnCk1vcmUgbWFqb3Jkb21vIGluZm8gYXQgIGh0dHA6Ly92Z2VyLmtl
+cm5lbC5vcmcvbWFqb3Jkb21vLWluZm8uaHRtbA==
