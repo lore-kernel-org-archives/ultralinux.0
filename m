@@ -1,37 +1,47 @@
-From: Mark Fortescue <mark@mtfhpc.demon.co.uk>
-Date: Wed, 03 Nov 2004 00:01:29 +0000
-Subject: Re: [Linux-fbdev-devel] Help re Frame Buffer/Console Problems
-Message-Id: <Pine.LNX.4.10.10411022352380.5583-100000@mtfhpc.demon.co.uk>
+From: James Nelson <james4765@verizon.net>
+Date: Sun, 26 Dec 2004 13:46:54 +0000
+Subject: [PATCH] sparc64: remove x86-specific SMP reference in Kconfig
+Message-Id: <20041226134715.11731.39190.49206@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-In-Reply-To: <200411030719.06138.adaplas@hotpop.com>
-References: <200410300825.47096.adaplas@hotpop.com>
-In-Reply-To: <200410300825.47096.adaplas@hotpop.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: adaplas@pol.net
-Cc: linux-fbdev-devel@lists.sourceforge.net, jsimmons@infradead.org, geert@linux-m68k.org, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, linux-kernel@vger.kernel.org, wli@holomorphy.com
+To: ultralinux@vger.kernel.org
+Cc: akpm@osdl.org, linux-kernel@vger.kernel.org, James Nelson <james4765@verizon.net>
 
-I have just tested it and at the moment it does not. I suspect that
-something needs to be registered in the 'panic_notifier_list' to do some
-basic resets on the colour palette.
+Remove inapplicable references to x86 SMP configuration in arch/sparc64/Kconfig.
 
-For the moment I will just ensure that colour 255 <> colour 0 by some
-visible margin (Black/Dark Slate).
+Signed-off-by: James Nelson <james4765@gmail.com>
 
-Mark.
-
-On Wed, 3 Nov 2004, Antonino A. Daplas wrote:
-
-> On Wednesday 03 November 2004 06:57, Mark Fortescue wrote:
-> > Will this work for a kernel Panic ?
-> >
-> 
-> Probably not, unless the 'Panic' tells fbcon to release the console and 
-> tells promcon to take over the console again.  That in itself is problematic
-> as fbcon cannot be safely unloaded yet.
-> 
-> Tony
-> 
-> 
-
+diff -urN --exclude='*~' linux-2.6.10-original/arch/sparc64/Kconfig linux-2.6.10/arch/sparc64/Kconfig
+--- linux-2.6.10-original/arch/sparc64/Kconfig	2004-12-24 16:35:25.000000000 -0500
++++ linux-2.6.10/arch/sparc64/Kconfig	2004-12-26 08:27:19.248406666 -0500
+@@ -92,8 +92,8 @@
+ 	bool "Symmetric multi-processing support"
+ 	---help---
+ 	  This enables support for systems with more than one CPU. If you have
+-	  a system with only one CPU, like most personal computers, say N. If
+-	  you have a system with more than one CPU, say Y.
++	  a system with only one CPU, say N. If you have a system with more
++	  than one CPU, say Y.
+ 
+ 	  If you say N here, the kernel will run on single and multiprocessor
+ 	  machines, but will use only one CPU of a multiprocessor machine. If
+@@ -101,17 +101,11 @@
+ 	  singleprocessor machines. On a singleprocessor machine, the kernel
+ 	  will run faster if you say N here.
+ 
+-	  Note that if you say Y here and choose architecture "586" or
+-	  "Pentium" under "Processor family", the kernel will not work on 486
+-	  architectures. Similarly, multiprocessor kernels for the "PPro"
+-	  architecture may not work on all Pentium based boards.
+-
+ 	  People using multiprocessor machines who say Y here should also say
+ 	  Y to "Enhanced Real Time Clock Support", below. The "Advanced Power
+ 	  Management" code will be disabled if you say Y here.
+ 
+ 	  See also the <file:Documentation/smp.txt>,
+-	  <file:Documentation/i386/IO-APIC.txt>,
+ 	  <file:Documentation/nmi_watchdog.txt> and the SMP-HOWTO available at
+ 	  <http://www.tldp.org/docs.html#howto>.
+ 
