@@ -1,36 +1,62 @@
-From: gert@greenie.muc.de (Gert Doering)
-Date: Tue, 30 Jun 1998 07:27:06 +0000
-Subject: Re: Ultralinux for Sun newbies?
-Message-Id: <marc-linux-ultrasparc-90222357631047@msgid-missing>
+From: rick@dgii.com (Rick Richardson)
+Date: Thu, 25 Jun 1998 23:44:36 +0000
+Subject: Boot of 1.0.9 fails on Sun Ultra 1
+Message-Id: <marc-linux-ultrasparc-90222357631030@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357631046@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357631046@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
 
-Robert Macomber wrote:
-> [..] -- and as
-> far as I can tell, if I get Linux to boot at all, it will be
-> sufficiently stable for my needs.  My question, then, is: is this a
-> correct impression?  
+Dear UltraPenguins:
 
-Yes.  I use RedHat/Sparc 4.2 since about a year now (on a Sparc IPX and
-some SS2's), and it "just works" - no crashes whatsoever.
+A couple of us here though we could turn the Ultra Sparc into
+the worlds hottest RAS server.
 
-> Should I get the workstation and install Linux,
-> keep Solaris around until UltraPenguin 1.1 is released, or get another
-> Intel box with Linux?
+We dug up an UltraSparc machine here that identifies itself on
+the boot screen as:
 
-Going Intel is the easier road - going Sparc is more fun :-)
+	Sun Ultra 1 UPA/PCI (UltraSPARC-II 248 Mhz)
 
-gert
+It has 128 MB's of RAM in it.
+
+We downloaded the UltraPenguin 1.0.9 distribution and set up
+arp, rarp, and tftpd with the boot image:
+
+-rw-r--r--   1 rick     users     2582793 May  2 20:57 /tftpboot/up/tftpboot.img
+lrwxrwxrwx   1 rick     users          15 Jun 25 17:52 /tftpboot/C75608DD -> up/tftpboot.img
+
+
+At the "ok" prompt, we booted off the network using the following
+command.  The machine sucked down the boot image from the tftp server,
+and then ended with an error message "Couldn't get translation
+property".  Here is what is on the screen:
+
+	ok boot /pci@1f,4000/pci@4/SUNW,hme@0,1
+	Boot device: /pci@1f,4000/pci@4/SUNW,hme@0,1      File and args:
+	27a800 TILO
+
+	Couldn't get translation property
+	Program terminated
+	ok
+
+
+Does anybody know what this means and how to correct the problem?
+
+We'd really like to be able to port the drivers for some of our
+new PCI boards from linux/i386 to the UltraSparc.
+
+-Rick
+
+P.S. please reply to me as well as to the list, as I'm not sure my
+subscription to this list has been processed yet, and I don't
+know where to find an archive of this list to look at if I
+miss the answer.
+
 
 -- 
-USENET is *not* the non-clickable part of WWW!
-                                                           //www.muc.de/~gert/
-Gert Doering - Munich, Germany                             gert@greenie.muc.de
-fax: +49-89-35655025                        gert.doering@physik.tu-muenchen.de
+Rick Richardson        Sr. Techno-something   Its 1993 again, and I don't have
+Digi Intl.             Email: rick@dgii.com   a Web page.
+11001 Bren Rd. East    Fax:   (612) 912-4955  
+Minnetonka, MN 55343   Tel:   (612) 912-3212  
