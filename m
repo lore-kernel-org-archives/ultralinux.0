@@ -1,25 +1,16 @@
-From: Steve Dunham <dunham@cse.msu.edu>
-Date: Fri, 21 Aug 1998 19:31:42 +0000
-Subject: Problem with graphics on Ultra5
-Message-Id: <marc-linux-ultrasparc-90373464005114@msgid-missing>
+From: James Thomason <james@exodus.net>
+Date: Fri, 14 Aug 1998 01:57:42 +0000
+Subject: Quantum3D MGX Framebuffer Support?
+Message-Id: <marc-linux-ultrasparc-90306605612950@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hi, 
 
-I'm having trouble with XFree86 on an Ultra5.  If I start up the
-server and display anything with color (like the xbanner screen), the
-colors streak to the right side of anything with color (like the
-penguin).  Solaris seems to work fine on the same machine with the
-same monitor.
+Are there any plans to support the Quantum3D 24bit MGX card in Ultralinux?
 
-Has anybody seen this problem?  If this isn't a known problem with the
-Mach32 xserver in UltraPenguin-1.0.9, could somebody send me a copy of
-a working XF86Config file?
-
-
-Thanks,
-Steve
-dunham@cse.msu.edu
+Regards, 
+James Thomason 
