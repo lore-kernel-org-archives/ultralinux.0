@@ -1,7 +1,7 @@
 From: Robert HYATT <hyatt@cis.uab.edu>
-Date: Mon, 13 Jul 1998 15:24:52 +0000
+Date: Mon, 13 Jul 1998 15:38:13 +0000
 Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531030@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531031@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
@@ -11,23 +11,41 @@ Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-no.  that is the cache to cpu speed.  memory is still stuck on the
-good old 100mhz bus.
+
+On Mon, 13 Jul 1998, Matti Aarnio wrote:
+
+> One "spelling" error buggers me major way:
+> ... 
+> > you are correct.  If you take a high-end machine, like a Cray T90, over
+> > 50% of the total cost is the memory interconnection network, because it
+> > is so hard to provide almost a terrabyte of data/second spread over 32
+> > cpus.  :)
+> 
+> 	There is no such multiplier prefix as "terra".  The one you were
+> 	thinking about is "tera" (10**12 in Fortran notation).
+> 	That is the multiplier that is meant when "T" is used -- thus
+> 	"almoast a TB of data per second" (of course "TB" means something
+> 	else too, but that goes way beside the point.)
 
 
-Robert Hyatt                    Computer and Information Sciences
-hyatt@cis.uab.edu               University of Alabama at Birmingham
-(205) 934-2213                  115A Campbell Hall, UAB Station 
-(205) 934-5473 FAX              Birmingham, AL 35294-1170
+sorry...  I generally get "terabyte" correct.  But I have been a science-
+fiction reader for 40 years, and read all the time, and "terra" is a
+natural screw-up for those of us so inclined.  :)
 
-On Mon, 13 Jul 1998, Matthew Jacob wrote:
 
+
+> 
+> 	Although MicroSoft has a system called TerraServer(.microsoft.com),
+> 	they do use the intentional misspelling of the prefix to refer to
+> 	its size, although they also use the Latin "Terra" to mean "Earth"
+> 	to refer to its contents...
 > 
 > > but the memory interconnect is always the sticky wicket on SMP machines,
 > > although for the PC, we simply dribble along at (now) 100mhz.  :)
 > 
-> Umm.. I thought that the new PC motherboards coming out are running
-> at 400Mhz (no, not CPU speed- I mean internal bus speed...)
+> Whatever systems we consider to buy/use, unless they are of commodity
+> type products, they will always cost way more than the commodity stuff.
+> Of course, nothing beats T90 in memory bandwidth per CPU :-)
 > 
-> 
+> /Matti Aarnio <matti.aarnio@sonera.fi>
 > 
