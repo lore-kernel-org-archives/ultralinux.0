@@ -1,40 +1,27 @@
-From: Andreas Schwab <schwab@suse.de>
-Date: Mon, 31 Dec 2001 13:11:31 +0000
+From: Ralf Baechle <ralf@oss.sgi.com>
+Date: Mon, 31 Dec 2001 13:29:53 +0000
 Subject: Re: [Linux-ia64] [PATCH][RFC][CFT] remove global errno from the kernel, make _syscallX kernel-only
-Message-Id: <marc-linux-ultrasparc-100980457911320@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-100981339024445@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-100980457911320@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-100980457911320@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Lennert Buytenhek <buytenh@gnu.org> writes:
+On Mon, Dec 31, 2001 at 02:11:31PM +0100, Andreas Schwab wrote:
 
-|> What I would like to know from each architecture team:
-|> - What is your arch's policy on userspace usage of asm/unistd.h, and
-|>   consequently, what is your opinion on the goal these patches
-|>   aim for?
+> |> Please CC me on replies as I'm not on any of the lists posted to.
+> |> 
+> |> My intention is to push these to Linus for 2.5 if everyone agrees.
+> |> They're probably too intrusive for 2.4 (although I'd love people
+> |> to convince me otherwise).
+> 
+> I wouldn't mind putting it into 2.4.
 
-I very much appreciate the removal of the _syscallX macros.  FWIW, the
-ia64 version of these macros never worked in userspace anyway.
+While it may break things in userspace it will hopefully ensure correctness
+for userspace, so better kill 'em now than later.  _syscallX() has a too
+long history of causing problems.
 
-|> - Are the changes I made in [1] and [2] for your $arch technically
-|>   correct?
-
-The m68k changes look ok.
-
-|> Please CC me on replies as I'm not on any of the lists posted to.
-|>=20
-|> My intention is to push these to Linus for 2.5 if everyone agrees.
-|> They're probably too intrusive for 2.4 (although I'd love people
-|> to convince me otherwise).
-
-I wouldn't mind putting it into 2.4.
-
-Andreas.
-
---=20
-Andreas Schwab                                  "And now for something
-Andreas.Schwab@suse.de				completely different."
-SuSE Labs, SuSE GmbH, Schanz=E4ckerstr. 10, D-90443 N=FCrnberg
-Key fingerprint =3D 58CA 54C7 6D53 942B 1756  01D3 44D5 214B 8276 4ED5
+  Ralf
