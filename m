@@ -1,45 +1,47 @@
-From: Matthew Jacob <mjacob@feral.com>
-Date: Wed, 16 Dec 1998 02:28:25 +0000
-Subject: Re: UltraSparc 10 Clone with Qlogic SCSI
-Message-Id: <marc-linux-ultrasparc-91378243325799@msgid-missing>
+From: Ben Crosby <bc@ecs.soton.ac.uk>
+Date: Tue, 29 Dec 1998 11:00:57 +0000
+Subject: Ultralinux 1.1.9 brick wall....
+Message-Id: <marc-linux-ultrasparc-91493348232595@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91370717917495@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91370717917495@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
 
-Dave, uh, I'll loan you a card...but it'll have to be next week as I'm
-using it now  to debug the new QLA driver...
+Hi guys,
 
+I pulled down the up-1.1.9.iso image from doc.ic.ac.uk's mirror site, and
+wrote a cd. 
 
+boot cd on a Sun Ultra 10 works up to a point.
 
-On Tue, 15 Dec 1998, David S. Miller wrote:
+The system boots, the SILO prompt comes up, and says 
+"You have just booted to the SILO prompt on a SUN4U Sun Ultra 5/10 UPA/PCI
+Ultra Sparc IIi 300MHz"
 
->    Date: 	Tue, 15 Dec 1998 12:46:55 +0800 (SGT)
->    From: Ong Lon Voon <rarf@ddns.org>
-> 
->    Has anyone any success with this? It seems to be unsupported on the
->    Supported Hardware list...
-> 
->    On booting, no SCSI devices are found.
-> 
->    Tried on an ultrasparc 2 clone too, but it could not mount the root
->    filesystem at 0b:00. Any ideas? The cdrom is id 6 on the primary SCSI
->    channel, and is recognised. Tried "linux root=/dev/sr0", but it didn't
->    work too.
-> 
-> We have the means to support the QLogic SCSI PCI cards in such systems
-> (and therefore in Sun's Ether/SCSI PCI cards too) but since none of
-> the developers have any such cards to test I cannot enable the
-> driver.
-> 
-> I'm working on obtaining such a card right now, but until I do these
-> machines will be unsupported.
-> 
-> Later,
-> David S. Miller
-> davem@dm.cobaltmicro.com
-> 
+I hit enter, and the messages go:
+
+Uncompressing image...
+Loading initial ramdisk....
+-
+root child is f002ca28
+
+The the boot just stops. 
+
+This happens on two different sun ultras, both with exactly the same
+messages. 
+
+The machines are as above SILO prompt, with 256Meg Ram, and Elite3D
+graphics systems.
+
+I'd love some light shed on this. I don't fancy playing with 1.0, but I'm
+happy to devote some time to 1.1.9.
+
+Thanks,
+Ben.
+
+--
+Ben Crosby                  Dept. of Electronics and Computer Science
+Systems & Networks Admin    University of Southampton
+Email: bc@ecs.soton.ac.uk   Southampton, SO17 1BJ, England.
