@@ -1,7 +1,7 @@
-From: Bob Drzyzgula <bob@drzyzgula.org>
-Date: Tue, 14 Jul 1998 23:23:03 +0000
+From: Dave Wreski <dave@nic.com>
+Date: Wed, 15 Jul 1998 03:31:59 +0000
 Subject: Re: Ultra AXmp
-Message-Id: <marc-linux-ultrasparc-90222358531039@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222358531040@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-90222358531013@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-90222358531013@msgid-missing>
@@ -10,35 +10,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Well, I guess that answers the question of why Intel doesn't
-cause quad-processor x86 servers to cost $20K... they just
-hadn't gotten around to it yet. :-)
-
-BTW, does anyone happen to know how a Quad-processor
-Ultra AXmp system is likely to do under UltraPenguin?
-From what I've seen it should be possible to build such
-a thing for about $20K. I've seen some discussion of
-this board on some Linux mailing lists, but Linux-specific
-issues related to this board weren't discussed... :-\
-
---Bob
-
-On Tue, Jul 14, 1998 at 02:07:25PM -0400, Douglas Eadline wrote:
-> On Mon, 13 Jul 1998, Mike wrote:
+>    Based on early pricing estimates I've seen, it should be possible
+>    to build a quad-processor @ 300+MHz, 2GB rackmount system for under
+>    around $US 20K.
 > 
-> > Robert G. Brown wrote:
-> > 
-> > > The current 440BX systems have a 100 MHz memory bus (50% faster than
-> > 
-> > That was so until just over a week ago. The Xeon version of the Pentium
-> > 
-> 
-> 400 MHz - 2 MB cache $4489 !!!!!!!!!!!
-> 400 MHz - 1 MB cache $2836
-> 400 MHz - 512K cache $1124
+> I wonder what the equivalent quad-PPRO system would cost (even with
+> 400MHZ chips...)...  I love the Ultra as everyone knows, but I have to
+> say, price talks bullshit walks... and Sun has a lot of trouble
+> learning this especially on the high end.
 
--- 
-==============================
-Bob Drzyzgula                             It's not a problem
-bob@drzyzgula.org                until something bad happens
-==============================
+How about two CPUs for $198,400?  From this month's SunExpert:
+
+"The top-of-the-line Enterprise 6500 can hold a maximum of 30 CPUs, two 8.4-Gig
+disk boards (each containing two drives) more than 375 GB of rack-mounted
+storage in the system cabinet and 30 GB of memory.  A basic configuration with
+8.4 GB of internal storage, 256 MB of memory and two CPUs costs $198,400 for a
+250-Mhz version, and $204,400 for a 336-Mhz version"
+
+Besides the ability to hold 30 GB of RAM, and 1/3 GB of disk, what could
+possibly make it so expensive?  Does the Intel SMP arch support 30 CPUs?
+
+The picture is not very good, but it looks as high as a convention refrigerator.
+
+Dave
