@@ -1,66 +1,59 @@
-From: David Andrew - Sun MDE <David.Andrew@East.Sun.COM>
-Date: Tue, 07 Jul 1998 14:55:29 +0000
-Subject: Re: UltraPenguin109 + Ultra5 = Bad
-Message-Id: <marc-linux-ultrasparc-90222358531007@msgid-missing>
+From: Bj|rn Augustsson <d3august@dtek.chalmers.se>
+Date: Sun, 26 Jul 1998 01:51:00 +0000
+Subject: Observations on CVS kernel
+Message-Id: <marc-linux-ultrasparc-90222358531081@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222358531001@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222358531001@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Stephan, Ken, et al,
+Hi!
 
-I checked out patch number 106121-03 for Ultra5 & 10, which upgrades the 
-OBP to 3.11.9. If you have access to the patch database, you can get the 
-update from there.  It has a "stand-alone" Prom update included.  If not, I 
-can get it for you.  The compressed tar file would be about 700K.  I can 
-mail it to you, if we can trust the mailer.  If you have an ftp site I can 
-access, we can also do it that way.   Let me know.
+I installed ultrapenguin 1.0.9, and then got the latest kernel from CVS,
+to test the new console system. Especially the multihead part.
+The kernel is 1.2.109, from about 1700 26-Jul GMT.
 
-What it cures:
-1. Symbios changed Vendor ID on its PCI SCSI interface cards; the system 
-   could not boot from external SCSI drives on a Symbios card. 
-   
-2. Some PCI cards specify 64-bit Base Address range; that was broken.
+The machine is a U1140E with two disks, a floppy, a CD, a Creator and a 
+CGsix.
 
-3. Corrected the PCI Base Address Register probe to assure successful 
-   probing; it failed with certain interface chips which did not
-   declare the LSB read-only.
-   
-David Andrew
------------
+I had a few problems with getting modules to work, so I decided to build 
+a monolithic kernel. I had problems getting the nfsd support to compile
+because of __my_nfsfh_is_too_big() being unresolved in /fs/nfsd/nfsfh.c
+so I configured without it. Looking at the code, I could probably just
+have commented the (single) usage of it out, but I don't need the machine
+to serve NFS anyway.
 
-> Date: Tue, 7 Jul 1998 09:39:36 +0200 (CEST)
-> From: Stephan van Hienen <ddx@cable.a2000.nl>
-> X-Sender: ddx@ddx.ml.org
-> To: "David.Andrew" <David.Andrew@East>
-> cc: ultralinux@vger.rutgers.edu
-> Subject: Re: UltraPenguin109 + Ultra5 = Bad
-> MIME-Version: 1.0
-> X-Orcpt: rfc822;ultralinux@vger.rutgers.edu
-> X-Loop: majordomo@vger.rutgers.edu
-> 
-> On Mon, 6 Jul 1998, David.Andrew wrote:
-> 
-> > Hi Ken,
-> > 
-> > The latest open boot prom version is 3.11.9.  Send me a note if you 
-would like
-> > to update your OBP to the latest version.  I'll let the Linux technical 
-guys
-> > address the rest of the message.
-> i have here a sun ultra 10 
-> also with open prom 3.11.6
-> 
-> what is better with 3.11.9 ? 
-> and how to get an update
-> 
-> 
-> 
+Mostly everything seems to work fine, but I have a few questions/comments:
 
-David Andrew                Tel:  978-442-2316   Internal:   22316
-Market Development Engineer - I/O Technologies   FAX:  978-442-1520	
-Sun Microsystems, 2 Omni Way - M/S UCHL02-102,   Chelmsford, MA 01824	 
-e-mail:  david.andrew@sun.com
+My first try at a monolithic kernel failed to boot because it was to big.
+(Can't remember the error message, but something along the lines of
+"kernel image to big to fit in destination".)
+I stripped some things from it and rebuilt without a problem. 
+The first one was about 1MB compressed, and the new one is about 810K
+compressed. (2.2MB uncompressed)
+What's the limit? 
+
+If I do L1A and then "go", the machine hangs. Under Solaris this generally
+works. (I have never seen it hang, a friend says he saw a panic once.)
+
+If I start X (BTW, very neat startup picture!), and then switch VCs, the
+parts of the screen where the "border" (in the textmode) is isn't cleared.
+(I still see sort of like a frame around the text area, where the old X
+graphics are left.)
+
+(X being the X I got when I installed UP 1.0.9. I haven't installed any
+special fbcon X-server. I'm a bit surprised this server worked at all.)
+
+How would I go about to set up a dual head? (X or textmode)
+Both framebuffers get detected properly when booting, and the second one
+(the CGsix) does _something_ (the screen clicks), but after that, no 
+activity ever on the second screen.
+
+Thanks,
+  /August.
+-- 
+Wrong on most accounts.  const Foo *foo; and Foo const *foo; mean the same: foo
+being a pointer to const Foo.  const Foo const *foo; would mean the same but is
+illegal (double const).  You are confusing this with Foo * const foo; and const
+Foo * const foo; respectively. -David Kastrup, comp.os.linux.development.system
