@@ -1,25 +1,27 @@
-From: Derrick J Brashear <shadow@DEMENTIA.ORG>
-Date: Thu, 19 Nov 1998 14:26:02 +0000
-Subject: Re: Worth attempting an Ultra 30 install with 1.1???
-Message-Id: <marc-linux-ultrasparc-91152095028321@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Tue, 03 Nov 1998 11:29:08 +0000
+Subject: Still no go with 10mb on 100mb card
+Message-Id: <marc-linux-ultrasparc-91009247508389@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91138236409961@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91138236409961@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+just downloaded the newest rpms etc.
+and reinstalled the ultralinux 
 
-Incidentally, I tried 1.1 on 2 different Ultra 30's yesterday. It worked
-on the one with a single ncr53c8xx (875, IIRC) and 2 disks on that. I
-also tried it on one of the machines we have with 3 ncr53c8xxs (file
-server configuration, raid arrays on 2 of the ncrs) and it identified 3
-scsi hosts and got unhappy, didn't boot further, and started getting scsi
-errors. This was both with the raid arrays attached, and with nothing on
-the second two controllers (e.g. using only the internal).
+but the same as with my own compiled kernel:
 
-When I finish using the disk on the machine I have it attached to now,
-I'll try to collect the errors.
+no go with the sun happy meal on eth0 (on the scsi/ethernet pci board)
+it's connected to a cable modem at 10mbit/sec half duplex
+and it gives ethernet time outs
 
--D
+eth1 (the onboard sun happy meal) works ok at 100mbit full duplex
+
+whats up ? 
+
+( i'm still stuck at kernel 2.1.109)
+cause after that console display disapeared 
+and  when i then tried to compile the newest one (after my vacation)
+i had no go with the ethernet :((
