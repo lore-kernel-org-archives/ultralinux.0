@@ -1,32 +1,19 @@
-From: "Corporate Jobs" <jobs@TurnAroundStrategies.com>
-Date: Sun, 28 Mar 2004 19:03:56 +0000
-Subject: Linux Kernel Programmers
-Message-Id: <044101c414f7$6bf60760$3a4a3842@comcast.net>
+From: "David S. Miller" <davem@redhat.com>
+Date: Tue, 25 May 2004 22:12:02 +0000
+Subject: Re: [PATCH 3/4] Consolidate sys32_select
+Message-Id: <20040525151202.58010d51.davem@redhat.com>
 List-Id: <ultralinux.vger.kernel.org>
+References: <200404161800.22367.arnd@arndb.de>
+	<200404161805.55224.arnd@arndb.de>
+	<1085522532.969.91.camel@tux.rsn.bth.se>
+In-Reply-To: <1085522532.969.91.camel@tux.rsn.bth.se>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: ultralinux@vger.kernel.org
-
-We are building a small benchmarking team for the following project in Bay
-Area, CA. This is Linux kernel level work. Interested people should email
-their RESUMEs to
-Jobs@TurnAroundStrategies.com
+To: Martin Josefsson <gandalf@wlug.westbo.se>
+Cc: arnd@arndb.de, linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
 
 
-Position 1) Skills Required: In-depth knowledge in and experience with the
-Linux kernel
-(particularly the I/O subsystem), filesystems, Oracle and TPC benchmarking.
-
-Location: Bay Area, CA
-
-
-Position 2) Skills Required:  System level programmers for device drivers on
-Linux.
-
-Location: Bay Area, CA
-
-
-Strategic Talent Acquisition and Retention ( STAR) Team
-New Business Strategies Corporation
+Just fix the code to use compat_ptr().  That's what we created
+that macro for :-)
 
