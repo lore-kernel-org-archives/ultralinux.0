@@ -1,26 +1,25 @@
-From: "Edward Brookhouse" <ebroo@erols.com>
-Date: Fri, 09 Apr 1999 20:36:45 +0000
-Subject: Re: reboot problem solved
-Message-Id: <marc-linux-ultrasparc-92369144307982@msgid-missing>
+From: Charu Chaubal <Charu.Chaubal@Eng.Sun.COM>
+Date: Tue, 13 Apr 1999 23:35:47 +0000
+Subject: Solaris tmpfs vs. Linux RAMdisk
+Message-Id: <marc-linux-ultrasparc-92405694308530@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Apologies to the list...S00reboot was not in /etc/rc.d/rc6.d ;)
+How comparable are tmpfs on Solaris and /dev/ram on Linux?
 
-----------
-> From: Edward Brookhouse <ebroo@erols.com>
-> To: ultralinux@vger.rutgers.edu
-> Subject: reboot problem
-> Date: Friday, April 09, 1999 2:15 PM
-> 
-> Can anyone tell me why when given a shutdown -r or reboot or even an init
-6
-> a machine would gracefully switch to runlevel 6 but hang before
-unmounting
-> filesystems and not reboot?? I reinstalled  initscripts-3.78-1 still no
-> luck ...
-> 
-> Edward
+do they essentially provide the same thing?  are there any
+particular ways in which they should be set up (flags, parameters, etc)?
+
+if all I am looking for is a really really fast filesystem on each (for files 
+that aren't huge), will each behave more or less like that?
+
+or is there a better equivalent on Linux?
+
+==================================Charu Chaubal				charu.chaubal@eng.sun.com    
+Performance Engineer			650-786-7672              tel
+Performance/Benchmarks			650-786-7323              fax
+SMCC Desktop Engineering		650-786-7281              lab
+==================================
