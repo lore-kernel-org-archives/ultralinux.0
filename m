@@ -1,34 +1,55 @@
-From: David Andrew - Sun MDE <David.Andrew@East.Sun.COM>
-Date: Wed, 11 Nov 1998 22:56:04 +0000
-Subject: Has anyone got a bootable UltraLinux CD?
-Message-Id: <marc-linux-ultrasparc-91084837731037@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Mon, 16 Nov 1998 17:17:38 +0000
+Subject: UltraPenguin-1.1 mirrors
+Message-Id: <marc-linux-ultrasparc-91127004023399@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi folks,
+Hi!
 
-Since Jakub has put the image on his site, we have tried several times  
-to get it, so we could generate a bootable CD.  The best we could do so 
-far is about 574MB of the 625 Mb image, but we're still trying again 
-this evening. 
+I've put a .message file into ultrapenguin-1.1/ directory with the mirrors
+which have been found by ftpsearch. If there are some more mirrors or if
+some of them are incomplete or do not work at all, please let me know.
 
-Has anyone in this community been successful in getting or generating a 
-bootable CD and would like to share in their success?  We'd like to get 
-one and generate some copies - we have lots of interest here, and I 
-suspect there are many more who would also like one.  I am not sure how 
-fast or how many we can generate internally - somewhat limited, I'm 
-sure, so I cannot volunteer to populate the entire community. However, 
-EIS Computers has volunteered to generate CD's for $20 or less each if 
-they can get the image in house, so that should help.
+ftp> cd pub/ultrapenguin-1.1
+250-You can get UltraPenguin-1.1 distribution from the master site:
 
-Thanks,
+ (Czech Republic) ftp://ultra.penguin.cz/pub/ultrapenguin-1.1/
 
-Dave
+ and from the following mirrors:
 
-David Andrew                Tel:  978-442-2316   Internal:   22316
-Market Development Engineer - I/O Technologies   FAX:  978-442-1520	
-Sun Microsystems, 2 Omni Way - M/S UCHL02-102,   Chelmsford, MA 01824	 
-e-mail:  david.andrew@sun.com
+ Europe:
+ (UK)             ftp://ftp.ox.ac.uk/pub/linux/ultralinux/ultrapenguin-1.1/
+                  ftp://sunsite.doc.ic.ac.uk/Mirrors/ultra.linux.cz/pub/ultrapenguin-1.1/
+ (Sweden)         ftp://ftp.it.kth.se/people/jj/Ultralinux/ultrapenguin-1.1/
+                  ftp://ftp.sunet.se/pub4/os/Linux/distributions/ultrapenguin/ultrapenguin-1.1/
+ (Danmark)        ftp://ftp.sunsite.auc.dk/disk2/ultra.linux.cz/OS/Linux/Non-x86/Sparc/local/ultrapenguin-1.1/
+ (Netherlands)    ftp://ftp.cs.uu.nl/mirror/Linux/UltraPenguin/ultrapenguin-1.1/
+ (Russia)         ftp://ftp.nc.orc.ru/pub/mirrors/ultra.linux.cz/OS/Linux/Sparc/ultrapenguin-1.1/
+ (Germany)        ftp://ftp.uni-trier.de/pub/unix/systems/linux/Sparc/sunsite/local/ultrapenguin-1.1/
+ (Poland)         ftp://ftp.icm.edu.pl/vol/jwr6/linux-sparc/local/ultrapenguin-1.1/
+
+ North America:
+ (US California)  ftp://ftp.cobaltnet.com/pub/users/davem/mirrors/sunsite.ms.mff.cuni.cz/OS/Linux/Sparc/local/ultrapenguin-1.1/
+ (US Ohio)        ftp://ftp.muc.muohio.edu/pub/linux/distributions/ultrapenguin-1.1/
+
+ If some other site mirrors this, please let me know the physical location
+ and URL.
+ Web site for this distribution is at http://ultra.penguin.cz/, for Linux on
+ sparc64 go to http://ultra.linux.cz/.
+ Browsable by WWW (http://sunsite.mff.cuni.cz/ftp/pub/ultrapenguin-1.1) as well.
+250 CWD command successful.
+
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.128 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
