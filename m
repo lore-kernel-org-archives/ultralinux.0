@@ -1,33 +1,48 @@
-From: charlie N <neuromancernt@yahoo.com>
-Date: Thu, 14 Jan 1999 12:04:37 +0000
-Subject: Sun Ultra 5 mouse not working ??
-Message-Id: <marc-linux-ultrasparc-91631573607011@msgid-missing>
+From: "G.M.Sigut" <sigut@awu.id.ethz.ch>
+Date: Fri, 08 Jan 1999 09:49:26 +0000
+Subject: UltraPenguin 1.1.9 CD-ROM
+Message-Id: <marc-linux-ultrasparc-91587925607671@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I finally successfully installed UltraLinux on my Sparc Ultra 5
-machine after a few bizzarre things, such as the install program not
-finding a file that was visible. But anyways, X windows starts fine
-with the Ati 3drage II + DVD 2mg Sdram, however the mouse does not
-seem to work. I can't even move it, and I have tried numerous things :
-Xconfigurator, XF86Config, editing the XF86config and manually
-changing the protocol of the mouse to "sunmouse" "Auto" and a bunch of
-other things, but when I use "sun" X actually starts but there is not
-mouse movement, only a cursor. I also tried changing the device to
-"mouse" b/c i ran mouseconfig and it found the Sun mouse and linked it
-to /dev/mouse, so it is not the physical mouse that is the problem
-atleast. What protocal or device do i use to get it working?.. I am
-running Ultralinux 1.1, Xfree86 3.2.2 and the accelerated server
-XFMach64.
-thx
-Charlie Ombres
+Hallo,
 
+just in case anybody is interested:
 
+The CD-ROM available as a "ready-to-grill" file at
 
+  ftp://ultra.penguin.cz/pub/ultrapenguin-1.1.9/cdimages/ 
 
-_________________________________________________________
-DO YOU YAHOO!?
-Get your free @yahoo.com address at http://mail.yahoo.com
+       up-1.1.9.iso . . . . . . . . . . Jan  6 02:04 493572k  
+
+which is identical to
+
+  http://sunsite.mff.cuni.cz/ftp/OS/Linux/Sparc/ultrapenguin-1.1.9/cdimages/
+
+       up-1.1.9.iso           505417728  Wed Jan 6 01:04
+
+installs and runs (almost) without problem on a Sun Ultra60 WS.
+
+The only hicks are:
+
+1) gimp-1.0.1-2 package doesn't install with the message "RPM install
+   of gimp failed (Bad file description)"
+
+and
+
+2) creating a boot diskette during the installation fails (time-out
+   after 20 minutes (yes, I am patient - sometimes))
+
+Just thought somebody might want to know...
+
+George
+
+ ------------------------------------------------------------------------------
+ George M.Sigut,  ETH Informatikdienste, Anwenderunterstuetzung, CH-8092 Zurich
+ Swiss Federal Institute of Technology,    Computing Services,     User Support
+ email: sigut@awu.id.ethz.ch     Phone: +41 1 632 5763      Fax: +41 1 632 1312
+ >>>>>>>> if my regular address does not work, try "sigut@pop.agri.ch" <<<<<<<<
+ ------------------------------------------------------------------------------
