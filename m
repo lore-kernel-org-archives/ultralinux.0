@@ -1,45 +1,21 @@
-From: Steve Dunham <dunham@cse.msu.edu>
-Date: Thu, 19 Nov 1998 00:19:37 +0000
-Subject: Re: More detailed UltraPenguin CD-ROM making instructions
-Message-Id: <marc-linux-ultrasparc-91148581104499@msgid-missing>
+From: Aric Hagberg <aric@t7.lanl.gov>
+Date: Wed, 18 Nov 1998 17:45:40 +0000
+Subject: 1.1 great, netscape?
+Message-Id: <marc-linux-ultrasparc-91146828828908@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-91084546630118@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-91084546630118@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz> writes:
+Hi,
 
-> > 
-> > Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz> writes:
-> > 
-> > > As I've received a couple of requests for more detailed instructions how to
-> > > make the bootable CD, here they are:
-> > 
-> > I followed the instructions, and ended up with a CD that would boot
-> > the kernel off of the CD, but then fail with:
-> > 
-> >   "Unable to mount root filesystem on device: 0b:00"
-> > 
-> > Any ideas what is wrong?  It is loading the kernel from the CD and the
-> > CDROM is the only CDROM attached to the machine.  The above message is
-> > preceeded by a "media changed on sr0" so I assume it is detecting the
-> > CD and everything.
-> 
-> Ok, I'd like to know at least some other messages from the kernel.
-> Did it show some message about initrd being overwritten?
-> Did it show the CD-ROM listed between SCSI devices?
+I had an extra Ultra I with a Creator card lying around in my
+office and last eve was inspired to put Ultrapenguin on it.
+It installed perfectly and took about 30 minutes total from
+reading the instructions to login.  Great job!
 
-The CD-ROM was listed when it was scanning SCSI devices.  (It was at
-target 6.)  I didn't see anything about an initrd, which confused me,
-since the /etc/silo.conf has "initrd=" lines.
+What is the current status of Netscape with ultrapenguin?
+Native binary?  Solaris emulation?
 
-I have since overwritten the CD with a Red Hat "Raw Hide" CD, which I
-created by virtually the same proceedure.  I may give the UltraPenguin
-one another try in a few days.
-
-
-Steve
-dunham@cse.msu.edu
+Aric
