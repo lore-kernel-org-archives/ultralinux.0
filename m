@@ -1,54 +1,81 @@
-From: Valery Brasseur <vbrasseur@laposte.net>
-Date: Tue, 06 Feb 2001 17:32:08 +0000
-Subject: Re: [Linux Status for Sun Netra T1 200 ]
-Message-Id: <marc-linux-ultrasparc-98148077500700@msgid-missing>
+From: Ralf Liesegang <Ralf.Liesegang@fujitsu-siemens.com>
+Date: Fri, 09 Feb 2001 14:08:53 +0000
+Subject: a bug in sparc/sparc64: test_bit()?
+Message-Id: <marc-linux-ultrasparc-98172782300242@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-98079874113446@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-98079874113446@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-for the LED... only one small LED on the front panel indicating the
-"state"
-ie: good/nok etc...
-for other drivers I have not already test ! what did they give ?
-I don't know what is envctrl and cpwatchdog ? (is the hardware wathcodg
-what's
-provide the famous "watchdog reset" ? )
 
-what is "jsflash" ?
+Hi,
 
->Brasseur Val=E9ry <Valery.Brasseur@atosorigin.com> wrote:
->> (note : I can be new kernel if needed as I have already a t1
->> 105 running under ultralinux )
->
-From glancing the prtconf output, I'd guess that environmental
->control (envctrl) and hardware watchdog (cpwatchdog) drivers
->will work without modification on the Netra t1-105.  I can't=20
->recall if t1-105 has a visible 7-segment display and error
->LED on the front, but they should be supported as well (d7s). =20
->Be sure you have the latest source for these drivers, as most=20
->are new and envctrl has changed quite a bit in the last few=20
->kernel versions.
+I'm working on a port to HAL SPARC64 cpu's, sometimes the system suddenly
+hung.  What i found is, that one CPU "loop" somewhere in: 
 
->If you have any need for these drivers, I'd be interested in
->hearing if they worked for you or not.  I may have userflash
->licked soon, but Pete's jsflash might be modified to work as
->well.
+	net/core/dev.c: 
+	deliver_to_old_ones(...)
+	{
+		[...]
+		tasklet_disable(...);
+		[...]
+	}
 
->E
+if i disassemble the function I see, that the CPU "loop" in: 
 
-____________________________________________________________________
->Get free email and a permanent address at http://www.netaddress.com/?N=3D1
->
+#define	tasklet_unlock_wait(t) while (test_bit(TASKLET_STATE_RUN, &(t)->state))
 
---=20
-Valery BRASSEUR                | Phone # +33 320 60 7982=20
-Atos Branche Multimedia        | Fax   # +33 320 60 7649
-Ce que vous voyez est tout ce que vous obtenez
-  -- Brian Kernigham
+include/asm-sparc64/bitops.h: test_bit() do:
+
+	return (1UL & (((__const__ long *) addr)[.....]
+
+generating assembler output show me:
+
+	[...]
+        ldx     [%l0+8], %o2
+        srax    %o2, 1, %o2
+        and     %o2, 1, %o2
+        cmp     %o2, 0
+.LL1769:
+        bne,pt  %icc, .LL1769
+	[...]
+
+the value of "bit", is just read once and then never again.
+
+if I change test_bit() to:
+
+	return (1UL & (((volatile long *) addr)[.....]
+
+.LL1758:
+        ldx     [%l0+%o1], %o0
+        andcc   %o0, 2, %g0
+        bne,pt  %xcc, .LL1758
+	[...]
+
+the value of "bit", is reread again. 
+
+
+as test_bit() is defined, i think that the compiler generate correct (but
+not what we wanted) assembler output.
+
+i'm using:  sparc64-linux-gcc -v
+
+ Reading specs from /usr/lib/gcc-lib/sparc64-suse-linux/egcs-2.92.11/specs
+ gcc version egcs-2.92.11 19980921 (gcc2 ss-980609 experimental)
+
+so, my question: 
+
+do i need a newer compiler, "my" change to test_bit() or anything else? 
+
+	
+thanks,
+	Ralf
+-- 
+| Ralf Liesegang          Phone:  +49-5251-8-15131                  |
+| FSC EP OS UX1           Fax:    +49-5251-8-16104                  |
+| Heinz-Nixdorf-Ring      EMail:  Ralf.Liesegang@fujitsu-siemens.com|
+| D-33106 Paderborn                                                 | 
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
