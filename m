@@ -1,25 +1,24 @@
-From: Charu Chaubal <Charu.Chaubal@Eng.Sun.COM>
-Date: Tue, 13 Apr 1999 23:35:47 +0000
-Subject: Solaris tmpfs vs. Linux RAMdisk
-Message-Id: <marc-linux-ultrasparc-92405694308530@msgid-missing>
+From: <rsr@lab.net>
+Date: Thu, 22 Apr 1999 00:29:56 +0000
+Subject: Sun Ultra-1 serial hangs?
+Message-Id: <marc-linux-ultrasparc-92474238302593@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-How comparable are tmpfs on Solaris and /dev/ram on Linux?
+I'm running custom-compiled non-CVS 2.2.6 (Debian Slink sparc dist) on a
+Sun Ultra-1; when I attempt to access the serial port the machine hangs
+solid, instantly.
 
-do they essentially provide the same thing?  are there any
-particular ways in which they should be set up (flags, parameters, etc)?
+Is this a known problem?
 
-if all I am looking for is a really really fast filesystem on each (for files 
-that aren't huge), will each behave more or less like that?
+(I seem to be seeing more serial port problems in general with 2.2 as
+well)
 
-or is there a better equivalent on Linux?
-
-==================================Charu Chaubal				charu.chaubal@eng.sun.com    
-Performance Engineer			650-786-7672              tel
-Performance/Benchmarks			650-786-7323              fax
-SMCC Desktop Engineering		650-786-7281              lab
-==================================
+-- 
+Guard: Why do you have so many decks of cards?
+Me: They're munitions.  I wanted to be well-armed.
+                 - Russ Nelson on cryptography@c2.net
+           http://web.lab.net/~rsr/
