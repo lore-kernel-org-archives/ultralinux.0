@@ -1,22 +1,16 @@
-From: Anton Blanchard <anton@progsoc.uts.edu.au>
-Date: Wed, 25 Aug 1999 07:36:35 +0000
-Subject: Re: RedHat 6.0 on UE 250?
-Message-Id: <marc-linux-ultrasparc-93556689705459@msgid-missing>
+From: Jean-Marie PIVETEAU <jean-marie.piveteau@wanadoo.fr>
+Date: Fri, 06 Aug 1999 14:53:22 +0000
+Subject: CDE under UltraLinux
+Message-Id: <marc-linux-ultrasparc-93395166715496@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-
-> Was wondering if anyone has installed RedHat 6.0 on an UltraEnterprise 250,
-> using the serial install mode? It gets down to the line saying:
-> 
-> > Writing superblocks and filesystem accounting information: done.
-> 
-> and then appears to hang.
-
-Are you using the images on the redhat errata site? The standard 6.0
-images do not support serial console installs.
-
-Anton
+Does anyone know if CDE (Common Desktop Environment) is running
+under Linux/SPARC?
+I see CDE on various other important Unixes such as HP-UX and AIX (and
+of course
+Solaris)
+Tank you
