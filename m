@@ -1,7 +1,7 @@
-From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
-Date: Mon, 22 Mar 1999 19:53:09 +0000
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Mon, 22 Mar 1999 20:05:04 +0000
 Subject: Re: [ANNOUNCE] Test release of rewritten Creator/Creator3D/Elite3D support
-Message-Id: <marc-linux-ultrasparc-92213274703528@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-92213353104043@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-92169272206527@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-92169272206527@msgid-missing>
@@ -10,38 +10,27 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-David Miller writes:
+> Dave,
+> 
+> I have the kernel source, however I don't know how to compile/install
+> it.  I am very familiar with the Intel version but not the Sparc
+> version.  Is there a HOWTO?
 
- > Please grab the latest kernel and try to reproduce.  I can almost
- > guarentee that you will not be able to as I have been doing an
- > enormous amount of stress testing of things.
- >
- > There are two ways to get the latest at the moment:
- > 
- > 1) http://cvs.on.openprojects.net/
- > 
- >    Follow the instructions for the vger kernel mirror repository
- >    and checkout the cvs module named "linux"
- > 
- > 2) Grab the latest 2.2.3 linux sources and apply the latest
- >    2.2.4 pre-patch on top, this will be essentially the same
- >    thing as what you'd get from method #1.
- > 
- >    ftp://ftp.xx.kernel.org/pub/linux/kernel/v2.2/linux-2.2.3.tar.bz2
- >    ftp://ftp.xx.kernel.org/pub/linux/kernel/testing/pre-patch-2.2.4-6.gz
- > 
- >    Replace "xx" with your country code, it may take a little while for
- >    the pre-patch to reach the mirrors.
- > 
- > Please report back to me asap as Linus is going to release the real
- > 2.2.4 some time tomorrow and if this is a kernel bug I need to fix it
- > before tomorrow morning.
+If you have the sparc64-linux-gcc compiler and recent binutils (UltraPenguin
+1.1.9 e.g. has such packages), then just cd /usr/src/linux; make config (if
+you don't want to bother with selecting config options, do make oldconfig
+instead, it will have reasonable defaults). Then
+make dep && make && make modules && make modules_install
+cp vmlinux /boot/vmlinux-2.2.4
+echo "disk /boot/vmlinux-2.2.4" > /proc/sys/kernel/reboot-cmd
+/sbin/reboot
 
-Dave,
-
-I have the kernel source, however I don't know how to compile/install
-it.  I am very familiar with the Intel version but not the Sparc
-version.  Is there a HOWTO?
-
--- 
-Ryan
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+UltraLinux  |  http://ultra.linux.cz/  |  http://ultra.penguin.cz/
+Linux version 2.2.3 on a sparc64 machine (3958.37 BogoMips)
+___________________________________________________________________
