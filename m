@@ -1,29 +1,23 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Fri, 15 May 1998 09:03:19 +0000
-Subject: Re: Ultra 5
-Message-Id: <marc-linux-ultrasparc-90222356531040@msgid-missing>
+From: Douglas Bowyer <db@hpnc.com>
+Date: Fri, 08 May 1998 15:50:32 +0000
+Subject: ultrapenguin as High Availability Raid Server
+Message-Id: <marc-linux-ultrasparc-90222356530990@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356531023@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356531023@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   From: "Derek R. Pizzagoni" <drp@interlink.com>
-   Date: Thu, 14 May 1998 22:20:52 -0700
+We are preparing to implement a High Availability Raid Server, using dual
+ultrasparc systems controlling a Raid 5 assembly. It will be primarily
+configured for NFS. In its current status, would any of you use
+ultrapenguin?
 
-   Yes, the Ultra5 came with an internal IDE.  There is a workaround?
 
-For the impatient you can either:
-
-1) Disconnect the cdrom driver
-2) Try multiple boots over and over, I've this technique work around
-   the problem for a couple crappy IDE disks I have.
-
-Otherwise wait for the next set of kernel updates in the UP-109
-distribution area.
-
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+          If at first you don't succeed, 
+        then skydiving may not be for you.
+****************************************************
+Douglas Bowyer		Hypernet Communcations, Inc.
+db@sigma.hpnc.com	http://www.hpnc.com
+817-517-6000
+****************************************************
