@@ -1,53 +1,41 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Thu, 15 Oct 1998 09:40:02 +0000
-Subject: Re: Need UltraPenguin 1.0.9 - where is it?
-Message-Id: <marc-linux-ultrasparc-90848930602415@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Sat, 17 Oct 1998 18:25:34 +0000
+Subject: Netscape 4.5 on sparc
+Message-Id: <marc-linux-ultrasparc-90868474718359@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90843205607269@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90843205607269@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> The page on the UltraPenguin 1.0.9 distribution does not
-> say where to get the distribution, and does not provide
-> any links to it.
-> 
->   http://ultra.penguin.cz/ultrapenguin-1.0.9/
+just saw that netscape 4.5 came out
+and it includes a version for the sparc
 
-I think on that page is and has been link to ftp:
+communicator-v45-export.sparc-unknown-linux2.0.tar.gz
 
- This distribution, available from Ultra.Linux.Cz is
+tried to run it :
 
-where Ultra.Linux.Cz is a href to the ftp...
+netscape: error in loading shared libraries
+libstdc++.so.2.8: cannot open shared object file: No such file or
+directory 
 
-> 
-> I need that version since I have an Ultra 2 with Creator
-> display board.  
-> 
-> I see that the SunSITE ftp area does have the
-> 1.0.9 release, but it took some hunting.  The rutgers site
-> does not contain that release.
+so i tried to compile libstdc++-2.8.1.1-1.src.rpm
 
-It does not any more, at least not up to date.
-> 
-> The documentation also mentions a CD-ROM, but does not 
-> mention how to get one.  A CD-ROM would be very handy
-> in my situation, since otherwise I have to get some other
-> OS working on the hardware first.
+but it gives me :
 
-The CD-ROM does not exist yet, though once kernel stabilizes this time, I'm
-going to make it. BTW: If you have another machine, you don't have to have
-any OS working on the hw first before installation.
+n file included from ../../../libio/fstream.h:30,
+                 from ../../../libio/fstream.cc:34:
+../../../libio/iostream.h:91: parse error before `__extension__'
+../../../libio/iostream.h:208: parse error before `__extension__'
+make[1]: *** [fstream.o] Error 1
+make[1]: Leaving directory
+`/usr/src/redhat/BUILD/libstdc++-2.8.1.1/obj-linux/libraries/libio'
+make: *** [all-target-libio] Error 2                                       
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.125 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+
+
+now i see in the sparc contrib for redhat :
+
+libstdc++-2.9.0-2.sparc.rpm
+
+i wonder if i can use this one ?
