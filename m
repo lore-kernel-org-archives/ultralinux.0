@@ -1,7 +1,7 @@
-From: Trond Myklebust <trond.myklebust@fys.uio.no>
-Date: Sun, 19 Jan 2003 21:00:14 +0000
-Subject: Re: strange sparc64 -> i586 intermittent but reproducible NFS write errors to one and only one fs
-Message-Id: <marc-linux-ultrasparc-104301002809481@msgid-missing>
+From: "David S. Miller" <davem@redhat.com>
+Date: Mon, 20 Jan 2003 06:01:24 +0000
+Subject: Re: strange sparc64 -> i586 intermittent but reproducible NFS write
+Message-Id: <marc-linux-ultrasparc-104304248432185@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-104300775807656@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-104300775807656@msgid-missing>
@@ -10,88 +10,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
->>>>> " " = nix  <nix@esperi.demon.co.uk> writes:
+On Sun, 2003-01-19 at 13:00, Trond Myklebust wrote:
+> It sounds rather strange that this particular patch should introduce
+> an EIO, but here it is (fresh from BitKeeper)
 
+It is possible in the context of the change causing a miscompile.
+Another possibility is just timing differences causing different
+sequences of events to occur than before.
 
-     > Anyway, the problem appears in 2.4.20-pre10; I suspect
-
-     > Trond Myklebust <trond.myklebust@fys.uio.no>:
-     > o Workaround NFS hangs introduced in 2.4.20-pre
-
-     > (so Cc:ed)
-
-     > Does anyone have a pointer to this patch so I can try reversing
-     > it from 2.4.20pre10? (I can't see it on l-k, but since I don't
-     > know what it looks like it's hard to find it in the archives; I
-     > don't have bitkeeper on this machine, and can't, as one of my
-     > current projects involves version-control filesystems).
-
-It sounds rather strange that this particular patch should introduce
-an EIO, but here it is (fresh from BitKeeper)
-
-Cheers,
-  Trond
-
-# This is a BitKeeper generated patch for the following project:
-# Project Name: Linux kernel tree
-# This patch format is intended for GNU patch command version 2.5 or higher.
-# This patch includes the following deltas:
-#	           ChangeSet	1.717.1.6 -> 1.717.1.7
-#	   net/sunrpc/xprt.c	1.30    -> 1.31   
-#
-# The following is the BitKeeper ChangeSet Log
-# --------------------------------------------
-# 02/10/07	trond.myklebust@fys.uio.no	1.717.1.7
-# [PATCH] Workaround NFS hangs introduced in 2.4.20-pre
-# 
-# Alan,
-# 
-# Does the following patch make any difference to the hangs?
-# 
-# It reverts one effect of my changes, and ensures that requests get resent
-# immediately after the timeout, even if doing so would violate the current
-# congestion window size.
-# Doing this ensures that we keep probing the `connection' to the server
-# rather than just waiting for the entire window to time out. The latter
-# can be very expensive due to the exponential backoff rule...
-# 
-# Cheers,
-#   Trond
-# --------------------------------------------
-#
-diff -Nru a/net/sunrpc/xprt.c b/net/sunrpc/xprt.c
---- a/net/sunrpc/xprt.c	Sun Jan 19 21:56:20 2003
-+++ b/net/sunrpc/xprt.c	Sun Jan 19 21:56:20 2003
-@@ -171,10 +171,10 @@
- 
- 	if (xprt->snd_task)
- 		return;
--	if (!xprt->nocong && RPCXPRT_CONGESTED(xprt))
--		return;
- 	task = rpc_wake_up_next(&xprt->resend);
- 	if (!task) {
-+		if (!xprt->nocong && RPCXPRT_CONGESTED(xprt))
-+			return;
- 		task = rpc_wake_up_next(&xprt->sending);
- 		if (!task)
- 			return;
-@@ -1013,7 +1013,6 @@
- 		}
- 		rpc_inc_timeo(&task->tk_client->cl_rtt);
- 		xprt_adjust_cwnd(req->rq_xprt, -ETIMEDOUT);
--		__xprt_put_cong(xprt, req);
- 	}
- 	req->rq_nresend++;
- 
-@@ -1150,10 +1149,7 @@
- 		req->rq_bytes_sent = 0;
- 	}
-  out_release:
--	spin_lock_bh(&xprt->sock_lock);
--	__xprt_release_write(xprt, task);
--	__xprt_put_cong(xprt, req);
--	spin_unlock_bh(&xprt->sock_lock);
-+	xprt_release_write(xprt, task);
- 	return;
-  out_receive:
- 	dprintk("RPC: %4d xmit complete\n", task->tk_pid);
