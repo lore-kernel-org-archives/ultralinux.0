@@ -1,33 +1,41 @@
-From: "Christine Casey" <rxcajb@lookingforagooddate.com>
-Date: Sat, 17 Jan 2004 23:52:49 +0000
-Subject: Set Up Ultralinux
-Message-Id: <y-i-f02s$9urh8ct@48jxq749>
-MIME-Version: 1
-Content-Type: multipart/mixed; boundary=".3D3D2D21_CFAAC_"
+From: natashafromrussia@yahoo.com
+Date: Wed, 21 Jan 2004 23:18:36 +0000
+Subject: Re: Let me know when you will be available
+Message-Id: <S266076AbUAUXRp/20040121231746Z+35238@vger.kernel.org>
 List-Id: <ultralinux.vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hello Sweetie,
 
---.3D3D2D21_CFAAC_
-Content-Type: text/plain;
-Content-Transfer-Encoding: quoted-printable
+Remember I told you that I was going to open my website.
+Now it's ready :). Check it please www.natasha-from-russia.org.
 
-Interested in a connection that was set up by a mutual friend?
+I'm usually online in the chat there - let's talk there.
 
-Click here to accept the invitation:
-http://lookingforagooddate.com/confirm/?oc=3D53037=
-409
-
-
-The FREE dating web site
-CREATED BY WOMEN
+Your Natasha.
+www.natasha-from-russia.org
 
 
-Click here if you do not wish to be invited again:
-http://lookingforagooddate.com/remove/?oc=3D53032=
-743
 
-spontaneity
 
---.3D3D2D21_CFAAC_--
+
+
+
+
+
+
+
+
+
+
+          
+57929971-740EEB32-2C172698-605B3483-51DC23B8
+  
+579DCC80-2013EAB9-58C65F6B-23E0B52F-33BF5154
+      
+65B782E7-7C36554E-697A398-7AA3F0DF-7EBBA512
+              
 
