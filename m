@@ -1,28 +1,23 @@
-From: Robert Cagle <rcagle@ccpu.com>
-Date: Sat, 20 Mar 1999 04:37:33 +0000
-Subject: cp1500
-Message-Id: <marc-linux-ultrasparc-92192319500398@msgid-missing>
+From: David Miller <davem@twiddle.net>
+Date: Sat, 20 Mar 1999 09:55:02 +0000
+Subject: Re: cp1500
+Message-Id: <marc-linux-ultrasparc-92192349500494@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92192319500398@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92192319500398@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="macroman"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-SGVsbG8sCkkgaGF2ZSBtYWRlIHNvbWUgcHJvZ3Jlc3MgZ2V0dGluZyBVbHRyYVBlbmd1aW4gMS4x
-LjkgcnVubmluZwpvbiBhIFN1biBDUDE1MDAgQ29tcGFjdFBjaSBib2FyZCAoVWx0cmFTcGFyYyBJ
-SWkgMjcwLzMwME1oeikuCgpFdmVyeXRoaW5nIHNlZW1zIHRvIHdvcmsgZXhjZXB0IHRoZSBvbi1i
-b2FyZCBTWU01M0M4NzUgU0NTSSBjb250cm9sbGVyLgpEb2VzIGFueWJvZHkga25vdyB3aGF0IG1p
-Z2h0IGNhdXNlIHRoZXNlIGVycm9ycz8KCjw2Pm5jcjUzYzh4eDogYXQgUENJIGJ1cyAxLCBkZXZp
-Y2UgMiwgZnVuY3Rpb24gMCAKPDY+bmNyNTNjOHh4OiA1M2M4NzUgZGV0ZWN0ZWQgIAo8Nj5uY3I1
-M2M4NzUtMDogcmV2PTB4MDQsIGJhc2U9MHgxZmZlMDAwODAwMCwgaW9fcG9ydD0weGZmZmZmOWZl
-MDJjMDAwMDAsIGlycT0zLCwsLAo3ZTAgCjw0Pm5jcjUzYzg3NS0wOiBOQ1IgY2xvY2sgaXMgNDAy
-MThLSHosIDQwMjE4S0h6IAo8Nj5uY3I1M2M4NzUtMDogSUQgNywgRmFzdC0yMCwgUGFyaXR5IENo
-ZWNraW5nIAo8Nj5uY3I1M2M4NzUtMDogb24tY2hpcCBSQU0gYXQgMHgxZmZlMDAwYTAwMCAKPDQ+
-Q0FDSEUgVEVTVCBGQUlMRUQ6IHNjcmlwdCBleGVjdXRpb24gZmFpbGVkLiAKPDQ+c3RhcnTAOTBi
-NjQwLCBwY8A5MGI2NGMsIGVuZMA5MGI2NmMgCjwzPkNBQ0hFIElOQ09SUkVDVExZIENPTkZJR1VS
-RUQuIAo8Nj5uY3I1M2M4NzUtMDogZGV0YWNoaW5nLi4uIAo8ND5zY3NpIDogMCBob3N0cy4gCjw0
-PnNjc2kgOiBkZXRlY3RlZCB0b3RhbC4gCgpJIGhhdmUgcGxheWVkIGFyb3VuZCB3aXRoIHRoZSBr
-ZXJuZWwgU0NTSSBjb25maWcgc2V0dGluZ3MsIGJ1dCBub3RoaW5nIApzZWVtcyB0byB3b3JrLiBJ
-J20gZmFpcmx5IG5ldyBhdCB0aGlzLCBzbyBwbGVhc2UgZ28gZWFzeSBpZiB0aGlzIAppcyBhIG5v
-LWJyYWluZXIhCgpCb2IgQ2FnbGUKcmNhZ2xlQGNjcHUuY29tCgooSSdtIG5vdCBvbiB0aGUgbWFp
-bGluZyBsaXN0LCBzbyBwbGVhc2UgcmVwbHkgcGVyc29uYWxseSAtIHRoYW5rcyEpCg==
+
+The cache test only fails if the IOMMU mappings and translations for
+the PCI controller are not setup correctly.
+
+How much ram is in this machine?  You may want to update to the latest
+cvs kernel sources as I have fixed several things to get my 2GB ram
+AXmp machine working properly.
+
+Later,
+David S. Miller
+davem@redhat.com
