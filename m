@@ -1,39 +1,28 @@
-From: biz@bits.com.mx
-Date: Mon, 25 May 1998 03:28:55 +0000
-Subject: =?ISO-8859-1?Q?=A1?= DINERO por Internet!
-Message-Id: <marc-linux-ultrasparc-90222356531064@msgid-missing>
+From: Chip Spencer <ma_spencer@LGCA.OHIO.GOV>
+Date: Fri, 08 May 1998 17:54:47 +0000
+Subject: Installation question
+Message-Id: <marc-linux-ultrasparc-90222356530994@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-///////////////////////////////////////////////////////////////////////////=
-////
-This Message was Composed using Extractor Pro Bulk E- Mail Software. If=20
-you wish to be removed from this advertiser's future mailings, please reply=
-=20
-with the subject "Remove" and this software will automatically block you=20
-from their future mailings.
-///////////////////////////////////////////////////////////////////////////=
-/////
 
-Hola,
+Hi,
 
-Obtuvimos su direccion de los anuncios clasificados porque creemos que el s=
-iguiente mensaje puede ser de su interes:
+I just joined this list and I had a question about installing Ultrapenguin.
+I have an IPX running RH 4.2 and I wish to try UltraPenguin. I do not have a
+dedicated connection to the net for a tftp install. I am downloading the
+Ultrapenguin binaries to an unused harddrive partition. Is there a boot.img
+to install from a hard drive partition yet? I tried the boot2.img from the
+.../misc/src/trees directory without success. Could someone give me some
+suggestions.   BTW is there a bootable UltrPenguin cd that someone has
+created??
 
-=A1GANE $2,000-$5,000 USD MENSUALES  COLOCANDO ANUNCIOS EN INTERNET! Solici=
-te informes GRATIS enviando un E-mail insertando "BIZ" en el Subject/Asunto=
-; o bien, visite nuestra pagina en:
+Thanks,
 
-http://www.bits.com.mx/biz
-
-SERIEDAD ABSOLUTA.
-
-Atentamente
-
-Alberto Martinez
-
-MIller Business Consultant
-Consultores en Internet Marketing
+Chip Spencer
+Technology Coordinator
+Madison Local School District
+ma_spencer@lgca.ohio.gov
