@@ -1,25 +1,43 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Wed, 01 Sep 1999 20:10:06 +0000
-Subject: Re: Question
-Message-Id: <marc-linux-ultrasparc-93621743514649@msgid-missing>
+From: Ryan Cresawn <cresawn@arbs1.larc.nasa.gov>
+Date: Fri, 03 Sep 1999 15:30:05 +0000
+Subject: RH 6.0 and X crashes
+Message-Id: <marc-linux-ultrasparc-93637236300459@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-93621502811335@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-93621502811335@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   From: "S. Ashbrook" <ashbrook@crosswinds.net>
-   Date:   Wed, 1 Sep 1999 15:36:19 +400
+Confusion abounds regarding the X crashes on my Ultra2 box.  I have
+installed all RPM updates from ftp://updates.redhat.com.  I have also
+compiled kernel version 2.2.12 and am running that kernel.
 
-   is this still an active project?
-   I recently installed the 1.1.9 version and like it.
-   But i see its based on the RH5.2 and was wondering if a new release is planned
-   and if it will be based on RH6.0.
+Today I decided to look on http://www.deja.com and was led to the
+following address.
 
-RH6.0 supports UltraSparc
+http://www.redhat.com/corp/support/errata/sparc99_05_27.html
 
-Later,
-David S. Miller
-davem@redhat.com
+This page indicates the existence of an RPM package with the name
+"egcs64-1.1.2-13.sparc64.rpm".  I cannot find it on their ftp site,
+nor do I have it installed.  I do, however have a similar package
+named "egcs64-19980921-4.sparc.rpm".  Here is a list of all the egcs
+packages I have installed.
+
+grimlock:~# rpm -qa | grep egcs
+compat-egcs-5.2-1.0.3a.1
+compat-egcs-c++-5.2-1.0.3a.1
+compat-egcs-g77-5.2-1.0.3a.1
+compat-egcs-objc-5.2-1.0.3a.1
+egcs-g77-1.1.2-13
+egcs-objc-1.1.2-13
+egcs-1.1.2-13
+egcs64-19980921-4
+egcs-c++-1.1.2-13
+
+Should I have a stable X server since I have compiled 2.2.12 after
+installing all these compiler RPM updates?
+
+Does the egcs64 RPM to which Redhat references exist?
+
+-- 
+Ryan
