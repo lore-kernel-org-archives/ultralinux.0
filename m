@@ -1,28 +1,31 @@
-From: "Edward J. Bradshaw" <biscuit@clark.net>
-Date: Fri, 08 Sep 2000 16:30:25 +0000
-Subject: Need help with RedHat post install- sound, keyboard
-Message-Id: <marc-linux-ultrasparc-96843062507029@msgid-missing>
+From: Peter Jones <pjones@redhat.com>
+Date: Mon, 11 Sep 2000 13:59:26 +0000
+Subject: Re: Need help with RedHat post install- sound, keyboard
+Message-Id: <marc-linux-ultrasparc-96868058911162@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-96843062507029@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-96843062507029@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-    I just loaded Red Hat 6.2 on a Sparc Ultra60 and have just a few
-minor problems.
+On Fri, 8 Sep 2000, Edward J. Bradshaw wrote:
 
-First - My audio works fine on the internal speaker but I can't figure
-out how to switch it over to the audio out on the back of the sytem.
-Under Solaris 2.6 you would go to the audio tool to switch this.
+>     I just loaded Red Hat 6.2 on a Sparc Ultra60 and have just a few
+> minor problems.
+> 
+> First - My audio works fine on the internal speaker but I can't figure
+> out how to switch it over to the audio out on the back of the sytem.
+> Under Solaris 2.6 you would go to the audio tool to switch this.
 
-Second - Despite turning off the "auto-repeat" and even setting it to a
-large delay, it still auto-repeats when I keep the key depressed for
-just a fraction of a second.
+You want audioctl(1).
 
-Thanks,
+-- 
+        Peter
 
-Ed Bradshaw
-biscuit@clark.net
+Gravity is a habbit that is hard to shake off.
+		-- Pratchett
 
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
