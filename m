@@ -1,57 +1,40 @@
-From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
-Date: Sun, 18 Oct 1998 15:59:21 +0000
+From: "Brandon S. Allbery" <allbery@ece.cmu.edu>
+Date: Mon, 19 Oct 1998 01:52:53 +0000
 Subject: Re: status of UltraPenguin?
-Message-Id: <marc-linux-ultrasparc-90873041330746@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90877629913940@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90873041330746@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90873041330746@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-> 
-> Hello Jakub,
-> 
-> the UltraPenguin home page mentions -for some time already- the release
-> of a final release (followup on 1.0.9) "soon".
-> 
-> Could you inform me about the status? Will it be on hold for a 2.2 kernel?
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
++-----
+| Ok, this is not the first question, so I'll answer to everybody.
+| I thought 1.1 will come soon after 1.0.9, but during the time we were
+| fighting little bugs in 1.0.9, redhat came with 5.1, so I have mistakenly
+| merged a few packages and the result is some broken things in the
+| distribution, me already not knowing which rpms have changed from stock
+| redhat and which not (and why).
++--->8
 
-Ok, this is not the first question, so I'll answer to everybody.
-I thought 1.1 will come soon after 1.0.9, but during the time we were
-fighting little bugs in 1.0.9, redhat came with 5.1, so I have mistakenly
-merged a few packages and the result is some broken things in the
-distribution, me already not knowing which rpms have changed from stock
-redhat and which not (and why).
-So, I've started two days ago with boot images, which I'm merging from
-current sparc rawhide with UP changes (and enhancing it, so it will finally
-autoprobe all sbus SCSI/NET cards and stuff like that). After that's done,
-I'll take a snapshot from rawhide as of a particular date and go one package
-by one and create a new distribution based on merge of rawhide with 1.0.9.
-I think I'm gonna to call that 1.0.10, then ask people to test it and
-release 1.1 quickly.
-A couple of things I want to have:
-the compiler will be egcs-current (ie. later than 1.1b, as major SPARC
-backend rewrite happened after 1.1b). The compiler will be 64/32bit, like
-binutils, so we'll drop sparc64-linux-* compilers/binutils.
-I want to ship both libstdc++ 2.8 and 2.9, our UP rpms will use 2.9, but you
-should be able to install e.g. netscape which relies on 2.8.
-If people help me, I'd like to maintain full binary compatibility with
-redhat 4.2/sparc (the dynamic loader UP 1.0.9 should be just fine, just we
-need to have more dynamic libraries).
+That's not your fault; Red Hat started releasing 5.1 security updates for 5.0
+and didn't take any care to deal with compatibility.  The initscripts update
+is a major problem, as the 5.1 initscripts package assumes the Red Hat 5.1
+kernel identification convention (%{version}-%{release} to identify the
+modules directory in /lib/modules, whereas 5.0's used only %{version}) ---
+and everything seems to work fine unless you rebuild the kernel :-(  There
+are other such incompatibilities in the 5.0 patches as well.  *grumble*
 
-The kernel corruption bug is gone, so once I finish merging boot images,
-I'll put there new kernels and come out with tftp/floppy images for both to
-be done 1.0.10 and 1.0.9. After 1.0.10 is on ftp, I plan do test CD-ROM
-images (or even earlier), I have still not decided whether to put the whole
-600M or whatever iso image on ftp, or put up some nice scripts somewhere, or
-ask somebody to press a bunch of CDs...
+This stung us bad when I was mirroring the RH50 updates for ECE and also
+building new kernels to support functionality we needed... while staying with
+the 2.0.33 kernel, because 2.0.34 didn't work with the Linux AFS port then
+available.
 
-Cheers,
-    Jakub
-___________________________________________________________________
-Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
-Administrator of SunSITE Czech Republic, MFF, Charles University
-___________________________________________________________________
-Ultralinux - first 64bit OS to take full power of the UltraSparc
-Linux version 2.1.125 on a sparc64 machine (498.80 BogoMips).
-___________________________________________________________________
+-- 
+brandon s. allbery	[os/2][linux][solaris][japh]	 allbery@kf8nh.apk.net
+system administrator	     [WAY too many hats]	   allbery@ece.cmu.edu
+electrical and computer engineering
+carnegie mellon university			   (bsa@kf8nh is still valid.)
