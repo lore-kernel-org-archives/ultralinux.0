@@ -1,42 +1,36 @@
-From: Wesley Hosking <wes@atlantek.com.au>
-Date: Fri, 05 Jun 1998 07:46:29 +0000
-Subject: NFS Root image suitable for boot low memory machines
-Message-Id: <marc-linux-ultrasparc-90222357630986@msgid-missing>
+From: Thierry Lafage <Thierry.Lafage@irisa.fr>
+Date: Wed, 03 Jun 1998 11:56:47 +0000
+Subject: Problem booting kernel 2.1.103
+Message-Id: <marc-linux-ultrasparc-90222357630979@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Any instructions, FAQ on how to build these ?
-I have a number of 12M and 16MB machines that I would like to try
-the install and usage on, but I need information on how to create an
-appropriate NFS directory :
 
+Hi!
 
-ie: from the RH4.2 installation manual I have :
+I cvs-fetched linux kernel 2.1.103 (from vger.rutgers.edu) and
+successfully compiled it on my ultra-I (UP-1.0.9 installed), but it
+failed to boot. I must (one more time) have missed something (rpm
+update ?). Here is the boot message I get (everything seems to be ok
+until entering run level 3):
 
-C.5.3.1 Network Boot Commands
+--------------------------------------------------------
+[...]
+Enabling swap space.
+Initializing random number generator...
+INIT: Entering runlevel: 3
+request_irq with old style irq 00000060 00000000004f7b40
+Program terminated
+ok 
+--------------------------------------------------------
 
-You're now ready to boot. If you're going to boot tftpboot.img, simply use the following command (in
-new command mode): 
+Any help appreciated,
 
-       boot net
+Thierry Lafage.
 
-On the other hand, if you're going boot from vmlinux and use an NFS-mounted root, use this command: 
-
-       boot net linux nfsroot=nfs.server.IP.address:/path/to/RH/image
-
-Replace nfs.server.ip.address with the NFS server's IP address, and
-/path/to/RH/image with the path to the exported directory containing the appropriate Red Hat
-Linux/SPARC files. 
-
-SPARC systems with PROM versions less than 2.0 should use this boot command, appending the usual
-NFS root argument if required: 
-
-       b le()
-
-
-Any hints gratefully accepted.
-
-wes
+-- CAPS project -- IRISA, campus de Beaulieu, 35042 Rennes cedex, France
+Phone: +33 2 99 84 25 01 -- Fax: +33 2 99 84 71 71 --
+http://www.irisa.fr/caps/PEOPLE/ThierryL/
