@@ -1,20 +1,17 @@
-From: Peter Chiocchetti <girbal@ast5.uibk.ac.at>
-Date: Fri, 03 Jul 1998 15:59:07 +0000
-Subject: Re: distribution
-Message-Id: <marc-linux-ultrasparc-90222358530994@msgid-missing>
+From: Kris Boulez <kris@belbone.be>
+Date: Wed, 22 Jul 1998 15:35:44 +0000
+Subject: Cdrecord on ultralinux
+Message-Id: <marc-linux-ultrasparc-90222358531069@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222358530991@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222358530991@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I'm sorry,
+Anyone already tried using ultralinux to burn CD's with cdrecord-1.6 ?
+I had a quick go at it with not a big succes. I used the latest
+CVS kernel tree and cdrecord-1.6.
 
-saw only today that there is a redhat 5.1 distribution out now (these
-days).
-
-Excuse me
-
-Yours, Peter.
+Kris,
+-- 
+Kris Boulez				kris@belbone.be
