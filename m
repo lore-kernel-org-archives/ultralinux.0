@@ -1,48 +1,80 @@
-From: Randy McCaskill <rmccask@comm-data.com>
-Date: Fri, 12 Jun 1998 03:57:26 +0000
-Subject: Re: Ultralinux tftp boot on an SS2?
-Message-Id: <marc-linux-ultrasparc-90222357631008@msgid-missing>
+From: rick@dgii.com (Rick Richardson)
+Date: Fri, 26 Jun 1998 21:01:17 +0000
+Subject: Re: Boot of 1.0.9 fails on Sun Ultra 1 (actually, Ultra 30)
+Message-Id: <marc-linux-ultrasparc-90222357631036@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357631003@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357631003@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-
-Here is the tftpboot file I used with a sparc 2.  Try it and see if it
-works for you.
-
-http://www.comm-data.com/~rmccask/ultrapenguin-1.0.9-tftpboot.img
-
-I think that the install script is built into the tftpboot file as a
-ramdisk so the one from RH4.2 will probably choke.  It is possible that
-the one I have above might not be completely thrilled with any changes
-that have been made since I grabbed it, but I suspect that it will work.
-
--Randy
-
-On Thu, 11 Jun 1998, Lars Kellogg-Stedman wrote:
-
-> The problem looks like it's part of the tftpboot process...I'm booting
-> off a Mac running LinuxPPC (tried it with kernel 2.1.103 and 2.1.24);
-> according to a tcpdump of the install process the tftp fetch hanging
-> close to the end with the client (the machine I'm trying to install on)
-> repeatedly ACKing the server.
+Rick Richardson writes...
+> Dear UltraPenguins:
 > 
-> I *can* get the standard RH4.2/sparc install to boot.  Is there any
-> chance I can use the older installer with the Ultralinux distribution?
+> We dug up an UltraSparc machine here that identifies itself on
+> the boot screen as:
 > 
-> Thanks,
+> 	Sun Ultra 1 UPA/PCI (UltraSPARC-II 248 Mhz)
 > 
->   -- Lars
+> It has 128 MB's of RAM in it.
 > 
-> --
-> Lars Kellogg-Stedman * lars@bu.edu * (617)353-8277
-> Office of Information Technology, Boston University
 
-------
-Randy McCaskill
-rmccask@comm-data.com              ! Poodle... The other white meat.
-http://www.comm-data.com/~rmccask/ !   -- Sherman's Lagoon
+[snip]
+
+> At the "ok" prompt, we booted off the network using the following
+> command.  The machine sucked down the boot image from the tftp server,
+> and then ended with an error message "Couldn't get translation
+> property".  Here is what is on the screen:
+> 
+> 	ok boot /pci@1f,4000/pci@4/SUNW,hme@0,1
+> 	Boot device: /pci@1f,4000/pci@4/SUNW,hme@0,1      File and args:
+> 	27a800 TILO
+> 
+> 	Couldn't get translation property
+> 	Program terminated
+> 	ok
+> 
+> 
+> Does anybody know what this means and how to correct the problem?
+
+
+Hmm.  The silence on this problem is, well, scary.  Maybe
+nobody is actually working on UltraPenguin anymore?
+
+I did find out that the machine in question is an Ultra-30, if
+that helps.  Also, the message is apparently coming from Linux
+itself:
+
+/usr/src/linux-2.1.107/linux/arch/sparc64/mm/init.c:
+
+...
+
+
+#define MAX_TRANSLATIONS 64
+static inline void inherit_prom_mappings(void)
+{
+        struct linux_prom_translation transl[MAX_TRANSLATIONS];
+        pgd_t *pgdp;
+        pmd_t *pmdp;
+        pte_t *ptep;
+        int node, n, i;
+
+        node = prom_finddevice("/virtual-memory");
+        if ((n = prom_getproperty(node, "translations", (char *) transl,
+                                  sizeof(transl))) = -1) {
+                prom_printf("Couldn't get translation property\n");
+                prom_halt();
+        }
+
+
+I have no real experience with Ultra's, but if somebody could
+give me the low down on what this code is trying to do, I could
+investigate it further.
+
+-Rick
+
+-- 
+Rick Richardson        Sr. Techno-something   Its 1993 again, and I don't have
+Digi Intl.             Email: rick@dgii.com   a Web page.
+11001 Bren Rd. East    Fax:   (612) 912-4955  
+Minnetonka, MN 55343   Tel:   (612) 912-3212  
