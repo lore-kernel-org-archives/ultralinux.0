@@ -1,20 +1,26 @@
-From: Stephan van Hienen <ultra@a2000.nu>
-Date: Sat, 28 Dec 2002 23:05:18 +0000
-Subject: booting with kernel on floppy ?
-Message-Id: <marc-linux-ultrasparc-104111670110718@msgid-missing>
+From: Ralphe Neill <ran@oberon.sub.net.au>
+Date: Sun, 08 Dec 2002 22:10:12 +0000
+Subject: 24-bit colour board
+Message-Id: <marc-linux-ultrasparc-103938542903808@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-A friend has an ultrasparc10
-he upgraded his kernel with the wrong rpm package
-(sparc32 instead of sparc64 package)
-now it won't boot (rpm removed the old kernel)
+I want to add an S-Bus 24-bit colour board to an Ultra 1 and I am hoping
+that some of you on this mailing-list might have some advice.
 
-is there an simple way to fix this ? (i can only find i386 rescue
-floppy's)
-(like pointing silo to /dev/floppy/kernel root=/dev/hda1 or something?)
-instead of taking out the hardrive and put it in another machine to copy
-a working kernel ?
+From what I have been told so far, there shouldn't be any major problems
+but I would greatly welcome any suggestions about the best source for
+such a board.
+
+Are there any hassles that I should watch out for and how can the Ultra 1
+be forced to used that board.
+
+I am running RH 6.2
+
+Thanks,
+
+Ralphe Neill
+(Melbourne, Australia)
