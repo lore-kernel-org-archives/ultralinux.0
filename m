@@ -1,24 +1,41 @@
-From: David Miller <davem@twiddle.net>
-Date: Wed, 14 Apr 1999 23:49:40 +0000
-Subject: Re: HME on ultrasparc
-Message-Id: <marc-linux-ultrasparc-92413543909708@msgid-missing>
+From: Peter Jones <pjones@redhat.com>
+Date: Mon, 12 Apr 1999 00:08:46 +0000
+Subject: Another Brute Force And Ignorance(tm) derived question...
+Message-Id: <marc-linux-ultrasparc-92387605531299@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92413396908580@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92413396908580@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   From: "Dale B" <d_a_l_e_@hotmail.com>
-   Date: 	Wed, 14 Apr 1999 18:51:03 EDT
+(Yeah, one of these days I'll actually learn something)
 
-   Is there a way to force 100MB Full Duplex?
+As I've said before, I'm attempting to get an es1371 going, and I'm
+running into a couple of things that are perplexing me...  I've managed to
+get it to compile in (obvious config.in patch), and with some patches
+against es1371.c it doesn't even Oops anymore (these are getting merged in
+to the main kernel, I think... Thomas Sailer sent them off to Alan
+sometime last week), but I'm having some trouble after that, regarding how
+the ioctl()'s work on sparc64...
 
-Use 'ethtool', it was specifically made for this purpose.
-And make sure you are using the latest kernels (Jakub released them
-and an updated ethtool rpm today).
+It looks as if the switch(cmd){...} in sys32_ioctl() goes through, and if
+it finds an ioctl() in its list, it runs it, and if not, it prints an
+error.  But if I run, say, aumix, I get:
 
-Later,
-David S. Miller
-davem@redhat.com
+<4>sys32_ioctl: Unknown cmd fd(3) cmd(40044dfe) arg(0002563c)
+
+I go to look what ioctl() it happened to send, and its doing
+
+open("/dev/mixer", O_RDWR)              = 4
+ioctl(4, SOUND_MIXER_READ_DEVMASK, 0x2563c) = -1 EINVAL (Invalid argument)
+
+Which doesn't make sense to me, because SOUND_MIXER_READ_DEVMASK is in its
+list, and is handled by es1371.c ...
+
+Have I missed something obvious?
+
+ -- Peter
+
+"If people are good only because they fear punishment, and hope for reward,
+then we are a sorry lot indeed."
+		-- Einstein
