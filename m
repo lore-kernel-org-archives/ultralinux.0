@@ -1,103 +1,97 @@
-From: Nix <nix@esperi.demon.co.uk>
-Date: Sun, 19 Jan 2003 20:21:57 +0000
+From: Trond Myklebust <trond.myklebust@fys.uio.no>
+Date: Sun, 19 Jan 2003 21:00:14 +0000
 Subject: Re: strange sparc64 -> i586 intermittent but reproducible NFS write errors to one and only one fs
-Message-Id: <marc-linux-ultrasparc-104300775807656@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-104301002809481@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-104300775807656@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-104300775807656@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-[Large amount of quoting to provide useful context; see below.]
-
-On Fri, 10 Jan 2003, Denis Vlasenko recommended:
-> On 10 January 2003 00:56, Nix wrote:
->> When I rebooted my systems into 2.4.20 (from 2.4.19), I started
->> seeing EIO write() errors to files in my ext3 home directory
->> (NFS-mounted, exported async).
->>
->> So I knocked up a test program (included below) to try to track the
->> failing writes down, and got more confused.
->>
->> The properties of the failing writes that I've been able to determine
->> thus far are as follows; look out, they're weird as hell:
->>
->>  - the failures are definitely from write(), not open().
->>
->>  - writes from sparc64 to one filesystem, and only one filesystem, on
->>    i586, both running 2.4.20, UDP NFSv3; rquotad and quotas are on,
->> but I am well within my quota. (quota 3.06, nfs-utils 1.0). Writes to
->> other filesystems on the same machine, even if they too are using
->> ext3, even if they too have user quotas for the same user.
->>
->>    What differs between filesystems that work and the one that fails
->> I can't tell; other FSen *on the same block device* work... (the
->> block device is an un-RAIDed SCSI disk.)
->>
->>  - local writes to the same filesystem, with the same test program,
->>    never fail.
->>
->>  - writes from another IA32 box (all these boxes are near-clones of
->>    each other as far as software is concerned) to the NFS server box
->>    never fail.
->>
->>  - It happens if I mount the fs with -o soft (my default for all NFS
->>    mounts for robustness-in-the-presence-of-machine-failure reasons),
->>    but also if I mount with -o hard :(( besides, the timeouts happen
->>    far too fast for it to be major timeout expiry that casues the EIOs.
->>
->>  - The failure always occurs for writes that cross the 2^21 byte
->>    boundary, but not all such writes fail. You seem to need to have
->>    done a lot of write()s before, perhaps even starting with O_TRUNC
->>    and write()ing like mad from there on up (the WRITES_PER_OPEN
->>    #define is a way to test that; I've never had a failure for a file
->>    opened with O_APPEND, even if it crossed the 2^21 byte boundary).
->>
->>  - It happens whether _LARGEFILE_SOURCE / _FILE_OFFSET_BITS are
->>    defined or not (I'd be amazed if this affected it, actually, but
->>    it never hurts to check).
->>
->>  - Despite the EIO, the write actually *succeeds* most of the time
->>    (perhaps not all the time; again, I'm not sure yet). In fact...
->>
->>  - It is quite thoroughly inconsistent. If you #define REPRODUCE to 1
->>    in the test program and fill out sizes_to_reproduce[] with a set
->>    of write() sizes that have caused the error in the past, the error
->>    happens again, but not always:
-
-[and more; see <http://www.uwsg.iu.edu/hypermail/linux/kernel/0301.1/0597.html>;
- note that I have seen errors on writes to files of total size <2Mb --- e.g.,
- my mail overview databases --- but I can't reproduce them with a test program
- yet.]
-
-> This beast is most probably Sparc64 or 64-bit arch specific.
-
-That seems very likely.
-
-> Try to pin down the first 2.4.20-preN where it appears.
-> Then inform NFS and Sparc64 folks.
-
-Done. Sorry for the delay; this box is quite hard to arrange to reboot :(
-
-Anyway, the problem appears in 2.4.20-pre10; I suspect
-
-Trond Myklebust <trond.myklebust@fys.uio.no>:
-  o Workaround NFS hangs introduced in 2.4.20-pre
-
-(so Cc:ed)
-
-Does anyone have a pointer to this patch so I can try reversing it from
-2.4.20pre10? (I can't see it on l-k, but since I don't know what it
-looks like it's hard to find it in the archives; I don't have bitkeeper
-on this machine, and can't, as one of my current projects involves
-version-control filesystems).
-
-Anyone got any other ideas, suggestions, or anything?
+>>>>> " " = nix  <nix@esperi.demon.co.uk> writes:
 
 
-Thanks!
+     > Anyway, the problem appears in 2.4.20-pre10; I suspect
 
--- 
-`I knew that there had to be aliens somewhere in the universe.  What I
- did not know until now was that they read USENET.' --- Mark Hughes,
-      on those who unaccountably fail to like _A Fire Upon The Deep_
+     > Trond Myklebust <trond.myklebust@fys.uio.no>:
+     > o Workaround NFS hangs introduced in 2.4.20-pre
+
+     > (so Cc:ed)
+
+     > Does anyone have a pointer to this patch so I can try reversing
+     > it from 2.4.20pre10? (I can't see it on l-k, but since I don't
+     > know what it looks like it's hard to find it in the archives; I
+     > don't have bitkeeper on this machine, and can't, as one of my
+     > current projects involves version-control filesystems).
+
+It sounds rather strange that this particular patch should introduce
+an EIO, but here it is (fresh from BitKeeper)
+
+Cheers,
+  Trond
+
+# This is a BitKeeper generated patch for the following project:
+# Project Name: Linux kernel tree
+# This patch format is intended for GNU patch command version 2.5 or higher.
+# This patch includes the following deltas:
+#	           ChangeSet	1.717.1.6 -> 1.717.1.7
+#	   net/sunrpc/xprt.c	1.30    -> 1.31   
+#
+# The following is the BitKeeper ChangeSet Log
+# --------------------------------------------
+# 02/10/07	trond.myklebust@fys.uio.no	1.717.1.7
+# [PATCH] Workaround NFS hangs introduced in 2.4.20-pre
+# 
+# Alan,
+# 
+# Does the following patch make any difference to the hangs?
+# 
+# It reverts one effect of my changes, and ensures that requests get resent
+# immediately after the timeout, even if doing so would violate the current
+# congestion window size.
+# Doing this ensures that we keep probing the `connection' to the server
+# rather than just waiting for the entire window to time out. The latter
+# can be very expensive due to the exponential backoff rule...
+# 
+# Cheers,
+#   Trond
+# --------------------------------------------
+#
+diff -Nru a/net/sunrpc/xprt.c b/net/sunrpc/xprt.c
+--- a/net/sunrpc/xprt.c	Sun Jan 19 21:56:20 2003
++++ b/net/sunrpc/xprt.c	Sun Jan 19 21:56:20 2003
+@@ -171,10 +171,10 @@
+ 
+ 	if (xprt->snd_task)
+ 		return;
+-	if (!xprt->nocong && RPCXPRT_CONGESTED(xprt))
+-		return;
+ 	task = rpc_wake_up_next(&xprt->resend);
+ 	if (!task) {
++		if (!xprt->nocong && RPCXPRT_CONGESTED(xprt))
++			return;
+ 		task = rpc_wake_up_next(&xprt->sending);
+ 		if (!task)
+ 			return;
+@@ -1013,7 +1013,6 @@
+ 		}
+ 		rpc_inc_timeo(&task->tk_client->cl_rtt);
+ 		xprt_adjust_cwnd(req->rq_xprt, -ETIMEDOUT);
+-		__xprt_put_cong(xprt, req);
+ 	}
+ 	req->rq_nresend++;
+ 
+@@ -1150,10 +1149,7 @@
+ 		req->rq_bytes_sent = 0;
+ 	}
+  out_release:
+-	spin_lock_bh(&xprt->sock_lock);
+-	__xprt_release_write(xprt, task);
+-	__xprt_put_cong(xprt, req);
+-	spin_unlock_bh(&xprt->sock_lock);
++	xprt_release_write(xprt, task);
+ 	return;
+  out_receive:
+ 	dprintk("RPC: %4d xmit complete\n", task->tk_pid);
