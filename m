@@ -1,7 +1,7 @@
-From: Chris Salter <ctsalter@eos.ncsu.edu>
-Date: Wed, 09 Feb 2000 01:32:28 +0000
+From: Chris Salter <ctsalter@unity.ncsu.edu>
+Date: Wed, 09 Feb 2000 04:51:51 +0000
 Subject: Re: CD ripper/MP3 encoder
-Message-Id: <marc-linux-ultrasparc-95006725528515@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95007237531428@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-95005914224137@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-95005914224137@msgid-missing>
@@ -10,16 +10,9 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+OOPS... I gave you the address of an encoder and cd recorder. For ripping
+I use cdparanoia... found at www.xiph.org/paranoia/
 
-Charu,
-
-> Can anyone recommend some programs for Linux on Ultra for ripping CDs and 
-> encoding MP3's?
-> 
-
-I use encoder-js found at wopr.campus.se /pub/mpeg_layer_3 and cdrecord.
-
-Have fun...
-
+Sorry 
 
 -Chris
