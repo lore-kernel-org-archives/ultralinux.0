@@ -1,31 +1,31 @@
-From: "Ansgar Bodenberger" <a.bodenberger@t-online.net>
-Date: Fri, 11 Sep 1998 07:09:58 +0000
-Subject: Problems with Silo on UltraSparc2
-Message-Id: <marc-linux-ultrasparc-90549918609004@msgid-missing>
+From: Thierry Lafage <Thierry.Lafage@irisa.fr>
+Date: Tue, 29 Sep 1998 11:06:50 +0000
+Subject: Process image.
+Message-Id: <marc-linux-ultrasparc-90707626319540@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hallo,
 
-I installed the Ultrapinguin 1.09 and Solaris 2.6 on an Ultra 2 Prom
-Version 3.7.0.
+Hello,
 
-/dev/sda1     SunOs     /
-/dev/sda2     SunOs    swap
-/dev/sda3    whole      disk
-/dev/sda4    linux        /
-/dev/sda5    linux        /usr
-/dev/sda6    linux        swap
-/dev/sda7    SunOs    /usr
+I'm currently involved in a project aimed at gathering program
+execution trace on an (ultra)SPARC architecture microprocessor running
+Linux (ultrapenguin-1.0.9). For this project, I'm looking for a
+detailed documentation which describes how an executable ELF program
+is mapped in memory at execution time. Typically, I would like to know
+where (memory addresses) the different sections of the ELF executable
+are mapped, i.e. the composition of the process image. I've been told
+the SysV ABI could contain such information. If it is the case, does
+anyone know where I can find (download ?) this document for
+(ultra)SPARC ?
 
-I have problems to boot both Operating Systems with the Silo. To start
-linux is easy, but when I want to start Solaris i have problems.
-At the Silo command line I put in the string /boot/old.b but  the boot
-prom from answer SFast Data Access MMU Miss.
+Any help very appreciated.
 
-Has anybody an idea?
+Thierry Lafage.
 
-Ansgar
+--
+CAPS project -- IRISA, Rennes, France
+http://www.irisa.fr/caps/PEOPLE/ThierryL/
