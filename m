@@ -1,84 +1,56 @@
-From: Thierry Lafage <Thierry.Lafage@irisa.fr>
-Date: Thu, 07 May 1998 08:41:46 +0000
-Subject: Re: NIS pbs
-Message-Id: <marc-linux-ultrasparc-90222356530979@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Mon, 04 May 1998 16:44:34 +0000
+Subject: UltraPenguin1.0.9 update
+Message-Id: <marc-linux-ultrasparc-90222356530965@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356530971@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356530971@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Wesley Hosking wrote:
-> You need to set the NIS domainname in /etc/sysconfig/networks
-> 
-> ie: add
-> NISDOMAIN=yourdomainname
-> to the end of the file.
-> 
-> If you want to check out whats happenning look at /etc/rc.d
-> 
-> in rc.sysinit you have :
-> 
-> # Set the NIS domain name
-> if [ -n "$NISDOMAIN" ]; then
->     domainname $NISDOMAIN
-> else
->     domainname ""
-> fi
-> 
-> (Which is set from the networks file)
+Hi!
 
-Yes, I saw it. Thanks. My post was just to say that the command
-'domainname' or 'hostname -y' without any argument does not give the
-right output (under certain circumstances). On the other hand, the
-system seems to use the right NIS domain name value, so no problemo at
-all :-).
+Following things have changes in UP1.1 beta:
 
->  > 
->  > 2)
->  > > rpm -Uvh ypbind-3.3-3.sparc.rpm 
->  > ypbind                      #############################################>  > #####
->  > > cd /etc/rc.d
->  > > find . -name '*ypbind*' -ls   
->  > 101712 1 -rwxr-xr-x 1 root root 863 May  4 13:39 ./init.d/ypbind
->  > 132156 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc0.d/K30ypbind -> ../i>  > nit.d/ypbind
->  >   6236 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc1.d/K30ypbind -> ../i>  > nit.d/ypbind
->  >  48874 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc2.d/K30ypbind -> ../i>  > nit.d/ypbind
->  >  79342 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc3.d/K30ypbind -> ../i>  > nit.d/ypbind
->  >  89412 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc4.d/K30ypbind -> ../i>  > nit.d/ypbind
->  > 101715 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc5.d/K30ypbind -> ../i>  > nit.d/ypbind
->  > 122203 1 lrwxrwxrwx 1 root root 16 May  6 11:23 ./rc6.d/K30ypbind -> ../i>  > nit.d/ypbind
->  > 
->  > I don't know how to setup these links to start ypbind correctly at boot t>  > ime.
-> 
-> Normally in rh5.0 you can change this with the level editor (whatever
-> its called ? ).
-> 
-> In the above cases change the K to an S for the levels you want it
-> running in ie: 3,4,5
-> 
-> ie: rc3.d/S30ypbind
-> 
+update to kernel 2.1.99 (should fix a couple of bugs with Ultra5 machines,
+plus one ugly bug which sometimes killed applications during fork - now
+there are no known bugs, just to make assure you)
 
-Here also, I did not want to say, hey this does not work !, but just
-precise that the links are not correctly configured by the rpm
-installation process. To set up correctly the links, I used
-'chkconfig':
-chkconfig --levels 345 ypbind on
+update to glibc-2.0.7pre3 plus sparc patches (please, if you can, test
+whether this update does not break anything, I haven't seen any problem, but
+the more people, the more proper testing).
 
-Be careful, this does not only change the K to an S, but K30 to S70
-(see init.d/ypbind).
+ld.so: ld-linux.so.1 and libc5 apps now should work on both sparc32 and
+	sparc64, not only on sparc64
 
-> wes
-> 
-> PS: hopes this helps, I had trouble because I was specifying NISDOMAIN
-> as NIS_DOMAIN
+mouseconfig: I hope the lockup during serial installation is gone, but
+	things about probing Xserver need still to be solved (for now, don't
+	install Xservers when doing serial console installs - hope to fix
+	this tomorrow)
 
-So do I.
+joe: fix a bug in joe, which caused improper screen size detection
 
+procps: update to 1.2.7, fixed a bug in procps which caused it not to work 
+	with shared libs
 
-Thierry Lafage.
+other minor updates:
+	lpr, hdparm, strace, texinfo, ypbind
 
-PS. A special thanks to Felix von Leitner who provided great help ;-).
+The colors in SBUS Xservers are not yet fixed (well, I have a patch which
+fixes it, but am waiting for a fix for Mach64/16+32bpp colormap handling to
+make a shiny new XFree86-3.3.2 RPMS).
+Then, modutils need to be fixed wrt. kerneld, and then I'd like if people
+can remind me on broken packages, so that we can have a release in a week or
+so.
+And if the sparcaudio people help us, we can have full sound support in the
+distribution as well ;) Then just T-shirt time and CD burning time...
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.99 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
