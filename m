@@ -1,32 +1,31 @@
-From: Matthew Hawkins <matt@mail.goldweb.com.au>
-Date: Tue, 23 Mar 1999 21:34:12 +0000
-Subject: Re: Solaris emulation !?!
-Message-Id: <marc-linux-ultrasparc-92222515102068@msgid-missing>
+From: Flavio Pescuma <edtfopa@malmen.ericsson.se>
+Date: Fri, 26 Mar 1999 16:46:11 +0000
+Subject: Multi Happy Meal Ethernet problem
+Message-Id: <marc-linux-ultrasparc-92246813116359@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92220050913641@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92220050913641@msgid-missing>
+References: <marc-linux-ultrasparc-92255674631513@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92255674631513@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Tue, 23 Mar 1999, Olivier A. D. Lebaillif wrote:
-> Is there anybody out there who was able to use the Solaris emulation in
-> order to run something more involving than ls ??????
+Hi,
 
-I managed to get a couple of components of Verity's Search97 package to run,
-however the main server required lwp support which solemu doesn't do just
-yet.  A coworker and I intend to fix that small deficiency, however don't
-hold your breath as (and I hate to say it) it's the lowest priority we have
-- closely beaten by sleep ;)
+I have just succeeded to install ultralinux-1.1.9 on a Ultra 30
+machine.  This machine has three Happy Meal ethernet cards, the problem
+I have is that eth0 works fine but the other two doesn't.  The module
+seems to work perfectly because it recognize the three of them,  but
+neither eth1 nor eth2 receive any traffic at all.
 
-I found the documentation for the package quite concise and complete - get
-your sloaris libraries, whack them in this directory, cross your fingers and
-pray to your favourite deity, try to run something.  I can't remember
-anything special I had to do that wasn't written in the docs.  I think the
-worst that can happen is the program whinges about unimplemented system
-calls, and you'll have to run the thing under the real solaris.  That's your
-cue to implement them! :)
+Thanks in advance,
 
--- 
-Matt
+Flavio
+
+
+
+--
+WIRE - Web & Internet Resources at Ericsson
+Flavio Pescuma           phone: +46 (0)8 7263359
+L M Ericsson Data AB     fax:   +46 (0)8 7217207
+125 82 Stockholm Sweden  http://eriweb.ericsson.se
