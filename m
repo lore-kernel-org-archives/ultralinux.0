@@ -1,37 +1,31 @@
-From: Shawn Hooton <shooton@cms.cendant.com>
-Date: Thu, 25 Mar 1999 02:43:48 +0000
-Subject: Re: Problems compiling 2.2.4 Ultrasparc kernel...
-Message-Id: <marc-linux-ultrasparc-92233005314042@msgid-missing>
+From: David Andrew - Sun MDE <David.Andrew@East.Sun.COM>
+Date: Fri, 12 Mar 1999 22:25:32 +0000
+Subject: Run Level 5 problems
+Message-Id: <marc-linux-ultrasparc-92127776107725@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-92232769912646@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-92232769912646@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I want to apologize to everyone for being an idiot.
-I figured that it should be using the sparc64-linux-gcc
-compiler. I figured it was getting egcs from my $CC
-so I unset all of my build vars, but I think the damage
-had already propagated to the makefiles. Sorry.
+Hi,
 
-FYI: uname -a="Linux {hostname} 2.2.0-pre4 #1 Tue Jan 5 17:08:15 CET
-1999 sparc64 unknown"
+I have been successful in loading UltraPenguin-1.1.9 in many Ultra platforms, 
+but have not been able to log in at Run level 5.  Is there something I am 
+missing?  I have done it as root, as well as with another username.  As soon 
+as the name and password are entered, it tries to do something, then comes 
+back up with the same login screen, with no reasonable exit.  I am running the 
+newest UP RPMS, including the 2.2.2-3 kernel files, but this happened on 
+earlier versions as well.  
 
-I really appreciate the quick response!!!
+I can get the X up with startx, but not by going to run level5.  This happens 
+even if I have already logged in at level 3.
 
-David Miller wrote:
-> 
->    Date:        Thu, 25 Mar 1999 02:01:30 +0000
->    From: Shawn Hooton <shooton@cms.cendant.com>
-> 
->    egcs -O2 -fomit-frame-pointer -funroll-loops -fno-strength-reduce
->    -DEXPORT_SYMTAB -c signal.c
-> 
-> It's using the wrong compiler.  Does "uname -a" output "sparc64" as
-> the cpu type?
-> 
-> Later,
-> David S. Miller
-> davem@redhat.com
+Is this a known bug?
+
+Thanks,
+
+David Andrew                Tel:  781-442-2316   Internal:   22316
+Market Development Engineer - I/O Technologies   FAX:  781-442-1520	
+Sun Microsystems, 1 Network Drive - M/S UBUR01-203,   Burlington, MA 01803	 
+e-mail:  david.andrew@sun.com
