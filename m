@@ -1,27 +1,42 @@
-From: Derrick J Brashear <shadow@DEMENTIA.ORG>
-Date: Mon, 16 Nov 1998 20:27:14 +0000
-Subject: "unified" audio snapshot available
-Message-Id: <marc-linux-ultrasparc-91127768025797@msgid-missing>
+From: David Van Beveren <dvb@eis.com>
+Date: Thu, 05 Nov 1998 21:43:25 +0000
+Subject: ULTRA LINUX 1.1 bootable CDROMs
+Message-Id: <marc-linux-ultrasparc-91031042911643@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi,
+Hi!
 
-I just dropped a new audio snapshot to ftp.dementia.org:
-ftp://ftp.dementia.org/pub/linux/sparc/audio/audio-2.0.35-981116.tar.gz
+For folks interested in running UltraLinux 1.1 from a bootable CDROM,
+EIS Computers will be making them available very shortly - as soon as we
+get the newest image here and get it up and running and are sure we made
+it right. to that end, if I can find a few folks in Southern California
+interested in running this let me know if you will be a beta tester, and
+I will send you a free copy. Here we have SME Ultra AXi and AXmp boxes,
+and a very small number of Sun workstations - we would like to run this
+on a variety of boxes to make sure we did the CDROM correctly. I will
+make ten CDs for beta testers.
 
-The name is a misnomer; This one *does* work on my Ultra 1 running
-Ultrapenguin 1.1. Still no DBRI support, still no Ebus (PCI Ultra) audio
-support; Someone else is working on DBRI, and I expect to get at a newer
-Ultra later in the week. 
+Overall, we will sell  them for $20 each, to cover cost of media and the
+time it takes to  burn the CDs by hand. If we get enough requests  we
+will do a production run of the CD, in which case the cost will be
+lower, like around $10. This cost does not cover support of course. That
+may come later. We will ship via FedEx 2nd day for $7 or by US mail for
+$5, (to cover the cost of the postage and the CDROM mailer). I recommend
+FedEx.
 
-Whether you're running 2.0 or 2.1, please give this a try if you have a
-machine with an AMD or 4231/APC in it; You can find a complete list at 
-http://www.dementia.org/~shadow/sparcaudio.html
+We can only do it at this price for NorthAmerican users. Shipping
+overseas is too expensive, unless you are willing to pay it - tell me if
+you are in your email reply.
 
-Feedback welcome, but as I said, no DBRI, no 4231/ebus.
+So, if you want one, let me know by email to dvb@eis.com. Please put
+ULTRA LINUX in the Subject so my mail reader can filter them (or just
+reply to this message).  At this point, I am not taking an order, just
+understanding how many we should expect to make.  Send it to me form a
+reply-able email address, and when we are ready to take orders (on our
+web store and by FAX), we will let you know. by email.
 
--D
+dvb
