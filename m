@@ -1,7 +1,7 @@
-From: Guglielmo Bondioni <g.bondioni@informex.it>
-Date: Wed, 09 Feb 2000 14:47:15 +0000
+From: Isaiah Weiner <iweiner@redhat.com>
+Date: Wed, 09 Feb 2000 14:57:16 +0000
 Subject: Re: CD ripper/MP3 encoder
-Message-Id: <marc-linux-ultrasparc-95010849523990@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95010849523987@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-95005914224137@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-95005914224137@msgid-missing>
@@ -10,9 +10,13 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Isaiah Weiner wrote:
->         In my book, having all SCSI components takes your machine out of
-> the "PC" classification.
-So an Ultra 10 with IDE devices is a PC, right?
+> So an Ultra 10 with IDE devices is a PC, right?
+> 
+> bond
 
-bond
+	The cache the cpu has in this case declassifies it from an
+otherwise deathly PC label.
+
+	My opinion of Ultra5/10s is not very high. ;)
+
+	- Isaiah
