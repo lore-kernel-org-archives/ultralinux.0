@@ -1,46 +1,41 @@
-From: Derrick J Brashear <shadow@DEMENTIA.ORG>
-Date: Sun, 27 Sep 1998 05:24:10 +0000
-Subject: Re: sparc32 2.1.121 problems
-Message-Id: <marc-linux-ultrasparc-90687365520034@msgid-missing>
+From: DURANTEZ Marc <durantez@is.s.u-tokyo.ac.jp>
+Date: Mon, 07 Sep 1998 04:01:40 +0000
+Subject: Cannot compile with /usr/local/bin/sparc64-linux-gcc
+Message-Id: <marc-linux-ultrasparc-90515862113550@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90682217607462@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90682217607462@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Sat, 26 Sep 1998, Derrick J Brashear wrote:
+I have just installed the distribution 1.0.9 of
+ultrapenguin on my ultra2 and I wanted
+to compile a kind of helloworld 64 bits. But I get
+an error with sparc64-linux-gcc:
 
-> with a recipe to reproduce, but i can make release *not* get closed when
-> it should; i just modprobe amd7930, lsmod (to see normal usage), dd an au
-> file to /dev/audio, and then lose. the device claims to still be open,
-> e.g. release never called, and hence subsequent open attempts lose.
+/usr/local/bin/sparc64-linux-gcc -o test64
+test64.c
+/usr/local/sparc64-linux/bin/ld: cannot open
+crt1.o: No such file or directory.
 
-about time for bed, and i got sidetracked with other things (problems with
-roof, plaster, and wall board, mostly) but I rebooted back into 2.1.99 and
-had same problem, but this time i verified it easily.
+I could compile it with the standard gcc (the one
+in the path) but then the output
+of test64 is that long and pointers are 4bytes
+long.
 
-[root@magnetbox ~]# modprobe amd7930
-[root@magnetbox ~]# lsmod
-Module                  Size  Used by
-amd7930                 8092   0  (unused)
-audio                   9612   1  [amd7930]
-[root@magnetbox ~]# audioctl -a
-name=SUNW,am79c30
-...
-record.errors=0
-[root@magnetbox ~]# lsmod
-Module                  Size  Used by
-amd7930                 8092   0  (unused)
-audio                   9612   2  [amd7930]
+How should I do to compile programs using the
+64bits capabilities of the Ultra2?
+Might be I missed an important HOWTO or info page.
 
-bing! subsequeunt opens of the audioctl device fail the same way, but
-shouldn't: 
-static int sparcaudioctl_release(struct inode * inode, struct file * file)
-{
-        MOD_DEC_USE_COUNT;
-...
+I would also like to subscribe to the ultralinux
+mailing list and receive information
+about any source of information on ultrapenguin as
+FAQs, HOWTOs, etc...
 
-more tomorrow
--D
+Please reply directly as I am not in the mailing
+list!
+
+Thanks
+
+Marc Durantez
+durantez@is.s.u-tokyo.ac.jp
