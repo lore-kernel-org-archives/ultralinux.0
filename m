@@ -1,24 +1,26 @@
-From: "R. Marc" <rmarc@dimension.net>
-Date: Thu, 11 Jun 1998 03:20:27 +0000
-Subject: Re: archives?
-Message-Id: <marc-linux-ultrasparc-90222357631000@msgid-missing>
+From: Thierry Lafage <lafage@irisa.fr>
+Date: Mon, 22 Jun 1998 09:05:33 +0000
+Subject: Global register use.
+Message-Id: <marc-linux-ultrasparc-90222357631025@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222357630999@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222357630999@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
->   just signed on this list as I wanted to try 1.0.9
->  
->   Are there any archives for this list? (besides asking majordomo for
->  a list)  the tftpboot image keeps throwing a data access exception on
->  my SS1 w/24 megs.. trying to track down a solution
->  dave
 
-There is an unofficial but mostly complete list at:
+Hi!
 
-http://ultrapenguin.copacetic.net
+Does anyone knows where I can find information about global register
+use in SPARC machines? 
 
-R. Marc
+In fact, I would like to know which of them are reserved for the
+kernel (g5-g7?), which are eventually reserved by the (C) libraries (or
+linker) and which can be actually safely used by the end user.
+
+Some information about gcc register allocation would be useful too.
+
+Thierry Lafage.
+
+-- CAPS project -- IRISA, campus de Beaulieu, 35042 Rennes cedex, France
+http://www.irisa.fr/caps/PEOPLE/ThierryL/
