@@ -1,22 +1,24 @@
-From: "David S. Miller" <davem@dm.cobaltmicro.com>
-Date: Fri, 09 Oct 1998 12:34:24 +0000
-Subject: Re: weird segfault on ./configure scripts doing eval something
-Message-Id: <marc-linux-ultrasparc-90794300408395@msgid-missing>
+From: Rich Sahlender <rsahlen@voicenet.com>
+Date: Mon, 26 Oct 1998 14:28:33 +0000
+Subject: sparc64 autofs
+Message-Id: <marc-linux-ultrasparc-90941213724594@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90793529604749@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90793529604749@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+I saw a post about this a few weeks ago and the response was that it was
+fixed in the newer kernels. I pulled the source from vger cvs last week
+for 2.1.125 and I still get:
 
-Yes we know about this bug, we're working on it, it's horrible and
-every time I think I have killed it it returns on me.
+[root@skater /root]# automount /home yp auto.home
+[root@skater /root]# sys32_ioctl: Unknown cmd fd(5) cmd(c0049364) arg(effffc64)
 
-This is an ongoing effort to zap this bug, we'll get it eventually, I
-promise.
+I took all the defaults in "make config"...
 
-Later,
-David S. Miller
-davem@dm.cobaltmicro.com
+[root@skater /root]# uname -a
+Linux skater.micro.lucent.com 2.1.125 #1 Mon Oct 26 08:17:54 EST 1998 sparc64 unknown
+[root@skater /root]#
+
+What have I missed? This works fine on an ss20 even with 2.1.99.
