@@ -1,8 +1,10 @@
 From: rick@dgii.com (Rick Richardson)
 Date: Thu, 25 Jun 1998 23:44:36 +0000
 Subject: Boot of 1.0.9 fails on Sun Ultra 1
-Message-Id: <marc-linux-ultrasparc-90222357631030@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-90222357631031@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90222357631030@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90222357631030@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
