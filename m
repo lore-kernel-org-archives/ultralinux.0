@@ -1,7 +1,7 @@
 From: Peter Jones <pjones@redhat.com>
-Date: Wed, 01 Sep 1999 15:02:06 +0000
+Date: Fri, 03 Sep 1999 19:58:26 +0000
 Subject: Re: X still crashing
-Message-Id: <marc-linux-ultrasparc-93619829122651@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93638912817549@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-93619297513663@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-93619297513663@msgid-missing>
@@ -12,13 +12,6 @@ To: ultralinux@vger.kernel.org
 
 On Wed, 1 Sep 1999, David S. Miller wrote:
 
->    Date: Wed, 1 Sep 1999 10:45:57 -0400 (EDT)
->    From: Peter Jones <pjones@redhat.com>
-> 
->    For what its worth, I've got XFree86-Sun24-3.3.3.1-52 on a u10 creator,
->    and I manage to get this when I replace /etc/X11/X with the LD_PRELOAD
->    and such:
-> 
 >    *** Segmentation fault
 >    Register dump:
 > 
@@ -30,10 +23,15 @@ On Wed, 1 Sep 1999, David S. Miller wrote:
 > image yourself for debugging purposes?  I need the symbol information
 > to even begin to be able to debug this.
 
-I havn't, but I'll do that this afternoon and send you a dump and the
-symbol info.
+eww.  0x27bcc, bd0, and 0x213e0 look like:
+
+0000000000027bbc t vis13          (for both of the first two) and
+0000000000213de0 T SwapHalfSpace
+
+Need any objdumps?
 
  -- Peter
 
-"What is a magician but a practicing theorist?"
-		-- Kenobi
+The object of war is not to die for your country but to make the
+  other bastard die for his.
+		-- Patton
