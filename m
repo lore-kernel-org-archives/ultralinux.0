@@ -1,7 +1,7 @@
-From: Peter Jones <pjones@redhat.com>
-Date: Thu, 17 Dec 1998 16:46:33 +0000
+From: Daniel Veillard <Daniel.Veillard@w3.org>
+Date: Thu, 17 Dec 1998 22:52:15 +0000
 Subject: Re: Changes in UltraPenguin 1.1.9 area
-Message-Id: <marc-linux-ultrasparc-91391616720863@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-91393645800705@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-91386114230666@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-91386114230666@msgid-missing>
@@ -10,22 +10,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Thu, 17 Dec 1998, David S. Miller wrote:
+> I've updated the 1.1.9 distribution (it is updated in place, as it is beta
+> still), so point your wget(1), mirror.pl(1) or cml(1) or whatever you use 
+> for mirroring to ftp://ultra.penguin.cz/pub/ultrapenguin-1.1.9/
+> or later on to mirrors. Most of the files have not been touched, so you'd
+> really better use some mirroring software.
 
->    Date: 	Thu, 17 Dec 1998 09:58:34 +0100 (CET)
->    From: Andreas Jungmaier <ajung@etecs3.uni-duisburg.de>
-> 
->    However, I tried adding a new harddrive (SEAGATE Model: ST39173LC),
->    which supposedly has around 9 GBytes, and cannot access that drive.
-> 
-> The drive refuses to spin up, it keeps reporting "not ready".
-> Can you verify that this disk works in some other system?
+  Just to announce the availability of a mirror at
+    ftp://rpmfind.net/linux/ultrapenguin/1.1.9
+or http://rpmfind.net/linux/ultrapenguin/1.1.9
+or rsync -va rpmfind.net::linux/ultrapenguin/1.1.9/ wherever_on_your_tree
 
-Might also be a good idea to try making the disk spin up on its own.
-Seagate specs and jumper settings are available at
-http://www.seagate.com/support/disc/specs/qs2num.shtml .
+ The distribution is also indexed by rpm2html 
+   http://rufus.w3.org/linux/RPM/ultrapenguin/1.1.9/
 
- -- Peter
+and available for upgrades via rpmfind
 
-I number the Linux folks among my personal heroes.
-		-- Donald Knuth
+Daniel
+
+-- 
+Daniel.Veillard@w3.org | W3C  MIT/LCS  NE43-344  | Today's Bookmarks :
+Tel : +1 617 253 5884  | 545 Technology Square   | Linux, WWW, rpm2html,
+Fax : +1 617 258 5999  | Cambridge, MA 02139 USA | badminton, Kaffe,
+http://www.w3.org/People/W3Cpeople.html#Veillard | HTTP-NG and Amaya.
