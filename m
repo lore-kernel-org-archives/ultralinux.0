@@ -1,44 +1,24 @@
-From: Mirko Tochtermann <tochterm@alpha.fh-furtwangen.de>
-Date: Wed, 08 Jul 1998 20:38:34 +0000
-Subject: ext2
-Message-Id: <marc-linux-ultrasparc-90222358531009@msgid-missing>
+From: Kenneth Preslan <kpreslan@lcse.umn.edu>
+Date: Tue, 07 Jul 1998 16:51:52 +0000
+Subject: UltraPenguin109 + Ultra5 = GettingBetter
+Message-Id: <marc-linux-ultrasparc-90222358531008@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi !
+Thanks to Jakub Jelinek's suggestion and David Andrew's OBP upgrade I have
+2.1.106 booting ok on my Ultra 5.  It now panics looking for a root 
+filesystem.
 
-I have installed the UltraPenguin V1.0.9 with kernel 2.1.106 on a 
-Ultra 1 with 64 mb.
-The problem is that after reboot I get a message from silo
-( I don't remember it exactly) :
-"Can't find silo.conf ... filesystem has unsupported read-only features.... "
- ( This happens 2 times a day or more often )
+My new question is how do I package this new kernel together with a root
+filesystem to install from.  The new kernel doesn't appear to be able
+to do nfsroot, and it doesn't recognize the SCSI disk I attached to the
+machine.
 
-My only chance to fix it is to make a boot net, switch to console ,  make a
-device called sda1 with mknod and run e2fsck. 
-Then e2fsck has the following output:
-"Filesystem has unsupported read-only feature(s) while training to open
-/dev/sda1 . The superblock could not be read or does not describe a 
-correct ext2"
+Any suggestions on what I should do next?
 
-After doing this i make a "e2fsck /dev/sda1 -b 8193" .
-e2fsck produce the following output:
+Thanks,
 
-.... Fix summary information <y>:
-... Block bitmap differences...
-... Free blocks count wrong for group .. 
-... Free inodes count wrong .. 
-... and so on .. 
-
-Any idea ?? 
-
-Thx in advance
-	Mirko
-
-P.S.: I have problems to compile any other kernel than 2.1.106 ( e.g. 2.1.108 ).
-        Any help available ?
-
- 
+Ken
