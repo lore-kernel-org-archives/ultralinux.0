@@ -1,27 +1,44 @@
 From: Stephan van Hienen <ddx@cable.a2000.nl>
-Date: Wed, 30 Sep 1998 09:32:22 +0000
-Subject: binutiles 2.8.1
-Message-Id: <marc-linux-ultrasparc-90714814421320@msgid-missing>
+Date: Wed, 16 Sep 1998 13:06:35 +0000
+Subject: Problems with kernel 2.1.121
+Message-Id: <marc-linux-ultrasparc-90595114026392@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-som1 here can send me the rpm (or point me to a place where i can find it)
-of binutils 2.8.1
+hey
+while doing make menuconfig i get this errors :
 
-i think i have here problems with the 2.9.1
+scripts/Menuconfig: line 1:  ???? Segmentation fault      parse_config
+<arch/$ARCH/defconfig
+	???? Exit 1
 
-when i try to install a source file (.tgz or srpm)
-i get a lot of seg faults etc.
+where ???? = number (differs al the time)
+and i get this on all questions
 
-maybe it's also the libc
+it goes on, but i'm not sure this is ok :)
 
-som1 else have this problems 
+also menuconfig end normally
+only gives me the errors
 
-most of times segfaults on thing like eval $something
+and then when compiled the kernel
+i reboot
 
-with ./configure
+and then have an error with the network
+eth0 is connected to a cable modem on 10mbit half duplex
+and it gives ok connected at 10mbit
+only connection timed out after some time (30seconds or something)
 
-so i think binutils is the problem
+eth1 is connected at 100mbit full duplex to my other computer
+and connects ok
+and that network also runs ok
+
+som1 has an idea what is wron here ???
+
+cards are both sun  HAPPY MEAL (on the same hardware adress)
+
+kernel 2.1.112 runs ok 
+after  that been a while on vacation and so
+so no time to compile kernel 2.1.113-2.1.120
