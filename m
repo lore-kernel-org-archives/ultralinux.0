@@ -1,54 +1,39 @@
-From: "Polyglot" <info@polyglot.com.cn>
-Date: Fri, 09 Aug 2002 02:12:09 +0000
-Subject: Polyglot Translation
-Message-Id: <marc-linux-ultrasparc-102885919413425@msgid-missing>
+From: Greg Boyce <gboyce@rakis.net>
+Date: Mon, 21 Oct 2002 15:17:10 +0000
+Subject: Problems with Networking on Ultra 1 Creator
+Message-Id: <marc-linux-ultrasparc-103521349411848@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-102879830314351@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-102879830314351@msgid-missing>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgUG9seWdsb3QgVHJhbnNsYXRpb24gIAoKUG9s
-eWdsb3QgaXMgYSBwcm9mZXNzaW9uYWwgbXVsdGlsaW5ndWFsIHNvbHV0aW9ucyBwcm92aWRlci4K
-Ck91ciByaWNoIGV4cGVyaWVuY2UgYW5kIHByb2Zlc3Npb25hbCB0ZWFtIGVzdGFibGlzaGVkIHVz
-IGFzIGEgbGVhZGVyIGluIHRoZQpmaWVsZCBvZiBtdWx0aWxpbmd1YWwgc29sdXRpb25zLgoKUG9s
-eWdsb3QgY2FuIHByb3ZpZGUgZmFzdCBhbmQgYWNjdXJhdGUgdHJhbnNsYXRpb25zIG9mIGZpbmFu
-Y2lhbCwgbGVnYWwgYW5kIHRlY2huaWNhbApkb2N1bWVudHMgb24gb3ZlciAzMCBsYW5ndWFnZXMs
-IHN1Y2ggYXMgRW5nbGlzaCwgR2VybWFuLCBTcGFuaXNoLCBGcmVuY2gsIApJdGFsaWFuLCBDaGlu
-ZXNlLCBKYXBhbmVzZSwgS29yZWFuLCBldGMuCgpXZSBhbHNvIHByb3ZpZGUgd2Vic2l0ZSBsb2Nh
-bGl6YXRpb24gYW5kIHNpbXVsdGFuZW91cyBpbnRlcnByZXRhdGlvbi4KCkZvciBmdXJ0aGVyIGlu
-Zm9ybWF0aW9uLCBwbGVhc2UgdmlzaXQgb3VyIHdlYnNpdGU6CiAKICAgICAgICAgICAgICAgIGh0
-dHA6Ly93d3cucG9seWdsb3QuY29tLmNuCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAK
-Q29udGFjdCB1cyBhdDoKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgZS1tYWlsOiBp
-bmZvQHBvbHlnbG90LmNvbS5jbiAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICBUZWw6
-ICAgICArODYgMjAgODY1Ny0zNjA4CiAgICAgICAgICAgICAgICBGYXg6ICAgICs4NiAyMCA4NjU3
-LTM5NjUKIAogICAgICAgICAgICAgICAgQWRkOiAgICA5NjggT2ZmaWNlIFRvd2VyLCBDZW50cmFs
-IEhvdGVsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIDMzIEFpcnBvcnQgUm9hZAogICAgICAg
-ICAgICAgICAgICAgICAgICAgICBHdWFuZ3pob3UsIENoaW5hCgoKVGhlIG1lc3NhZ2UgYmVsb3cg
-aXMgd3JpdHRlbiBpbiBDaGluZXNlIGNoYXJhY3RlcnM6CgoKICAgICAgICAgICAgICAgICAgILGj
-waLQxbet0uu5q8u+CgogICAgsaPBotDFt63S67mry77Kx9K7vNLM4bmptuDW1tPv0dS94r72t72w
-uLXE16jStbv6ubmho7fhuLu1xL6t0em8sArXqNK1tcS2087pyLfBosHLztLDx9TatuDW1tPv0dS9
-4r72t72wuMHs0/K1xMHsz8i12M67oaMKCiAgICDO0sPHxNzM4bmpMzC24NbW0+/R1LXE17zIt6Gi
-v+y93bXEt63S67f+zvGjrLet0uvB7NPyyea8sL3wyNrOxLz+oaIKt6jCyc7EvP68sLy8yvXOxLz+
-o6y3rdLr0+/W1rD8wKijutOioaK1wqGizvehoreooaLS4qGi1tChosjVoaK6q7XItcihowoKICAg
-tMvN4qOsztLDx7u5zOG5qc341b6xvrXYu6+6zbvh0um1xM2syfm0q9LroaMKCiAgILnY09rP6sfp
-o6zH67fDzsrO0sPHtcTN+Na3o7oKCiAgICAgICAgICAgICAgICBodHRwOi8vd3d3LnBvbHlnbG90
-LmNvbS5jbgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIAogICAgwarPtbe9yr2jugogICAgCiAgICAgICAgICAgICAgICC1
-59PKOiBpbmZvQHBvbHlnbG90LmNvbS5jbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAK
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICC157uw
-OiAoODYtMjApIDg2NTcgMzYwOAogICAgICAgICAgICAgICAgtKvV5jogKDg2LTIwKSA4NjU3IDM5
-NjUgICAgICAgICAgICAgICAKIAogICAgICAgICAgICAgICAgtdjWt6O61tC5+rnj1t0KICAgICAg
-ICAgICAgICAgICAgICAgILv6s6HCtzMzusUgIAogICAgICAgICAgICAgICAgICAgICAg1tDR677G
-terQtNfWwqU5NjgKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgINPKseCjujUx
-MDQwMyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgCgoKCiAgICAg
-ICAgIAogICAKICAgICAgICAgICAKICAgIAoKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAKCgoKLQpUbyB1
-bnN1YnNjcmliZSBmcm9tIHRoaXMgbGlzdDogc2VuZCB0aGUgbGluZSAidW5zdWJzY3JpYmUgdWx0
-cmFsaW51eCIgaW4KdGhlIGJvZHkgb2YgYSBtZXNzYWdlIHRvIG1ham9yZG9tb0B2Z2VyLmtlcm5l
-bC5vcmcKTW9yZSBtYWpvcmRvbW8gaW5mbyBhdCAgaHR0cDovL3ZnZXIua2VybmVsLm9yZy9tYWpv
-cmRvbW8taW5mby5odG1s
+Folks,
+
+I've been attempting to track down a problem I've been having lately with
+my Ultra 1 Creator.  When transfering files to/from the machine, it ends
+up hanging for short periods of time giving the following errors:
+
+eth0: transmit timed out, resetting
+eth0: Happy Status 00000000 TX[000003ff:00000401]
+eth0: Auto-Negotiation unsuccessful, trying force link mode
+
+I've been attempting to locate a fix in the archives, but none of the
+fixes I've found so far seem to work for me.
+
+I attempted applying the patch found here:
+http://www.uwsg.iu.edu/hypermail/linux/kernel/0208.1/0764.html
+
+And the patch located here:
+http://www.uwsg.iu.edu/hypermail/linux/kernel/0208.1/0798.html
+
+I've also tried upgrading from 2.4.18 to 2.4.19 after reading the problem
+was fixed in one of the 2.4.19-pre* kernels, and I attempted to downgrade
+to 2.2.20.  None of these things worked.
+
+Does anyone have a definitive fix for this problem?  If not, does anyone
+have any possible fixes they'd like me to try out for testing?
+
+-- 
+Gregory Boyce
+
