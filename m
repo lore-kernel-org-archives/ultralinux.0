@@ -1,58 +1,96 @@
-From: "Nils Lohner" <lohner@ICD.Teradyne.COM>
-Date: Thu, 24 Sep 1998 01:12:00 +0000
-Subject: glibc building
-Message-Id: <marc-linux-ultrasparc-90664428512210@msgid-missing>
+From: Jakub Jelinek <jj@sunsite.ms.mff.cuni.cz>
+Date: Tue, 22 Sep 1998 16:21:29 +0000
+Subject: SILO 0.7.3 pre-3
+Message-Id: <marc-linux-ultrasparc-90649491122083@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+Hi!
 
-This is a problem I ran into while trying to compile glibc 2.0.96 on an 
-ultra.  I'm not sure where the error is... it could well be the compiler, 
-which I recompiled with -static in the gcc directory after a complete build 
-(cd gcc;make clean;env LDFLAGS=-static make)
+I've put up yet another prerelease of SILO 0.7.3 to
+ftp://ultra.linux.cz/OS/Linux/Sparc/local/silo/testing/silo-pre0.7.3-3.tgz
+This version features among other changes:
 
-The egcs configure script ignores the LDFLAGS passed to it by 
-env LDFLAGS=-static ./configure --prefix=/usr --host=sparc-sun-linux
+romfs support (SILO is able to read files from the romfs filesystem,
+               and is able to make e.g. bootable floppies out of it).
+	      You need genromfs-0.3 or higher (available from ftp.banki.hu/pub/linux/local/)
+	      and when creating the image, pass it -A 2048,/.. -a 512
+	      arguments. I will come hopefully tomorrow with a sample
+	      boot & root floppies for ultrapenguin, including source,
+	      so you can learn how to do that.
 
-If this is a kernel issue, I plan on recompiling the kernel to the latest 
-CVS snapshot tomorrow, and also do some more digging into this.
+If you have /etc/silo.conf on your disk, but boot a custom image (ie. not
+one of the targets specified in silo.conf), you don't have to specify
+root= option if it does not differ from the default root= line in silo.conf
+any more. SILO now first checks if the arguments passed to linux kernel
+contain any root= option, if not, it checks if the kernel image has been 
+rdev'ed to some root device and if not, it will append the default for you.
 
-Thanks, Nils.
+Fixed cd.b, that combo first stage bootblock can now be used for floppies as
+well as CDs (for floppies, you have to use -F switch). That lets you have a
+floppy with a sparc32 and sparc64 kernels be bootable (again, wait for my
+floppies tomorrow). The previous cd.b from 0.6.9 onwards could not boot at
+all, I haven't burned any CD after rewrite for sun4u, so I haven't found it
+(but noone reported what the problems were).
 
+Fixed -r handling, now it does a chroot, but for files which live outside
+the chroot jail (e.g. /dev devices), it looks into the normal root. In fact,
+very old versions of SILO didn't use chroot at all, I had my own
+canonicalizing routines which prepended some path where appropriate).
+But chroot is probably better.
 
-gcc   -shared -o sysdeps/../libc.so  -Wl,-dynamic-linker=/lib/ld-linux.so.2 
--Bsysdeps/../csu/  -Wl,-soname=libc.so.6  -nostdlib -nostartfiles -e 
-__libc_main -L. -Lsysdeps/../math -Lsysdeps/../elf -Lsysdeps/../nss 
--Lsysdeps/../nis -Lsysdeps/../db2 -Lsysdeps/../rt -Lsysdeps/../resolv 
--Lsysdeps/../linuxthreads -Wl,-rpath-link=.:sysdeps/../math:sysdeps/../elf:sy
-sdeps/../nss:sysdeps/../nis:sysdeps/../db2:sysdeps/../rt:sysdeps/../resolv:sy
-sdeps/../linuxthreads -Wl,--whole-archive sysdeps/../elf/soinit.os 
-sysdeps/../libc_pic.os sysdeps/../elf/sofini.os sysdeps/../elf/interp.os 
-sysdeps/../elf/ld.so  -lgcc
-/usr/lib/gcc-lib/sparc-sun-linux/egcs-2.92.11/libgcc.a(_bb.o): In function 
-`__bb_exit_func':
-/home/lohner/work/egcs_tree/egcs/6build/gcc/../../gcc/libgcc2.c(.text+0x274):
- multiple definition of `__bb_exit_func'
-sysdeps/../libc_pic.os:/home/lohner/utils/glibc-2.0.96/gmon/bb_exit_func.c:47
-: first defined here
-/usr/sparc-sun-linux/bin/ld: Warning: size of symbol `__bb_exit_func' 
-changed from 308 to 1864 in _bb.o
-/usr/lib/gcc-lib/sparc-sun-linux/egcs-2.92.11/libgcc.a(_bb.o): In function 
-`__bb_init_func':
-/home/lohner/work/egcs_tree/egcs/6build/gcc/../../gcc/libgcc2.c(.text+0x9bc):
- multiple definition of `__bb_init_func'
-sysdeps/../libc_pic.os:/home/lohner/utils/glibc-2.0.96/gmon/../sysdeps/generi
-c/bb_init_func.c:33: first defined here
-/usr/sparc-sun-linux/bin/ld: Warning: size of symbol `__bb_init_func' 
-changed from 116 to 100 in _bb.o
-collect2: ld returned 1 exit status
-gcc: file path prefix `sysdeps/../csu/' never used
-make: *** [sysdeps/../libc.so] Error 1
-$[lohner@xia01 glibc-2.0.96]$ gcc --version
-egcs-2.92.11
-[lohner@xia01 glibc-2.0.96]$ uname -a
-Linux xia01 2.1.99 #1 Sat May 2 18:35:38 1998 sparc64 unknown
-[lohner@xia01 glibc-2.0.96]$ 
+Enhanced silo.conf syntax, so that it can be conditionalized based on
+architecture detected. So you can go like:
+partition = 1
+root = /dev/fd0
+read-write
+timeout = 100
+message = /welcome.msg
+append = "load_ramdisk=1 prompt_ramdisk=1"
+image[sun4u] = /vmlinux-64.gz
+        label = linux
+        alias = install
+image[sun4c,sun4d,sun4m] = /vmlinux-32.gz
+        label = linux
+        alias = install
+image[sun4] = /vmlinux-sun4.gz
+        label = linux
+        alias = install
+
+The meaning is that if you boot on sun4u, it will be like if /vmlinux-32.gz
+and /vmlinux-sun4.gz images were not present in silo.conf at all.
+
+Probably some more changes I forgot to mention.
+BTW: genromfs support is funny and was not trivial to do, as romfs expects
+its bootblock to be at offset 0 of the device, sun partition table as well.
+But, fortunately, it has first 128 bytes reserved for a descriptive string.
+So, I put first two romfs headers into those 128 bytes and add there a skip
+to offset 2048 for /.. header (that's the -A 2048,/.. argument to genromfs).
+What's most funny is that there are two checksums: both check integrity of
+the first 512 bytes of the device. romfs requires sum of all 4byte words to
+be 0, sun partition table requires xor of all 2byte words to be 0.
+
+sun4 support is not yet written, if there are some volunteers wanting to
+write 128 instruction first stage block, I'd welcome it a lot, as I don't
+have any sun4 machines and cannot test it. The idea is that for disks, it
+would install sun4.b normally, for floppies the partition table could
+contain another partition which would contain solely sun4 bootblock, for CDs
+likewise, for tftp one has to use two different images, unless someone comes
+with a way how to make a single boot block for sun4/sun4cdm/sun4u. I know
+how to do either sun4/sun4cdm or sun4cdm/sun4u (the problem is that sun4u is
+more strict about the a.out header and moves the bytes specified there.
+There is no such instruction which would be small enough, so that the move
+would succeed).
+
+Cheers,
+    Jakub
+___________________________________________________________________
+Jakub Jelinek | jj@sunsite.mff.cuni.cz | http://sunsite.mff.cuni.cz
+Administrator of SunSITE Czech Republic, MFF, Charles University
+___________________________________________________________________
+Ultralinux - first 64bit OS to take full power of the UltraSparc
+Linux version 2.1.121 on a sparc64 machine (498.80 BogoMips).
+___________________________________________________________________
