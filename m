@@ -1,75 +1,50 @@
-From: Lencses Gabor <lgaby@mail.euroweb.hu>
-Date: Wed, 06 May 1998 16:25:00 +0000
-Subject: Re: X files
-Message-Id: <marc-linux-ultrasparc-90222356530974@msgid-missing>
+From: Kris Boulez <kris@belbone.be>
+Date: Wed, 20 May 1998 12:03:59 +0000
+Subject: Decompression error with silo and new kernel
+Message-Id: <marc-linux-ultrasparc-90222356531054@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90222356530972@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90222356530972@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
+After having installed the latest ultrapenguin release I wanted to
+compile a new kernel. I couldn't find any (ultra)sparclinux specific
+docs about this, so I used my Intel/PMac knowledge about Linux. I did 
+the following
 
-On Wed, 6 May 1998, Jakub Jelinek wrote:
+- make kernel as usual
+- copy and gzip the resulting vmlinux file (tiens, it is not located somewhere 
+  deep down in the arch hierarchy this time) to /boot
+- edit /etc/silo.conf to add a new target
+- reboot
 
-> > First of all, the domainname is present on my UE1 too, it appears that
-> > it's ok on certain length domainnames [exactly 1,2,3,8,9,10,20+ chars].
-> 
-> Known bug in the kernel, I have it fixed in my tree, but cannot spend all my
-> time just remaking packages.
+I get the error "Decompression error: uncompressed image too large - 
+		 wouldn't fit into destination"
 
-Hey, bite me! I just tried to be useful. :) And of course I remarked that
-you are working quickly. I think all of us has to do work before the
-fun...
+/etc/silo.conf
+timeoutP
+partition=3
+root=/dev/sda1
+image=/boot/vmlinux-2.1.102
+        label=linux102
+        root=/dev/sda1
+        read-only
+image=/boot/vmlinux-2.1.99.gz
+        label=linux
+        root=/dev/sda1
+        read-only
 
-> > Second any time I press the control key under X, it does something [a sync
-> > hop?] and the monitor does the same as when you degauss it. It shatters
-> > and deshatters. 
-> 
-> Haven't been able to reproduce this, what fb are you running?
-
-XFree86-Xvfb-3.3.1-22
-
-Card: Sun Turbo GX Plus
-Monitor: 1152x900x76 Monitor type 4
-
-The whole system was installed from the Apr 20 or so 1.0.9, and when the
-updates came out, I installed them too.
-
-I have to respecify it. After I move the mouse and press any key.
-
-> > The icons from the control-panel still missing. They are empty boxes. 
-> Cannot reproduce this either.
-
-It's ok if I export it to another [i386] X. 
-
-> > The gimp segfaults on start.
-> Neither this. GIMP runs just fine.
-
-Sorry, I found this out. It said "Unable to allocate sufficient colormap
-entries", so when I exited from control-panel [:) a fine example of a
-color hungry application] it started.
-
-> > The exit from Xserver [maybe fwvm?] does not work, the xinit has to kill
-> > the server.
-> Strange. There was some problem with -18, but it is fixed already and I
-> cannot see it.
-
-:) I am known to generate strange effects... and most of them has nothing
-to do with the software.
-
-> > The screen is not refreshed after the exit.
-> If it has to be killed, then that's normal.
-
-Hmm. On i386 it gets refreshed... Afterall, when it exists and I press any
-key it should show that. Since I get back to bash I should be able type
-commands without first switching to another VC and back.
-
-When I switch from X to any VC, it refreshes only part of the screen.
-And after I switch back to X, it is inverted again.
-[The next switch kills the console. :) In the first occurence I wasn't
-able to reboot it even via telnet.]
+# ls -l /boot/vml*
+-rwxr-xr-x   1 root     root       987827 May 20 08:31 /boot/vmlinux-2.1.102.gz
+-rw-r--r--   1 root     root       938796 May  2 20:56 /boot/vmlinux-2.1.99.gz
+-rw-r--r--   1 root     root       966315 May  2 21:20 /boot/vmlinux-smp-2.1.99.gz
+lrwxrwxrwx   1 root     root           17 Feb 19 19:53 /boot/vmlinux.gz -> vmlinux-2.1.99.gz
 
 
-LGaby
+Uncompressing the kernel by hand doesn't solve the problem : "Image too large
+to fit in destination"
+
+Kris,
+-- 
+Kris Boulez				kris@belbone.be
