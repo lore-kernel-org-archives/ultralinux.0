@@ -1,7 +1,7 @@
-From: Ricky Beam <jfbeam@bluetronic.net>
-Date: Wed, 24 Dec 2003 03:38:18 +0000
+From: Clint Adams <schizo@debian.org>
+Date: Wed, 24 Dec 2003 04:12:19 +0000
 Subject: Re: environmental monitoring
-Message-Id: <marc-linux-ultrasparc-107223723030762@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-107223915131800@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-107223135327134@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-107223135327134@msgid-missing>
@@ -10,50 +10,124 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Tue, 23 Dec 2003, Eric Brower wrote:
->A driver needs to learn about the OBP format used on a particular
->platform for environmental monitoring.  In the case of the T1/200 it may
->be similar enough to the existing bbc_envctrl driver (written for an
->SB1000) that you can adapt it for use on your system.  At the very
->least, you'll have to remove the bbc_present() test.
+> Umm, the Netra T1 doesn't have an "envctrl" -- or a "SUNW,rasctrl" on an
+> ebus.
 
-Umm, the Netra T1 doesn't have an "envctrl" -- or a "SUNW,rasctrl" on an
-ebus.
+I don't think that's important; all I want is the CPU temperature.
 
-(pruned prtconf -pv from solaris -- linux doesn't see anything behind pmu)
-            Node 0xf00793b8
-                name:  'pmu'
-                compatible: 'pci10b9,7101' + 'pciclass,000000'
-                device-id:  00007101
-                vendor-id:  000010b9
+This is from a 105 (where the linux 2.6.0 envctrl module works):
 
-                Node 0xf0079b80
-                    compatible: 'i2c-smbus'
-                    name:  'i2c'
+System Configuration:  Sun Microsystems  sun4u
+Memory size: 1024 Megabytes
+System Peripherals (Software Nodes):
 
-                    Node 0xf007b018
-                        compatible: 'i2c-max1617'
-                        name:  'temperature'
+SUNW,UltraSPARC-IIi-cEngine
+    packages (driver probably installed)
+        terminal-emulator (driver probably installed)
+        deblocker (driver probably installed)
+        obp-tftp (driver probably installed)
+        disk-label (driver probably installed)
+        ufs-file-system (driver probably installed)
+        cdfs (driver probably installed)
+        SUNW,builtin-drivers (driver probably installed)
+        sun-keyboard (driver probably installed)
+    chosen (driver probably installed)
+    openprom (driver probably installed)
+        client-services (driver probably installed)
+    options (driver probably installed)
+    aliases (driver probably installed)
+    memory (driver probably installed)
+    virtual-memory (driver probably installed)
+    pci (driver probably installed)
+        pci (driver probably installed)
+            ebus (driver probably installed)
+                auxio (driver probably installed)
+                power (driver probably installed)
+                SUNW,pll (driver probably installed)
+                su (driver probably installed)
+                su (driver probably installed)
+                ecpp (driver probably installed)
+                fdthree (driver probably installed)
+                eeprom (driver probably installed)
+                flashprom (driver probably installed)
+                watchdog (driver probably installed)
+                display7seg (driver probably installed)
+                beeper (driver probably installed)
+                flashprom (driver probably installed)
+                flashprom (driver probably installed)
+                i2c (driver probably installed)
+                    adc (driver probably installed)
+                    gpio (driver probably installed)
+                    gpio (driver probably installed)
+                i2c (driver probably installed)
+                SUNW,lom (driver probably installed)
+            network (driver probably installed)
+            scsi (driver probably installed)
+                disk (driver probably installed)
+                tape (driver probably installed)
+            network (driver probably installed)
+        pci (driver probably installed)
+            pci (driver probably installed)
+                ide (driver probably installed)
+                    disk (driver probably installed)
+                    cdrom (driver probably installed)
+    SUNW,UltraSPARC-IIi (driver probably installed)
 
-                    Node 0xf007b2c0 (&0xf007b378)
-                        compatible: 'i2c-at34c02'
-                        name:  'dimm'
+And this is from a 200 (where it doesn't)
 
-                    Node 0xf007b430
-                        compatible: 'i2c-at24c64'
-                        device_type:  'nvram'
-                        name:  'i2c-nvram'
+System Configuration:  Sun Microsystems  sun4u
+Memory size: 512 Megabytes
+System Peripherals (Software Nodes):
 
-                        Node 0xf007bf48
-                            device_type:  'idprom'
-                            name:  'idprom'
-
-                    Node 0xf007c1fc
-                        compatible: 'i2c-at24c64'
-                        name:  'motherboard-fru'
-
-                Node 0xf007cd94
-                    compatible: 'SUNW,smbus-fan-control'
-                    name:  'fan-control'
-
-
+SUNW,UltraAX-i2
+    packages (driver probably installed)
+        terminal-emulator (driver probably installed)
+        deblocker (driver probably installed)
+        obp-tftp (driver probably installed)
+        disk-label (driver probably installed)
+        SUNW,builtin-drivers (driver probably installed)
+        dropins (driver probably installed)
+        kbd-translator (driver probably installed)
+    chosen (driver probably installed)
+    openprom (driver probably installed)
+        client-services (driver probably installed)
+    options (driver probably installed)
+    aliases (driver probably installed)
+    memory (driver probably installed)
+    virtual-memory (driver probably installed)
+    pci (driver probably installed)
+        pci (driver probably installed)
+            ebus (driver probably installed)
+                flashprom (driver probably installed)
+                eeprom (driver probably installed)
+                idprom (driver probably installed)
+                SUNW,lomh (driver probably installed)
+            pmu (driver probably installed)
+                i2c (driver probably installed)
+                    temperature (driver probably installed)
+                    dimm (driver probably installed)
+                    dimm (driver probably installed)
+                    i2c-nvram (driver probably installed)
+                        idprom (driver probably installed)
+                    motherboard-fru (driver probably installed)
+                fan-control (driver probably installed)
+            lomp (driver probably installed)
+            isa (driver probably installed)
+                power (driver probably installed)
+                serial (driver probably installed)
+                serial (driver probably installed)
+            network (driver probably installed)
+            usb (driver probably installed)
+            ide (driver probably installed)
+                disk (driver probably installed)
+                cdrom (driver probably installed)
+            network (driver probably installed)
+            usb (driver probably installed)
+        pci (driver probably installed)
+            scsi (driver probably installed)
+                disk (driver probably installed)
+                tape (driver probably installed)
+            scsi (driver probably installed)
+                disk (driver probably installed)
+                tape (driver probably installed)
+    SUNW,UltraSPARC-IIe (driver probably installed)
