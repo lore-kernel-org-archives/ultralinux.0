@@ -1,22 +1,24 @@
-From: Derrick J Brashear <shadow@dementia.org>
-Date: Fri, 13 Nov 1998 19:55:53 +0000
-Subject: anyone using nested modules?
-Message-Id: <marc-linux-ultrasparc-91099548828878@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Sun, 15 Nov 1998 20:51:42 +0000
+Subject: Still no go with the happy meal on the scsi/hme card on sun ultra
+Message-Id: <marc-linux-ultrasparc-91117918117094@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-So on my ultrapenguin 1.1 system (ultra 1/170, 2.1.126) I was having
-problems where attempting to load cs4231.o after audio.o caused an
-initialization failure, and I assumed it was some problem with my module.
-I tried "modprobe ppp_deflate" with the distributed modules, and same
-thing:
-init_module: found dependancy that is (no longer?) a module.
-/lib/modules/2.1.126/net/ppp.o: init_module: Invalid argument
+tried the new cvs kernel (2.1.128)
 
-So it's not me. Are there any other nested module combos? Do any work
-correctly?
+but still get timeouts on the happy meal eth0 card in my kernel
 
--D
+eth1 (onboard happy meal)
+eth2,eth3 (dec 450)
+work ok
+
+this was on the list before, but i hoped it was fixed
+
+som1 is looking at this ?
+
+i can look for things here, but since i'm not a programmer myself, i can't
+try to fix it :(
