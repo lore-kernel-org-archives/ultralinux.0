@@ -1,58 +1,50 @@
-From: Steve Dunham <dunham@cse.msu.edu>
-Date: Fri, 18 Sep 1998 15:17:45 +0000
-Subject: Re: MAJOR 1.09 problem!!!!!!
-Message-Id: <marc-linux-ultrasparc-90613604203612@msgid-missing>
+From: DURANTEZ Marc <durantez@is.s.u-tokyo.ac.jp>
+Date: Fri, 11 Sep 1998 11:44:57 +0000
+Subject: Problem with automount
+Message-Id: <marc-linux-ultrasparc-90551513813521@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-90564416421025@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-90564416421025@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Phil Hunt <phil@isone.net> writes:
+I have a problem with the automount daemon, it doesn't crash but it
+doesn't work.
+Anyone has an idea of what is wrong? I am not enought sorcerer to
+understand the
+message of kernel: sys32_ioctl!
 
-> I have a Sun Ultra 10, 300mhz processor, 256meg memory,
-> startup header is:
+Here you have a copy of what I get:
 
-> Sun Ultra 5/10 UPA/PCI  (UltraSparc IIi - 300mHZ)
-> Open Boot 3.11, 256Meg memory installed
+bash-2.01# ./autofs start
 
-> I net booted it using the 1.09 kit, got through RARP, and tftpboot.img load.
+Sep 11 10:43:49 helios automount[957]: starting automounter version
+0.3.14, path = /home, maptype = yp, mapname = auto.home
+Sep 11 10:43:49 helios kernel: sys32_ioctl: Unknown cmd fd(5)
+cmd(c0049364) arg(effff944)
+Sep 11 10:43:49 helios automount[957]: Map argc = 1
+Sep 11 10:43:49 helios automount[957]: Map argv[0] = auto.home
+Sep 11 10:43:49 helios automount[957]: using kernel protocol version 3
 
-> Install started.....
+bash-2.01# ls /home/flex3 (won't return)
 
-> Right after it read hdlist, the following error appeared:
+Sep 11 10:44:02 helios automount[963]: lookup(yp): looking up
+Sep 11 10:44:02 helios automount[963]: lookup(yp): lookup for  failed:
+Request arguments bad
+Sep 11 10:44:02 helios automount[957]: AUTOFS_IOC_READY: Invalid
+argument
 
-> Comps Error
-> Missing package
-> GLIB
-> at line 220
+I guess the string flex3 should appear somewhere in the messages...
 
-> I hit ok, and it proceeded  (I looked in RPMS, glib-1 was there).
+Complementary info:
 
-This has little to do with your other problems. AFAIK, glib is only
-needed for gtk/gnome stuff.  (It has to be in RPMS and in the "hdlist"
-file, BTW.  Moreover, the case of the the packagename in the comps
-file should match the real package name.)
+UltraSparc2 (JU2/1300)
+Kernel : 2.1.106 on a sparc64        Ultrapenguin 1.0.9
 
-> After total install, whether SILO is installed or not....upon reboot, the Sun
-> white screen said:
+Linux automount version 0.3.14 (binary from the distribution)
+but also Linux automount version 3.1.1 (compiled with gcc 2.7.2.3
+and glibc 2.0.7)
 
-> Boot Device: disk:b  File and args:
-> The File just loaded does not appear to be executable.
-
-> Tries that twice, then comes to an OK prompt
-
-> Any ideas whats wrong??????
-
-> HELP!  I am stuck!!!
-> phil
-
-Looks like a problem loading SILO.  Perhaps it wasn't installed, the
-PROM is looking on ther wrong slice (partition), or there is some
-other error.
-
-
-Steve
-dunham@cse.msu.edu
+Nota: There is also two syntax errors in /etc/rc.d/init.d/autofs
+lines 110-111. before the } should be a ; . It is in the package
+autofs-0.3.14-3.src.rpm .
