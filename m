@@ -1,14 +1,19 @@
-From: thomas.d.prohigh@bellatlantic.COM
-Date: Mon, 24 Aug 1998 19:53:56 +0000
-Subject: Ultra Linux CD-ROM
-Message-Id: <marc-linux-ultrasparc-90400291716064@msgid-missing>
+From: Shane Boulle <shaneb@durban.vector.co.za>
+Date: Thu, 27 Aug 1998 18:00:26 +0000
+Subject: Where can I FTP a copy of UltraLinux from
+Message-Id: <marc-linux-ultrasparc-90425258414602@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-        Where can I get an ultralinux/ultrapenguin bootable CD-ROM?
+Hello
 
+I would like to run Linux on a Sun Ultra1 but because a problems with
+datalines.
 
-     Tom
+I am looking for a site from where I can download the INSTIMAGE in TAR
+format.
+
+Thanks for any help
