@@ -1,46 +1,55 @@
-From: Marc Aurele La France <tsi@ualberta.ca>
-Date: Thu, 05 Apr 2001 13:49:55 +0000
-Subject: Re: XFree4.0.3 on Ultralinux (kernel 2.4.3)
-Message-Id: <marc-linux-ultrasparc-98647864116573@msgid-missing>
+From: "Eric FEILLANT" <eric.feillant@laposte.fr>
+Date: Wed, 09 May 2001 11:23:27 +0000
+Subject: SUN KEYBOARD PROBLEM, please help
+MIME-Version: 1
+Content-Type: multipart/mixed; boundary="----------7NhE3WuB9OnU6N9D2A0R5Y7"
+Message-Id: <marc-linux-ultrasparc-98940743306355@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-98644352025191@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-98644352025191@msgid-missing>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Thu, 5 Apr 2001, David Andrew - Sun MDE wrote:
 
-> > > Has anyone managed to get the very latest XFree86 (4.0.3) working on 
-> > > an Ultra 5? (ATI Mach64 3d Rage Pro) I keep getting system lockups 
-> > > whenever I attempt to startx.
+This is a multi-part message in MIME format.
 
-> >Only the SBUS and UPA framebuffers work, no PCI devices work yet.
+------------7NhE3WuB9OnU6N9D2A0R5Y7
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-> We loaned an Ultra10 to Marc LaFrance at the University of Alberta in 
-> December for XFree86 work, but I don't know the status.  Marc?
+Hi,
 
-Yes, and I've already accumulated about 10,000 lines of changes for this.
-I don't have anything working yet as I'm still dealing with a number of
-XFree86 infrastructure issues.  Mostly SunOS/Linux differences and PCI
-handling.  It'll be at least a month before I feel comfortable with making
-this work available to others, whether through CVS or not.  At this point,
-even its compilability isn't as stable as I'd like it.
+I just installed SUSE 7.0 on my ULTRA SPARC 5 WS.
 
-Marc.
+My keyboard (Sun type 5) works well in console mode but
+have problem with Xfree86 (v3).
 
-+----------------------------------+-----------------------------------+
-|  Marc Aurele La France           |  work:   1-780-492-9310           |
-|  Computing and Network Services  |  fax:    1-780-492-1729           |
-|  352 General Services Building   |  email:  tsi@ualberta.ca          |
-|  University of Alberta           +-----------------------------------+
-|  Edmonton, Alberta               |                                   |
-|  T6G 2H1                         |     Standard disclaimers apply    |
-|  CANADA                          |                                   |
-+----------------------------------+-----------------------------------+
-XFree86 Core Team member.  ATI driver and X server internals.
+When i press the 'H' key i get 'G', when i press 'T' i get 'R', when i
+press
+6 i get '5' ...and so on ....
 
+Any idea ?
+
+Thanks
+
+
+
+------------7NhE3WuB9OnU6N9D2A0R5Y7
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: Quoted-Printable
+
+Post-scriptum La Poste
+
+Ce message est confidentiel. Sous r=E9serve de tout accord conclu par
+=E9crit entre vous et La Poste, son contenu ne repr=E9sente en aucun cas un=
+
+engagement de la part de La Poste. Toute publication, utilisation ou
+diffusion, m=EAme partielle, doit =EAtre autoris=E9e pr=E9alablement. Si vo=
+us
+n'=EAtes pas destinataire de ce message, merci d'en avertir imm=E9diatement=
+
+l'exp=E9diteur.
+
+
+
+------------7NhE3WuB9OnU6N9D2A0R5Y7--
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
 the body of a message to majordomo@vger.kernel.org
