@@ -1,55 +1,33 @@
-From: Karl-Olov Serrander <kase@cntw.com>
-Date: Fri, 12 Mar 1999 10:47:34 +0000
-Subject: ultrapenguin-1.1.9 problems
-Message-Id: <marc-linux-ultrasparc-92123595303143@msgid-missing>
+From: Elliott Hughes <Elliott.Hughes@genedata.com>
+Date: Fri, 12 Mar 1999 10:57:58 +0000
+Subject: Re:  ultrapenguin-1.1.9 problems
+Message-Id: <marc-linux-ultrasparc-92123655603714@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-92123595303143@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-92123595303143@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hi
+> 1 During install it was not possible to create a boot floppy.
 
-1 During install it was not possible to create a boot floppy.
-  Later when i try to access /dev/fd0 i get:
-    floppy0: probe failed
-    floppy0: probe failed
-    floppy0: probe failed
-    ...
+no, the floppy didn't work on my Ultra10 either.
 
-  Works ok in solaris7
+> 2 silo.conf does not seem to be correct. I can only boot
+>   linux, not solaris as i have entered during install.
 
-2 silo.conf does not seem to be correct. I can only boot
-  linux, not solaris as i have entered during install.
+what i found was that the boot record was written to the
+wrong disc. i could boot both Linux and Solaris from silo,
+but getting to silo required that i boot from the disc i hadn't
+told the install program to put it on.
 
-3 I can't choose 1152*900 when configuring X. Sun monitors
-  (in my case 20" GDM-20D10) does not seem to be included
-  in configuration script.
+> 5 what is the status for sound ?
 
-My configuration:
-  Ultra5 with 132 Mb mem
-  no IDE disk
-  SCSI glm0 (53C875)
-  DISK SEAGATE-ST34520W 4.3 Gb
-    slice 1 Solaris
-    slice 2 linux
-    slice 3 solaris swap
-    slice 4 linux swap
-  Monitor Sun 20" GDM-20D10
+seems to be unimplemented. all the relevant ioctls fail for
+me, and i can't write either. "Operation not supported by
+device."
 
-  I also have a graphics card TECH-SOURCE Raptor GFX 8P
-  which have not tried to use with linux.
-
-
-4 prompt$ /sbin/modinfo
-  The insmod/rmmod combined binary is having an identity crisis.
-  Please give it a proper name.
-
-I have upgraded to XFree86*-3.3.3.1-2.sparc.rpm and kernel*-2.2.2-3.sparc64.rpm
-but floppy still does not work.
-
-5 what is the status for sound ?
-
-Regards
 -- 
-Karl-Olov Serrander kase@cntw.com
+"Plan 9? Ah, yes: Plan 9 deals with the resurrection of the dead."
+	http://plan9.bell-labs.com/plan9/
