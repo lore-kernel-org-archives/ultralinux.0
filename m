@@ -1,41 +1,22 @@
-From: Stephan van Hienen <ddx@cable.a2000.nl>
-Date: Sat, 17 Oct 1998 18:25:34 +0000
-Subject: Netscape 4.5 on sparc
-Message-Id: <marc-linux-ultrasparc-90868474718359@msgid-missing>
+From: "David S. Miller" <davem@dm.cobaltmicro.com>
+Date: Sun, 18 Oct 1998 08:29:07 +0000
+Subject: Re: Netscape 4.5 on sparc
+Message-Id: <marc-linux-ultrasparc-90870825224034@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
+References: <marc-linux-ultrasparc-90868474718359@msgid-missing>
+In-Reply-To: <marc-linux-ultrasparc-90868474718359@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-just saw that netscape 4.5 came out
-and it includes a version for the sparc
+   Date: 	Sat, 17 Oct 1998 20:25:34 +0200 (CEST)
+   From: Stephan van Hienen <ddx@cable.a2000.nl>
 
-communicator-v45-export.sparc-unknown-linux2.0.tar.gz
+   so i tried to compile libstdc++-2.8.1.1-1.src.rpm
 
-tried to run it :
+It's the libstdc++-2.8.0 built from the RH-5.1 egcs-1.0.x srpms
 
-netscape: error in loading shared libraries
-libstdc++.so.2.8: cannot open shared object file: No such file or
-directory 
-
-so i tried to compile libstdc++-2.8.1.1-1.src.rpm
-
-but it gives me :
-
-n file included from ../../../libio/fstream.h:30,
-                 from ../../../libio/fstream.cc:34:
-../../../libio/iostream.h:91: parse error before `__extension__'
-../../../libio/iostream.h:208: parse error before `__extension__'
-make[1]: *** [fstream.o] Error 1
-make[1]: Leaving directory
-`/usr/src/redhat/BUILD/libstdc++-2.8.1.1/obj-linux/libraries/libio'
-make: *** [all-target-libio] Error 2                                       
-
-
-
-now i see in the sparc contrib for redhat :
-
-libstdc++-2.9.0-2.sparc.rpm
-
-i wonder if i can use this one ?
+Later,
+David S. Miller
+davem@dm.cobaltmicro.com
