@@ -1,51 +1,80 @@
-From: yves@ultr.vub.ac.be
-Date: Fri, 15 Oct 1999 13:30:55 +0000
-Subject: X on ultrasparc creator3D
-Message-Id: <marc-linux-ultrasparc-93999468103688@msgid-missing>
+From: Thierry Lafage <Thierry.Lafage@irisa.fr>
+Date: Thu, 28 Oct 1999 08:24:56 +0000
+Subject: gprof on RH-6.0/UltraSPARC
+Message-Id: <marc-linux-ultrasparc-94109917425255@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I installed RH6 on  a ultrasparc creator3d with the latest patches and all. When I start X (gnome, KDE, AnotherLevel WM or whatever) the server starts, the wm starts, I even see xterms, taskbars, ... running when I log in using telnet, but the screen stops after 
--the Gnome welcome message, and the initial file manager window,
--the fwm blue screen with a pink rectangle in one of the corners.
+Hello,
 
-The mouse moves, but the buttons do not show any response,
-The keyboard appears to be dead, even <STOP><A> doesn't work, pressing CAPSLOCK doesn't show the light, none of the keys show responses.
-When I reboot or halt the system, using the telnet session, the screen stays the same. 
-Xsun24 takes about 90% of the cpu.
- 
+Has anyone successfully experienced gprof on an UltraSPARC running RH-6.0 ?
 
-The logfile I created using startx shows
-xauth:  creating new authority file /usr4/people/yves/.Xauthority
+It seems not to work on my workstation (UltraSPARC I):
 
-_X11TransSocketUNIXConnect: Can't connect: errno = 61
+[thierry data]$ uname -r
+2.2.10
+[thierry data]$ rpm -qf `which gprof`
+binutils-2.9.1.0.23-1
+[thierry data]$ gprof ../li.p ./gmon.out 
+Bus error
+[thierry data]$ gdb gprof
+GNU gdb 4.17.0.11 with Linux support
+Copyright 1998 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certain conditions.
+Type "show copying" to see the conditions.
+There is absolutely no warranty for GDB.  Type "show warranty" for details.
+This GDB was configured as "sparc-redhat-linux"...
+(no debugging symbols found)...
+(gdb) r ../li.p ./gmon.out
+Starting program: /usr/bin/gprof ../li.p ./gmon.out
 
-waiting for X server to begin accepting connections .(using VT number 7)
+Program received signal SIGBUS, Bus error.
+0x12954 in _init ()
+(gdb) bt
+#0  0x12954 in _init ()
+#1  0x1359c in _init ()
+#2  0x18b0c in _init ()
+#3  0x700b78d0 in __libc_start_main () at ../sysdeps/generic/libc-start.c:78
+(gdb) 
+
+I've recompiled the binutils, but the new gprof does not work
+either:
+
+[thierry data]$ ~/binutils-2.9.1/gprof/gprof ../li.p 
+Segmentation fault
+[thierry data]$ gdb ~/binutils-2.9.1/gprof/gprof         
+GNU gdb 4.17.0.11 with Linux support
+Copyright 1998 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certain conditions.
+Type "show copying" to see the conditions.
+There is absolutely no warranty for GDB.  Type "show warranty" for details.
+This GDB was configured as "sparc-redhat-linux"...
+(gdb) r ../li.p     
+Starting program: /usr/local/home/thierry/binutils-2.9.1/gprof/gprof ../li.p
+
+Program received signal SIGSEGV, Segmentation fault.
+0x70081c98 in chunk_free (ar_ptr=0x701233ac, p=0x2a7a8) at malloc.c:3006
+malloc.c:3006: No such file or directory.
+(gdb) bt
+#0  0x70081c98 in chunk_free (ar_ptr=0x701233ac, p=0x2a7a8) at malloc.c:3006
+#1  0x70081960 in chunk_alloc (ar_ptr=0x701233ac, nb2) at malloc.c:2515
+#2  0x70081050 in __malloc () at malloc.c:2107
+#3  0x70078e3c in _IO_new_fopen (filename=0x51fd0 "gmon.out", mode=0x51c88 "r")
+    at iofopen.c:42
+#4  0x16ea0 in gmon_out_read (filename=0x51fd0 "gmon.out") at gmon_io.c:78
+#5  0x18294 in main (argc=2, argv=0xeffff9f4) at gprof.c:544
+#6  0x700478d0 in __libc_start_main () at ../sysdeps/generic/libc-start.c:78
+(gdb) 
+
+It's quite strange since it works on another workstation running
+Ultrapenguin-1.1.9 and kernel 2.2.10.
+
+Any idea ?
 
 
-DEF /usr/share/enlightenment/themes/CleanBig
-Xlib:  extension "XFree86-Misc" missing on display ":0.0".
-Xlib:  extension "XFree86-Misc" missing on display ":0.0".
-Gdk-Message: Got event for unknown window: 0
-
-xscreensaver-command: no screensaver is running on display :0.0
-xscreensaver disabling server builtin screensaver.
-xscreensaver: you can re-enable it with "xset s on".
-subshell.c: couldn't get terminal settings: Inappropriate ioctl for device
-xinit:  unexpected signal 1
- for gnome, and
-(using VT number 7)
-
-for fwm
-
-
-
-This is a desparate cry for help. Do I really have to reinstall solaris?
-
-
-Yves Geunes
-Vrije Universiteit Brussel
-yves@ultr.vub.ac.be
+Thierry Lafage.
