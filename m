@@ -1,7 +1,7 @@
-From: "David S. Miller" <davem@redhat.com>
-Date: Tue, 08 Feb 2000 23:34:26 +0000
+From: John Simpson <jms1@depeche.mode.net>
+Date: Tue, 08 Feb 2000 23:41:39 +0000
 Subject: Re: Adobe Acrobat (acroread) ?
-Message-Id: <marc-linux-ultrasparc-95005892323955@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-95006263626050@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-95005104717748@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-95005104717748@msgid-missing>
@@ -10,14 +10,23 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date:   Tue, 08 Feb 2000 16:24:12 -0500
-   From: Brent Jay Thorpe <brent.thorpe@sun.com>
+On Tue, 8 Feb 2000, Brent Jay Thorpe wrote:
 
-   Anyone know where or if there is a port of acrobat (or any pdf
-   reader) for Linux on sparc?
+> Anyone know where or if there is a port of acrobat (or any pdf reader)
+> for Linux on sparc?
 
-Try ghostview (ie "gv").
+redhat 6.1 (running on my ultra-1) came with a program called "xpdf" that
+seems to work just fine... the man page gives the following address for
+more info:
 
-Later,
-David S. Miller
-davem@redhat.com
+http://www.foolabs.com/xpdf/
+
+take care.
+
+----------------------------------------------------------------
+|  John Simpson         |  http://www.depeche.mode.net/~jms1/  |
+|  Programmer At Large  |  <jms1@depeche.mode.net>             |
+----------------------------------------------------------------
+|  It all seems so stupid, it makes me want to give up.        |
+|  But why should I give up when it all seems so stupid?       |
+----------------------------------------------------------------
