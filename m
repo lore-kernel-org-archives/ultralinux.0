@@ -1,27 +1,40 @@
-From: guido sintoni <gsintoni@libero.it>
-Date: Mon, 26 Nov 2001 11:10:06 +0000
-Subject: hi folks!
-Message-Id: <marc-linux-ultrasparc-100677300618301@msgid-missing>
+From: Andreas Schwab <schwab@suse.de>
+Date: Mon, 31 Dec 2001 13:11:31 +0000
+Subject: Re: [Linux-ia64] [PATCH][RFC][CFT] remove global errno from the kernel, make _syscallX kernel-only
+Message-Id: <marc-linux-ultrasparc-100980457911320@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 To: ultralinux@vger.kernel.org
 
-hi to everyone!
-i'm a newbie to the list. i'm 27yo, i come from italy and i work in a dot.com 
-developing open source financial software with linux os.
-i'm about buying an old sparcstation 20 with two sm61-2 cpus (60mhz, 2mb 
-cache), 128 (or 256) mb ram, 2x 2gb hard disk.
-currently, i'm told the machine runs solaris 8... obviously, i'd like it to 
-be tux-powered.
-it's the first sun i'm dealing with, and my current background is only the 
-linux-sparc howto... so, take pity on me plz!
-i'd like to have some good advises about the distribution to use (i know it's 
-a very personal opinion... i thought of rh 6.2-sparc), but - mostly - i would 
-like to know if the smp on the machine is supported (the guy who is about 
-selling me the machine says it does, but i read somewhere - i think on a smp 
-howto - that smp doesn't work on sun4m machines).
-thank you in advance,
-ciao
-guido sintoni
+Lennert Buytenhek <buytenh@gnu.org> writes:
+
+|> What I would like to know from each architecture team:
+|> - What is your arch's policy on userspace usage of asm/unistd.h, and
+|>   consequently, what is your opinion on the goal these patches
+|>   aim for?
+
+I very much appreciate the removal of the _syscallX macros.  FWIW, the
+ia64 version of these macros never worked in userspace anyway.
+
+|> - Are the changes I made in [1] and [2] for your $arch technically
+|>   correct?
+
+The m68k changes look ok.
+
+|> Please CC me on replies as I'm not on any of the lists posted to.
+|>=20
+|> My intention is to push these to Linus for 2.5 if everyone agrees.
+|> They're probably too intrusive for 2.4 (although I'd love people
+|> to convince me otherwise).
+
+I wouldn't mind putting it into 2.4.
+
+Andreas.
+
+--=20
+Andreas Schwab                                  "And now for something
+Andreas.Schwab@suse.de				completely different."
+SuSE Labs, SuSE GmbH, Schanz=E4ckerstr. 10, D-90443 N=FCrnberg
+Key fingerprint =3D 58CA 54C7 6D53 942B 1756  01D3 44D5 214B 8276 4ED5
