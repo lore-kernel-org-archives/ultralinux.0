@@ -1,29 +1,47 @@
-From: Kapil Chowksey <kchowksey@hss.hns.com>
-Date: Sat, 11 Jul 1998 14:29:14 +0000
-Subject: another openboot question
-Message-Id: <marc-linux-ultrasparc-90222358531011@msgid-missing>
+From: Stephan van Hienen <ddx@cable.a2000.nl>
+Date: Mon, 20 Jul 1998 08:38:42 +0000
+Subject: quota not working? (it just hangs the whole computer)
+Message-Id: <marc-linux-ultrasparc-90222358531063@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-hi all,
+i was wondering, if quota is not working ok
+i tried it yesterday (kernel 2.1.106)
 
-I was able to set breakpoints in the ultralinux kernel after it
-relocates itself. I just `map-page'd the location KERNBASE into paddr
-0. But I still cannot examine memory using the dump command. eg.
 
-If I do 
+done thi :
 
-ok 0x404300 dump 
-<displays data at vaddr 0xfffe0000>
 
-All this is with OpenBoot rev 3.0.
+touch /quota.user
+reboot
+quota -v gives nothing
+so i have done manual quotacheck
 
-I will be grateful if someone can give me the magic incantation to
-enable the PROM to dump memory correctly from the relocated address.
+waiting few minutes
+then back shell
 
--- 
-Kapil Chowksey                         Viva GNU !
-kchowksey@hss.hns.com
+
+quota -v
+and  machine hangs
+response on nothing
+
+
+
+quota -V
+quota 1.60, with RPC and EXT2_DIRECT options
+
+
+
+and i wonder about this :
+
+rpm -qf /usr/bin/quota
+quota-1.66-1
+
+
+while in redhat 5.1 on my intel i have quota-1.55-9.i386.rpm
+
+P.s also when i do quota -v as a user it just hangs
+so i think its a kernel problem (i have compiled quota into the kernel)
