@@ -1,7 +1,7 @@
 From: "David S. Miller" <davem@redhat.com>
-Date: Sat, 04 Sep 1999 17:39:12 +0000
+Date: Sat, 04 Sep 1999 17:43:03 +0000
 Subject: Re: SUN StorEdge D1000
-Message-Id: <marc-linux-ultrasparc-93646637800674@msgid-missing>
+Message-Id: <marc-linux-ultrasparc-93646697401225@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 References: <marc-linux-ultrasparc-93642093308384@msgid-missing>
 In-Reply-To: <marc-linux-ultrasparc-93642093308384@msgid-missing>
@@ -10,17 +10,14 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-   Date: Sat, 4 Sep 1999 10:33:46 -0700 (PDT)
-   From: Matthew Jacob <mjacob@feral.com>
+   Date: Sat, 04 Sep 1999 13:38:40 -0400
+   From: "David A. Cooley" <n5xmt@bellsouth.net>
 
-   > Which will just make the driver not try to scsi probe the
-   > internal controller of these disk arrays.
+   If you need any beta testing, since I have the hardware, let me
+   know!  It's just a file server for my wife and I internal to the
+   house.
 
-   The GEM chip has problems when you try and go to other luns. I believe
-   that 7.55 F/W corrected this problem.
-
-It doesn't, that is the firmware I load onto non-PTI boards, it still
-is croaking.
+Gee, I wish I had a D1000 array at home :-)
 
 Later,
 David S. Miller
