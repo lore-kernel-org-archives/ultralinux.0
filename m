@@ -1,53 +1,60 @@
-From: Lennert Buytenhek <buytenh@gnu.org>
-Date: Mon, 31 Dec 2001 03:05:00 +0000
-Subject: [PATCH][RFC][CFT] remove global errno from the kernel, make _syscallX kernel-only
-Message-Id: <marc-linux-ultrasparc-100976861802143@msgid-missing>
+From: Eric <ebrower@usa.net>
+Date: Sat, 01 Dec 2001 09:32:30 +0000
+Subject: Re: [Ultra1 monitor]
+Message-Id: <marc-linux-ultrasparc-100722784927078@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-(Apologies for the massive cross-post, but this is a matter that concerns
-all architectures.  For archs that don't have a maintainer listed in
-MAINTAINERS I grabbed a random email address from arch/$arch/kernel/*.
-If you're not the person to answer this for your $arch, please forward
-to an appropriate person/list.)
+Hi Ralphe,
 
+This all depends upon what framebuffer you have
+installed in the Ultra1 boxes-- I'll punt and give
+you the following advice:
 
-Hi,
+  Check the excellent Sun Framebuffer FAQ available
+  at www.sunhelp.org.  Find your framebuffer and check
+  the supported resolutions.  You can then check them
+  against what the monitor will support.  Be sure to
+  double check the OBP settings for the framebuffer
+  (as described within the FAQ) to be sure they don't
+  default to something wierd.
 
-As I mentioned in my email to l-k with subject '[PATCH][RFC] global
-errno considered harmful' earlier today, having a global errno in the
-kernel doesn't really make sense.
+E
 
-Referenced patch [1] deletes all mention of a global errno from the
-kernel, fixes up a very small number of callers that were depending on
-it, and fixes up the syscall helpers in include/asm-$arch/unistd.h not
-to write an error code to errno in case of error anymore.
+Ralphe Neill <ran@oberon.sub.net.au> wrote:
+> Hi all,
+> 
+> I'm probably taking a bit of a liberty again by asking what is
+> essentially a hardware question but I never seem to get much response
+> from comp.sys.sun.hardware and I figure there's got to be a great deal
+> of UltraSPARC expertise on this mailing list.
+> 
+> Now, I've got to admit that I've always had some reservations about
+> Linux but I guess that I'm a new convert from SunOS after acquiring two
+> Ultra1 boxes running UltraLinux. At the moment the systems are networked
+> to an old (is there any other kind) Sun 386i and using it as an
+> X-terminal. It is, of course, far from ideal and, because the systems
+> came without a monitor, I'm looking at getting one.
+> 
+> The monitor that used to be with one of the boxes was a Sun-badged
+> GDM-17E20 (17"). Sony cannot tell me if they have an exact equivalent
+> but I'm looking at a 19" CPDG420 (which, I gather, replaced the earlier
+> C
 
-This subtly breaks userspace code that uses these helpers, but the general
-consensus seems to be that userspace code shouldn't be touching these in
-the first place.  Patch [2] fixes up asm-$arch/unistd.h to only define
-_syscallX in case __KERNEL_SYSCALLS__ is defined, to try and actively
-break userspace (ab)users of this code (thanks to Ralf Baechle for
-suggesting I should do something along these lines).
+PDE420). Sony's consultant assures me that it will work (it has the
+> usual multisync/resolution ranges).
+> 
+> Does anybody have any experience with this monitor or can offer me some
+> advice?
+> 
+> Thanks,
+> 
+> Ralphe Neill
+> -
+> To unsubscribe from this list: send the line "unsubscribe ultralinux" in
+> the body of a message to majordomo@vger.kernel.org
+> More majordomo info at  http://vger.kernel.org/majordomo-info.html
 
-What I would like to know from each architecture team:
-- What is your arch's policy on userspace usage of asm/unistd.h, and
-  consequently, what is your opinion on the goal these patches
-  aim for?
-- Are the changes I made in [1] and [2] for your $arch technically
-  correct?
-Please CC me on replies as I'm not on any of the lists posted to.
-
-My intention is to push these to Linus for 2.5 if everyone agrees.
-They're probably too intrusive for 2.4 (although I'd love people
-to convince me otherwise).
-
-
-cheers,
-Lennert
-
-[1] http://www.math.leidenuniv.nl/~buytenh/errno_ectomy-1.diff
-[2] http://www.math.leidenuniv.nl/~buytenh/errno_ectomy-1-to-2.diff
