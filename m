@@ -1,30 +1,28 @@
 From: charlie N <neuromancernt@yahoo.com>
-Date: Wed, 16 Dec 1998 17:25:05 +0000
-Subject: Sun Ultra 5 mouse not working ??
-Message-Id: <marc-linux-ultrasparc-91383794519325@msgid-missing>
+Date: Wed, 09 Dec 1998 22:06:17 +0000
+Subject: booting and installing using tfp and rarp
+Message-Id: <marc-linux-ultrasparc-91333880005151@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-I finally successfully installed UltraLinux on my Sparc Ultra 5
-machine after a few bizzarre things, such as the install program not
-finding a file that was visible. But anyways, X windows starts fine
-with the Ati 3drage II + DVD 2mg Sdram, however the mouse does not
-seem to work. I can't even move it, and I have tried numerous things :
-Xconfigurator, XF86Config, editing the XF86config and manually
-changing the protocol of the mouse to "sunmouse" "Auto" and a bunch of
-other things, but when I use "sun" X actually starts but there is not
-mouse movement, only a cursor. I also tried changing the device to
-"mouse" b/c i ran mouseconfig and it found the Sun mouse and linked it
-to /dev/mouse, so it is not the physical mouse that is the problem at
-least. 
-What protocal or device do i use to get it working?.. I am running
-Ultralinux 1.1, Xfree86 3.2.2 and the accelerated server XFMach64.
-thx
-Charlie Ombres
+I wrote a message to this mailing list a few weeks ago asking for more
+clarity on installing ultralinux on a Sparc ultra 5, and today I
+acutally had time to play with it. I got rarp working on my other
+solaris based ultra 5 machine and did the hosts and ethers stuff to
+assign the ip address, however, I do not have enough space to work
+with on my solaris box to copy the whole ultralinux image, but I have
+a tftp server running on the network, but it is Macintosh based. My
+question is: Can I give the soon-to-be ultra linux box a boot command
+to get a rarp/arp packet from the solaris machine, but look at the
+Macintosh to get the tftpboot.img and the rest of the ultra linux files?
+What would the syntax be in order for me to specify the macintosh tftp
+server, but receive a rarp ip using the solaris machine?
 
+Thx
+Charlie Ombres
 
 
 
