@@ -1,33 +1,43 @@
-From: Keith Owens <kaos@ocs.com.au>
-Date: Sat, 02 Sep 2000 01:40:30 +0000
-Subject: Re: 2.4.0 do_fork() change, all architectures
-Message-Id: <marc-linux-ultrasparc-96785875031662@msgid-missing>
+From: YAMAMOTO Taku <yamataku@layer-seven.com>
+Date: Tue, 26 Sep 2000 06:59:18 +0000
+Subject: Couldn't find sparc64-linux-gcc
+Message-Id: <marc-linux-ultrasparc-96995143407396@msgid-missing>
 List-Id: <ultralinux.vger.kernel.org>
-References: <marc-linux-ultrasparc-96785844931380@msgid-missing>
-In-Reply-To: <marc-linux-ultrasparc-96785844931380@msgid-missing>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Fri, 1 Sep 2000 18:23:13 -0700, 
-"David S. Miller" <davem@redhat.com> wrote:
->UGH, I thought you said you just added the new argument at the end of
->do_fork's argument list?  That way makes the assembler come out the
->easiest (ie. the one line changes I sent you) on Sparc and on other
->architectures as well.
->
->Any chance to change this so that the stack_top thing is added
->as the last arg to do_fork?
->
->Thus, currently, the asm I sent you doesn't work.  I would not have
->made this mistake if you had sent me the patch and not just an english
->explanation of the change :-(
+Hello,
 
-Will do.  The IA64 patch on kernel.org already has the extra parameter
-inserted just for IA64 and I based my patch on their change.  No big
-deal, I can change IA64 to put the do_fork parameter at the end, it
-just means changing ia64 entry.S as well.
+I'm experiencing difficulties that can't compile
+using kernel-source-2.2.16-3.sparc.rpm on RH6.2sparc.
+
+I have done following procedure.
+
+# rpm -ivh kernel-headers-2.2.16-3.sparc.rpm
+# rpm -ivh kernel-source-2.2.16-3.sparc.rpm
+# cd /usr/src/linux
+# ln -s /usr/src/linux/include/asm-sparc64 /usr/include/asm/asm-sparc64
+# make mrproper
+# make menuconfig
+# make vmlinux
+sparc64-linux-gcc -D__KERNEL__ -I/usr/src/linux-2.2.16/include -Wall -Wstrict-prototypes -O2 -fomit-frame-point
+er  -D__SMP__ -pipe -mno-fpu -mtune=ultrasparc -mmedlow -ffixed-g4 -fcall-used-g5 -fcall-used-g7 -Wno-sign-comp
+are  -c -o init/main.o init/main.c
+/bin/bash: sparc64-linux-gcc: command not found
+make: *** [init/main.o] Error 127
+
+According to mailinglist,sparc64-linux-gcc exist in /usr/local/bin, but
+not found.
+
+Does anyone know complete way to compile linux-kernel with
+kernel-sources rpm ?
+
+
+___________________________________________________________________
+Taku Yamamoto
+MailTo: yamamoto@layer-seven.com
 
 -
 To unsubscribe from this list: send the line "unsubscribe ultralinux" in
