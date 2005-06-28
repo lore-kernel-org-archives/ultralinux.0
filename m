@@ -1,20 +1,26 @@
-From: "David S. Miller" <davem@davemloft.net>
-Date: Mon, 04 Apr 2005 21:25:23 +0000
-Subject: Re: Weird Mouse Behaviour with 2.6
-Message-Id: <20050404142523.5da9d087.davem@davemloft.net>
+From: Juan Gamboa <Juan.Gamboa@Sun.COM>
+Date: Tue, 28 Jun 2005 22:33:36 +0000
+Subject: Looking Linux for Sun Enterprise 6900 (UltraSPARC-IV)
+Message-Id: <42C1D040.4030608@Sun.COM>
 List-Id: <ultralinux.vger.kernel.org>
-References: <ec7cefb050404111120b5c75@mail.gmail.com>
-In-Reply-To: <ec7cefb050404111120b5c75@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Mon, 4 Apr 2005 13:22:37 -0700
-Eric Brower <ebrower@gmail.com> wrote:
+Hi:
 
-> It seems to me that serial_core.c::uart_wait_until_sent() should
-> assert if port->timeout is 0
+I need to know if your Linux Distribution supports E6900 with
+UltraSPARC-IV cpu.
 
-I definitely agree it should BUG() on this.  We would have
-caught this problem a long time ago if it did.
+If you have an affirmative answer please send me information ASAP.
+
+
+Thanks, in advance
+______________________________________________
+Juan Antonio Gamboa R.
+Sun Microsystems Chile
+Fono: 372-8705
+Fax: 372-4501
+
+
