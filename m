@@ -1,63 +1,55 @@
-From: Kumar Gala <galak@freescale.com>
-Date: Wed, 24 Aug 2005 17:00:59 +0000
-Subject: [PATCH 13/15] sparc64: remove use of asm/segment.h
-Message-Id: <Pine.LNX.4.61.0508241159570.23956@nylon.am.freescale.net>
+From: Jiri Slaby <jirislaby@gmail.com>
+Date: Mon, 29 Aug 2005 22:27:42 +0000
+Subject: [PATCH 7/7] arch: pci_find_device remove (sparc64/kernel/ebus.c)
+Message-Id: <200508292227.j7TMRgNY020033@wscnet.wsc.cz>
 List-Id: <ultralinux.vger.kernel.org>
-References: <Pine.LNX.4.61.0508241139100.23956@nylon.am.freescale.net>
-In-Reply-To: <Pine.LNX.4.61.0508241139100.23956@nylon.am.freescale.net>
+In-Reply-To: <200508292220.j7TMKbNC019793@wscnet.wsc.cz>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: linux-kernel@vger.kernel.org
-Cc: Andrew Morton <akpm@osdl.org>, davem@davemloft.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org
+To: Greg KH <gregkh@suse.de>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, linux-pci@atrey.karlin.mff.cuni.cz, davem@davemloft.net, ecd@brainaid.de, jj@sunsite.ms.mff.cuni.cz, anton@samba.org, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org
 
-Removed sparc64 architecture specific users of asm/segment.h and
-asm-sparc64/segment.h itself
+Generated in 2.6.13-rc6-mm2 kernel version.
 
-Signed-off-by: Kumar Gala <kumar.gala@freescale.com>
+Signed-off-by: Jiri Slaby <xslaby@fi.muni.cz>
 
----
-commit 4c42a86cb24cd46d20ccb883b196e29bef6df18f
-tree 83888c48157ecf0783f19cd73634d6446ac29482
-parent 6ee9ded730a875d63e42add1c3094eca7d5a6cdf
-author Kumar K. Gala <kumar.gala@freescale.com> Wed, 24 Aug 2005 11:04:10 -0500
-committer Kumar K. Gala <kumar.gala@freescale.com> Wed, 24 Aug 2005 11:04:10 -0500
+ ebus.c |   17 ++++++-----------
+ 1 files changed, 6 insertions(+), 11 deletions(-)
 
- b/arch/sparc64/kernel/setup.c     |    1 -
- b/include/asm-sparc64/processor.h |    1 -
- include/asm-sparc64/segment.h     |    6 ------
- 3 files changed, 8 deletions(-)
-
-diff --git a/arch/sparc64/kernel/setup.c b/arch/sparc64/kernel/setup.c
---- a/arch/sparc64/kernel/setup.c
-+++ b/arch/sparc64/kernel/setup.c
-@@ -33,7 +33,6 @@
- #include <linux/cpu.h>
- #include <linux/initrd.h>
+diff --git a/arch/sparc64/kernel/ebus.c b/arch/sparc64/kernel/ebus.c
+--- a/arch/sparc64/kernel/ebus.c
++++ b/arch/sparc64/kernel/ebus.c
+@@ -527,19 +527,13 @@ static struct pci_dev *find_next_ebus(st
+ {
+ 	struct pci_dev *pdev = start;
  
--#include <asm/segment.h>
- #include <asm/system.h>
- #include <asm/io.h>
- #include <asm/processor.h>
-diff --git a/include/asm-sparc64/processor.h b/include/asm-sparc64/processor.h
---- a/include/asm-sparc64/processor.h
-+++ b/include/asm-sparc64/processor.h
-@@ -18,7 +18,6 @@
- #include <asm/a.out.h>
- #include <asm/pstate.h>
- #include <asm/ptrace.h>
--#include <asm/segment.h>
- #include <asm/page.h>
+-	do {
+-		pdev = pci_find_device(PCI_VENDOR_ID_SUN, PCI_ANY_ID, pdev);
+-		if (pdev &&
+-		    (pdev->device = PCI_DEVICE_ID_SUN_EBUS ||
+-		     pdev->device = PCI_DEVICE_ID_SUN_RIO_EBUS))
++	while (pdev = pci_get_device(PCI_VENDOR_ID_SUN, PCI_ANY_ID, pdev))
++		if (pdev->device = PCI_DEVICE_ID_SUN_EBUS ||
++			pdev->device = PCI_DEVICE_ID_SUN_RIO_EBUS)
+ 			break;
+-	} while (pdev != NULL);
+-
+-	if (pdev && (pdev->device = PCI_DEVICE_ID_SUN_RIO_EBUS))
+-		*is_rio_p = 1;
+-	else
+-		*is_rio_p = 0;
  
- /* The sparc has no problems with write protection */
-diff --git a/include/asm-sparc64/segment.h b/include/asm-sparc64/segment.h
-deleted file mode 100644
---- a/include/asm-sparc64/segment.h
-+++ /dev/null
-@@ -1,6 +0,0 @@
--#ifndef __SPARC64_SEGMENT_H
--#define __SPARC64_SEGMENT_H
--
--/* Only here because we have some old header files that expect it.. */
--
--#endif
++	*is_rio_p = !!(pdev && (pdev->device = PCI_DEVICE_ID_SUN_RIO_EBUS));
++	
+ 	return pdev;
+ }
+ 
+@@ -637,6 +631,7 @@ void __init ebus_init(void)
+ 		ebus->is_rio = is_rio;
+ 		++num_ebus;
+ 	}
++	pci_dev_put(pdev); /* XXX for the case, when ebusnd is 0, is it OK? */
+ 
+ #ifdef CONFIG_SUN_AUXIO
+ 	auxio_probe();
