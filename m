@@ -1,7 +1,7 @@
-From: Adrian Bunk <bunk@stusta.de>
-Date: Thu, 01 Sep 2005 23:34:01 +0000
+From: "David S. Miller" <davem@davemloft.net>
+Date: Thu, 01 Sep 2005 23:48:31 +0000
 Subject: Re: Please review the sparc64 bugs in the kernel Bugzilla
-Message-Id: <20050901233401.GG3657@stusta.de>
+Message-Id: <20050901.164831.129514045.davem@davemloft.net>
 List-Id: <ultralinux.vger.kernel.org>
 References: <20050901002932.GB3766@stusta.de>
 In-Reply-To: <20050901002932.GB3766@stusta.de>
@@ -10,33 +10,31 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-On Wed, Aug 31, 2005 at 06:40:09PM -0700, David S. Miller wrote:
-> From: Adrian Bunk <bunk@stusta.de>
-> Date: Thu, 1 Sep 2005 02:29:33 +0200
-> 
-> > the kernel Bugzilla [1] currently contains 8 open [2] sparc64 bugs.
-> 
-> I've stated repeatedly in the past that	I choose not to
-> use the kernel bugzilla facility.  I process all networking
-> and sparc64 bugs via the appropriate mailing lists.
+From: Adrian Bunk <bunk@stusta.de>
+Date: Fri, 2 Sep 2005 01:34:01 +0200
 
-Sorry, I didn't know about this.
+> May I ask why?
 
-May I ask why?
+Because I shouldn't have to spend time on some bugzilla web site just
+to work on some bug.  The bugs should come to me, by being reported to
+the appropriate mailing list, I shouldn't have to seek them.
 
-> If you wish to forward bug reports to the appropriate mailing list so
-> that they get worked on, that's great.
+The kernel bugzilla exists only to make some bean counters at some
+corporations happy that there is some place to track kernel bugs.  But
+this is wholly incompatible with how upstream kernel development
+works.  The kernel bugzilla database would never have been created
+with the sole impetus of the core kernel folks, that's simply not how
+we work.
 
-What about doing this automatically by setting a mailing list as owner 
-of the sparc64 bug component?
+That is why.
 
-cu
-Adrian
+Sending bugzilla reports directly to the list is not the answer.
+That means a lot of garbage ends up on the list, so if anything
+it should either:
 
--- 
+1) get forwarded by hand by someone willing to volunteer to
+   filter out the crap
+2) get sent directly to the right mailing list in the first
+   place, bypassing the kernel bugzilla altogether
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+The latter is what happens in practice for sparc stuff.
