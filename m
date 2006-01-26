@@ -1,30 +1,40 @@
-From: mita@miraclelinux.com (Akinobu Mita)
-Date: Mon, 30 Jan 2006 03:15:22 +0000
-Subject: Re: [PATCH 4/6] use include/asm-generic/bitops for each architecture
-Message-Id: <20060130031522.GA6897@miraclelinux.com>
+From: Nicolas Pitre <nico@cam.org>
+Date: Thu, 26 Jan 2006 16:30:43 +0000
+Subject: Re: [parisc-linux] Re: [PATCH 3/6] C-language equivalents of
+Message-Id: <Pine.LNX.4.64.0601261128280.16649@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060125112625.GA18584@miraclelinux.com> <20060125113336.GE18584@miraclelinux.com> <20060126014934.GA6648@miraclelinux.com> <20060127.220401.356433243.takata.hirokazu@renesas.com>
-In-Reply-To: <20060127.220401.356433243.takata.hirokazu@renesas.com>
+References: <20060125112625.GA18584@miraclelinux.com>
+ <20060125113206.GD18584@miraclelinux.com>
+ <20060125200250.GA26443@flint.arm.linux.org.uk>
+ <20060126000618.GA5592@twiddle.net>
+ <20060126085540.GA15377@flint.arm.linux.org.uk>
+ <20060126161849.GA13632@colo.lackof.org>
+In-Reply-To: <20060126161849.GA13632@colo.lackof.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Hirokazu Takata <takata@linux-m32r.org>
-Cc: linux-kernel@vger.kernel.org, rth@twiddle.net, ink@jurassic.park.msu.ru, rmk@arm.linux.org.uk, spyro@f2s.com, dev-etrax@axis.com, dhowells@redhat.com, ysato@users.sourceforge.jp, torvalds@osdl.org, linux-ia64@vger.kernel.org, linux-m68k@vger.kernel.org, gerg@uclinux.org, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxppc-dev@ozlabs.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, uclinux-v850@lsi.nec.co.jp, ak@suse.de, chris@zankel.net, akpm@osdl.org
+To: Grant Grundler <grundler@parisc-linux.org>
+Cc: Akinobu Mita <mita@miraclelinux.com>, lkml <linux-kernel@vger.kernel.org>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Ian Molton <spyro@f2s.com>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-m68k@vger.kernel.org, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxppc-dev@ozlabs.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>
 
-On Fri, Jan 27, 2006 at 10:04:01PM +0900, Hirokazu Takata wrote:
+On Thu, 26 Jan 2006, Grant Grundler wrote:
 
-> compile and boot test on m32r: OK
-
-Thanks.
-
-> Code size became a little bigger...  ;-)
+> On Thu, Jan 26, 2006 at 08:55:41AM +0000, Russell King wrote:
+> > Unfortunately that's not correct.  You do not appear to have checked
+> > the compiler output like I did - this code does _not_ generate
+> > constant shifts.
 > 
-> $ size linux-2.6.16-rc1*/vmlinux
->    text    data     bss     dec     hex filename
-> 1768030  124412  721632 2614074  27e33a linux-2.6.16-rc1.bitops/vmlinux
-> 1755010  124412  721632 2601054  27b05e linux-2.6.16-rc1.org/vmlinux
+> Russell,
+> By "written stupidly", I thought Richard meant they could have
+> used constants instead of "s".  e.g.:
+> 	if (word << 16 = 0) { b += 16; word >>= 16); }
+> 	if (word << 24 = 0) { b +=  8; word >>=  8); }
+> 	if (word << 28 = 0) { b +=  4; word >>=  4); }
+> 
+> But I prefer what Edgar Toernig suggested.
 
-The only difference I can find is __ffs()/ffz().
-As Russel King clealy pointed out, it will generate larger code
-than before.
+It is just as bad on ARM since it requires large constants that cannot 
+be expressed with immediate litteral values.  The constant shift 
+approach is really the best on ARM.
 
+
+Nicolas
