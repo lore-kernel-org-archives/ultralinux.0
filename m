@@ -1,75 +1,148 @@
 From: Akinobu Mita <mita@miraclelinux.com>
-Date: Wed, 01 Feb 2006 09:02:41 +0000
-Subject: [patch 17/44] generic minix_{test,set,test_and_clear,test,find_first_zero}_bit()
-Message-Id: <20060201090326.484695000@localhost.localdomain>
+Date: Wed, 01 Feb 2006 09:02:30 +0000
+Subject: [patch 06/44] generic __{,test_and_}{set,clear,change}_bit() and test_bit()
+Message-Id: <20060201090322.422243000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
 References: <20060201090224.536581000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: linux-kernel@vger.kernel.org
-Cc: Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
+Cc: Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, dev-etrax@axis.com, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxppc-dev@ozlabs.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
 
 This patch introduces the C-language equivalents of the functions below:
 
-int minix_test_and_set_bit(int nr, volatile unsigned long *addr);
-int minix_set_bit(int nr, volatile unsigned long *addr);
-int minix_test_and_clear_bit(int nr, volatile unsigned long *addr);
-int minix_test_bit(int nr, const volatile unsigned long *addr);
-unsigned long minix_find_first_zero_bit(const unsigned long *addr,
-                                        unsigned long size);
+void __set_bit(int nr, volatile unsigned long *addr);
+void __clear_bit(int nr, volatile unsigned long *addr);
+void __change_bit(int nr, volatile unsigned long *addr);
+int __test_and_set_bit(int nr, volatile unsigned long *addr);
+int __test_and_clear_bit(int nr, volatile unsigned long *addr);
+int __test_and_change_bit(int nr, volatile unsigned long *addr);
+int test_bit(int nr, const volatile unsigned long *addr);
 
-In include/asm-generic/bitops/minix.h
-   and include/asm-generic/bitops/minix-le.h
+In include/asm-generic/bitops/non-atomic.h
 
 This code largely copied from:
-include/asm-sparc/bitops.h
+asm-powerpc/bitops.h
 
 Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
+ include/asm-generic/bitops/non-atomic.h |  111 ++++++++++++++++++++++++++++++++
+ 1 files changed, 111 insertions(+)
 
- include/asm-generic/bitops/minix-le.h |   17 +++++++++++++++++
- include/asm-generic/bitops/minix.h    |   15 +++++++++++++++
- 2 files changed, 32 insertions(+)
-
-Index: 2.6-git/include/asm-generic/bitops/minix.h
+Index: 2.6-git/include/asm-generic/bitops/non-atomic.h
 =================================--- /dev/null
-+++ 2.6-git/include/asm-generic/bitops/minix.h
-@@ -0,0 +1,15 @@
-+#ifndef _ASM_GENERIC_BITOPS_MINIX_H_
-+#define _ASM_GENERIC_BITOPS_MINIX_H_
++++ 2.6-git/include/asm-generic/bitops/non-atomic.h
+@@ -0,0 +1,111 @@
++#ifndef _ASM_GENERIC_BITOPS_NON_ATOMIC_H_
++#define _ASM_GENERIC_BITOPS_NON_ATOMIC_H_
 +
-+#define minix_test_and_set_bit(nr,addr)	\
-+	__test_and_set_bit((nr),(unsigned long *)(addr))
-+#define minix_set_bit(nr,addr)		\
-+	__set_bit((nr),(unsigned long *)(addr))
-+#define minix_test_and_clear_bit(nr,addr) \
-+	__test_and_clear_bit((nr),(unsigned long *)(addr))
-+#define minix_test_bit(nr,addr)		\
-+	test_bit((nr),(unsigned long *)(addr))
-+#define minix_find_first_zero_bit(addr,size) \
-+	find_first_zero_bit((unsigned long *)(addr),(size))
++#include <asm/types.h>
 +
-+#endif /* _ASM_GENERIC_BITOPS_MINIX_H_ */
-Index: 2.6-git/include/asm-generic/bitops/minix-le.h
-=================================--- /dev/null
-+++ 2.6-git/include/asm-generic/bitops/minix-le.h
-@@ -0,0 +1,17 @@
-+#ifndef _ASM_GENERIC_BITOPS_MINIX_LE_H_
-+#define _ASM_GENERIC_BITOPS_MINIX_LE_H_
++#define BITOP_MASK(nr)		(1UL << ((nr) % BITS_PER_LONG))
++#define BITOP_WORD(nr)		((nr) / BITS_PER_LONG)
 +
-+#include <asm-generic/bitops/le.h>
++/**
++ * __set_bit - Set a bit in memory
++ * @nr: the bit to set
++ * @addr: the address to start counting from
++ *
++ * Unlike set_bit(), this function is non-atomic and may be reordered.
++ * If it's called on the same region of memory simultaneously, the effect
++ * may be that only one operation succeeds.
++ */
++static __inline__ void __set_bit(int nr, volatile unsigned long *addr)
++{
++	unsigned long mask = BITOP_MASK(nr);
++	unsigned long *p = ((unsigned long *)addr) + BITOP_WORD(nr);
 +
-+#define minix_test_and_set_bit(nr,addr)	\
-+	generic___test_and_set_le_bit((nr),(unsigned long *)(addr))
-+#define minix_set_bit(nr,addr)		\
-+	generic___set_le_bit((nr),(unsigned long *)(addr))
-+#define minix_test_and_clear_bit(nr,addr) \
-+	generic___test_and_clear_le_bit((nr),(unsigned long *)(addr))
-+#define minix_test_bit(nr,addr)		\
-+	generic_test_le_bit((nr),(unsigned long *)(addr))
-+#define minix_find_first_zero_bit(addr,size) \
-+	generic_find_first_zero_le_bit((unsigned long *)(addr),(size))
++	*p  |= mask;
++}
 +
-+#endif /* _ASM_GENERIC_BITOPS_MINIX_LE_H_ */
++static __inline__ void __clear_bit(int nr, volatile unsigned long *addr)
++{
++	unsigned long mask = BITOP_MASK(nr);
++	unsigned long *p = ((unsigned long *)addr) + BITOP_WORD(nr);
++
++	*p &= ~mask;
++}
++
++/**
++ * __change_bit - Toggle a bit in memory
++ * @nr: the bit to change
++ * @addr: the address to start counting from
++ *
++ * Unlike change_bit(), this function is non-atomic and may be reordered.
++ * If it's called on the same region of memory simultaneously, the effect
++ * may be that only one operation succeeds.
++ */
++static __inline__ void __change_bit(int nr, volatile unsigned long *addr)
++{
++	unsigned long mask = BITOP_MASK(nr);
++	unsigned long *p = ((unsigned long *)addr) + BITOP_WORD(nr);
++
++	*p ^= mask;
++}
++
++/**
++ * __test_and_set_bit - Set a bit and return its old value
++ * @nr: Bit to set
++ * @addr: Address to count from
++ *
++ * This operation is non-atomic and can be reordered.  
++ * If two examples of this operation race, one can appear to succeed
++ * but actually fail.  You must protect multiple accesses with a lock.
++ */
++static __inline__ int __test_and_set_bit(int nr, volatile unsigned long *addr)
++{
++	unsigned long mask = BITOP_MASK(nr);
++	unsigned long *p = ((unsigned long *)addr) + BITOP_WORD(nr);
++	unsigned long old = *p;
++
++	*p = old | mask;
++	return (old & mask) != 0;
++}
++
++/**
++ * __test_and_clear_bit - Clear a bit and return its old value
++ * @nr: Bit to clear
++ * @addr: Address to count from
++ *
++ * This operation is non-atomic and can be reordered.  
++ * If two examples of this operation race, one can appear to succeed
++ * but actually fail.  You must protect multiple accesses with a lock.
++ */
++static __inline__ int __test_and_clear_bit(int nr, volatile unsigned long *addr)
++{
++	unsigned long mask = BITOP_MASK(nr);
++	unsigned long *p = ((unsigned long *)addr) + BITOP_WORD(nr);
++	unsigned long old = *p;
++
++	*p = old & ~mask;
++	return (old & mask) != 0;
++}
++
++/* WARNING: non atomic and it can be reordered! */
++static __inline__ int __test_and_change_bit(int nr,
++					    volatile unsigned long *addr)
++{
++	unsigned long mask = BITOP_MASK(nr);
++	unsigned long *p = ((unsigned long *)addr) + BITOP_WORD(nr);
++	unsigned long old = *p;
++
++	*p = old ^ mask;
++	return (old & mask) != 0;
++}
++
++/**
++ * test_bit - Determine whether a bit is set
++ * @nr: bit number to test
++ * @addr: Address to start counting from
++ */
++static __inline__ int test_bit(int nr, __const__ volatile unsigned long *addr)
++{
++	return 1UL & (addr[BITOP_WORD(nr)] >> (nr & (BITS_PER_LONG-1)));
++}
++
++#endif /* _ASM_GENERIC_BITOPS_NON_ATOMIC_H_ */
 
 --
