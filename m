@@ -1,61 +1,188 @@
-From: mita@miraclelinux.com (Akinobu Mita)
-Date: Mon, 06 Feb 2006 11:52:57 +0000
-Subject: Re: [patch 14/44] generic hweight{64,32,16,8}()
-Message-Id: <20060206115257.GB11836@miraclelinux.com>
+From: Akinobu Mita <mita@miraclelinux.com>
+Date: Wed, 01 Feb 2006 09:02:39 +0000
+Subject: [patch 15/44] generic ext2_{set,clear,test,find_first_zero,find_next_zero}_bit()
+Message-Id: <20060201090326.139510000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060201090224.536581000@localhost.localdomain> <20060201090325.905071000@localhost.localdomain> <20060202012637.GA25093@iram.es>
-In-Reply-To: <20060202012637.GA25093@iram.es>
+References: <20060201090224.536581000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Gabriel Paubert <paubert@iram.es>
-Cc: linux-kernel@vger.kernel.org, linux-mips@linux-mips.org, linux-ia64@vger.kernel.org, Ian Molton <spyro@f2s.com>, David Howells <dhowells@redhat.com>, linuxppc-dev@ozlabs.org, Greg Ungerer <gerg@uclinux.org>, sparclinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Linus Torvalds <torvalds@osdl.org>, Yoshinori Sato <ysato@users.sourceforge.jp>, Hirokazu Takata <takata@linux-m32r.org>, linuxsh-shmedia-dev@lists.sourceforge.net, linux-m68k@vger.kernel.org, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Richard Henderson <rth@twiddle.net>, Chris Zankel <chris@zankel.net>, dev-etrax@axis.com, ultralinux@vger.kernel.org, Andi Kleen <ak@suse.de>, linuxsh-dev@lists.sourceforge.net, linux390@de.ibm.com, Russell King <rmk@arm.linux.org.uk>, parisc-linux@parisc-linux.org, Balbir Singh <bsingharora@gmail.com>, linux@horizon.com
+To: linux-kernel@vger.kernel.org
+Cc: Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-m68k@vger.kernel.org, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
 
-On Thu, Feb 02, 2006 at 02:26:38AM +0100, Gabriel Paubert wrote:
-> 
-> The first step can be implemented slightly better:
-> 
-> unsigned int res = w-((w>>1)&0x55555555);
-> 
+This patch introduces the C-language equivalents of the functions below:
 
-Yes. I've got many advices about hweight speedup.
+int ext2_set_bit(int nr, volatile unsigned long *addr);
+int ext2_clear_bit(int nr, volatile unsigned long *addr);
+int ext2_test_bit(int nr, const volatile unsigned long *addr);
+unsigned long ext2_find_first_zero_bit(const unsigned long *addr,
+                                       unsigned long size);
+unsinged long ext2_find_next_zero_bit(const unsigned long *addr,
+                                      unsigned long size);
 
+In include/asm-generic/bitops/ext2-non-atomic.h
 
-static unsigned int hweight32(unsigned int w)
-{
-        unsigned int res = w - ((w >> 1) & 0x55555555);
-        res = (res & 0x33333333) + ((res >> 2) & 0x33333333);
-        res = (res + (res >> 4)) & 0x0F0F0F0F;
-        res = res + (res >> 8);
-        return (res + (res >> 16)) & 0x000000FF;
-}
+This code largely copied from:
 
-static unsigned int hweight16(unsigned int w)
-{
-        unsigned int res = w - ((w >> 1) & 0x5555);
-        res = (res & 0x3333) + ((res >> 2) & 0x3333);
-        res = (res + (res >> 4)) & 0x0F0F;
-        return (res + (res >> 8)) & 0x00FF;
-}
+include/asm-powerpc/bitops.h
+include/asm-parisc/bitops.h
 
-static unsigned int hweight8(unsigned int w)
-{
-        unsigned int res = w - ((w >> 1) & 0x55);
-        res = (res & 0x33) + ((res >> 2) & 0x33);
-        return (res + (res >> 4)) & 0x0F;
-}
+Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
+ include/asm-generic/bitops/ext2-non-atomic.h |   18 +++
+ include/asm-generic/bitops/le.h              |  126 +++++++++++++++++++++++++++
+ 2 files changed, 144 insertions(+)
 
-static unsigned long hweight64(__u64 w)
-{
-#if BITS_PER_LONG < 64
-	return hweight32((unsigned int)(w >> 32)) +
-				hweight32((unsigned int)w);
-#else
-	__u64 res = w - ((w >> 1) & 0x5555555555555555ul);
-	res = (res & 0x3333333333333333ul) + ((res >> 2) & 0x3333333333333333ul);
-	res = (res + (res >> 4)) & 0x0F0F0F0F0F0F0F0Ful;
-	res = res + (res >> 8);
-	res = res + (res >> 16);
-	return (res + (res >> 32)) & 0x00000000000000FFul;
-#endif
-}
+Index: 2.6-git/include/asm-generic/bitops/ext2-non-atomic.h
+=================================--- /dev/null
++++ 2.6-git/include/asm-generic/bitops/ext2-non-atomic.h
+@@ -0,0 +1,18 @@
++#ifndef _ASM_GENERIC_BITOPS_EXT2_NON_ATOMIC_H_
++#define _ASM_GENERIC_BITOPS_EXT2_NON_ATOMIC_H_
++
++#include <asm-generic/bitops/le.h>
++
++#define ext2_set_bit(nr,addr)	\
++	generic___test_and_set_le_bit((nr),(unsigned long *)(addr))
++#define ext2_clear_bit(nr,addr)	\
++	generic___test_and_clear_le_bit((nr),(unsigned long *)(addr))
++
++#define ext2_test_bit(nr,addr)	\
++	generic_test_le_bit((nr),(unsigned long *)(addr))
++#define ext2_find_first_zero_bit(addr, size) \
++	generic_find_first_zero_le_bit((unsigned long *)(addr), (size))
++#define ext2_find_next_zero_bit(addr, size, off) \
++	generic_find_next_zero_le_bit((unsigned long *)(addr), (size), (off))
++
++#endif /* _ASM_GENERIC_BITOPS_EXT2_NON_ATOMIC_H_ */
+Index: 2.6-git/include/asm-generic/bitops/le.h
+=================================--- /dev/null
++++ 2.6-git/include/asm-generic/bitops/le.h
+@@ -0,0 +1,126 @@
++#ifndef _ASM_GENERIC_BITOPS_LE_H_
++#define _ASM_GENERIC_BITOPS_LE_H_
++
++#include <asm/types.h>
++#include <asm/byteorder.h>
++
++#define BITOP_WORD(nr)		((nr) / BITS_PER_LONG)
++#define BITOP_LE_SWIZZLE	((BITS_PER_LONG-1) & ~0x7)
++
++#if defined(__LITTLE_ENDIAN)
++
++static __inline__ int generic_test_le_bit(unsigned long nr,
++				  __const__ unsigned long *addr)
++{
++	__const__ unsigned char	*tmp = (__const__ unsigned char *) addr;
++	return (tmp[nr >> 3] >> (nr & 7)) & 1;
++}
++
++#define generic___set_le_bit(nr, addr) __set_bit(nr, addr)
++#define generic___clear_le_bit(nr, addr) __clear_bit(nr, addr)
++
++#define generic_test_and_set_le_bit(nr, addr) test_and_set_bit(nr, addr)
++#define generic_test_and_clear_le_bit(nr, addr) test_and_clear_bit(nr, addr)
++
++#define generic___test_and_set_le_bit(nr, addr) __test_and_set_bit(nr, addr)
++#define generic___test_and_clear_le_bit(nr, addr) __test_and_clear_bit(nr, addr)
++
++#define generic_find_next_zero_le_bit(addr, size, offset) find_next_zero_bit(addr, size, offset)
++
++#elif defined(__BIG_ENDIAN)
++
++static __inline__ int generic_test_le_bit(unsigned long nr,
++				  __const__ unsigned long *addr)
++{
++	__const__ unsigned char	*tmp = (__const__ unsigned char *) addr;
++	return (tmp[nr >> 3] >> (nr & 7)) & 1;
++}
++
++#define generic___set_le_bit(nr, addr) \
++	__set_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic___clear_le_bit(nr, addr) \
++	__clear_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++
++#define generic_test_and_set_le_bit(nr, addr) \
++	test_and_set_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic_test_and_clear_le_bit(nr, addr) \
++	test_and_clear_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++
++#define generic___test_and_set_le_bit(nr, addr) \
++	__test_and_set_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic___test_and_clear_le_bit(nr, addr) \
++	__test_and_clear_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++
++/* include/linux/byteorder does not support "unsigned long" type */
++static inline unsigned long ext2_swabp(const unsigned long * x)
++{
++#if BITS_PER_LONG = 64
++	return (unsigned long) __swab64p((u64 *) x);
++#elif BITS_PER_LONG = 32
++	return (unsigned long) __swab32p((u32 *) x);
++#else
++#error BITS_PER_LONG not defined
++#endif
++}
++
++/* include/linux/byteorder doesn't support "unsigned long" type */
++static inline unsigned long ext2_swab(const unsigned long y)
++{
++#if BITS_PER_LONG = 64
++	return (unsigned long) __swab64((u64) y);
++#elif BITS_PER_LONG = 32
++	return (unsigned long) __swab32((u32) y);
++#else
++#error BITS_PER_LONG not defined
++#endif
++}
++
++static __inline__ unsigned long generic_find_next_zero_le_bit(const unsigned long *addr,
++				unsigned long size, unsigned long offset)
++{
++	const unsigned long *p = addr + BITOP_WORD(offset);
++	unsigned long result = offset & ~(BITS_PER_LONG - 1);
++	unsigned long tmp;
++
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset &= (BITS_PER_LONG - 1UL);
++	if (offset) {
++		tmp = ext2_swabp(p++);
++		tmp |= (~0UL >> (BITS_PER_LONG - offset));
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (~tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
++	}
++
++	while (size & ~(BITS_PER_LONG - 1)) {
++		if (~(tmp = *(p++)))
++			goto found_middle_swap;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
++	}
++	if (!size)
++		return result;
++	tmp = ext2_swabp(p);
++found_first:
++	tmp |= ~0UL << size;
++	if (tmp = ~0UL)	/* Are any bits zero? */
++		return result + size; /* Nope. Skip ffz */
++found_middle:
++	return result + ffz(tmp);
++
++found_middle_swap:
++	return result + ffz(ext2_swab(tmp));
++}
++#else
++#error "Please fix <asm/byteorder.h>"
++#endif
++
++#define generic_find_first_zero_le_bit(addr, size) \
++        generic_find_next_zero_le_bit((addr), (size), 0)
++
++#endif /* _ASM_GENERIC_BITOPS_LE_H_ */
+
+--
