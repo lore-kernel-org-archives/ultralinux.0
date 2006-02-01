@@ -1,36 +1,136 @@
-From: mita@miraclelinux.com (Akinobu Mita)
-Date: Wed, 08 Feb 2006 10:41:21 +0000
-Subject: Re: [patch 15/44] generic ext2_{set,clear,test,find_first_zero,find_next_zero}_bit()
-Message-Id: <20060208104121.GB27490@miraclelinux.com>
+From: Akinobu Mita <mita@miraclelinux.com>
+Date: Wed, 01 Feb 2006 09:02:35 +0000
+Subject: [patch 11/44] generic find_{next,first}{,_zero}_bit()
+Message-Id: <20060201090324.373982000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060201090224.536581000@localhost.localdomain> <20060201090326.139510000@localhost.localdomain> <Pine.LNX.4.61.0602011214270.12293@scrub.home>
-In-Reply-To: <Pine.LNX.4.61.0602011214270.12293@scrub.home>
+References: <20060201090224.536581000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Roman Zippel <zippel@linux-m68k.org>
-Cc: linux-kernel@vger.kernel.org, Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-m68k@vger.kernel.org, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>
+To: linux-kernel@vger.kernel.org
+Cc: Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
 
-On Wed, Feb 01, 2006 at 12:27:38PM +0100, Roman Zippel wrote:
+This patch introduces the C-language equivalents of the functions below:
 
-> For the inline version I would prefer this version:
-> 
-> {
-> 	const unsigned char *tmp = (const unsigned char *)addr;
-> 	return (tmp[nr >> 3] & (unsigned char)(1 << (nr & 7))) != 0;
-> }
-> 
-> Although this would be a good alternative as well:
-> 
-> {
-> 	return (addr[nr >> 5] & (1 << ((nr ^ 24) & 31))) != 0;
-> }
+unsigned logn find_next_bit(const unsigned long *addr, unsigned long size,
+                            unsigned long offset);
+unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
+                                 unsigned long offset);
+unsigned long find_first_zero_bit(const unsigned long *addr,
+                                  unsigned long size);
+unsigned long find_first_bit(const unsigned long *addr, unsigned long size);
 
-Thanks, maybe I could use BITOP_LE_SWIZZLE similar to other *_le_bit().
+In include/asm-generic/bitops/find.h
 
-#define BITOP_LE_SWIZZLE       ((BITS_PER_LONG-1) & ~0x7)
- :
-#define generic_test_le_bit(nr, addr) test_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
- :
-#endif /* __BIG_ENDIAN */
+This code largely copied from:
+arch/powerpc/lib/bitops.c
 
+Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
+ include/asm-generic/bitops/find.h |   99 ++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 99 insertions(+)
+
+Index: 2.6-git/include/asm-generic/bitops/find.h
+=================================--- /dev/null
++++ 2.6-git/include/asm-generic/bitops/find.h
+@@ -0,0 +1,99 @@
++#ifndef _ASM_GENERIC_BITOPS_FIND_H_
++#define _ASM_GENERIC_BITOPS_FIND_H_
++
++#include <asm/types.h>
++
++#define BITOP_WORD(nr)		((nr) / BITS_PER_LONG)
++
++/**
++ * find_next_bit - find the next set bit in a memory region
++ * @addr: The address to base the search on
++ * @offset: The bitnumber to start searching at
++ * @size: The maximum size to search
++ */
++static inline unsigned long find_next_bit(const unsigned long *addr,
++				unsigned long size, unsigned long offset)
++{
++	const unsigned long *p = addr + BITOP_WORD(offset);
++	unsigned long result = offset & ~(BITS_PER_LONG-1);
++	unsigned long tmp;
++
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset %= BITS_PER_LONG;
++	if (offset) {
++		tmp = *(p++);
++		tmp &= (~0UL << offset);
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
++	}
++	while (size & ~(BITS_PER_LONG-1)) {
++		if ((tmp = *(p++)))
++			goto found_middle;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
++	}
++	if (!size)
++		return result;
++	tmp = *p;
++
++found_first:
++	tmp &= (~0UL >> (BITS_PER_LONG - size));
++	if (tmp = 0UL)		/* Are any bits set? */
++		return result + size;	/* Nope. */
++found_middle:
++	return result + __ffs(tmp);
++}
++
++/*
++ * This implementation of find_{first,next}_zero_bit was stolen from
++ * Linus' asm-alpha/bitops.h.
++ */
++static inline unsigned long find_next_zero_bit(const unsigned long *addr,
++				unsigned long size, unsigned long offset)
++{
++	const unsigned long *p = addr + BITOP_WORD(offset);
++	unsigned long result = offset & ~(BITS_PER_LONG-1);
++	unsigned long tmp;
++
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset %= BITS_PER_LONG;
++	if (offset) {
++		tmp = *(p++);
++		tmp |= ~0UL >> (BITS_PER_LONG - offset);
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (~tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
++	}
++	while (size & ~(BITS_PER_LONG-1)) {
++		if (~(tmp = *(p++)))
++			goto found_middle;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
++	}
++	if (!size)
++		return result;
++	tmp = *p;
++
++found_first:
++	tmp |= ~0UL << size;
++	if (tmp = ~0UL)	/* Are any bits zero? */
++		return result + size;	/* Nope. */
++found_middle:
++	return result + ffz(tmp);
++}
++
++#define find_first_zero_bit(addr, size) find_next_zero_bit((addr), (size), 0)
++#define find_first_bit(addr, size) find_next_bit((addr), (size), 0)
++
++#endif /*_ASM_GENERIC_BITOPS_FIND_H_ */
+
+--
