@@ -1,33 +1,42 @@
-From: mita@miraclelinux.com (Akinobu Mita)
-Date: Tue, 07 Feb 2006 02:02:16 +0000
-Subject: Re: [patch 11/44] generic find_{next,first}{,_zero}_bit()
-Message-Id: <20060207020216.GA9323@miraclelinux.com>
+From: Akinobu Mita <mita@miraclelinux.com>
+Date: Wed, 01 Feb 2006 09:02:34 +0000
+Subject: [patch 10/44] generic fls64()
+Message-Id: <20060201090323.294297000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060201090324.373982000@localhost.localdomain> <20060201090224.536581000@localhost.localdomain> <12367.1139221560@warthog.cambridge.redhat.com>
-In-Reply-To: <12367.1139221560@warthog.cambridge.redhat.com>
+References: <20060201090224.536581000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: David Howells <dhowells@redhat.com>
-Cc: linux-kernel@vger.kernel.org, Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, Yoshinori Sato <ysato@users.sourceforge.jp>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Chris Zankel <chris@zankel.net>
+To: linux-kernel@vger.kernel.org
+Cc: Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-m68k@vger.kernel.org, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxppc-dev@ozlabs.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
 
-On Mon, Feb 06, 2006 at 10:26:00AM +0000, David Howells wrote:
-> Akinobu Mita <mita@miraclelinux.com> wrote:
-> 
-> > This patch introduces the C-language equivalents of the functions below:
-> > 
-> > unsigned logn find_next_bit(const unsigned long *addr, unsigned long size,
-> >                             unsigned long offset);
-> > unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
-> >                                  unsigned long offset);
-> > unsigned long find_first_zero_bit(const unsigned long *addr,
-> >                                   unsigned long size);
-> > unsigned long find_first_bit(const unsigned long *addr, unsigned long size);
-> 
-> These big functions should perhaps be out of line.
+This patch introduces the C-language equivalent of the function:
+int fls64(__u64 x);
 
-Yes. I'll make them and below out of line.
+In include/asm-generic/bitops/fls64.h
 
-- hweight*()
-- ext2_find_*_zero_bit()
-- minix_find_first_zero_bit()
+This code largely copied from:
+include/linux/bitops.h
+
+Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
+ include/asm-generic/bitops/fls64.h |   12 ++++++++++++
+ 1 files changed, 12 insertions(+)
+
+Index: 2.6-git/include/asm-generic/bitops/fls64.h
+=================================--- /dev/null
++++ 2.6-git/include/asm-generic/bitops/fls64.h
+@@ -0,0 +1,12 @@
++#ifndef _ASM_GENERIC_BITOPS_FLS64_H_
++#define _ASM_GENERIC_BITOPS_FLS64_H_
++
++static inline int fls64(__u64 x)
++{
++	__u32 h = x >> 32;
++	if (h)
++		return fls(x) + 32;
++	return fls(x);
++}
++
++#endif /* _ASM_GENERIC_BITOPS_FLS64_H_ */
+
+--
