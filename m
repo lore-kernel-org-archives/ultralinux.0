@@ -1,42 +1,71 @@
 From: Akinobu Mita <mita@miraclelinux.com>
-Date: Tue, 14 Feb 2006 05:04:02 +0000
-Subject: [patch 11/47] generic fls64()
-Message-Id: <20060214050443.852246000@localhost.localdomain>
+Date: Wed, 01 Feb 2006 09:02:33 +0000
+Subject: [patch 09/44] generic fls()
+Message-Id: <20060201090323.100733000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060214050351.252615000@localhost.localdomain>
+References: <20060201090224.536581000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: linux-kernel@vger.kernel.org
-Cc: akpm@osdl.org, Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-m68k@vger.kernel.org, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxppc-dev@ozlabs.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
+Cc: Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, dev-etrax@axis.com, Yoshinori Sato <ysato@users.sourceforge.jp>, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Akinobu Mita <mita@miraclelinux.com>
 
 This patch introduces the C-language equivalent of the function:
-int fls64(__u64 x);
+int fls(int x);
 
-In include/asm-generic/bitops/fls64.h
+In include/asm-generic/bitops/fls.h
 
 This code largely copied from:
 include/linux/bitops.h
 
 Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
- include/asm-generic/bitops/fls64.h |   12 ++++++++++++
- 1 files changed, 12 insertions(+)
+ include/asm-generic/bitops/fls.h |   41 +++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 41 insertions(+)
 
-Index: 2.6-rc/include/asm-generic/bitops/fls64.h
+Index: 2.6-git/include/asm-generic/bitops/fls.h
 =================================--- /dev/null
-+++ 2.6-rc/include/asm-generic/bitops/fls64.h
-@@ -0,0 +1,12 @@
-+#ifndef _ASM_GENERIC_BITOPS_FLS64_H_
-+#define _ASM_GENERIC_BITOPS_FLS64_H_
++++ 2.6-git/include/asm-generic/bitops/fls.h
+@@ -0,0 +1,41 @@
++#ifndef _ASM_GENERIC_BITOPS_FLS_H_
++#define _ASM_GENERIC_BITOPS_FLS_H_
 +
-+static inline int fls64(__u64 x)
++/**
++ * fls - find last (most-significant) bit set
++ * @x: the word to search
++ *
++ * This is defined the same way as ffs.
++ * Note fls(0) = 0, fls(1) = 1, fls(0x80000000) = 32.
++ */
++
++static __inline__ int fls(int x)
 +{
-+	__u32 h = x >> 32;
-+	if (h)
-+		return fls(h) + 32;
-+	return fls(x);
++	int r = 32;
++
++	if (!x)
++		return 0;
++	if (!(x & 0xffff0000u)) {
++		x <<= 16;
++		r -= 16;
++	}
++	if (!(x & 0xff000000u)) {
++		x <<= 8;
++		r -= 8;
++	}
++	if (!(x & 0xf0000000u)) {
++		x <<= 4;
++		r -= 4;
++	}
++	if (!(x & 0xc0000000u)) {
++		x <<= 2;
++		r -= 2;
++	}
++	if (!(x & 0x80000000u)) {
++		x <<= 1;
++		r -= 1;
++	}
++	return r;
 +}
 +
-+#endif /* _ASM_GENERIC_BITOPS_FLS64_H_ */
++#endif /* _ASM_GENERIC_BITOPS_FLS_H_ */
 
 --
