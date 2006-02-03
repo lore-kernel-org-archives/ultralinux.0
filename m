@@ -1,73 +1,35 @@
-From: Akinobu Mita <mita@miraclelinux.com>
-Date: Wed, 01 Feb 2006 09:02:31 +0000
-Subject: [patch 07/44] generic __ffs()
-Message-Id: <20060201090322.698909000@localhost.localdomain>
+From: mita@miraclelinux.com (Akinobu Mita)
+Date: Fri, 03 Feb 2006 01:27:35 +0000
+Subject: [PATCH] fix generic_fls64()
+Message-Id: <20060203012735.GA21567@miraclelinux.com>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060201090224.536581000@localhost.localdomain>
+References: <DCEAAC0833DD314AB0B58112AD99B93B859547@ismail.innsys.innovsys.com>
+In-Reply-To: <DCEAAC0833DD314AB0B58112AD99B93B859547@ismail.innsys.innovsys.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: linux-kernel@vger.kernel.org
-Cc: Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, David Howells <dhowells@redhat.com>, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Akinobu Mita <mita@miraclelinux.com>
+To: Rune Torgersen <runet@innovsys.com>
+Cc: linux-kernel@vger.kernel.org, linux-mips@linux-mips.org, linux-ia64@vger.kernel.org, Ian Molton <spyro@f2s.com>, David Howells <dhowells@redhat.com>, linuxppc-dev@ozlabs.org, Greg Ungerer <gerg@uclinux.org>, sparclinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Linus Torvalds <torvalds@osdl.org>, Yoshinori Sato <ysato@users.sourceforge.jp>, Hirokazu Takata <takata@linux-m32r.org>, linuxsh-shmedia-dev@lists.sourceforge.net, linux-m68k@vger.kernel.org, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Richard Henderson <rth@twiddle.net>, Chris Zankel <chris@zankel.net>, dev-etrax@axis.com, ultralinux@vger.kernel.org, Andi Kleen <ak@suse.de>, linuxsh-dev@lists.sourceforge.net, linux390@de.ibm.com, Russell King <rmk@arm.linux.org.uk>, parisc-linux@parisc-linux.org, akpm@osdl.org, Stephen Hemminger <shemminger@osdl.org>
 
-This patch introduces the C-language equivalent of the function:
-unsigned long __ffs(unsigned long word);
+Noticed by Rune Torgersen.
 
-In include/asm-generic/bitops/__ffs.h
-
-This code largely copied from:
-include/asm-sparc/bitops.h
+fix generic_fls64().
+tcp_cubic is using fls64().
 
 Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
- include/asm-generic/bitops/__ffs.h |   43 +++++++++++++++++++++++++++++++++++++
- 1 files changed, 43 insertions(+)
 
-Index: 2.6-git/include/asm-generic/bitops/__ffs.h
-=================================--- /dev/null
-+++ 2.6-git/include/asm-generic/bitops/__ffs.h
-@@ -0,0 +1,43 @@
-+#ifndef _ASM_GENERIC_BITOPS___FFS_H_
-+#define _ASM_GENERIC_BITOPS___FFS_H_
-+
-+#include <asm/types.h>
-+
-+/**
-+ * __ffs - find first bit in word.
-+ * @word: The word to search
-+ *
-+ * Undefined if no bit exists, so code should check against 0 first.
-+ */
-+static inline unsigned long __ffs(unsigned long word)
-+{
-+	int num = 0;
-+
-+#if BITS_PER_LONG = 64
-+	if ((word & 0xffffffff) = 0) {
-+		num += 32;
-+		word >>= 32;
-+	}
-+#endif
-+	if ((word & 0xffff) = 0) {
-+		num += 16;
-+		word >>= 16;
-+	}
-+	if ((word & 0xff) = 0) {
-+		num += 8;
-+		word >>= 8;
-+	}
-+	if ((word & 0xf) = 0) {
-+		num += 4;
-+		word >>= 4;
-+	}
-+	if ((word & 0x3) = 0) {
-+		num += 2;
-+		word >>= 2;
-+	}
-+	if ((word & 0x1) = 0)
-+		num += 1;
-+	return num;
-+}
-+
-+#endif /* _ASM_GENERIC_BITOPS___FFS_H_ */
+ include/linux/bitops.h |    2 +-
+ 1 files changed, 1 insertion(+), 1 deletion(-)
 
---
+Index: 2.6-git/include/linux/bitops.h
+=================================--- 2.6-git.orig/include/linux/bitops.h
++++ 2.6-git/include/linux/bitops.h
+@@ -81,7 +81,7 @@ static inline int generic_fls64(__u64 x)
+ {
+ 	__u32 h = x >> 32;
+ 	if (h)
+-		return fls(x) + 32;
++		return fls(h) + 32;
+ 	return fls(x);
+ }
+ 
