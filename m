@@ -1,71 +1,203 @@
 From: Akinobu Mita <mita@miraclelinux.com>
-Date: Tue, 14 Feb 2006 05:04:01 +0000
-Subject: [patch 10/47] generic fls()
-Message-Id: <20060214050443.645438000@localhost.localdomain>
+Date: Tue, 14 Feb 2006 05:04:07 +0000
+Subject: [patch 16/47] generic ext2_{set,clear,test,find_first_zero,find_next_zero}_bit()
+Message-Id: <20060214050444.795734000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
 References: <20060214050351.252615000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: linux-kernel@vger.kernel.org
-Cc: akpm@osdl.org, Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, dev-etrax@axis.com, Yoshinori Sato <ysato@users.sourceforge.jp>, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, linux390@de.ibm.com, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Akinobu Mita <mita@miraclelinux.com>
+Cc: akpm@osdl.org, Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, Linus Torvalds <torvalds@osdl.org>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, linux-m68k@vger.kernel.org, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Andi Kleen <ak@suse.de>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
 
-This patch introduces the C-language equivalent of the function:
-int fls(int x);
+This patch introduces the C-language equivalents of the functions below:
 
-In include/asm-generic/bitops/fls.h
+int ext2_set_bit(int nr, volatile unsigned long *addr);
+int ext2_clear_bit(int nr, volatile unsigned long *addr);
+int ext2_test_bit(int nr, const volatile unsigned long *addr);
+unsigned long ext2_find_first_zero_bit(const unsigned long *addr,
+                                       unsigned long size);
+unsinged long ext2_find_next_zero_bit(const unsigned long *addr,
+                                      unsigned long size);
+
+In include/asm-generic/bitops/ext2-non-atomic.h
 
 This code largely copied from:
-include/linux/bitops.h
+
+include/asm-powerpc/bitops.h
+include/asm-parisc/bitops.h
 
 Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
- include/asm-generic/bitops/fls.h |   41 +++++++++++++++++++++++++++++++++++++++
- 1 files changed, 41 insertions(+)
+ include/asm-generic/bitops/ext2-non-atomic.h |   18 ++++++
+ include/asm-generic/bitops/le.h              |   53 +++++++++++++++++++
+ lib/find_next_bit.c                          |   73 +++++++++++++++++++++++++++
+ 3 files changed, 144 insertions(+)
 
-Index: 2.6-rc/include/asm-generic/bitops/fls.h
+Index: 2.6-rc/include/asm-generic/bitops/ext2-non-atomic.h
 =================================--- /dev/null
-+++ 2.6-rc/include/asm-generic/bitops/fls.h
-@@ -0,0 +1,41 @@
-+#ifndef _ASM_GENERIC_BITOPS_FLS_H_
-+#define _ASM_GENERIC_BITOPS_FLS_H_
++++ 2.6-rc/include/asm-generic/bitops/ext2-non-atomic.h
+@@ -0,0 +1,18 @@
++#ifndef _ASM_GENERIC_BITOPS_EXT2_NON_ATOMIC_H_
++#define _ASM_GENERIC_BITOPS_EXT2_NON_ATOMIC_H_
 +
-+/**
-+ * fls - find last (most-significant) bit set
-+ * @x: the word to search
-+ *
-+ * This is defined the same way as ffs.
-+ * Note fls(0) = 0, fls(1) = 1, fls(0x80000000) = 32.
-+ */
++#include <asm-generic/bitops/le.h>
 +
-+static inline int fls(int x)
++#define ext2_set_bit(nr,addr)	\
++	generic___test_and_set_le_bit((nr),(unsigned long *)(addr))
++#define ext2_clear_bit(nr,addr)	\
++	generic___test_and_clear_le_bit((nr),(unsigned long *)(addr))
++
++#define ext2_test_bit(nr,addr)	\
++	generic_test_le_bit((nr),(unsigned long *)(addr))
++#define ext2_find_first_zero_bit(addr, size) \
++	generic_find_first_zero_le_bit((unsigned long *)(addr), (size))
++#define ext2_find_next_zero_bit(addr, size, off) \
++	generic_find_next_zero_le_bit((unsigned long *)(addr), (size), (off))
++
++#endif /* _ASM_GENERIC_BITOPS_EXT2_NON_ATOMIC_H_ */
+Index: 2.6-rc/include/asm-generic/bitops/le.h
+=================================--- /dev/null
++++ 2.6-rc/include/asm-generic/bitops/le.h
+@@ -0,0 +1,53 @@
++#ifndef _ASM_GENERIC_BITOPS_LE_H_
++#define _ASM_GENERIC_BITOPS_LE_H_
++
++#include <asm/types.h>
++#include <asm/byteorder.h>
++
++#define BITOP_WORD(nr)		((nr) / BITS_PER_LONG)
++#define BITOP_LE_SWIZZLE	((BITS_PER_LONG-1) & ~0x7)
++
++#if defined(__LITTLE_ENDIAN)
++
++#define generic_test_le_bit(nr, addr) test_bit(nr, addr)
++#define generic___set_le_bit(nr, addr) __set_bit(nr, addr)
++#define generic___clear_le_bit(nr, addr) __clear_bit(nr, addr)
++
++#define generic_test_and_set_le_bit(nr, addr) test_and_set_bit(nr, addr)
++#define generic_test_and_clear_le_bit(nr, addr) test_and_clear_bit(nr, addr)
++
++#define generic___test_and_set_le_bit(nr, addr) __test_and_set_bit(nr, addr)
++#define generic___test_and_clear_le_bit(nr, addr) __test_and_clear_bit(nr, addr)
++
++#define generic_find_next_zero_le_bit(addr, size, offset) find_next_zero_bit(addr, size, offset)
++
++#elif defined(__BIG_ENDIAN)
++
++#define generic_test_le_bit(nr, addr) \
++	test_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic___set_le_bit(nr, addr) \
++	__set_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic___clear_le_bit(nr, addr) \
++	__clear_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++
++#define generic_test_and_set_le_bit(nr, addr) \
++	test_and_set_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic_test_and_clear_le_bit(nr, addr) \
++	test_and_clear_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++
++#define generic___test_and_set_le_bit(nr, addr) \
++	__test_and_set_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++#define generic___test_and_clear_le_bit(nr, addr) \
++	__test_and_clear_bit((nr) ^ BITOP_LE_SWIZZLE, (addr))
++
++extern unsigned long generic_find_next_zero_le_bit(const unsigned long *addr,
++		unsigned long size, unsigned long offset);
++
++#else
++#error "Please fix <asm/byteorder.h>"
++#endif
++
++#define generic_find_first_zero_le_bit(addr, size) \
++        generic_find_next_zero_le_bit((addr), (size), 0)
++
++#endif /* _ASM_GENERIC_BITOPS_LE_H_ */
+Index: 2.6-rc/lib/find_next_bit.c
+=================================--- 2.6-rc.orig/lib/find_next_bit.c
++++ 2.6-rc/lib/find_next_bit.c
+@@ -12,6 +12,7 @@
+ #include <linux/bitops.h>
+ #include <linux/module.h>
+ #include <asm/types.h>
++#include <asm/byteorder.h>
+ 
+ #define BITOP_WORD(nr)		((nr) / BITS_PER_LONG)
+ 
+@@ -106,3 +107,75 @@ found_middle:
+ }
+ 
+ EXPORT_SYMBOL(find_next_zero_bit);
++
++#ifdef __BIG_ENDIAN
++
++/* include/linux/byteorder does not support "unsigned long" type */
++static inline unsigned long ext2_swabp(const unsigned long * x)
 +{
-+	int r = 32;
-+
-+	if (!x)
-+		return 0;
-+	if (!(x & 0xffff0000u)) {
-+		x <<= 16;
-+		r -= 16;
-+	}
-+	if (!(x & 0xff000000u)) {
-+		x <<= 8;
-+		r -= 8;
-+	}
-+	if (!(x & 0xf0000000u)) {
-+		x <<= 4;
-+		r -= 4;
-+	}
-+	if (!(x & 0xc0000000u)) {
-+		x <<= 2;
-+		r -= 2;
-+	}
-+	if (!(x & 0x80000000u)) {
-+		x <<= 1;
-+		r -= 1;
-+	}
-+	return r;
++#if BITS_PER_LONG = 64
++	return (unsigned long) __swab64p((u64 *) x);
++#elif BITS_PER_LONG = 32
++	return (unsigned long) __swab32p((u32 *) x);
++#else
++#error BITS_PER_LONG not defined
++#endif
 +}
 +
-+#endif /* _ASM_GENERIC_BITOPS_FLS_H_ */
++/* include/linux/byteorder doesn't support "unsigned long" type */
++static inline unsigned long ext2_swab(const unsigned long y)
++{
++#if BITS_PER_LONG = 64
++	return (unsigned long) __swab64((u64) y);
++#elif BITS_PER_LONG = 32
++	return (unsigned long) __swab32((u32) y);
++#else
++#error BITS_PER_LONG not defined
++#endif
++}
++
++unsigned long generic_find_next_zero_le_bit(const unsigned long *addr, unsigned
++		long size, unsigned long offset)
++{
++	const unsigned long *p = addr + BITOP_WORD(offset);
++	unsigned long result = offset & ~(BITS_PER_LONG - 1);
++	unsigned long tmp;
++
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset &= (BITS_PER_LONG - 1UL);
++	if (offset) {
++		tmp = ext2_swabp(p++);
++		tmp |= (~0UL >> (BITS_PER_LONG - offset));
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (~tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
++	}
++
++	while (size & ~(BITS_PER_LONG - 1)) {
++		if (~(tmp = *(p++)))
++			goto found_middle_swap;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
++	}
++	if (!size)
++		return result;
++	tmp = ext2_swabp(p);
++found_first:
++	tmp |= ~0UL << size;
++	if (tmp = ~0UL)	/* Are any bits zero? */
++		return result + size; /* Nope. Skip ffz */
++found_middle:
++	return result + ffz(tmp);
++
++found_middle_swap:
++	return result + ffz(ext2_swab(tmp));
++}
++
++EXPORT_SYMBOL(generic_find_next_zero_le_bit);
++
++#endif /* __BIG_ENDIAN */
 
 --
