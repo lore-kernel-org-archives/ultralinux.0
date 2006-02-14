@@ -1,42 +1,185 @@
 From: Akinobu Mita <mita@miraclelinux.com>
-Date: Tue, 14 Feb 2006 05:04:00 +0000
-Subject: [patch 09/47] generic ffz()
-Message-Id: <20060214050443.468528000@localhost.localdomain>
+Date: Tue, 14 Feb 2006 05:04:03 +0000
+Subject: [patch 12/47] generic find_{next,first}{,_zero}_bit()
+Message-Id: <20060214050444.051147000@localhost.localdomain>
 List-Id: <ultralinux.vger.kernel.org>
 References: <20060214050351.252615000@localhost.localdomain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: linux-kernel@vger.kernel.org
-Cc: akpm@osdl.org, Russell King <rmk@arm.linux.org.uk>, Ian Molton <spyro@f2s.com>, David Howells <dhowells@redhat.com>, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Akinobu Mita <mita@miraclelinux.com>
+Cc: akpm@osdl.org, Richard Henderson <rth@twiddle.net>, Ivan Kokshaysky <ink@jurassic.park.msu.ru>, dev-etrax@axis.com, David Howells <dhowells@redhat.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, linux-ia64@vger.kernel.org, Hirokazu Takata <takata@linux-m32r.org>, Greg Ungerer <gerg@uclinux.org>, linux-mips@linux-mips.org, parisc-linux@parisc-linux.org, linuxsh-dev@lists.sourceforge.net, linuxsh-shmedia-dev@lists.sourceforge.net, sparclinux@vger.kernel.org, ultralinux@vger.kernel.org, Miles Bader <uclinux-v850@lsi.nec.co.jp>, Chris Zankel <chris@zankel.net>, Akinobu Mita <mita@miraclelinux.com>
 
-This patch introduces the C-language equivalent of the function:
-unsigned long ffz(unsigned long word);
+This patch introduces the C-language equivalents of the functions below:
 
-In include/asm-generic/bitops/ffz.h
+unsigned logn find_next_bit(const unsigned long *addr, unsigned long size,
+                            unsigned long offset);
+unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
+                                 unsigned long offset);
+unsigned long find_first_zero_bit(const unsigned long *addr,
+                                  unsigned long size);
+unsigned long find_first_bit(const unsigned long *addr, unsigned long size);
+
+In include/asm-generic/bitops/find.h
 
 This code largely copied from:
-include/asm-parisc/bitops.h
+arch/powerpc/lib/bitops.c
 
 Signed-off-by: Akinobu Mita <mita@miraclelinux.com>
- include/asm-generic/bitops/ffz.h |   12 ++++++++++++
- 1 files changed, 12 insertions(+)
+ include/asm-generic/bitops/find.h |   13 ++++
+ lib/find_next_bit.c               |  114 +++++++++++++++++++++++++++-----------
+ 2 files changed, 95 insertions(+), 32 deletions(-)
 
-Index: 2.6-rc/include/asm-generic/bitops/ffz.h
+Index: 2.6-rc/include/asm-generic/bitops/find.h
 =================================--- /dev/null
-+++ 2.6-rc/include/asm-generic/bitops/ffz.h
-@@ -0,0 +1,12 @@
-+#ifndef _ASM_GENERIC_BITOPS_FFZ_H_
-+#define _ASM_GENERIC_BITOPS_FFZ_H_
++++ 2.6-rc/include/asm-generic/bitops/find.h
+@@ -0,0 +1,13 @@
++#ifndef _ASM_GENERIC_BITOPS_FIND_H_
++#define _ASM_GENERIC_BITOPS_FIND_H_
 +
-+/*
-+ * ffz - find first zero in word.
-+ * @word: The word to search
-+ *
-+ * Undefined if no zero exists, so code should check against ~0UL first.
++extern unsigned long find_next_bit(const unsigned long *addr, unsigned long
++		size, unsigned long offset);
++
++extern unsigned long find_next_zero_bit(const unsigned long *addr, unsigned
++		long size, unsigned long offset);
++
++#define find_first_bit(addr, size) find_next_bit((addr), (size), 0)
++#define find_first_zero_bit(addr, size) find_next_zero_bit((addr), (size), 0)
++
++#endif /*_ASM_GENERIC_BITOPS_FIND_H_ */
+Index: 2.6-rc/lib/find_next_bit.c
+=================================--- 2.6-rc.orig/lib/find_next_bit.c
++++ 2.6-rc/lib/find_next_bit.c
+@@ -11,48 +11,98 @@
+ 
+ #include <linux/bitops.h>
+ #include <linux/module.h>
++#include <asm/types.h>
+ 
+-int find_next_bit(const unsigned long *addr, int size, int offset)
++#define BITOP_WORD(nr)		((nr) / BITS_PER_LONG)
++
++/**
++ * find_next_bit - find the next set bit in a memory region
++ * @addr: The address to base the search on
++ * @offset: The bitnumber to start searching at
++ * @size: The maximum size to search
 + */
-+#define ffz(x)  __ffs(~(x))
++unsigned long find_next_bit(const unsigned long *addr, unsigned long size,
++		unsigned long offset)
+ {
+-	const unsigned long *base;
+-	const int NBITS = sizeof(*addr) * 8;
++	const unsigned long *p = addr + BITOP_WORD(offset);
++	unsigned long result = offset & ~(BITS_PER_LONG-1);
+ 	unsigned long tmp;
+ 
+-	base = addr;
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset %= BITS_PER_LONG;
+ 	if (offset) {
+-		int suboffset;
+-
+-		addr += offset / NBITS;
+-
+-		suboffset = offset % NBITS;
+-		if (suboffset) {
+-			tmp = *addr;
+-			tmp >>= suboffset;
+-			if (tmp)
+-				goto finish;
+-		}
+-
+-		addr++;
++		tmp = *(p++);
++		tmp &= (~0UL << offset);
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
+ 	}
++	while (size & ~(BITS_PER_LONG-1)) {
++		if ((tmp = *(p++)))
++			goto found_middle;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
++	}
++	if (!size)
++		return result;
++	tmp = *p;
 +
-+#endif /* _ASM_GENERIC_BITOPS_FFZ_H_ */
++found_first:
++	tmp &= (~0UL >> (BITS_PER_LONG - size));
++	if (tmp = 0UL)		/* Are any bits set? */
++		return result + size;	/* Nope. */
++found_middle:
++	return result + __ffs(tmp);
++}
+ 
+-	while ((tmp = *addr) = 0)
+-		addr++;
++EXPORT_SYMBOL(find_next_bit);
+ 
+-	offset = (addr - base) * NBITS;
++/*
++ * This implementation of find_{first,next}_zero_bit was stolen from
++ * Linus' asm-alpha/bitops.h.
++ */
++unsigned long find_next_zero_bit(const unsigned long *addr, unsigned long size,
++		unsigned long offset)
++{
++	const unsigned long *p = addr + BITOP_WORD(offset);
++	unsigned long result = offset & ~(BITS_PER_LONG-1);
++	unsigned long tmp;
+ 
+- finish:
+-	/* count the remaining bits without using __ffs() since that takes a 32-bit arg */
+-	while (!(tmp & 0xff)) {
+-		offset += 8;
+-		tmp >>= 8;
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset %= BITS_PER_LONG;
++	if (offset) {
++		tmp = *(p++);
++		tmp |= ~0UL >> (BITS_PER_LONG - offset);
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (~tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
+ 	}
+-
+-	while (!(tmp & 1)) {
+-		offset++;
+-		tmp >>= 1;
++	while (size & ~(BITS_PER_LONG-1)) {
++		if (~(tmp = *(p++)))
++			goto found_middle;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
+ 	}
+-
+-	return offset;
++	if (!size)
++		return result;
++	tmp = *p;
++
++found_first:
++	tmp |= ~0UL << size;
++	if (tmp = ~0UL)	/* Are any bits zero? */
++		return result + size;	/* Nope. */
++found_middle:
++	return result + ffz(tmp);
+ }
+ 
+-EXPORT_SYMBOL(find_next_bit);
++EXPORT_SYMBOL(find_next_zero_bit);
 
 --
