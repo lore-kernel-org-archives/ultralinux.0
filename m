@@ -1,21 +1,20 @@
-From: "David S. Miller" <davem@davemloft.net>
-Date: Tue, 18 Apr 2006 23:20:11 +0000
-Subject: Re: [2.6 patch] fix dependencies of HUGETLB_PAGE_SIZE_64K
-Message-Id: <20060418.162011.47766368.davem@davemloft.net>
+From: "Vickie" <Vickiecheesy@mindless.com>
+Date: Fri, 14 Jul 2006 02:18:49 +0000
+Subject: Make other men envy you and girls worship you Most efficient products for men
+Message-Id: <17433257375360.EB57380FBE@1HZLEE>
 List-Id: <ultralinux.vger.kernel.org>
-References: <20060415225244.GG47644@dspnet.fr.eu.org>
-In-Reply-To: <20060415225244.GG47644@dspnet.fr.eu.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-To: jean-luc.leger@dspnet.fr.eu.org
-Cc: linux-kernel@vger.kernel.org, ultralinux@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: ultralinux@vger.kernel.org
 
-From: Jean-Luc L=E9ger <jean-luc.leger@dspnet.fr.eu.org>
-Date: Sun, 16 Apr 2006 00:52:44 +0200
+Hello my friend!
+Enhanced male power and unlimited prowess with your girl The best products for the winning guys
+Enhanced male power and unlimited prowess with your girl The best products for the winning guys
+ http://www.entirelyjb.com
 
-> This patch fixes dependencies of HUGETLB_PAGE_SIZE_64K
->=20
-> Signed-off-by: Jean-Luc L=E9ger <jean-luc.leger@dspnet.fr.eu.org>
 
-Applied, thanks Jean-Luc.
+Yuh gat fuh blow yuh nose where yuh stump yuh toe.	 God is alive and well and working on something less ambitious Kill two birds with one stone
+ The tongue that brings healing is a tree of life, but a deceitful tongue crushes the spirit  Lightning never strikes twice in the same place.
+
+
