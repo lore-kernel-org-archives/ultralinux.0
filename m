@@ -1,20 +1,28 @@
-From: "Vickie" <Vickiecheesy@mindless.com>
-Date: Fri, 14 Jul 2006 02:18:49 +0000
-Subject: Make other men envy you and girls worship you Most efficient products for men
-Message-Id: <17433257375360.EB57380FBE@1HZLEE>
+From: "Marla" <comanchecertain@witty.com>
+Date: Thu, 03 Aug 2006 13:18:52 +0000
+Subject: Hottest new offer Achieve astounding results in bed with these products designed to make any man a w
+Message-Id: <42227070260183.C740FB029F@2YFRX>
 List-Id: <ultralinux.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 To: ultralinux@vger.kernel.org
 
-Hello my friend!
-Enhanced male power and unlimited prowess with your girl The best products for the winning guys
-Enhanced male power and unlimited prowess with your girl The best products for the winning guys
- http://www.entirelyjb.com
+Good Day to you!
+ Rock hard manhood, multiple explosions and several times more semen volumeAchieve astounding results in bed with these products designed to make any man a winner
 
 
-Yuh gat fuh blow yuh nose where yuh stump yuh toe.	 God is alive and well and working on something less ambitious Kill two birds with one stone
- The tongue that brings healing is a tree of life, but a deceitful tongue crushes the spirit  Lightning never strikes twice in the same place.
+Impress your girl with prolonged hardness, plentiful explosions and increased duration
 
+
+ Come in: http://www.charrld.com
+
+
+Marla Dillard
+
+
+
+And thou mourn at the last, when thy flesh and thy body are consumed. There is more than one way to skin a catThere's a light at the end of the tunnel. I was almost in all evil in the midst of the congregation and assembly.
+
+You might as well be hanged for a sheep as for a lamb
 
